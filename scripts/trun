@@ -1,0 +1,7 @@
+selectedScript=`find scripts -type f -name "*.sh" | fzf --reverse`
+
+echo "$selectedScript"
+read  arguments
+
+eval "$selectedScript $arguments" 
+
