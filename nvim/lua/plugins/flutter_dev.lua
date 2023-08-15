@@ -27,9 +27,9 @@ return {
           enabled = true,
           run_via_dap = true,
           exception_breakpoints = { "uncaught", 'raised' },
-
           register_configurations = function(_)
-            require("dap").configurations.dart = {}
+            require("dap").configurations.dart = {
+            }
             require("dap.ext.vscode").load_launchjs()
           end,
           -- register_configurations = function(paths)
@@ -65,6 +65,13 @@ return {
             virtual_text_str = "■",
           },
         },
+        settings = {
+          showTodos = true,
+          completeFunctionCalls = true,
+          renameFilesWithClasses = "prompt", -- "always"
+          enableSnippets = true,
+          updateImportsOnRename = true,      -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
+        }
       })
       require("telescope").load_extension("flutter")
     end,
