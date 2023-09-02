@@ -35,9 +35,10 @@ local servers = {
       },
     },
   },
-  -- i added it
+  -- i added it?
   -- dart_ls = {
   --   dart = {
+  --     lineLength = 120,
   --     analysisExcludedFolders = {
   --       vim.fn.expand("$HOME/AppData/Local/Pub/Cache"),
   --       vim.fn.expand("$HOME/.pub-cache"),
@@ -124,6 +125,15 @@ cmp.setup {
     { name = "copilot" },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+  },
+  window = {
+    documentation = {
+      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+    },
+    completion = {
+      border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+      winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+    }
   },
 }
 

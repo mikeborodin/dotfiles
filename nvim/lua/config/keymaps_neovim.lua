@@ -14,7 +14,8 @@ local keys = {
   { '<space>fw',      require('telescope.builtin').live_grep,                                          'Live grep' },
   { '<space>fr',      ':lua find_replace_prompt()<cr>',                                                'File find/rep' },
   { '<space><space>', function() vim.lsp.buf.format() end,                                             'Format' },
-  { '<space>h',       function() vim.lsp.buf.hover() end,                                              'Format' },
+  -- { '<space>h',       function() vim.lsp.buf.hover() end,                                              'Format' },
+  { '<space>h',       function() require('hover').hover() end,                                         'Format' },
   { '<space>H',       function() vim.diagnostic.open_float() end,                                      'Floating diagnos' },
   { '<space>ni',      require('telescope.builtin').lsp_implementations,                                'Impl' },
   { '<space>no',      require('telescope.builtin').lsp_references,                                     'Reference' },
@@ -41,7 +42,7 @@ local keys = {
   { 'sh',             function() require('dapui').toggle() end,                                        'Toggle DapUI' },
   --testing
   { 'tso',            jumpToTest,                                                                      'Jump to test' },
-  { '<space>tf',      '<cmd>lua  require("neotest").run.run()<cr>',                                    'Run this test' },
+  { '<space>tf',      function() require("neotest").run.run({ strategy = 'dap' }) end,                 'Run this test' },
   { '<space>tw',      '<cmd>lua  require("neotest").run.run(vim.fn.expand("%"))<cr>',                  'Run test file' },
   -- :Coverage && CoverageToggle
   { '<space>U',       '<Cmd>call copilot#Complete()<CR>',                                              'copilot complete' },

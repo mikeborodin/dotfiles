@@ -6,6 +6,7 @@ return {
     dependencies = {
       'nvim-lua/plenary.nvim',
       "benfowler/telescope-luasnip.nvim",
+      'nvim-telescope/telescope-dap.nvim',
     },
   },
 
@@ -23,6 +24,7 @@ return {
     config = function()
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
+      require('telescope').load_extension('dap');
       require('telescope').setup {
         pickers = {
           live_grep = {
@@ -45,7 +47,6 @@ return {
           },
         },
       }
-
       -- Enable telescope fzf native, if installed
       pcall(require('telescope').load_extension, 'fzf')
       require('telescope').load_extension('luasnip')

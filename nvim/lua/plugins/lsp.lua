@@ -1,11 +1,12 @@
 return {
+  { "folke/neodev.nvim",                opts = {} },
+  { 'williamboman/mason-lspconfig.nvim' },
   {
     'neovim/nvim-lspconfig',
-    dependencies = {
+    deendencies = {
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       -- { 'j-hui/fidget.nvim', opts = {} },
-      { "folke/neodev.nvim", opts = {} }
     },
   },
   {

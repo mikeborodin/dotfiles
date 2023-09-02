@@ -1,6 +1,8 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.o.hlsearch = false
+vim.o.pumheight = 10
+vim.o.pumwidth = 120
 
 -- Make line numbers default
 vim.wo.number = true
@@ -35,6 +37,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 vim.o.completeopt = 'menuone,noselect'
+vim.cmd('set shortmess+=F')
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true

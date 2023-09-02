@@ -58,10 +58,10 @@ return {
         lsp = {
           color = {
             enabled = true,
-            background = true,
+            background = false,
             background_color = nil,
             foreground = false,
-            virtual_text = false,
+            virtual_text = true,
             virtual_text_str = "■",
           },
         },
