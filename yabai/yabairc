@@ -7,7 +7,7 @@ yabai -m space 4 --label communicate
 yabai -m space 5 --label personal
 yabai -m space 6 --label laptop1
 
-yabai -m config --space create layout stack
+yabai -m config --space create layout bsp
 yabai -m config --space browse layout bsp
 yabai -m config --space communicate layout bsp
 yabai -m config --space personal layout bsp
@@ -17,8 +17,10 @@ yabai -m config --space terminal layout bsp
 # exceptions
 # float system preferences. Most of these just disable Yabai from resizing them.
 yabai -m rule --add app="^System Preferences$" sticky=on layer=above manage=off
+yabai -m rule --add app="^System Setting$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Karabiner-Elements$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on layer=above manage=off
+
 # yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Disk Utility$" sticky=on layer=above manage=off
 yabai -m rule --add app="^System Information$" sticky=on layer=above manage=off
@@ -33,7 +35,7 @@ yabai -m rule --add app="^menusc$" manage=off
 
 # excluded code
 yabai -m rule --add app="^Code$" manage=on space=create
-yabai -m rule --add app="^Chrome$" manage=off space=browse
+yabai -m rule --add app="^Chrome$" manage=on space=browse
 yabai -m rule --add app="^Slack$" manage=on space=communicate
 yabai -m rule --add app="^Telegram$" manage=on space=communicate
 yabai -m rule --add app="^iTerm2$" manage=on space=terminal
