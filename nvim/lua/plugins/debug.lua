@@ -11,7 +11,7 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
-    vim.fn.sign_define('DapBreakpoint', { text = '❓', texthl = '', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapBreakpoint', { text = '🔥', texthl = '', linehl = '', numhl = '' })
     vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '' })
 
     require('mason-nvim-dap').setup {
@@ -43,6 +43,34 @@ return {
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
+
+      layouts = {
+        {
+          -- You can change the order of elements in the sidebar
+          elements = {
+            -- Provide IDs as strings or tables with "id" and "size" keys
+            -- {
+            --   id = "scopes",
+            --   size = 0.25, -- Can be float or integer > 1
+            -- },
+            { id = "breakpoints", size = 0.25 },
+            -- { id = "stacks",      size = 0.25 },
+            { id = "watches",     size = 0.25 },
+            "console",
+            "repl",
+          },
+          size = 40,
+          position = "bottom", -- Can be "left" or "right"
+        },
+        -- {
+        --   elements = {
+        --     "repl",
+        --     "console",
+        --   },
+        --   size = 10,
+        --   position = "bottom", -- Can be "bottom" or "top"
+        -- },
+      },
       icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
       controls = {
         icons = {
@@ -59,7 +87,7 @@ return {
     }
 
     dap.listeners.after.event_initialized['dapui_config'] = function()
-      require('notify')('dap inited')
+      -- require('notify')('dap inited')
       -- dapui.open()
     end
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close

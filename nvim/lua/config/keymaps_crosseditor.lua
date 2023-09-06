@@ -6,7 +6,7 @@ local keys = {
   --this are my mappings! mine
   --selected
   { '<space>u',  '<cmd>silent write<cr>',                                                         'Save all buffers' },
-  { '<space>U',  '<cmd>wa<cr>',                                                                   'Save all buffers' },
+  { '<space>ua', '<cmd>wa<cr>',                                                                   'Save all buffers' },
   { '<space>q',  '<cmd>qa<cr>',                                                                   'Flutter Run' },
   { 'q',         'a',                                                                             '<a>' },
   { 'm',         'a',                                                                             '<a>' },

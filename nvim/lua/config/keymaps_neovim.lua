@@ -1,6 +1,7 @@
 require("utils.find_replace")
 require("utils.common_utils")
 require("utils.go_to_test")
+require("utils.run_script")
 
 
 local keys = {
@@ -47,6 +48,7 @@ local keys = {
   -- :Coverage && CoverageToggle
   { '<space>U',       '<Cmd>call copilot#Complete()<CR>',                                              'copilot complete' },
   { '<Space>e',       function() vim.lsp.buf.code_action() end,                                        'Code action (visual)' },
+  { '<Space>rs',      function() RunProjectScript() end,                                               'Run project script' },
 }
 
 useKeymapTable(keys)

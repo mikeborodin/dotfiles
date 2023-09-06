@@ -41,3 +41,8 @@ vim.cmd('set shortmess+=F')
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+vim.o.colorcolumn = 80
+vim.opt.textwidth = 120
+
+vim.api.nvim_set_hl(0, 'Comment', { italic = true })

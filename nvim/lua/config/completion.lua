@@ -14,6 +14,8 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
+vim.cmd('autocmd FileType dart setlocal textwidth=120')
+
 local servers = {
   -- clangd = {},
   -- gopls = {},
@@ -79,10 +81,6 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
--- require("lspconfig")["dartls"].setup({
---   on_attach = on_attach,
---   capabilities = capabilities,
--- })
 
 -- nvim-cmp setup
 local cmp = require 'cmp'

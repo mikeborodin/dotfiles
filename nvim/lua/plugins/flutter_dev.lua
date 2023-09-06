@@ -64,13 +64,15 @@ return {
             virtual_text = true,
             virtual_text_str = "■",
           },
-        },
-        settings = {
-          showTodos = true,
-          completeFunctionCalls = true,
-          renameFilesWithClasses = "prompt", -- "always"
-          enableSnippets = true,
-          updateImportsOnRename = true,      -- Whether to update imports and other directives when files are renamed. Required for `FlutterRename` command.
+          settings = {
+            lineLength = 120,
+            showTodos = true,
+            completeFunctionCalls = true,
+            -- analysisExcludedFolders = { "<path-to-flutter-sdk-packages>" },
+            renameFilesWithClasses = "prompt", -- "always"
+            enableSnippets = true,
+            updateImportsOnRename = true,
+          },
         }
       })
       require("telescope").load_extension("flutter")
