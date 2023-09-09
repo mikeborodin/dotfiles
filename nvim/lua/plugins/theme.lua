@@ -1,6 +1,6 @@
 return {
   {
-    enabled = true,
+    enabled = false,
     'doums/darcula',
     config = function()
       vim.cmd [[colorscheme darcula]]
@@ -40,6 +40,7 @@ return {
   },
   {
     'rose-pine/neovim',
+    enabled = false,
     name = 'rose-pine',
     config = function()
       -- vim.cmd [[colorscheme rose-pine]]
@@ -47,6 +48,7 @@ return {
   },
   {
     "catppuccin/nvim",
+    enabled = false,
     name = "catppuccin",
     config = function()
       -- vim.cmd [[colorscheme catppuccin]]
@@ -55,7 +57,7 @@ return {
   {
     -- Theme inspired by Atom
     'Mofiqul/dracula.nvim',
-    enabled = false,
+    enabled = true,
     priority = 1000,
     config = function()
       local dracula = require("dracula")
