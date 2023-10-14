@@ -54,6 +54,7 @@ local keys = {
   { '<space>U',       '<Cmd>call copilot#Complete()<CR>',                                              'copilot complete' },
   { '<Space>e',       function() vim.lsp.buf.code_action() end,                                        'Code action (visual)' },
   { '<Space>rs',      function() RunProjectScript() end,                                               'Run project script' },
+  { 'at',             ':FlutterRun<cr>',                                                               'FlutterRun' },
 }
 
 useKeymapTable(keys)

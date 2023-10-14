@@ -26,11 +26,11 @@ return {
         debugger = {
           enabled = true,
           run_via_dap = true,
-          exception_breakpoints = { "uncaught", 'raised' },
+          exception_breakpoints = { "uncaught", 'raised', },
           register_configurations = function(_)
             require("dap").configurations.dart = {
             }
-            require("dap.ext.vscode").load_launchjs()
+            require("dap.ext.vscode").load_launchjs(vim.fn.getcwd() .. '/.vscode/launch.nvim.json')
           end,
           -- register_configurations = function(paths)
           --   require("dap").configurations.dart = {
@@ -57,7 +57,7 @@ return {
         },
         lsp = {
           color = {
-            enabled = true,
+            enabled = false,
             background = false,
             background_color = nil,
             foreground = false,
@@ -66,9 +66,9 @@ return {
           },
           settings = {
             lineLength = 120,
-            showTodos = true,
+            showTodos = false,
             completeFunctionCalls = true,
-            -- analysisExcludedFolders = { "<path-to-flutter-sdk-packages>" },
+            analysisExcludedFolders = { "<path-to-flutter-sdk-packages>" },
             renameFilesWithClasses = "prompt", -- "always"
             enableSnippets = true,
             updateImportsOnRename = true,

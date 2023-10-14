@@ -43,5 +43,7 @@ vim.cmd('set shortmess+=F')
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.o.textwidth = 120
-vim.cmd(':set colorcolumn=+1')
+-- vim.cmd(':set nonu')
+vim.o.number = false
+-- vim.o.textwidth = 120
+-- vim.cmd(':set colorcolumn=+1')
