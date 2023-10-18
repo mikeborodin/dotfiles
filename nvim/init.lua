@@ -12,13 +12,11 @@ if (vim.g.vscode == nil) then
   require('config.keymaps_clear')
   require('config.callbacks')
 
-  -- require('config.completion')
-  -- require('config.snippets')
-
   require('config.keymaps_x')
+  require('config.autocmds')
   require('config.keymaps_crosseditor')
   require('config.keymaps_neovim')
-  -- vim.cmd [[autocmd bufwritepost kitty.conf :silent !kill -SIGUSR1 $(pgrep kitty)]]
+
 else
   require('config.init_plugins_vscode_only')
 end
