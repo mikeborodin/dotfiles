@@ -7,7 +7,7 @@ require("utils.run_script")
 local keys = {
   --selected
   { 'tk',             require('telescope.builtin').keymaps,                                            '?' },
-  { 'tf',             '<cmd>Neotree focus<cr>',                                                        '?' },
+  -- { 'tf',             '<cmd>Neotree focus<cr>',                                                        '?' },
   --space
   -- { '<space>su',      '<cmd>lua require("trouble").next({skip_groups = true, jump = true})<cr>',       'Next diagnos' },
   { '<space>sn',      function() require("trouble").previous({ skip_groups = true, jump = true }) end, 'Prev diagnos' },
@@ -48,8 +48,8 @@ local keys = {
   { 'sh',             function() require('dapui').toggle() end,                                        'Toggle DapUI' },
   --testing
   { 'tso',            jumpToTest,                                                                      'Jump to test' },
-  { '<space>tf',      function() require("neotest").run.run({ strategy = 'dap' }) end,                 'Run this test' },
-  { '<space>tw',      '<cmd>lua  require("neotest").run.run(vim.fn.expand("%"))<cr>',                  'Run test file' },
+  -- { '<space>tf',      function() require("neotest").run.run({ strategy = 'dap' }) end,                 'Run this test' },
+  -- { '<space>tw',      '<cmd>lua  require("neotest").run.run(vim.fn.expand("%"))<cr>',                  'Run test file' },
   -- :Coverage && CoverageToggle
   { '<space>U',       '<Cmd>call copilot#Complete()<CR>',                                              'copilot complete' },
   { '<Space>e',       function() vim.lsp.buf.code_action() end,                                        'Code action (visual)' },

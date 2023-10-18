@@ -58,14 +58,6 @@ return {
     end
   },
   {
-    "catppuccin/nvim",
-    enabled = false,
-    name = "catppuccin",
-    config = function()
-      -- vim.cmd [[colorscheme catppuccin]]
-    end
-  },
-  {
     -- Theme inspired by Atom
     'Mofiqul/dracula.nvim',
     enabled = true,
@@ -131,4 +123,16 @@ return {
       },
     },
   },
+  -- catppuccin
+  {
+
+    "folke/tokyonight.nvim",
+    lazy = false,
+    enabled = false,
+    opts = { style = "moon" },
+    config = function()
+      vim.cmd [[colorscheme tokyonight]]
+    end,
+  },
+
 }

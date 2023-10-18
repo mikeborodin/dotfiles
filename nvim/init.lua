@@ -12,8 +12,8 @@ if (vim.g.vscode == nil) then
   require('config.keymaps_clear')
   require('config.callbacks')
 
-  require('config.completion')
-  require('config.snippets')
+  -- require('config.completion')
+  -- require('config.snippets')
 
   require('config.keymaps_x')
   require('config.keymaps_crosseditor')

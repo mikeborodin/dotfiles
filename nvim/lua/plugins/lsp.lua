@@ -1,5 +1,5 @@
 return {
-  { "folke/neodev.nvim",                opts = {} },
+  -- { "folke/neodev.nvim",                opts = {} },
   { 'williamboman/mason-lspconfig.nvim' },
   {
     'neovim/nvim-lspconfig',
@@ -9,8 +9,8 @@ return {
       -- { 'j-hui/fidget.nvim', opts = {} },
     },
   },
-  {
     -- Autocompletion
+  {
     'hrsh7th/nvim-cmp',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
