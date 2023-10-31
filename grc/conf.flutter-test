@@ -1,0 +1,20 @@
+regexp==== RUN .*
+colour=blue
+-
+regexp=--- PASS: .*
+colour=green
+-
+regexp=^passed$
+colour=green
+-
+regexp=^(ok|\?) .*
+colour=magenta
+-
+regexp=--- FAIL: .*
+colour=red
+-
+regexp=[^\s]+\.dart(:\d+)?
+colour=cyan
+-
+regexp=All tests passed!
+colour=green

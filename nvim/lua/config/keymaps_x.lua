@@ -4,6 +4,7 @@ end
 
 local keys = {
   { 'p',        'P',                                      'paste' },
+  { '<space>0',       '%',                                                                  '% Parenthese' },
   { '<Space>e', function() vim.lsp.buf.code_action() end, 'Code action (visual)' },
   -- { '<space>U', '<Cmd>call copilot#Complete()<CR>',       'copilot complete' },
 }

@@ -1,20 +1,27 @@
+-- Define a function to check if the CWD contains "project-name"
+local function is_project_directory()
+    local current_dir = vim.fn.expand('%:p:h') -- Get the current directory
+    -- Check if the current directory contains "project-name"
+    return string.find(current_dir, "mms") ~= nil
+end
+
 return {
-  -- my plugins go here
   {
     'akinsho/flutter-tools.nvim',
-    lazy = false,
     dependencies = {
       'nvim-lua/plenary.nvim',
       'stevearc/dressing.nvim', -- optional for vim.ui.select
     },
     config = function()
+      local isSpecial = is_project_directory()
       local ft = require("flutter-tools");
+
       ft.setup({
         closing_tags = { enabled = false, },
         decorations = {
           statusline = {
             app_version = false,
-            device = false,
+            device = true,
             project_config = true,
           },
         },
@@ -30,7 +37,12 @@ return {
           register_configurations = function(_)
             require("dap").configurations.dart = {
             }
-            require("dap.ext.vscode").load_launchjs(vim.fn.getcwd() .. '/.vscode/launch.nvim.json')
+
+            if(isSpecial) then
+              require("dap.ext.vscode").load_launchjs(vim.fn.getcwd() .. '/.vscode/launch.json')
+            else
+              require("dap.ext.vscode").load_launchjs(vim.fn.getcwd() .. '/.vscode/launch.nvim.json')
+            end
           end,
           -- register_configurations = function(paths)
           --   require("dap").configurations.dart = {
@@ -55,6 +67,7 @@ return {
           --   }
           -- end,
         },
+        fvm = (isSpecial and true or false),
         lsp = {
           color = {
             enabled = false,
@@ -65,10 +78,10 @@ return {
             virtual_text_str = "■",
           },
           settings = {
-            lineLength = 120,
+            lineLength = (isSpecial and 80 or 120),
             showTodos = false,
             completeFunctionCalls = true,
-            analysisExcludedFolders = { "<path-to-flutter-sdk-packages>" },
+            analysisExcludedFolders = { "/Users/mike/fvm/versions/stable/packages" },
             renameFilesWithClasses = "prompt", -- "always"
             enableSnippets = true,
             updateImportsOnRename = true,

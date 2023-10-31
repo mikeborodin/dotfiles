@@ -13,7 +13,6 @@ return {
     local dapui = require 'dapui'
     vim.fn.sign_define('DapBreakpoint', { text = '🔥', texthl = '', linehl = '', numhl = '' })
     vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '' })
-
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations

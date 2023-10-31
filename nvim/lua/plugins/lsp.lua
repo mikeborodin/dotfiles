@@ -1,6 +1,6 @@
 return {
-  -- { "folke/neodev.nvim",                opts = {} },
   { 'williamboman/mason-lspconfig.nvim' },
+  { "folke/neodev.nvim", opts = {} },
   {
     'neovim/nvim-lspconfig',
     deendencies = {

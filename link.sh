@@ -4,3 +4,4 @@ ln -s -f $(pwd)/skhd ~/.config/skhd
 ln -s -f $(pwd)/tmux/.tmux.conf ~/.tmux.conf
 ln -s -f $(pwd)/scripts ~/scripts
 ln -s -f $(pwd)/kitty/kitty.conf ~/.config/kitty
+ln -s -f $(pwd)/grc ~/.grc
