@@ -1,14 +1,4 @@
 return {
-  { 'williamboman/mason-lspconfig.nvim' },
-  { "folke/neodev.nvim", opts = {} },
-  {
-    'neovim/nvim-lspconfig',
-    deendencies = {
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-      -- { 'j-hui/fidget.nvim', opts = {} },
-    },
-  },
     -- Autocompletion
   {
     'hrsh7th/nvim-cmp',

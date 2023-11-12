@@ -172,19 +172,6 @@ vim.cmd('colorscheme rose-pine')
       vim.cmd [[colorscheme dracula]]
     end,
   },
-  {
-    -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'dracula-nvim',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
-  },
   -- catppuccin
   {
 

@@ -28,15 +28,11 @@ return {
     config = function()
       require('Comment').setup({
         toggler = {
-          ---Line-comment toggle keymap
           line = '<leader>l',
-          ---Block-comment toggle keymap
           block = '<leader>j',
         },
         opleader = {
-          ---Line-comment keymap
           line = '<leader>l',
-          ---Block-comment keymap
           block = '<leader>j',
         },
       })
@@ -55,6 +51,7 @@ return {
   },
   {
     "EthanJWright/vs-tasks.nvim",
+    enabled = false,
     dependencies = {
       'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
@@ -65,17 +62,8 @@ return {
     end
   },
   {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
-    end
-  },
-  {
     'mg979/vim-visual-multi',
+    enabled = false,
     config = function()
 
     end

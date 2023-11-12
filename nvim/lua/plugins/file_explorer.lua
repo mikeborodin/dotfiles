@@ -1,5 +1,21 @@
 local Util = require("lazyvim.util")
 
+require('utils.table_to_string')
+
+function tableToString(tbl, indent)
+  local result = {}
+  indent = indent or 0
+
+  for k, v in pairs(tbl) do
+    local key = tostring(k)
+    local value = type(v) == "table" and tableToString(v, indent + 1) or tostring(v)
+
+    result[#result + 1] = string.rep("  ", indent) .. key .. " = " .. value
+  end
+
+  return "{\n" .. table.concat(result, ",\n") .. "\n" .. string.rep("  ", indent - 1) .. "}"
+end
+
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -90,7 +106,6 @@ return {
           ["t"] = "noop",
           -- ["<cr>"] = "open_drop",
           -- ["t"] = "open_tab_drop",
-          ["w"] = "open_with_window_picker",
           --["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
           ["C"] = "close_node",
           -- ['C'] = 'close_all_subnodes',
@@ -128,8 +143,20 @@ return {
           ["u"] = "noop",
           ["i"] = "open",
           ["n"] = "close_node",
-          ["."] = 'toggle_hidden'
+          ["."] = 'toggle_hidden',
+          ["w"] = 'copy_relative_path',
         }
+      },
+      commands = {
+        copy_relative_path = function(state)
+          local node = state.tree:get_node()
+          -- print(node.name)
+          local absolutePath = node.path
+          local cwd = vim.loop.cwd()
+          local relative_path = absolutePath:gsub(cwd .. '/', "")
+          vim.fn.setreg('+', relative_path)
+          require('notify')('copied ' .. relative_path)
+        end
       },
     },
     config = function(_, opts)

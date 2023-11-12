@@ -2,11 +2,13 @@ require("utils.find_replace")
 require("utils.common_utils")
 require("utils.go_to_test")
 require("utils.run_script")
+require("utils.select_run_config")
+
 local Util = require("lazyvim.util")
 
 local keys = {
 	--navigation
-	{ "<space>0", "%", "% Parenthese" },
+	{ "<space>0",  "%",                                    "% Parenthese" },
 	-- jumps
 	{
 		"afu",
@@ -33,15 +35,15 @@ local keys = {
 		"Find in buff",
 	},
 	{ "<space>fw", require("telescope.builtin").live_grep, "Live grep" }, --deprecated
-	{ "<C-f>", require("telescope.builtin").live_grep, "Live grep" }, --deprecated
-	{ "af", require("telescope.builtin").live_grep, "Live grep" },
+	{ "<C-f>",     require("telescope.builtin").live_grep, "Live grep" }, --deprecated
+	{ "af",        require("telescope.builtin").live_grep, "Live grep" },
 	{
 		"<space>fr",
 		":lua find_replace_prompt()<cr>",
 		"File find/rep",
 	},
 	{ "<space>ni", require("telescope.builtin").lsp_implementations, "Impl" },
-	{ "<space>no", require("telescope.builtin").lsp_references, "Reference" },
+	{ "<space>no", require("telescope.builtin").lsp_references,      "Reference" },
 	{
 		"<C-e>",
 		function()
@@ -108,8 +110,13 @@ local keys = {
 	--
 	--editor windows
 	{
-		"<space>ya",
-		'<cmd>%bdelete<cr><cmd>Neotree focus<cr>',
+		"<space>Y",
+		"<cmd>%bdelete<cr><cmd>Neotree focus<cr>",
+		"Close all buffers",
+	},
+	{
+		"<space>Y",
+		"<cmd>%bdelete<cr><cmd>Neotree focus<cr>",
 		"Close all buffers",
 	},
 	{
@@ -123,10 +130,21 @@ local keys = {
 		"Close buffer",
 	},
 	--flutter runs
-	{ "at", ":FlutterRun<cr>", "FlutterRun" },
-	{ "<space>NE", ":FlutterRun<cr>", "FlutterRun" },
-	{ "<space>NI", ":FlutterRestart<cr>", "FlutterRestart" },
-	{ "<space>NY", ":FlutterQuit<cr>", "FlutterRestart" },
+	{
+		"<space>lr",
+		function()
+			SelectRunConfig()
+		end,
+		"SelectRunConfig",
+	},
+	{ "<space>nu", ":FlutterRun<cr>",     "FlutterRun" },
+	{ "<space>lu", ":FlutterRestart<cr>", "FlutterRestart" },
+	{ "<space>ly", ":FlutterQuit<cr>",    "FlutterQuit" },
+
+	{ "<space>N",  ":FlutterRun<cr>",     "FlutterRun" },
+	{ "<space>E",  ":FlutterRestart<cr>", "FlutterRestart" },
+	{ "<space>NY", ":FlutterQuit<cr>",    "FlutterRestart" },
+	{ "at",        ":FlutterRun<cr>",     "FlutterRun" },
 	{
 		"ar",
 		"<cmd>FlutterRestart<cr>",
@@ -143,7 +161,7 @@ local keys = {
 		"FlutterLogClear",
 	},
 	{
-		"<space>NK",
+		"<space>K",
 		"<cmd>FlutterLogClear<cr>",
 		"FlutterLogClear",
 	},
@@ -151,6 +169,11 @@ local keys = {
 		"as",
 		"<cmd>FlutterVisualDebug<cr>",
 		"Flutter Quit",
+	},
+	{
+		"<space>lv",
+		"<cmd>FlutterVisualDebug<cr>",
+		"Flutter Visual Debug",
 	},
 	{
 		"ay",
@@ -170,30 +193,22 @@ local keys = {
 	{
 		"adn",
 		function()
+			--TODO: make it work
 			-- it wokrs for selecting devices
 			require("flutter-tools").setup_project({
 				{
-					-- name = "Dev-debug",
-					-- flavor = "dev",
-					-- target = "lib/main_dev.dart",
-					-- device = "A6AAC97D-0372-4A11-ACCF-2F784A02D70C",
 					device = "3D2FCA91-D8F9-44C2-AEB2-C1712B59E9F2",
-					-- dart_define = {
-					-- 	API_URL = "https://dev.example.com/api",
-					-- 	IS_DEV = true,
-					-- },
-					-- dart_define_from_file = "config.json", -- the path to a JSON configuration file
 				},
 			})
 		end,
 		"Select Flutter Devices",
 	},
 	-- searches
-	{ "<space>fb", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-	{ "<space>fF", Util.telescope("files", { cwd = false }), desc = "Find Files (cwd)" },
+	{ "<space>fb", "<cmd>Telescope buffers show_all_buffers=true<cr>",   desc = "Switch Buffer" },
+	{ "<space>fF", Util.telescope("files", { cwd = false }),             desc = "Find Files (cwd)" },
 	{ "<space>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent (cwd)" },
-	{ "<space>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
-	{ "<space>RR", "<cmd>Telescope resume<cr>", desc = "Resume" },
+	{ "<space>gs", "<cmd>Telescope git_status<CR>",                      desc = "status" },
+	{ "<space>RR", "<cmd>Telescope resume<cr>",                          desc = "Resume" },
 	{
 		"<space>ab",
 		require("telescope.builtin").buffers,
@@ -226,7 +241,7 @@ local keys = {
 	--testing
 	-- :Coverage && CoverageToggle
 	-- new
-	{ "<space>l", "space l", "?" },
+	{ "<space>l",  "space l",             "?" },
 	{ "<space>tv", ":CoverageToggle<cr>", "Coverage" },
 	{
 		"<C-w>",

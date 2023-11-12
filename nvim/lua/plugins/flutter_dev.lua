@@ -1,8 +1,8 @@
 -- Define a function to check if the CWD contains "project-name"
 local function is_project_directory()
-    local current_dir = vim.fn.expand('%:p:h') -- Get the current directory
-    -- Check if the current directory contains "project-name"
-    return string.find(current_dir, "mms") ~= nil
+  local current_dir = vim.fn.expand('%:p:h')   -- Get the current directory
+  -- Check if the current directory contains "project-name"
+  return string.find(current_dir, "mms") ~= nil
 end
 
 return {
@@ -26,9 +26,9 @@ return {
           },
         },
         dev_log = {
-          enabled = true,
+          enabled = false,
           notify_errors = false, -- if there is an error whilst running then notify the user
-          open_cmd = "edit",     -- command to use to open the log buffer
+          open_cmd = "tabedit",  -- command to use to open the log buffer
         },
         debugger = {
           enabled = true,
@@ -38,7 +38,7 @@ return {
             require("dap").configurations.dart = {
             }
 
-            if(isSpecial) then
+            if (isSpecial) then
               require("dap.ext.vscode").load_launchjs(vim.fn.getcwd() .. '/.vscode/launch.json')
             else
               require("dap.ext.vscode").load_launchjs(vim.fn.getcwd() .. '/.vscode/launch.nvim.json')
@@ -81,7 +81,10 @@ return {
             lineLength = (isSpecial and 80 or 120),
             showTodos = false,
             completeFunctionCalls = true,
-            analysisExcludedFolders = { "/Users/mike/fvm/versions/stable/packages" },
+            analysisExcludedFolders = {
+              "/Users/mike/fvm/versions/stable/packages",
+              "/Users/mike/fvm/versions/",
+            },
             renameFilesWithClasses = "prompt", -- "always"
             enableSnippets = true,
             updateImportsOnRename = true,

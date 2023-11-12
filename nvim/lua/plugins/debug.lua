@@ -11,8 +11,8 @@ return {
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
-    vim.fn.sign_define('DapBreakpoint', { text = '🔥', texthl = '', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapBreakpoint', { text = '🔥', texthl = '', linehl = '', numhl = '', })
+    vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '', })
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
@@ -52,10 +52,10 @@ return {
             --   id = "scopes",
             --   size = 0.25, -- Can be float or integer > 1
             -- },
-            { id = "breakpoints", size = 0.25 },
+            -- { id = "breakpoints", size = 0.25 },
             -- { id = "stacks",      size = 0.25 },
-            { id = "watches",     size = 0.25 },
-            "console",
+            -- { id = "watches",     size = 0.25 },
+            -- "console",
             "repl",
           },
           size = 40,
@@ -70,7 +70,7 @@ return {
         --   position = "bottom", -- Can be "bottom" or "top"
         -- },
       },
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+      icons = { expanded = '▾', collapsed = '▸', current_frame = '*', },
       controls = {
         icons = {
           pause = '⏸',

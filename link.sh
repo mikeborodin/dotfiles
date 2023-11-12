@@ -5,3 +5,4 @@ ln -s -f $(pwd)/tmux/.tmux.conf ~/.tmux.conf
 ln -s -f $(pwd)/scripts ~/scripts
 ln -s -f $(pwd)/kitty/kitty.conf ~/.config/kitty
 ln -s -f $(pwd)/grc ~/.grc
+ln -s -f $(pwd)/.global-gitignore ~/.global-gitignore

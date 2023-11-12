@@ -81,16 +81,16 @@ return {
 
 			require("neotest").setup(opts)
 		end,
-    -- stylua: ignore
-    keys = {
-      { "<space>tw", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File" },
-      { "<space>tF", function() require("neotest").run.run(vim.loop.cwd()) end, desc = "Run All Test Files" },
-      { "<space>tf", function() require("neotest").run.run() end, desc = "Run Nearest" },
-      { "<space>ts", function() require("neotest").summary.toggle() end, desc = "Toggle Summary" },
-      { "<space>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
-      { "<space>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel" },
-      { "<space>tS", function() require("neotest").run.stop() end, desc = "Stop" },
-    },
+	    -- stylua: ignore
+	    keys = {
+	      { "<space>tw", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File" },
+	      { "<space>tF", function() require("neotest").run.run(vim.loop.cwd()) end, desc = "Run All Test Files" },
+	      { "<space>tf", function() require("neotest").run.run() end, desc = "Run Nearest" },
+	      { "<space>ts", function() require("neotest").summary.toggle() end, desc = "Toggle Summary" },
+	      { "<space>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
+	      { "<space>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel" },
+	      { "<space>tS", function() require("neotest").run.stop() end, desc = "Stop" },
+	    },
 	},
 	{
 		"andythigpen/nvim-coverage",
