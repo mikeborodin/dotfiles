@@ -38,6 +38,9 @@ return {
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end)
+    vim.keymap.set('n', 'se', function()
+      require('dap.ui.variables').hover(function() vim.fn.expand('<cexpr>') end)
+    end)
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|

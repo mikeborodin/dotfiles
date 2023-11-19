@@ -2,13 +2,13 @@ local Util = require("lazyvim.util")
 
 require('utils.table_to_string')
 
-function tableToString(tbl, indent)
+function TableToString(tbl, indent)
   local result = {}
   indent = indent or 0
 
   for k, v in pairs(tbl) do
     local key = tostring(k)
-    local value = type(v) == "table" and tableToString(v, indent + 1) or tostring(v)
+    local value = type(v) == "table" and TableToString(v, indent + 1) or tostring(v)
 
     result[#result + 1] = string.rep("  ", indent) .. key .. " = " .. value
   end

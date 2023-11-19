@@ -8,7 +8,9 @@ local Util = require("lazyvim.util")
 
 local keys = {
 	--navigation
-	{ "<space>0",  "%",                                    "% Parenthese" },
+	{ "<space>0",    "%",                             "% Parenthese" },
+	{ "<space><cr>", function() print('spaceCR') end, "?" },
+	{ "<C-cr>",      'n',                             "?" },
 	-- jumps
 	{
 		"afu",

@@ -1,9 +1,4 @@
 -- Define a function to check if the CWD contains "project-name"
-local function is_project_directory()
-  local current_dir = vim.fn.expand('%:p:h')   -- Get the current directory
-  -- Check if the current directory contains "project-name"
-  return string.find(current_dir, "mms") ~= nil
-end
 
 return {
   {
@@ -13,7 +8,7 @@ return {
       'stevearc/dressing.nvim', -- optional for vim.ui.select
     },
     config = function()
-      local isSpecial = is_project_directory()
+      local isSpecial = IsFvmProject()
       local ft = require("flutter-tools");
 
       ft.setup({
