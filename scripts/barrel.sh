@@ -22,6 +22,6 @@ echo "Creating Dart barrel file: $barrel_file"
 # List Dart files in the directory (excluding the barrel file itself)
 # and write export statements to the barrel file
 # You may need to modify this depending on your naming conventions
-find "$directory" -type f -name '*.dart' ! -name "$(basename "$directory").dart" | sed "s|$directory/|export '|;s|.dart|';|" > "$barrel_file"
+find "$directory" -type f -name '*.dart' ! -name "$(basename "$directory").dart" | sed "s|$directory/|export '|;s|.dart|.dart';|" > "$barrel_file"
 
 echo "Dart barrel file created successfully!"
