@@ -17,7 +17,9 @@ tmux new-session -c "$session_root" -s "$session_name" -n "code" -d
 tmux new-window -c "$session_root" -t "$session_name" -n term 
 tmux new-window -c "$session_root" -t "$session_name" -n git 
 
-tmux send-keys -t "$session_name:code" "nvim" C-m
+sleep 1
+
+tmux send-keys -t "$session_name:code" "v" C-m
 tmux send-keys -t "$session_name:term" "flutter doctor && flutter pub get" C-m
 tmux send-keys -t "$session_name:git" "lazygit" C-m
 
