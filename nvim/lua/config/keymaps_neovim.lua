@@ -8,17 +8,14 @@ local Util = require("lazyvim.util")
 
 local keys = {
 	--navigation
-	{ "<space>0",    "%",                             "% Parenthese" },
-	{ "<space><cr>", function() print('spaceCR') end, "?" },
-	{ "<C-cr>",      'n',                             "?" },
+	{ "<space>0",    "%",                                     "% Parenthese" },
+	{ "<space><cr>", function() print("spaceCR") end,         "?" },
+	{ "<C-cr>",      "n",                                     "?" },
+	{ "<space>ne",   function() vim.lsp.buf.definition() end, "Go to definition", },
 	-- jumps
-	{
-		"afu",
-		function()
-			require("trouble").next({ skip_groups = true, jump = true })
-		end,
-		"Next problem",
-	},
+	{ "<space>fu", function()
+		require("trouble").next({ skip_groups = true, jump = true, })
+	end, "Next problem" },
 	{
 		"afd",
 		":Trouble<cr>",

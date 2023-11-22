@@ -7,6 +7,7 @@ return {
       'nvim-lua/plenary.nvim',
       'stevearc/dressing.nvim', -- optional for vim.ui.select
     },
+    event = 'VeryLazy',
     config = function()
       local isSpecial = IsFvmProject()
       local ft = require("flutter-tools");
