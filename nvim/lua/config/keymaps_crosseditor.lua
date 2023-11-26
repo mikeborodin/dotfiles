@@ -13,8 +13,7 @@ local keys = {
 		"<cmd>wa<cr>",
 		"Save all buffers",
 	},
-	{ "<space>qy", "<cmd>qa<cr>", "Quit Neovim" },
-	{ "<space>q",  "<cmd>qa<cr>", "Flutter Run" },
+	{ "<space>q", "<cmd>qa<cr>", "Flutter Run" },
 	{ "<C-q>w",    "<cmd>qa<cr>", "Flutter Run" },
 	{ "q",         "a",           "<a>" },
 	{ "m",         "a",           "<a>" },
@@ -31,10 +30,10 @@ local keys = {
 	{ "<space>ny", "<C-o>",       "Go back" },
 	{ "<space>nY", "<C-I>",       "Go back" },
 	{ "<space>n;", "<C-i>",       "Go next" },
-	{ "<space>fn", "n", "Find next search result", },
-	{ "<space>on", "<C-w>v", "Split vertical" },
-	{ "<space>oe", "<C-w>s", "Split horizontal", },
-	{ "tyn",       ":q<cr>", "Close window" },
+	{ "<space>fn", "n",           "Find next search result", },
+	{ "<space>on", "<C-w>v",      "Split vertical" },
+	{ "<space>oe", "<C-w>s",      "Split horizontal", },
+	{ "tyn",       ":q<cr>",      "Close window" },
 }
 
 useKeymapTable(keys)

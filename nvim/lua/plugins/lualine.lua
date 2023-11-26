@@ -5,10 +5,10 @@ return {
     'nvim-lualine/lualine.nvim',
     config = function()
       local function statusMode()
-        return 'on:' .. vim.g.selectedFlutterDevice
+        return vim.g.selectedFlutterDevice
       end
       local function runConfig()
-        return 'run:' .. vim.g.selected_run_config.name
+        return vim.g.selected_run_config.name
       end
 
       require('lualine').setup({

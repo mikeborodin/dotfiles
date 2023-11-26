@@ -9,7 +9,7 @@ return {
 	"axkirillov/easypick.nvim",
 	keys = {
 		{
-			"<space>sc",
+			"<space>sd",
 			":Easypick flutter_devices<cr>",
 			"Test",
 		},

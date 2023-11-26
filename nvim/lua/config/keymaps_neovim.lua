@@ -130,9 +130,9 @@ local keys = {
 	},
 	--flutter runs
 	{
-		"<space>lr",
+		"<space>su",
 		function()
-			SelectRunConfig()
+			require('utils.select_run_config').selectRunConfig()
 		end,
 		"SelectRunConfig",
 	},

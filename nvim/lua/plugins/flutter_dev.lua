@@ -31,13 +31,8 @@ return {
           run_via_dap = true,
           exception_breakpoints = { "uncaught", 'raised', },
           register_configurations = function(_)
-            require("dap").configurations.dart = {
-            }
-
-            if (isSpecial) then
-              require("dap.ext.vscode").load_launchjs(vim.fn.getcwd() .. '/.vscode/launch.json')
-            else
-              require("dap.ext.vscode").load_launchjs(vim.fn.getcwd() .. '/.vscode/launch.nvim.json')
+            if (not require("dap").configurations.dart) then
+              require('utils.select_run_config').selectRunConfig()
             end
           end,
           -- register_configurations = function(paths)
