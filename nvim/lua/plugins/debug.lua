@@ -12,7 +12,7 @@ return {
     local dap = require 'dap'
     local dapui = require 'dapui'
     vim.fn.sign_define('DapBreakpoint', { text = '🔥', texthl = '', linehl = '', numhl = '', })
-    vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '', })
+    vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = 'DiffText', numhl = '', })
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
       -- reasonable debug configurations
@@ -45,7 +45,14 @@ return {
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
     dapui.setup {
-
+      mappings = {
+        edit = "E",
+        expand = { "<CR>", "<2-LeftMouse>" },
+        open = "o",
+        remove = "d",
+        repl = "r",
+        toggle = "t"
+      },
       layouts = {
         {
           -- You can change the order of elements in the sidebar
@@ -73,7 +80,11 @@ return {
         --   position = "bottom", -- Can be "bottom" or "top"
         -- },
       },
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*', },
+      icons = {
+        expanded = '',
+        collapsed = '',
+        current_frame = '',
+      },
       controls = {
         icons = {
           pause = '⏸',
@@ -81,7 +92,7 @@ return {
           step_into = '⏎',
           step_over = '⏭',
           step_out = '⏮',
-          step_back = 'b',
+          step_back = '<',
           run_last = '▶▶',
           terminate = '⏹',
         },

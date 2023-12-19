@@ -5,7 +5,7 @@ return {
     lazy = false,
     enabled = true,
     config = function()
-      vim.cmd.colorscheme "tokyonight"
+      vim.cmd.colorscheme "tokyonight-moon"
     end,
   },
   {

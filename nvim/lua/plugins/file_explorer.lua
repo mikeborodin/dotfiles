@@ -148,6 +148,7 @@ return {
         }
       },
       commands = {
+        --idea paste image using png paste
         copy_relative_path = function(state)
           local node = state.tree:get_node()
           -- print(node.name)

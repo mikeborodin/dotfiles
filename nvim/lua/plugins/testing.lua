@@ -1,10 +1,14 @@
 return {
 	{
+		"sidlatau/neotest-dart",
+		lazy = false,
+		dir = "~/personal_projects/neotest-dart",
+	},
+	{
 		"nvim-neotest/neotest",
 		dependencies = {
 			{
 				"nvim-treesitter/nvim-treesitter",
-				"sidlatau/neotest-dart",
 				"nvim-lua/plenary.nvim",
 				"antoinemadec/FixCursorHold.nvim",
 			},
@@ -47,7 +51,8 @@ return {
 					format = function(diagnostic)
 						-- Replace newline and tab characters with space for more compact diagnostics
 						local message =
-							diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+						    diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " ")
+						    :gsub("^%s+", "")
 						return message
 					end,
 				},

@@ -1,3 +1,3 @@
 set -e
 
-echo "Time"
+echo "T:$(date +'%I:%M')"

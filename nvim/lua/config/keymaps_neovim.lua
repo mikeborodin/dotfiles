@@ -143,22 +143,6 @@ local keys = {
 	{ "<space>N",  ":FlutterRun<cr>",     "FlutterRun" },
 	{ "<space>E",  ":FlutterRestart<cr>", "FlutterRestart" },
 	{ "<space>NY", ":FlutterQuit<cr>",    "FlutterRestart" },
-	{ "at",        ":FlutterRun<cr>",     "FlutterRun" },
-	{
-		"ar",
-		"<cmd>FlutterRestart<cr>",
-		"Flutter Restart",
-	},
-	{
-		"as",
-		"<cmd>Telescope flutter commands<cr>",
-		"Find fluttercmd",
-	},
-	{
-		"ak",
-		"<cmd>FlutterLogClear<cr>",
-		"FlutterLogClear",
-	},
 	{
 		"<space>K",
 		"<cmd>FlutterLogClear<cr>",
@@ -233,9 +217,40 @@ local keys = {
 	{
 		"sh",
 		function()
-			require("dapui").toggle()
+			local dapui = require("dapui")
+			dapui.toggle()
 		end,
-		"Toggle DapUI",
+		"Open DapUI Repl",
+	},
+	{
+		"se",
+		function()
+			require('dapui').eval(nil,{enter = true})
+		end,
+		"Evaluate this",
+	},
+	{
+		"sa",
+		function()
+			local dapui = require("dapui")
+			dapui.float_element('stack')
+		end,
+		"Open DapUI stacks",
+	},
+	{
+		"sc",
+		function()
+			-- "breakpoints",
+			-- "repl",
+			-- "scopes",
+			-- "stacks",
+			-- "watches",
+			-- "hover",
+			-- "console",
+			local dapui = require("dapui")
+			dapui.float_element('scopes')
+		end,
+		"Open DapUI stacks",
 	},
 	--testing
 	-- :Coverage && CoverageToggle
