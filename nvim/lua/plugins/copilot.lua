@@ -6,14 +6,20 @@ return {
     cmd = "Copilot",
     build = ":Copilot auth",
     event = "InsertEnter",
-    opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = false },
-      filetypes = {
-        markdown = true,
-        help = true,
-      },
-    },
+    config = function()
+      require('copilot').setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+        filetypes = {
+          markdown = true,
+          help = true,
+        },
+      })
+      vim.cmd("Copilot disable")
+    end,
+    keys = {
+      { "<space>at", "<cmd>Copilot toggle<cr>", desc = "Toggle copilot" },
+    }
   },
 
   -- copilot cmp source

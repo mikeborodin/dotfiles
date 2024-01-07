@@ -1,5 +1,4 @@
 -- Define a function to check if the CWD contains "project-name"
-
 return {
   {
     'akinsho/flutter-tools.nvim',
@@ -76,6 +75,7 @@ return {
             analysisExcludedFolders = {
               "/Users/mike/fvm/versions/stable/packages",
               "/Users/mike/fvm/versions/",
+              ".fvm",
             },
             renameFilesWithClasses = "prompt", -- "always"
             enableSnippets = true,

@@ -225,7 +225,7 @@ local keys = {
 	{
 		"se",
 		function()
-			require('dapui').eval(nil,{enter = true})
+			require('dapui').eval(nil, { enter = true })
 		end,
 		"Evaluate this",
 	},
