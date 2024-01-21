@@ -145,6 +145,7 @@ return {
           ["n"] = "close_node",
           ["."] = 'toggle_hidden',
           ["w"] = 'copy_relative_path',
+          ["T"] = 'open_terminal_in_folder'
         }
       },
       commands = {
@@ -157,6 +158,17 @@ return {
           local relative_path = absolutePath:gsub(cwd .. '/', "")
           vim.fn.setreg('+', relative_path)
           require('notify')('copied ' .. relative_path)
+        end,
+        open_terminal_in_folder = function(state)
+          local node = state.tree:get_node()
+          -- print(node.name)
+          local absolutePath = node.path
+          local cwd = vim.loop.cwd()
+          local relative_path = absolutePath:gsub(cwd .. '/', "")
+          -- vim.fn.setreg('+', relative_path)
+          vim.cmd("ToggleTerm dir=" .. absolutePath)
+
+          -- require('notify')('copied ' .. relative_path)
         end
       },
     },

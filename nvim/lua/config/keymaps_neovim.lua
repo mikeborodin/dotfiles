@@ -18,7 +18,9 @@ local keys = {
 	end, "Next problem" },
 	{
 		"afd",
-		":Trouble<cr>",
+		function()
+			print('vilna kassa')
+		end,
 		"Next problem",
 	},
 	{
@@ -199,7 +201,7 @@ local keys = {
 	},
 	{
 		"ah",
-		require("telescope.builtin").diagnostics,
+		':TroubleToggle<cr>',
 		"Find diagnost",
 	},
 
@@ -264,20 +266,20 @@ local keys = {
 		end,
 		"?",
 	},
-	{
-		"<C-h>",
-		function()
-			print("Ch")
-		end,
-		"?",
-	},
-	{
-		"<C-i>",
-		function()
-			print("Ci")
-		end,
-		"?",
-	},
+	-- {
+	-- 	"<C-h>",
+	-- 	function()
+	-- 		print("Ch")
+	-- 	end,
+	-- 	"?",
+	-- },
+	-- {
+	-- 	"<C-i>",
+	-- 	function()
+	-- 		print("Ci")
+	-- 	end,
+	-- 	"?",
+	-- },
 	{ "tk", function() end, "?" },
 }
 

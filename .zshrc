@@ -7,8 +7,7 @@ fi
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-# plugins=(zsh-autosuggestions)
-plugins=()
+plugins=(zsh-autosuggestions)
 
 # enable italics in vim
 source $ZSH/oh-my-zsh.sh
@@ -92,3 +91,11 @@ zle -N down-line-or-beginning-search
 
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
+
+# pnpm
+export PNPM_HOME="/Users/mike/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

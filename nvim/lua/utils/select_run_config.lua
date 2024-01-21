@@ -161,7 +161,18 @@ function M.load_launchjs(path, type_to_filetypes)
   type_to_filetypes = vim.tbl_extend('keep', type_to_filetypes or {}, M.type_to_filetypes)
   local resolved_path = path or (vim.fn.getcwd() .. '/.vscode/launch.nvim.json')
   if not vim.loop.fs_stat(resolved_path) then
-    return
+    local configs = {
+      {
+        type = "dart",
+        request = "launch",
+        name = "Launch flutter",
+        -- dartSdkPath = paths.dart_sdk,
+        -- flutterSdkPath = paths.flutter_sdk,
+        program = "${workspaceFolder}/lib/main.dart",
+        cwd = "${workspaceFolder}",
+      },
+    }
+    return configs
   end
   local lines = {}
   for line in io.lines(resolved_path) do
