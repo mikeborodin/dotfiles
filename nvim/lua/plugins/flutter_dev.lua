@@ -1,24 +1,21 @@
--- Define a function to check if the CWD contains "project-name"
 return {
   {
     'akinsho/flutter-tools.nvim',
-    dir = '~/personal_projects/flutter-tools.nvim',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      'stevearc/dressing.nvim', -- optional for vim.ui.select
+      'stevearc/dressing.nvim',
     },
-    event = 'VeryLazy',
     config = function()
-      local isSpecial = IsFvmProject()
-      local ft = require("flutter-tools");
+      local isFvmProject = IsFvmProject()
+      print("isFvmProject", isFvmProject)
 
-      ft.setup({
+      require("flutter-tools").setup({
         closing_tags = { enabled = false, },
         decorations = {
           statusline = {
             app_version = false,
-            device = true,
-            project_config = true,
+            device = false,
+            project_config = false,
           },
         },
         dev_log = {
@@ -35,30 +32,8 @@ return {
               require('utils.select_run_config').selectRunConfig()
             end
           end,
-          -- register_configurations = function(paths)
-          --   require("dap").configurations.dart = {
-          --     {
-          --       type = "dart",
-          --       request = "launch",
-          --       name = "Launch flutter",
-          --       dartSdkPath = paths.dart_sdk,
-          --       flutterSdkPath = paths.flutter_sdk,
-          --       program = "${workspaceFolder}/lib/main.dart",
-          --       cwd = "${workspaceFolder}",
-          --     },
-          --     {
-          --       type = "dart",
-          --       request = "attach",
-          --       name = "Connect flutter",
-          --       dartSdkPath = paths.dart_sdk,
-          --       flutterSdkPath = paths.flutter_sdk,
-          --       program = "${workspaceFolder}/lib/main.dart",
-          --       cwd = "${workspaceFolder}",
-          --     },
-          --   }
-          -- end,
         },
-        fvm = (isSpecial and true or false),
+        fvm = isFvmProject,
         lsp = {
           color = {
             enabled = false,
@@ -69,21 +44,25 @@ return {
             virtual_text_str = "■",
           },
           settings = {
-            lineLength = (isSpecial and 80 or 120),
+            lineLength = (isFvmProject and 80 or 120),
             showTodos = false,
+            enableSnippets = false,
+            updateImportsOnRename = false,
+            closingLabels = false,
+            analysisExcludedFolders = { vim.fn.expand("$HOME/fvm"), ".fvm", },
+            flutterOutline = false,
+            outline = false,
+            -- enableSdkFormatter = false,
+            includeDependenciesInWorkspaceSymbols = false,
+            onlyAnalyzeProjectsWithOpenFiles = true,
             completeFunctionCalls = true,
-            analysisExcludedFolders = {
-              "/Users/mike/fvm/versions/stable/packages",
-              "/Users/mike/fvm/versions/",
-              ".fvm",
-            },
-            renameFilesWithClasses = "prompt", -- "always"
-            enableSnippets = true,
-            updateImportsOnRename = true,
+            checkForSdkUpdates = false,
+            suggestFromUnimportedLibraries = true,
+            projectSearchDepth = 1,
+            documentation = "full",
           },
         }
       })
-      require("telescope").load_extension("flutter")
     end,
   },
 }

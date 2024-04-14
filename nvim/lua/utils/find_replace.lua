@@ -2,7 +2,7 @@ local function input(prompt)
   return vim.fn.input(prompt)
 end
 
-function find_replace_prompt()
+function Find_replace_prompt()
   local search_str = input('Replace: ')
   local replace_str = input('With: ')
   search_str = vim.fn.escape(search_str, '/')

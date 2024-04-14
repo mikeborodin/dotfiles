@@ -19,4 +19,4 @@ local keys = {
   { 'H',         '<C-r>',                                                                         'Redo' },
 }
 
-useKeymapTable(keys)
+UseKeymapTable(keys)

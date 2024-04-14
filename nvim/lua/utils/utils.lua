@@ -23,3 +23,13 @@ function Has_flutter_dependency_in_pubspec()
   local flutter_dependency = string.match(joined_content, "flutter:\n[%s\t]*sdk:[%s\t]*flutter")
   return flutter_dependency ~= nil
 end
+
+function SaveCommandHistory()
+  local output = vim.api.nvim_command('silent history')
+  local lines = {}
+
+  for line in output:gmatch('[^\r\n]+') do
+    table.insert(lines, line)
+  end
+  vim.fn.writefile(lines, '~/neovim_history.txt')
+end

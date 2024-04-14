@@ -35,10 +35,28 @@ return {
 					},
 				},
 				{
+					pattern = "/lib/(.*).dart$",
+					target = {
+						{
+							target = "/test/%1_test.dart",
+							context = "test",
+						},
+					},
+				},
+				{
 					pattern = "/test/(.*)/(.*)_test.dart$",
 					target = {
 						{
 							target = "/lib/%1/%2.dart",
+							context = "subject",
+						},
+					},
+				},
+				{
+					pattern = "/test/(.*)_test.dart$",
+					target = {
+						{
+							target = "/lib/%1.dart",
 							context = "subject",
 						},
 					},

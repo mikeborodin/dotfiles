@@ -21,13 +21,6 @@ return {
         },
         bottom = {
           {
-            ft = "toggleterm",
-            size = { height = 0.4 },
-            filter = function(buf, win)
-              return vim.api.nvim_win_get_config(win).relative == ""
-            end,
-          },
-          {
             ft = "noice",
             size = { height = 0.4 },
             filter = function(buf, win)
@@ -53,7 +46,8 @@ return {
             end,
           },
           { title = "Spectre",        ft = "spectre_panel",        size = { height = 0.4 } },
-          { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 15 } },
+          { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 0.4 } },
+          { ft = "log",               size = { height = 0.4 } },
         },
         left = {
           {
@@ -66,27 +60,45 @@ return {
             open = function()
               vim.api.nvim_input("<esc><space>e")
             end,
-            size = { height = 0.5, width = 20 },
+            size = { height = 0.5, width = 40 },
           },
           { title = "Neotest Summary", ft = "neotest-summary" },
           "neo-tree",
+          -- {
+          --   title = "Neo-Tree Git",
+          --   ft = "neo-tree",
+          --   filter = function(buf)
+          --     return vim.b[buf].neo_tree_source == "git_status"
+          --   end,
+          --   pinned = true,
+          --   open = "Neotree position=right git_status",
+          -- },
         },
+        -- right = {
+        --   {
+        --     ft = "toggleterm",
+        --     size = { width = 40 },
+        --     filter = function(buf, win)
+        --       return vim.api.nvim_win_get_config(win).relative == ""
+        --     end,
+        --   },
+        -- },
         keys = {
-          -- increase width
-          ["<c-Right>"] = function(win)
-            win:resize("width", 2)
+          ["<space>wy"] = function(win)
+            win:resize("width", 8)
           end,
-          -- decrease width
-          ["<c-Left>"] = function(win)
-            win:resize("width", -2)
+          ["<space>wl"] = function(win)
+            win:resize("width", -8)
           end,
-          -- increase height
-          ["<c-Up>"] = function(win)
-            win:resize("height", 2)
+          ["<space>w;"] = function(win)
+            win:resize("height", 8)
           end,
-          -- decrease height
-          ["<c-Down>"] = function(win)
-            win:resize("height", -2)
+          ["<space>wu"] = function(win)
+            win:resize("height", -8)
+          end,
+
+          ["<space>wh"] = function(win)
+            win:hide()
           end,
         },
       }

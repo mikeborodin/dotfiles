@@ -1,21 +1,50 @@
-function nmap(keys, cmd, desc)
-  vim.keymap.set('n', keys, cmd, { noremap = true, desc = desc, silent = true, })
+function Nmap(keys, cmd, desc)
+	local function runAndLog()
+		if type(cmd) == 'function' then
+			cmd()
+		end
+		--
+		local file = io.open(os.getenv('HOME') .. '/neovim_keys.log', 'a')
+		if file == nil then
+			return
+		end
+		file:write(keys .. '\n')
+		file:close()
+	end
+
+	if type(cmd) == 'string' then
+		vim.keymap.set('n', keys, cmd, { noremap = true, desc = desc, silent = true, })
+	else
+		vim.keymap.set('n', keys, runAndLog, { noremap = true, desc = desc, silent = true, })
+	end
 end
 
-function clear(keys)
-  vim.keymap.set({ 'n', 'v' }, keys, '<Nop>', { noremap = true, silent = true })
+function Clear(keys)
+	vim.keymap.set({ 'n', 'v' }, keys, '<Nop>', { noremap = true, silent = true })
 end
 
-function useKeymapTable(keys)
-  for _, shortcut in pairs(keys) do
-    nmap(shortcut[1], shortcut[2], shortcut[3])
-  end
+function UseKeymapTable(keys)
+	for _, shortcut in pairs(keys) do
+		Nmap(shortcut[1], shortcut[2], shortcut[3])
+	end
 end
 
-function guard(nvim, vscode)
-  if (vim.g.vscode == nil) then
-    return nvim
-  else
-    return vscode
-  end
+function VsQuard(nvim, vscode)
+	if (vim.g.vscode == nil) then
+		return nvim
+	else
+		return vscode
+	end
+end
+
+function Cmd(cmd)
+	return function()
+		vim.cmd(cmd)
+	end
+end
+
+function Key(cmd)
+	return function()
+		vim.api.nvim_feedkeys(cmd, 'n', true)
+	end
 end

@@ -1,16 +1,16 @@
 require("utils.find_replace")
 require("utils.common_utils")
 
-clear('<space>')
-clear('s')
-clear('a')
-clear('<C-n>')
-clear('<C-i>')
-clear('<C-u>')
-clear('<C-e>')
-clear('<C-w>')
-clear('<C-S-n>')
-clear('<C-S-n>')
+Clear('<space>')
+Clear('s')
+Clear('a')
+Clear('<C-n>')
+Clear('<C-i>')
+Clear('<C-u>')
+Clear('<C-e>')
+Clear('<C-w>')
+Clear('<C-S-n>')
+Clear('<C-S-n>')
 
 
 local keys = {
@@ -65,4 +65,4 @@ local keys = {
   { 's<space>a',       '<Nop>', '?' },
 }
 
-useKeymapTable(keys)
+UseKeymapTable(keys)

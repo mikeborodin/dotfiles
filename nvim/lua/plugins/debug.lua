@@ -6,6 +6,7 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
+    'nvim-neotest/nvim-nio',
   },
 
   config = function()
@@ -87,15 +88,16 @@ return {
       },
       controls = {
         icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = '<',
-          run_last = '▶▶',
-          terminate = '⏹',
-        },
+          disconnect = "",
+          pause = "",
+          play = "",
+          run_last = "",
+          step_back = "",
+          step_into = "",
+          step_out = "",
+          step_over = "",
+          terminate = ""
+        }
       },
     }
 

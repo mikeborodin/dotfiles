@@ -48,7 +48,7 @@ return {
       },
       {
         "tf",
-        "<cmd>Neotree focus<cr>",
+        "<cmd>Neotree reveal<cr>",
         desc = "Explorer NeoTree (cwd)",
       },
     },
@@ -56,7 +56,7 @@ return {
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
       filesystem = {
-        follow_current_file = { enabled = true },
+        follow_current_file = { enabled = false },
         use_libuv_file_watcher = true,
         bind_to_cwd = false,
         filtered_items = {
@@ -80,6 +80,7 @@ return {
           expander_expanded = "",
           expander_highlight = "NeoTreeExpander",
         },
+        file_size = { enabled = false },
       },
       window = {
         position = "left",
@@ -98,8 +99,8 @@ return {
           ["<esc>"] = "revert_preview",
           ["P"] = { "toggle_preview", config = { use_float = true } },
           ["l"] = "focus_preview",
-          ["s"] = "open_split",
-          ["I"] = "open_vsplit",
+          ["S"] = "open_split",
+          ["s"] = "open_vsplit",
           -- ["S"] = "split_with_window_picker",
           -- ["s"] = "vsplit_with_window_picker",
           --["t"] = "open_tabnew",
@@ -157,6 +158,16 @@ return {
           local cwd = vim.loop.cwd()
           local relative_path = absolutePath:gsub(cwd .. '/', "")
           vim.fn.setreg('+', relative_path)
+          require('notify')('copied ' .. relative_path)
+        end,
+        create_test_file = function(state)
+          local node = state.tree:get_node()
+          local absolutePath = node.path
+          local cwd = vim.loop.cwd()
+          local relative_path = absolutePath:gsub(cwd .. '/', "")
+          vim.fn.setreg('+', relative_path)
+
+
           require('notify')('copied ' .. relative_path)
         end,
         open_terminal_in_folder = function(state)

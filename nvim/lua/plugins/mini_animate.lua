@@ -2,8 +2,9 @@ return {
   -- animations
   {
     "echasnovski/mini.animate",
-    event = "VeryLazy",
-    opts = function()
+    enabled = false,
+    event   = "VeryLazy",
+    opts    = function()
       -- don't use animate when scrolling with the mouse
       local mouse_scrolled = false
       for _, scroll in ipairs({ "Up", "Down" }) do

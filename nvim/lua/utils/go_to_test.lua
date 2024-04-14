@@ -28,15 +28,19 @@ local function swapTestLib(filepath)
   end
 end
 
-function jumpToTest()
+
+function GetFilePath()
   local absolutePath = vim.fn.expand('%:p')
   local cwd = vim.fn.getcwd()
   local filePath = vim.fn.substitute(absolutePath, "^" .. vim.fn.escape(cwd, '/'), '', '')
   if vim.startswith(filePath, '/') then
     filePath = vim.fn.substitute(filePath, '^/', '', '')
   end
-  print(filePath)
-  local counterpartFile = swapTestLib(filePath)
+  return filePath
+end
+
+function jumpToTest()
+  local counterpartFile = swapTestLib(GetFilePath())
   print(counterpartFile)
   create_file_if_not_exists(counterpartFile)
   vim.cmd('edit ' .. counterpartFile)

@@ -22,6 +22,8 @@ yabai -m rule --add app="^Karabiner-Elements$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Karabiner-EventViewer$" sticky=on layer=above manage=off
 yabai -m rule --add app="^KeyCastr$" sticky=on layer=above manage=off
 # yabai -m rule --add app="^Microsoft Teams classic$" sticky=on layer=above manage=off
+yabai -m rule --add  label=ignoreTeamsNotification app="Microsoft Teams" title="Microsoft Teams Notification" manage=off
+
 
 # yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
 yabai -m rule --add app="^Disk Utility$" sticky=on layer=above manage=off

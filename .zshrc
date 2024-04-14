@@ -7,6 +7,7 @@ fi
 
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
+
 plugins=(zsh-autosuggestions)
 
 # enable italics in vim
@@ -28,6 +29,11 @@ export PATH="$PATH:$HOME/Library/Python/3.9/bin"
 export PATH="$PATH:$HOME/Library/Android/sdk/emulator"
 export PATH="$PATH":"$HOME/programs/sonar-scanner/bin"
 export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="$PATH":"$HOME/.maestro/bin"
+
+export PATH="$PATH":"$HOME/personal_projects/extract/bin"
+export PATH="$PATH":"$HOME/personal_projects/other/bin"
+
 
 export PATH="$PATH:/opt/homebrew/bin"
 export PATH="$PATH":"/Applications/Firefox.app/Contents/MacOS"
@@ -42,10 +48,23 @@ source ~/env.sh
 
 export NVM_DIR="$HOME/.nvm"
 
-# get the name of the branch we are on
-# uncomment if something breaks
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(op completion zsh)"; compdef _op op
+
+# Defer initialization of nvm until nvm, node or a node-dependent command is
+# run. Ensure this block is only run once if .bashrc gets sourced multiple times
+# by checking whether __init_nvm is a function.
+# if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -w __init_nvm | awk '{print $2}')" = function ]; then
+#   export NVM_DIR="$HOME/.nvm"
+#   [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+#   declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack')
+#   function __init_nvm() {
+#     for i in "${__node_commands[@]}"; do unalias $i; done
+#     . "$NVM_DIR"/nvm.sh
+#     unset __node_commands
+#     unset -f __init_nvm
+#   }
+#   for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+# fi
 
 export QEMU_AUDIO_DRV=none
 
@@ -92,6 +111,14 @@ zle -N down-line-or-beginning-search
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+--color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
+--color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
+--color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
+--color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a
+--pointer " 
+
+
 # pnpm
 export PNPM_HOME="/Users/mike/Library/pnpm"
 case ":$PATH:" in
@@ -99,3 +126,17 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+export PATH=$PATH:$HOME/.maestro/bin
+eval "$(rbenv init - zsh)"
+
+# bun completions
+[ -s "/Users/mike/.bun/_bun" ] && source "/Users/mike/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# aitdd
+export AITDD_INSTALL="$HOME/.aitdd"
+export PATH="$AITDD_INSTALL/bin:$PATH"
+. "$HOME/.cargo/env"
