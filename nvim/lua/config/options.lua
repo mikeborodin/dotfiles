@@ -16,6 +16,7 @@ vim.o.autowriteall = true
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 vim.o.hidden = true
+vim.o.splitright = true
 
 vim.o.breakindent = true
 
@@ -39,12 +40,11 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.cmd('set shortmess+=F')
 
-
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
 -- vim.cmd(':set nonu')
-vim.o.number = false
+vim.o.number = true
 -- vim.o.textwidth = 120
 -- vim.cmd(':set colorcolumn=+1')
 
@@ -53,4 +53,4 @@ vim.opt.laststatus = 3
 -- Default splitting will cause your main splits to jump when opening an edgebar.
 -- To prevent this, set `splitkeep` to either `screen` or `topline`.
 vim.opt.splitkeep = "screen"
--- vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1

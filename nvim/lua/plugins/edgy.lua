@@ -35,7 +35,6 @@ return {
               return not vim.b[buf].lazyterm_cmd
             end,
           },
-          "Trouble",
           { ft = "qf",                title = "QuickFix" },
           {
             ft = "help",
@@ -47,9 +46,16 @@ return {
           },
           { title = "Spectre",        ft = "spectre_panel",        size = { height = 0.4 } },
           { title = "Neotest Output", ft = "neotest-output-panel", size = { height = 0.4 } },
-          { ft = "log",               size = { height = 0.4 } },
+          {
+            ft = "log",
+            size = { height = 0.4 },
+            filter = function(_, win)
+              return vim.api.nvim_win_get_config(win).relative == ""
+            end,
+          },
         },
         left = {
+          "Trouble",
           {
             title = "Neo-Tree",
             ft = "neo-tree",

@@ -11,22 +11,6 @@ return {
   },
   -- todo
   {
-    "folke/trouble.nvim",
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = function()
-      require("trouble").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-        mode = "workspace_diagnostics",
-        auto_open = false,
-        auto_close = false,
-      }
-    end
-  },
-  {
     'onsails/lspkind.nvim',
     config = function()
       require('lspkind').init({

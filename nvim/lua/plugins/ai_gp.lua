@@ -1,7 +1,7 @@
 -- kinda good, nice context
 return {
     "robitx/gp.nvim",
-    enabled = true,
+    enabled = false,
     config = function()
         require("gp").setup({
             openai_api_endpoint = "http://localhost:11434/v1/chat/completions",

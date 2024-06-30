@@ -146,7 +146,8 @@ return {
           ["n"] = "close_node",
           ["."] = 'toggle_hidden',
           ["w"] = 'copy_relative_path',
-          ["T"] = 'open_terminal_in_folder'
+          ["T"] = 'open_terminal_in_folder',
+          ["o"] = 'open_yazi'
         }
       },
       commands = {
@@ -178,9 +179,14 @@ return {
           local relative_path = absolutePath:gsub(cwd .. '/', "")
           -- vim.fn.setreg('+', relative_path)
           vim.cmd("ToggleTerm dir=" .. absolutePath)
+        end,
+        open_yazi = function(state)
+          local node = state.tree:get_node()
+          local absolutePath = node.path
 
-          -- require('notify')('copied ' .. relative_path)
+          require('yazi').yazi({}, absolutePath)
         end
+
       },
     },
     config = function(_, opts)

@@ -45,6 +45,7 @@ return {
       highlight = { enable = true },
       incremental_selection = { enable = true },
       indent = { enable = true },
+      ignore_install = { "dart" },
       textobjects = {
         -- select = {
         --   enable = true,

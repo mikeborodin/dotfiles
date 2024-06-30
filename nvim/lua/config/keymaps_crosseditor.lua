@@ -22,7 +22,6 @@ local keys = {
 	{ "<space>ny", "<C-o>",                   "go back" },
 	{ "<space>nY", "<C-I>",                   "go back" },
 	{ "<space>n;", "<C-i>",                   "go next" },
-	{ "<C-l>",     Key "n",                   "find next search result", },
 	{ "<space>fn", Key "n",                   "find next search result", },
 	{ "<space>on", "<C-w>v",                  "split vertical" },
 	{ "<space>oe", "<C-w>s",                  "split horizontal", },

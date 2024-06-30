@@ -3,7 +3,7 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
         require("fzf-lua").setup({
-            hls = { border = "FloatBorder" },
+            -- hls = { border = "FloatBorder", },
             winopts = {
                 height  = 0.5, -- window height
                 width   = 0.8, -- window width
@@ -18,6 +18,7 @@ return {
                     hidden     = 'nohidden', -- hidden|nohidden
                     vertical   = 'down:45%', -- up|down:size
                     horizontal = 'right:30%',
+
                 }
             },
         })

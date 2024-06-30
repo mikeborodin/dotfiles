@@ -1,4 +1,13 @@
+---@diagnostic disable: missing-fields
 local Util = require("lazyvim.util")
+
+local function fmt(diagnostic)
+  -- if diagnostic.code then
+  --   return ("[%s] %s"):format(diagnostic.code, diagnostic.message)
+  -- end
+  return diagnostic.code
+end
+
 
 return {
   -- lspconfig
@@ -25,7 +34,8 @@ return {
         virtual_text = {
           spacing = 4,
           source = "if_many",
-          prefix = "●",
+          prefix = "",
+          format = fmt,
           -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
           -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
           -- prefix = "icons",
@@ -100,16 +110,18 @@ return {
       -- setup keymaps
       Util.lsp.on_attach(function(client, buffer)
         -- require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
+        -- if client.server_capabilities.inlayHintProvider then
+        --   vim.lsp.inlay_hint(buffer, true)
+        -- end
       end)
 
       local register_capability = vim.lsp.handlers["client/registerCapability"]
 
       vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
         local ret = register_capability(err, res, ctx)
-        local client_id = ctx.client_id
-        ---@type lsp.Client
-        local client = vim.lsp.get_client_by_id(client_id)
-        local buffer = vim.api.nvim_get_current_buf()
+        -- local client_id = ctx.client_id
+        -- local client = vim.lsp.get_client_by_id(client_id)
+        -- local buffer = vim.api.nvim_get_current_buf()
         --LazyVim/LazyVim/lua/lazyvim/plugins/lsp/keymaps.lua
         -- require("lazyvim.plugins.lsp.keymaps").on_attach(client, buffer)
         return ret
@@ -121,15 +133,16 @@ return {
         vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
       end
 
-      local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
-
-      if opts.inlay_hints.enabled and inlay_hint then
-        Util.lsp.on_attach(function(client, buffer)
-          if client.supports_method("textDocument/inlayHint") then
-            inlay_hint(buffer, true)
-          end
-        end)
-      end
+      --todo
+      -- local inlay_hint = vim.lsp.buf.inlay_hint or vim.lsp.inlay_hint
+      --
+      -- if opts.inlay_hints.enabled and inlay_hint then
+      --   Util.lsp.on_attach(function(client, buffer)
+      --     if client.supports_method("textDocument/inlayHint") then
+      --       inlay_hint(buffer, true)
+      --     end
+      --   end)
+      -- end
 
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"

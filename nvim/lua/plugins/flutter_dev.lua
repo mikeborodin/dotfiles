@@ -7,7 +7,6 @@ return {
     },
     config = function()
       local isFvmProject = IsFvmProject()
-      print("isFvmProject", isFvmProject)
 
       require("flutter-tools").setup({
         closing_tags = { enabled = false, },

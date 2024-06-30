@@ -5,8 +5,8 @@ return {
       require 'nvim-web-devicons'.setup {
         override = {
           dart = {
-            icon = "",
-            color = "#1da5ff",
+            icon = "",
+            color = "#1E88E5",
             name = "Dart"
           }
         }
@@ -16,9 +16,9 @@ return {
   {
     'akinsho/bufferline.nvim',
     version = "*",
+    enabled = false,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
-      'moll/vim-bbye',
     },
     config = function()
       require("bufferline").setup({

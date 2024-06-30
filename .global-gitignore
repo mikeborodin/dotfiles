@@ -1,3 +1,7 @@
 local/
 .metadata
 .isflutter
+
+.nvim.lua
+.prompts.sh
+project_context.md

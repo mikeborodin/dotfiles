@@ -2,6 +2,7 @@
 return {
     'james1236/backseat.nvim',
     dir = "/Users/mike/personal_projects/backseat.nvim",
+    enabled = false,
     config = function()
         require("backseat").setup({
             -- Alternatively, set the env var $OPENAI_API_KEY by putting "export OPENAI_API_KEY=sk-xxxxx" in your ~/.bashrc

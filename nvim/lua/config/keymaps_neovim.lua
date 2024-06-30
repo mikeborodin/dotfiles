@@ -16,13 +16,81 @@ end
 
 vim.cmd [[:tnoremap <Esc> <C-\><C-n>]]
 
+-- Function to toggle LSP log output pop-up window
+--
+local popup_winid = nil
 
-local function implementThisTestWithContext()
+function toggle_flutter_dev_log()
+	-- Find the existing buffer by filename
+	local bufnr = nil
+	for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.api.nvim_buf_get_option(buffer, 'filetype') == 'log' then
+			bufnr = buffer
+			break
+		end
+	end
+
+	-- If the buffer doesn't exist, print an error and return
+	if not bufnr then
+		print("Buffer with filename '__FLUTTER_DEV_LOG__' not found")
+		return
+	end
+
+	if popup_winid and vim.api.nvim_win_is_valid(popup_winid) then
+		-- Close the popup window if it's already open
+		vim.api.nvim_win_close(popup_winid, true)
+		popup_winid = nil
+	else
+		-- Calculate popup dimensions and position
+		local width = math.floor(vim.o.columns * 0.9)
+		local height = math.floor(vim.o.lines * 0.9)
+		local row = math.floor((vim.o.lines - height) / 2)
+		local col = math.floor((vim.o.columns - width) / 2)
+
+		-- Create the popup window
+		popup_winid = vim.api.nvim_open_win(bufnr, true, {
+			relative = 'editor',
+			width = width,
+			height = height,
+			row = row,
+			col = col,
+			style = 'minimal',
+			border = 'single'
+		})
+	end
+end
+
+local function implementSpec4()
 	local path = GetFilePath()
-	vim.notify(path)
 
-	local command = "ai_task_implement_spec3 " .. path .. " | extract | tee $(other " .. path .. ")"
-	executeShell(command)
+	local other = '$(other ' .. path .. ')'
+	local createFileCommand = '  mkdir -p $(dirname ' .. other .. ') && touch ' .. other
+
+	local command = "ai_task_implement_spec4 " .. path .. " | extract | tee " .. other
+	executeShell(createFileCommand .. ' && ' .. command)
+end
+
+local function selectOllamaModel()
+	executeShell('selectOllamaModel && clear')
+end
+
+local function implementDirect()
+	local path = GetFilePath()
+
+	local other = '$(other ' .. path .. ')'
+	local createFileCommand = '  mkdir -p $(dirname ' .. other .. ') && touch ' .. other
+
+	local command = "ai_task_implement_direct " .. path .. " | extract | tee " .. other
+	executeShell(createFileCommand .. ' && ' .. command)
+end
+local function updateSpec4()
+	local path = GetFilePath()
+
+	local other = '$(other ' .. path .. ')'
+	local createFileCommand = '  mkdir -p $(dirname ' .. other .. ') && touch ' .. other
+
+	local command = "ai_task_update_spec4 " .. path .. " | extract | tee " .. other
+	executeShell(createFileCommand .. ' && ' .. command)
 end
 
 local function criticizeThisFile()
@@ -60,9 +128,12 @@ end
 
 local function selectAiCommand()
 	local tasks = {
-		["Infer code under test"] = implementThisTestWithContext,
-		["Criticize this file"] = criticizeThisFile,
-		["Find logic flaws"] = findLogicFlaws,
+		["Implement under test (spec)"] = implementSpec4,
+		["Update code under test (spec)"] = updateSpec4,
+		["Implenent under test (direct)"] = implementDirect,
+		["Criticize code this file"] = criticizeThisFile,
+		["Find logic flaws in this file"] = findLogicFlaws,
+		["Select Model"] = selectOllamaModel,
 	}
 	vim.ui.select(
 		getKeys(tasks),
@@ -75,23 +146,44 @@ local function selectAiCommand()
 	)
 end
 
+-- command can be one of:
+-- * source.sortMembers
+-- * source.organizeImports
+-- * source.fixAll
+local function executeLsp(command)
+	vim.lsp.buf.code_action({
+		filter = function(action)
+			return action.kind == command
+		end,
+		apply = true,
+	})
+end
+
+
+local function autoFix()
+	if vim.bo.filetype == 'dart' then
+		executeLsp('source.fixAll')
+	else
+		vim.lsp.buf.format()
+	end
+end
 
 local keys = {
 	--navigation
 	{ "<space>0",       Key "%",                                                                         "% Parenthese" },
 	{ "<C-cr>",         Key "n",                                                                         "?" },
-	{ "<space>n",       function() vim.lsp.buf.definition() end,                                         "Go to definition", },
 	{ "<space>ne",      function() vim.lsp.buf.definition() end,                                         "Go to definition", },
+	{ "<space>ni",      require("fzf-lua").lsp_implementations,                                          "Impl" },
+	{ "<space>no",      require("fzf-lua").lsp_references,                                               "Reference" },
+	{ "<space>i",       function() vim.lsp.buf.definition() end,                                         "Go to definition", },
 	-- jumps
-	{ "<space>fu",      function() require("trouble").next({ skip_groups = true, jump = true, }) end,    "Next problem" },
+	{ "<space>nu",      function() require("trouble").next({ skip_groups = true, jump = true, }) end,    "Next problem" },
 	{ "<space>aa",      Cmd ":Arrow open",                                                               "Arrow open", },
 	{ "afn",            function() require("trouble").previous({ skip_groups = true, jump = true }) end, "Previous diagnos", },
 	{ "<space>fw",      Cmd ":FzfLua blines",                                                            "Find in buff", },
 	{ "<C-f>",          require("fzf-lua").live_grep,                                                    "Live grep" },
 	{ "af",             require("fzf-lua").live_grep,                                                    "Live grep" },
 	{ "<space>fr",      Key ":lua find_replace_prompt()",                                                "File find/rep", },
-	{ "<space>ni",      require("fzf-lua").lsp_implementations,                                          "Impl" },
-	{ "<space>no",      require("fzf-lua").lsp_references,                                               "Reference" },
 	{ "<space>z",       Cmd ':Zen',                                                                      "Zen" },
 	{ "<C-e>",          function() require("fzf-lua").files() end,                                       "Find files", },
 	{ "<C-o>",          Cmd ":Other",                                                                    "Open other", },
@@ -99,6 +191,8 @@ local keys = {
 	{ "<space>e",       function() vim.lsp.buf.code_action() end,                                        "Code action (visual)", },
 	-- { "<space><space>", Cmd ":silent !dart format %",                                                           "Format", },
 	{ "<space><space>", function() vim.lsp.buf.format() end,                                             "Format", },
+	{ "<BS><BS>",       autoFix,                                                                         "Fix All & organizeImports" },
+	{ "<space>df",      Cmd ':silent !dart format %',                                                    "Format", },
 	{ "<space>h",       function() require("hover").hover() end,                                         "Format", },
 	{ "tr",             Cmd ":Other",                                                                    "Open other", },
 	{ "<space>O",       Cmd ":Other test",                                                               "Find files", },
@@ -108,7 +202,7 @@ local keys = {
 	{ "Tr",             Cmd ":FlutterRename",                                                            "Flutter Rename", },
 	{ "<space>H",       function() vim.diagnostic.open_float() end,                                      "Floating diagnos", },
 	{ '<space>ae',      ':Gen<cr>',                                                                      'AI Actions' },
-	{ '<space>nn',      implementThisTestWithContext,                                                    'AI Actions' },
+	{ '<space>nn',      implementDirect,                                                                 'AI Actions' },
 	{ '<space>ai',      selectAiCommand,                                                                 'AI Actions' },
 	-- { '<space>ai', function()
 	-- 	if is_default_buffer() then
@@ -121,22 +215,24 @@ local keys = {
 	{ "<space>Y",       Cmd ":%bdelete:Neotree focus",                                                   "Close all buffers", },
 	{ "<space>Y",       Key ":%bdelete\n:Neotree focus\n",                                               "Close all buffers", },
 	{ "ta",             Cmd ":AerialToggle",                                                             "AerialToggle", },
-	{ "<C-y>",          Cmd ":Bdelete",                                                                  "Close buffer", },
-	{ "<space>y",       Cmd ":Bdelete",                                                                  "Close buffer", },
+	{ "<C-y>",          function() require('bufdelete').bufdelete() end,                                 "Close buffer", },
+	{ "<space>y",       function() require('bufdelete').bufdelete() end,                                 "Close buffer", },
 	--flutter runs
 	{ "<space>su",      SelectConfigAndRun,                                                              "SelectRunConfig", },
-	{ "<space>nu",      Cmd ":FlutterRun",                                                               "FlutterRun" },
+	{ "au",             Cmd ":FlutterRun",                                                               "FlutterRun" },
+	{ "ao",             function() require('yazi').yazi({}, vim.fn.expand("%:p")) end,                   "Yazi" },
 	{ "<space>NU",      Cmd ":FlutterRestart",                                                           "FlutterRestart" },
+	{ "al",             Cmd ":FlutterRestart",                                                           "FlutterRestart" },
 	{ "<space>ly",      Cmd ":FlutterQuit",                                                              "FlutterQuit" },
+	{ "ay",             Cmd ":FlutterQuit",                                                              "FlutterQuit" },
 
 	{ "<space>N",       Cmd ":FlutterRun",                                                               "FlutterRun" },
 	{ "<space>NY",      Cmd ":FlutterQuit",                                                              "FlutterRestart" },
 	{ "<space>K",       Cmd ":FlutterLogClear",                                                          "FlutterLogClear", },
 	{ "as",             Cmd ":FlutterVisualDebug",                                                       "Flutter Quit", },
 	{ "<space>lv",      Cmd ":FlutterVisualDebug",                                                       "Flutter Visual Debug", },
-	{ "ay",             Cmd ":FlutterQuit",                                                              "Flutter Quit", },
 	{ "alr",            Cmd ":FlutterReanalyze",                                                         "FlutterReanalyze", },
-	{ "als",            Cmd ":FlutterLspRestart",                                                        "FlutterLspRestart", },
+	{ "<space>rr",      Cmd ":FlutterLspRestart",                                                        "FlutterLspRestart", },
 	-- searches
 	{ "<space>fb",      Cmd ":free",                                                                     desc = "Switch Buffer" },
 	{ "<space>fF",      Util.telescope("files", { cwd = false }),                                        desc = "Find Files (cwd)" },
@@ -157,6 +253,8 @@ local keys = {
 	{ "<space>tf",      Cmd ':TestNearest',                                                              "Test Nearest" },
 	{ "<space>tw",      Cmd ':TestFile',                                                                 "Test File" },
 	{ "<space>l",       function() print("spc l") end,                                                   "?" },
+	{ "<C-l>",          toggle_flutter_dev_log,                                                          "Toggle Lsp Log", },
+
 	{ "<space>tv",      Cmd ":CoverageToggle",                                                           "Coverage" },
 	{ "<space>kk",      function() print("spc kk") end,                                                  "SaveCommandHistory" },
 	{ "<C-w>",          function() print("Cw") end,                                                      "?", },
@@ -168,13 +266,13 @@ local keys = {
 	-- 	end,
 	-- 	"?",
 	-- },
-	-- {
-	-- 	"<C-i>",
-	-- 	function()
-	-- 		print("Ci")
-	-- 	end,
-	-- 	"?",
-	-- },
+	{
+		"<C-i>",
+		function()
+			require('arrow.ui').openMenu()
+		end,
+		"?",
+	},
 }
 -- {
 -- 	"adn",

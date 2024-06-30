@@ -43,8 +43,26 @@
     ],
     "description": "Freezed Union"
   },
-  "testFile": {
-    "prefix": "testFile",
+  "ftestf": {
+    "prefix": "ftestf",
+    "body": [
+      "import 'package:flutter_test/flutter_test.dart';",
+      "import 'package:mocktail/mocktail.dart';",
+      "",
+      "void main() {",
+      "setUp((){",
+      "});",
+      "",
+      "  group('${1}', () {",
+      "    test('${2}', () async {",
+      "      ${0}",
+      "    });",
+      "  });",
+      "}"
+    ]
+  },
+  "ftestfm": {
+    "prefix": "ftestfm",
     "body": [
       "import 'package:flutter_test/flutter_test.dart';",
       "import 'package:mocktail/mocktail.dart';",
@@ -54,6 +72,40 @@
       "});",
       "",
       "tearDown(resetMocktailState);",
+      "",
+      "  group('${1}', () {",
+      "    test('${2}', () async {",
+      "      ${0}",
+      "    });",
+      "  });",
+      "}"
+    ]
+  },
+  "dtestfm": {
+    "prefix": "dtestfm",
+    "body": [
+      "import 'package:test/test.dart';",
+      "import 'package:mocktail/mocktail.dart';",
+      "",
+      "void main() {",
+      "",
+      "tearDown(resetMocktailState);",
+      "",
+      "  group('${1}', () {",
+      "    test('${2}', () async {",
+      "      ${0}",
+      "    });",
+      "  });",
+      "}"
+    ]
+  },
+  "dtestf": {
+    "prefix": "dtestf",
+    "body": [
+      "import 'package:test/test.dart';",
+      "",
+      "void main() {",
+      "",
       "",
       "  group('${1}', () {",
       "    test('${2}', () async {",

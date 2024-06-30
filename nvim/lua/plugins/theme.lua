@@ -1,4 +1,6 @@
 return {
+  { 'tiagovla/tokyodark.nvim' },
+  { 'EdenEast/nightfox.nvim' },
   {
 
     "folke/tokyonight.nvim",

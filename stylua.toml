@@ -1,0 +1,5 @@
+indent_type = "Spaces"  # Use spaces for indentation
+indent_width = 2        # Indent width of 2 spaces
+quote_style = "AutoPreferDouble"  # Automatically prefer double quotes for strings
+line_endings = "Unix"   # Use Unix line endings
+column_width = 80    
