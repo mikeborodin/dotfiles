@@ -1,5 +1,5 @@
 return {
-    dir = '/Users/mike/personal_projects/fzf-lua',
+    dir = 'ibhagwan/fzf-lua',
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
         require("fzf-lua").setup({

@@ -26,11 +26,11 @@ return {
           enabled = true,
           run_via_dap = true,
           exception_breakpoints = { "uncaught", 'raised', },
-          register_configurations = function(_)
-            if (not require("dap").configurations.dart) then
-              require('utils.select_run_config').selectRunConfig()
-            end
-          end,
+          -- register_configurations = function(_)
+          --   if (not require("dap").configurations.dart) then
+          --     require('utils.select_run_config').selectRunConfig()
+          --   end
+          -- end,
         },
         fvm = isFvmProject,
         lsp = {
