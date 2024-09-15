@@ -38,10 +38,17 @@
       "",
       "@freezed",
       "class ${1} with _$${1}{",
-      "  const factory ${1}(${0}) = _${2};",
+      "  const factory ${1}(${0}) = _${1};",
       "}"
     ],
     "description": "Freezed Union"
+  },
+  "fjson": {
+    "prefix": "fjson",
+    "body": [
+      "factory ${0}.fromJson(Map<String, dynamic> json) =>_$${0}FromJson(json);"
+    ],
+    "description": "from json"
   },
   "ftestf": {
     "prefix": "ftestf",
@@ -202,12 +209,5 @@
       "}"
     ],
     "description": "Controller"
-  },
-  "fjson": {
-    "prefix": "fjson",
-    "body": [
-      "factory ${0}.fromJson(Map<String, dynamic> json) =>_$${0}FromJson(json);"
-    ],
-    "description": "from json"
   }
 }

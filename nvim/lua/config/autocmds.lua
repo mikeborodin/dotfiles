@@ -9,6 +9,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 
 vim.cmd([[ autocmd BufNewFile,BufRead *.arb set filetype=json ]])
 vim.cmd([[ autocmd BufNewFile,BufRead *.arb set filetype=json ]])
+vim.cmd([[ autocmd BufNewFile,BufRead *.code-snippets set filetype=json ]])
 vim.cmd([[ autocmd FileType dap-repl set filetype=log ]])
 
 vim.cmd([[autocmd ColorScheme * highlight NvimTreeNormal guibg=#ffff00]])

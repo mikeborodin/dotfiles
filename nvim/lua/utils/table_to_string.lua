@@ -13,9 +13,6 @@ function TableToString(tbl, indent)
 end
 
 function IsFvmProject()
-    -- local current_dir = vim.fn.expand('%:p:h') -- Get the current directory
-    -- Check if the current directory contains "project-name"
-    -- return string.find(current_dir, "mms") ~= nil
     -- check if .fvmrc exists
     return vim.fn.filereadable(".fvmrc") == 1
 end

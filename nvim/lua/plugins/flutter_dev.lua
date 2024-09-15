@@ -25,15 +25,19 @@ return {
         debugger = {
           enabled = true,
           run_via_dap = true,
-          exception_breakpoints = { "uncaught", 'raised', },
-          -- register_configurations = function(_)
-          --   if (not require("dap").configurations.dart) then
-          --     require('utils.select_run_config').selectRunConfig()
-          --   end
-          -- end,
+          exception_breakpoints = { 'raised', },
+          register_configurations = function(_)
+            if (not require("dap").configurations.dart) then
+              require('utils.select_run_config').selectRunConfig()
+            end
+          end,
         },
         fvm = isFvmProject,
         lsp = {
+          -- on_attach = custom_config.on_attach,
+          -- capabilities = custom_config.capabilities,
+          -- flags = custom_config.flags,
+          -- handlers = custom_config.handlers,
           color = {
             enabled = false,
             background = false,
@@ -46,9 +50,14 @@ return {
             lineLength = (isFvmProject and 80 or 120),
             showTodos = false,
             enableSnippets = false,
-            updateImportsOnRename = false,
+            updateImportsOnRename = true,
             closingLabels = false,
-            analysisExcludedFolders = { vim.fn.expand("$HOME/fvm"), ".fvm", },
+            analysisExcludedFolders = {
+              vim.fn.expand(".fvm"),
+              vim.fn.expand("$HOME/fvm"),
+              ".fvm",
+              vim.fn.expand("$HOME/.pub-cache"),
+            },
             flutterOutline = false,
             outline = false,
             -- enableSdkFormatter = false,

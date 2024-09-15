@@ -1,0 +1,10 @@
+{
+  "mike": {
+    "prefix": "tdms",
+    "body": [
+      "tearDown(resetMocktailState);"
+    ],
+    "description": "tearDown useful in tests",
+    "scope": "dart"
+  }
+}

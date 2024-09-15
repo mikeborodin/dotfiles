@@ -1,13 +1,39 @@
 return {
   {
     "L3MON4D3/LuaSnip",
+    version = "v2.*",
     build = (not jit.os:find("Windows"))
         and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
         or nil,
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function(_, opts)
-        require("luasnip.loaders.from_vscode").lazy_load({ paths = "~/.config/nvim/snippets" })
+        require("luasnip.loaders.from_vscode").load_standalone({
+          path = "~/.config/nvim/snippets/af.code-snippets",
+        })
+        require("luasnip.loaders.from_vscode").load_standalone({
+          path = "~/.config/nvim/snippets/mike.code-snippets",
+        })
+
+        local function scan_directory_for_snippets(dir)
+          local files = {}
+          for file in io.popen('ls "' .. dir .. '"'):lines() do
+            if file:match("%.code%-snippets$") then
+              table.insert(files, dir .. '/' .. file)
+            end
+          end
+          return files
+        end
+
+        local snippets_dir = vim.fn.expand(".vscode") -- Adjust this path as needed
+        require('notify')(snippets_dir)
+        local snippets_files = scan_directory_for_snippets(snippets_dir)
+
+        for _, file in ipairs(snippets_files) do
+          require("luasnip.loaders.from_vscode").load_standalone({
+            path = file,
+          })
+        end
       end,
     },
     opts = {

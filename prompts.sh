@@ -66,6 +66,28 @@ The following file contains already existing implementation which needs to be up
     echo "Update implementation to pass the tests above."
 }
 
+ai_suggest_tests() {
+    echo """
+    Write unit tests for that file.
+"""
+    project_context
+
+    echo """
+The following file contains implementation code:
+"""
+
+    implFile=$(other $1)
+
+    echo """
+    The following file contains already existing tests (you may decide to keep them or not):
+"""
+
+    contents $1
+
+    echo "Your task: Write unit tests to cover all possible cases for that file.
+"
+}
+
 implement_given_output() {
     ai_implement_in_context $1
     echo """

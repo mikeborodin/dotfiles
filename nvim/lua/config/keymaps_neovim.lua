@@ -3,6 +3,7 @@ require("utils.common_utils")
 require("utils.go_to_test")
 require("utils.run_script")
 require("utils.select_run_config")
+require("utils.diagnostics")
 
 local Util = require("lazyvim.util")
 
@@ -221,7 +222,7 @@ local keys = {
 	{ "<space>su",      SelectConfigAndRun,                                                              "SelectRunConfig", },
 	{ "au",             Cmd ":FlutterRun",                                                               "FlutterRun" },
 	{ "ao",             function() require('yazi').yazi({}, vim.fn.expand("%:p")) end,                   "Yazi" },
-	{ "<space>NU",      Cmd ":FlutterRestart",                                                           "FlutterRestart" },
+	{ "sd",          PopulateLoclistWithDiagnostics,                                                  "Populate diagns" },
 	{ "al",             Cmd ":FlutterRestart",                                                           "FlutterRestart" },
 	{ "<space>ly",      Cmd ":FlutterQuit",                                                              "FlutterQuit" },
 	{ "ay",             Cmd ":FlutterQuit",                                                              "FlutterQuit" },
