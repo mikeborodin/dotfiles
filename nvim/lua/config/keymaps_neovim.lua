@@ -179,7 +179,7 @@ local keys = {
 	{ "<space>i",       function() vim.lsp.buf.definition() end,                                         "Go to definition", },
 	-- jumps
 	{ "<space>nu",      function() require("trouble").next({ skip_groups = true, jump = true, }) end,    "Next problem" },
-	{ "<space>aa",      Cmd ":Arrow open",                                                               "Arrow open", },
+	-- { "<space>aa",      Cmd ":Arrow open",                                                               "Arrow open", },
 	{ "afn",            function() require("trouble").previous({ skip_groups = true, jump = true }) end, "Previous diagnos", },
 	{ "<space>fw",      Cmd ":FzfLua blines",                                                            "Find in buff", },
 	{ "<C-f>",          require("fzf-lua").live_grep,                                                    "Live grep" },
@@ -213,19 +213,16 @@ local keys = {
 	-- end, 'Gen toggle' },
 	--editor windows
 	--
-	{ "<space>Y",       Cmd ":%bdelete:Neotree focus",                                                   "Close all buffers", },
 	{ "<space>Y",       Key ":%bdelete\n:Neotree focus\n",                                               "Close all buffers", },
 	{ "ta",             Cmd ":AerialToggle",                                                             "AerialToggle", },
 	{ "<C-y>",          function() require('bufdelete').bufdelete() end,                                 "Close buffer", },
-	{ "<space>y",       function() require('bufdelete').bufdelete() end,                                 "Close buffer", },
 	--flutter runs
 	{ "<space>su",      SelectConfigAndRun,                                                              "SelectRunConfig", },
-	{ "au",             Cmd ":FlutterRun",                                                               "FlutterRun" },
+	{ "<space>n",       Cmd ":FlutterRun",                                                               "FlutterRun" },
+	{ "<space>u",       Cmd ":FlutterRestart",                                                           "FlutterRestart" },
+	{ "<space>y",       Cmd ":FlutterQuit",                                                              "FlutterQuit" },
 	{ "ao",             function() require('yazi').yazi({}, vim.fn.expand("%:p")) end,                   "Yazi" },
-	{ "sd",          PopulateLoclistWithDiagnostics,                                                  "Populate diagns" },
-	{ "al",             Cmd ":FlutterRestart",                                                           "FlutterRestart" },
-	{ "<space>ly",      Cmd ":FlutterQuit",                                                              "FlutterQuit" },
-	{ "ay",             Cmd ":FlutterQuit",                                                              "FlutterQuit" },
+	-- { "sd",             PopulateLoclistWithDiagnostics,                                                  "Populate diagns" },
 
 	{ "<space>N",       Cmd ":FlutterRun",                                                               "FlutterRun" },
 	{ "<space>NY",      Cmd ":FlutterQuit",                                                              "FlutterRestart" },

@@ -94,7 +94,7 @@ function M.formatter(opts)
       ---@param client lsp.Client
       local ret = vim.tbl_filter(function(client)
         return client.supports_method("textDocument/formatting")
-          or client.supports_method("textDocument/rangeFormatting")
+            or client.supports_method("textDocument/rangeFormatting")
       end, clients)
       ---@param client lsp.Client
       return vim.tbl_map(function(client)

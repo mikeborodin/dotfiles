@@ -4,10 +4,9 @@ return {
 	opts = {
 		-- options
 	},
-	enabled = false,
+	enabled = true,
 	config = function()
 		local fidget = require("fidget")
 		fidget.setup()
-		vim.notify = fidget.notify
 	end
 }

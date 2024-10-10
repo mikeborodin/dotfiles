@@ -17,6 +17,7 @@ vim.o.autowriteall = true
 vim.o.clipboard = 'unnamedplus'
 vim.o.hidden = true
 vim.o.splitright = true
+vim.o.wrap = false
 
 vim.o.breakindent = true
 

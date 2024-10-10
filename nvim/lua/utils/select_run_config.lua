@@ -156,24 +156,22 @@ function M._load_json(jsonstr)
   return configs
 end
 
---- Extends dap.configurations with entries read from .vscode/launch.json
-function M.load_launchjs(path, type_to_filetypes)
+function M.load_run_configurations_from_vscode(path, type_to_filetypes)
   type_to_filetypes = vim.tbl_extend('keep', type_to_filetypes or {}, M.type_to_filetypes)
-  local resolved_path = path or (vim.fn.getcwd() .. '/.vscode/launch.nvim.json')
+  local resolved_path = path
   if not vim.loop.fs_stat(resolved_path) then
     local configs = {
       {
         type = "dart",
         request = "launch",
-        name = "Launch flutter",
-        -- dartSdkPath = paths.dart_sdk,
-        -- flutterSdkPath = paths.flutter_sdk,
+        name = "launch main.dart",
         program = "${workspaceFolder}/lib/main.dart",
         cwd = "${workspaceFolder}",
       },
     }
     return configs
   end
+
   local lines = {}
   for line in io.lines(resolved_path) do
     if not vim.startswith(vim.trim(line), '//') then
@@ -183,39 +181,13 @@ function M.load_launchjs(path, type_to_filetypes)
   local contents = table.concat(lines, '\n')
   local configurations = M._load_json(contents)
 
-  -- assert(configurations, "launch.json must have a 'configurations' key")
-  --
-  -- for _, config in ipairs(configurations) do
-  --   assert(config.type, "Configuration in launch.json must have a 'type' key")
-  --   assert(config.name, "Configuration in launch.json must have a 'name' key")
-  --   local filetypes = type_to_filetypes[config.type] or { config.type, }
-  --   for _, filetype in pairs(filetypes) do
-  --     local dap_configurations = dap.configurations[filetype] or {}
-  --     for i, dap_config in pairs(dap_configurations) do
-  --       if dap_config.name == config.name then
-  --         -- remove old value
-  --         table.remove(dap_configurations, i)
-  --       end
-  --     end
-  --     table.insert(dap_configurations, config)
-  --     dap.configurations[filetype] = dap_configurations
-  --   end
-  -- end
-  --
-  -- return dap.configurations['dart']
   return configurations
 end
 
 function M.selectRunConfig()
-  local isSpecial = IsFvmProject()
+  local path = vim.fn.getcwd() .. '/.vscode/launch.json'
 
-  local path
-  if (isSpecial) then
-    path = vim.fn.getcwd() .. '/.vscode/launch.json'
-  else
-    path = vim.fn.getcwd() .. '/.vscode/launch.nvim.json'
-  end
-  local configurations = M.load_launchjs(path)
+  local configurations = M.load_run_configurations_from_vscode(path)
 
   require("dap.ui").pick_if_many(
     configurations,

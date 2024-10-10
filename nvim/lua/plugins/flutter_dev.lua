@@ -6,7 +6,7 @@ return {
       'stevearc/dressing.nvim',
     },
     config = function()
-      local isFvmProject = IsFvmProject()
+      -- local isFvmProject = IsFvmProject()
 
       require("flutter-tools").setup({
         closing_tags = { enabled = false, },
@@ -25,14 +25,24 @@ return {
         debugger = {
           enabled = true,
           run_via_dap = true,
-          exception_breakpoints = { 'raised', },
+          exception_breakpoints = {},
           register_configurations = function(_)
-            if (not require("dap").configurations.dart) then
-              require('utils.select_run_config').selectRunConfig()
-            end
+            -- require('fidget').notify('registering dart configurations')
+            -- require('utils.select_run_config').selectRunConfig()
+
+            require('dap').configurations.dart = { {
+              type = "dart",
+              request = "launch",
+              name = "launch main.dart",
+              program = "${workspaceFolder}/lib/main.dart",
+              toolArgs = {
+                '--no-start-paused'
+              },
+              cwd = "${workspaceFolder}",
+            } }
           end,
         },
-        fvm = isFvmProject,
+        fvm = true,
         lsp = {
           -- on_attach = custom_config.on_attach,
           -- capabilities = custom_config.capabilities,
@@ -47,7 +57,7 @@ return {
             virtual_text_str = "■",
           },
           settings = {
-            lineLength = (isFvmProject and 80 or 120),
+            lineLength = 80,
             showTodos = false,
             enableSnippets = false,
             updateImportsOnRename = true,
@@ -68,6 +78,9 @@ return {
             suggestFromUnimportedLibraries = true,
             projectSearchDepth = 1,
             documentation = "full",
+            debugSdkLibraries = false,
+            debugExternalLibraries = false,
+            debugExternalPackageLibraries = false,
           },
         }
       })

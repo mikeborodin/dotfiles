@@ -1,6 +1,6 @@
 return {
     "stevearc/aerial.nvim",
-    -- event = "User AstroFile",
+    enabled = false,
     config = function()
         require("aerial").setup({
             default_direction = "prefer_left",

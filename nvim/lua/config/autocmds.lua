@@ -14,5 +14,4 @@ vim.cmd([[ autocmd FileType dap-repl set filetype=log ]])
 
 vim.cmd([[autocmd ColorScheme * highlight NvimTreeNormal guibg=#ffff00]])
 
-
 vim.cmd [[autocmd bufwritepost kitty.conf :silent !kill -SIGUSR1 $(pgrep kitty)]]

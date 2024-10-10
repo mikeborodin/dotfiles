@@ -74,13 +74,36 @@ return {
         },
       },
       default_component_configs = {
+        file_size = { enabled = false },
         indent = {
-          with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
+          indent_size = 2,
+          padding = 1, -- extra padding on left hand side
+          -- indent guides
+          with_markers = false,
+          indent_marker = " ",
+          last_indent_marker = " ",
+          highlight = "NeoTreeIndentMarker",
+          -- expander config, needed for nesting files
+          with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
           expander_collapsed = "",
           expander_expanded = "",
           expander_highlight = "NeoTreeExpander",
         },
-        file_size = { enabled = false },
+        git_status = {
+          symbols = {
+            -- Change type
+            added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+            modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
+            deleted   = "", -- this can only be used in the git_status source
+            renamed   = "", -- this can only be used in the git_status source
+            -- Status type
+            untracked = "",
+            ignored   = "",
+            unstaged  = "",
+            staged    = "",
+            conflict  = "",
+          }
+        },
       },
       window = {
         position = "left",
