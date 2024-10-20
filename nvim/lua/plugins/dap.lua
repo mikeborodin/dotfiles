@@ -1,3 +1,14 @@
+vim.fn.sign_define('DapBreakpoint',
+  { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointCondition',
+  { text = 'ﳁ', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointRejected',
+  { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapLogPoint',
+  { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapBreakpoint', linehl = 'DiffText', numhl = '' })
+
+
 return {
   'mfussenegger/nvim-dap',
   dependencies = {
@@ -12,24 +23,12 @@ return {
     local dapui = require 'dapui'
     vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#FF5555', bg = '' })
 
-    vim.fn.sign_define('DapBreakpoint',
-      { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapBreakpointCondition',
-      { text = 'ﳁ', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapBreakpointRejected',
-      { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapLogPoint',
-      { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
-    vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapBreakpoint', linehl = 'DiffText', numhl = '' })
 
     require('mason-nvim-dap').setup {
       automatic_setup = true,
       ensure_installed = {},
     }
 
-    vim.keymap.set('n', '<F1>', dap.step_into)
-    vim.keymap.set('n', '<F2>', dap.step_over)
-    vim.keymap.set('n', '<F3>', dap.step_out)
     vim.keymap.set('n', 'sst', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint Condition: ')
     end)
@@ -37,18 +36,26 @@ return {
       require('dap.ui.variables').hover(function() vim.fn.expand('<cexpr>') end)
     end)
 
-    local defaultDartConfig = {
-      {
-        type = "dart",
-        request = "launch",
-        name = "launch main.dart",
-        program = "${workspaceFolder}/lib/main.dart",
-        cwd = "${workspaceFolder}"
-      },
+
+    require("dap").adapters.dart = {
+      type = "executable",
+      command = "dart",
+      name = "dart",
+      args = { 'debug_adapter' }
     }
 
-    dap.configurations.dart = defaultDartConfig
-    require('fidget').notify('sat dart launch main')
+    dap.configurations.dart = {
+      {
+        type = "dart",
+        request = "launch main.dart",
+        name = "launch main.dart",
+        program = "${workspaceFolder}/lib/main.dart",
+        cwd = "${workspaceFolder}",
+        args = {},
+        runInTerminal = true,
+      },
+    }
+    -- require('fidget').notify('sat dart launch main')
 
     dapui.setup {
       mappings = {
@@ -108,7 +115,7 @@ return {
     }
 
     dap.listeners.after.event_initialized['dapui_config'] = function()
-      -- dapui.open()
+      dapui.open()
     end
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close

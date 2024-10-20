@@ -53,6 +53,18 @@ function Cmd(cmd)
   end
 end
 
+function FlutterCmdOrDefault(cmd, fallback)
+  if (vim.g.x_is_flutter_project) then
+    return function()
+      vim.cmd(cmd)
+    end
+  else
+    return function()
+      vim.cmd(fallback)
+    end
+  end
+end
+
 function Key(cmd)
   return function()
     vim.api.nvim_feedkeys(cmd, "n", true)

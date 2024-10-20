@@ -66,7 +66,7 @@ return {
             open = function()
               vim.api.nvim_input("<esc><space>e")
             end,
-            size = { height = 0.5, width = 40 },
+            size = { height = 0.5, width = 60 },
           },
           { title = "Neotest Summary", ft = "neotest-summary" },
           "neo-tree",

@@ -1,11 +1,13 @@
 return {
   {
     'akinsho/flutter-tools.nvim',
+    event        = { "VeryLazy" },
+    -- enabled      = vim.g.x_is_flutter_project,
     dependencies = {
       'nvim-lua/plenary.nvim',
       'stevearc/dressing.nvim',
     },
-    config = function()
+    config       = function()
       -- local isFvmProject = IsFvmProject()
 
       require("flutter-tools").setup({
@@ -28,18 +30,20 @@ return {
           exception_breakpoints = {},
           register_configurations = function(_)
             -- require('fidget').notify('registering dart configurations')
-            -- require('utils.select_run_config').selectRunConfig()
+            require('dap').configurations.dart =
+                require('utils.select_run_config').selectRunConfig()
+            require('fidget').notify('registering ' .. TableToString(require('dap').configurations.dart))
 
-            require('dap').configurations.dart = { {
-              type = "dart",
-              request = "launch",
-              name = "launch main.dart",
-              program = "${workspaceFolder}/lib/main.dart",
-              toolArgs = {
-                '--no-start-paused'
-              },
-              cwd = "${workspaceFolder}",
-            } }
+            -- require('dap').configurations.dart = { {
+            --   type = "dart",
+            --   request = "launch",
+            --   name = "launch main.dart",
+            --   program = "${workspaceFolder}/lib/main.dart",
+            --   toolArgs = {
+            --     vim.g.x_is_flutter_project and '--no-start-paused' or nil
+            --   },
+            --   cwd = "${workspaceFolder}",
+            -- } }
           end,
         },
         fvm = true,

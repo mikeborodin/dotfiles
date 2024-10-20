@@ -43,7 +43,10 @@ export PATH="$PATH":"$HOME/personal_projects/status/bin"
 export PATH="$PATH":"$HOME/personal_projects/testui/bin"
 export PATH="$PATH":"$HOME/personal_projects/buildrunnerui//bin"
 export PATH="$PATH:/Users/mike/.local/bin"
+
 export PATH="$PATH:/opt/homebrew/bin"
+export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
+
 export PATH="$PATH":"/Applications/Firefox.app/Contents/MacOS"
 
 # export JAVA_HOME='/Applications/Android Studio.app/Contents/jre/Contents/Home'

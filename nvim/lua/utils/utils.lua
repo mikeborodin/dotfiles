@@ -21,6 +21,7 @@ function Has_flutter_dependency_in_pubspec()
   local joined_content = table.concat(pubspec_content, "\n")
 
   local flutter_dependency = string.match(joined_content, "flutter:\n[%s\t]*sdk:[%s\t]*flutter")
+  print('is flutter: ' .. flutter_dependency ~= nil)
   return flutter_dependency ~= nil
 end
 

@@ -188,20 +188,21 @@ function M.selectRunConfig()
   local path = vim.fn.getcwd() .. '/.vscode/launch.json'
 
   local configurations = M.load_run_configurations_from_vscode(path)
+  return configurations
 
-  require("dap.ui").pick_if_many(
-    configurations,
-    "Select launch configuration",
-    function(config)
-      return config.name
-    end,
-    function(launch_config)
-      if not launch_config then return end
-      launch_config = vim.deepcopy(launch_config)
-      vim.g.selected_run_config = launch_config
-      dap.configurations['dart'] = { launch_config }
-    end
-  )
+  -- require("dap.ui").pick_if_many(
+  --   configurations,
+  --   "Select launch configuration",
+  --   function(config)
+  --     return config.name
+  --   end,
+  --   function(launch_config)
+  --     if not launch_config then return end
+  --     launch_config = vim.deepcopy(launch_config)
+  --     vim.g.selected_run_config = launch_config
+  --     dap.configurations['dart'] = { launch_config }
+  --   end
+  -- )
 end
 
 return M

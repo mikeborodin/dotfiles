@@ -1,3 +1,9 @@
+local function registerPostfix()
+  local ls = require("luasnip")
+  local f = ls.function_node
+  local postfix = require("luasnip.extras.postfix").postfix
+end
+
 return {
   "L3MON4D3/LuaSnip",
   version = "v2.*",
@@ -6,7 +12,7 @@ return {
       or nil,
   dependencies = {
     "rafamadriz/friendly-snippets",
-    config = function(_, opts)
+    config = function(_, _)
       require("luasnip.loaders.from_vscode").load_standalone({
         path = "~/.config/nvim/snippets/af.code-snippets",
       })
@@ -32,6 +38,9 @@ return {
           path = file,
         })
       end
+
+
+      registerPostfix()
     end,
   },
   opts = {

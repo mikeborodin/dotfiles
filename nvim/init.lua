@@ -8,6 +8,21 @@ vim.g.copilot_filetypes = {
 }
 vim.g.loaded_syntastic_dart_dartanalyzer_checker = 0
 
+local function SetIsFlutterProject()
+  local pubspec = vim.fn.glob("pubspec.yaml")
+  -- vim.g.x_is_flutter_project = pubspec ~= ""
+
+  if pubspec == "" then return false end
+  local pubspec_content = vim.fn.readfile(pubspec)
+  local joined_content = table.concat(pubspec_content, "\n")
+
+  local flutter_dependency = string.match(joined_content, "flutter:\n[%s\t]*sdk:[%s\t]*flutter")
+  vim.g.x_is_flutter_project = flutter_dependency ~= nil
+end
+
+
+SetIsFlutterProject()
+
 if (vim.g.vscode == nil) then
   require('config.setup_lazy')
   require('config.keymaps_clear')
@@ -16,9 +31,8 @@ if (vim.g.vscode == nil) then
   require('config.keymaps_x')
   require('config.autocmds')
   require('config.keymaps_crosseditor')
-  require('config.keymaps_neovim')
+  require('config.keymaps_key')
   require('config.repl_highlight')
 else
   require('config.init_plugins_vscode_only')
 end
-

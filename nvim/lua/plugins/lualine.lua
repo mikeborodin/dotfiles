@@ -40,7 +40,7 @@ return {
           lualine_z = {}
         },
         tabline = {
-          lualine_b = {
+          lualine_c = {
             {
               'filename',
               style = 'default',
@@ -59,9 +59,10 @@ return {
                 newfile = '[new]',     -- Text to show for newly created file before first write
               }
             },
-            'diagnostics'
           },
-          lualine_x = {}
+          lualine_x = {
+            'diagnostics'
+          }
         },
         winbar = {},
         inactive_winbar = {},

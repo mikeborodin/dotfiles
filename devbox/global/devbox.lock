@@ -885,6 +885,60 @@
         }
       }
     },
+    "lua-language-server@latest": {
+      "last_modified": "2024-10-10T05:33:31Z",
+      "resolved": "github:NixOS/nixpkgs/b69de56fac8c2b6f8fd27f2eca01dcda8e0a4221#lua-language-server",
+      "source": "devbox-search",
+      "version": "3.11.1",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/9hsv3szycrhby31if26h6b7ngmr20bqf-lua-language-server-3.11.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/9hsv3szycrhby31if26h6b7ngmr20bqf-lua-language-server-3.11.1"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/spki7wrrsr9k5psh2sw7z4cmwnraxqdd-lua-language-server-3.11.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/spki7wrrsr9k5psh2sw7z4cmwnraxqdd-lua-language-server-3.11.1"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/n644p79gvhg0q4ixyp5ld8gxf8fm2v7n-lua-language-server-3.11.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/n644p79gvhg0q4ixyp5ld8gxf8fm2v7n-lua-language-server-3.11.1"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/cj2k1ngzrihbvzl5b0zl2bm09rkkkskp-lua-language-server-3.11.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/cj2k1ngzrihbvzl5b0zl2bm09rkkkskp-lua-language-server-3.11.1"
+        }
+      }
+    },
+    "luarocks@latest": {
+      "last_modified": "2023-02-24T09:01:09Z",
+      "resolved": "github:NixOS/nixpkgs/7d0ed7f2e5aea07ab22ccb338d27fbe347ed2f11#luarocks",
+      "source": "devbox-search",
+      "version": "3.9.1"
+    },
     "neovim@latest": {
       "last_modified": "2024-09-10T15:01:03Z",
       "resolved": "github:NixOS/nixpkgs/5ed627539ac84809c78b2dd6d26a5cebeb5ae269#neovim",
@@ -930,6 +984,54 @@
             }
           ],
           "store_path": "/nix/store/pj8wdxamz5hqxxdlm932bcrh45d3pcnh-neovim-0.10.1"
+        }
+      }
+    },
+    "nil@latest": {
+      "last_modified": "2024-10-08T08:54:18Z",
+      "resolved": "github:NixOS/nixpkgs/a2eacc0c62c0537bd1a7a60c1f91d1f3a59fd013#nil",
+      "source": "devbox-search",
+      "version": "2024-08-06",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ij8h81g2vsqq8723xlqb89wcj16fz8n2-nil-2024-08-06",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ij8h81g2vsqq8723xlqb89wcj16fz8n2-nil-2024-08-06"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/8qgl45ii73qq1ihc3d5ywdrfvdw9dxdh-nil-2024-08-06",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/8qgl45ii73qq1ihc3d5ywdrfvdw9dxdh-nil-2024-08-06"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/kan7427rx2pqfiydlasb6b901mdfqa8i-nil-2024-08-06",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/kan7427rx2pqfiydlasb6b901mdfqa8i-nil-2024-08-06"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/dc6ziw6dq8gaqplzyqp6vz19szbyrycv-nil-2024-08-06",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/dc6ziw6dq8gaqplzyqp6vz19szbyrycv-nil-2024-08-06"
         }
       }
     },
