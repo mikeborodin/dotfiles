@@ -1,6 +1,6 @@
 return {
   {
-    'akinsho/flutter-tools.nvim',
+    'nvim-flutter/flutter-tools.nvim',
     event        = { "VeryLazy" },
     -- enabled      = vim.g.x_is_flutter_project,
     dependencies = {
@@ -9,7 +9,6 @@ return {
     },
     config       = function()
       -- local isFvmProject = IsFvmProject()
-
       require("flutter-tools").setup({
         closing_tags = { enabled = false, },
         decorations = {
@@ -28,12 +27,10 @@ return {
           enabled = true,
           run_via_dap = true,
           exception_breakpoints = {},
+          evaluate_to_string_in_debug_views = true,
           register_configurations = function(_)
-            -- require('fidget').notify('registering dart configurations')
             require('dap').configurations.dart =
                 require('utils.select_run_config').selectRunConfig()
-            require('fidget').notify('registering ' .. TableToString(require('dap').configurations.dart))
-
             -- require('dap').configurations.dart = { {
             --   type = "dart",
             --   request = "launch",

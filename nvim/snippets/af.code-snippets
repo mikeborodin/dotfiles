@@ -125,9 +125,11 @@
   "clhw": {
     "prefix": "clhw",
     "body": [
+      "import 'package:flutter/material.dart';",
+      "import 'package:hooks_riverpod/hooks_riverpod.dart';",
       "",
       "class ${1} extends HookConsumerWidget {",
-      "\tconst ${1}({Key? key}):super(key:key);",
+      "\tconst ${1}({super.key});",
       "",
       "\t@override",
       "\tWidget build(BuildContext context, WidgetRef ref) {",
@@ -138,11 +140,11 @@
     "description": "Hook Widget File"
   },
   "clsw": {
-    "prefix": "clsw",
+    "prefix": "clsl",
     "body": [
       "",
       "class ${1} extends StatelessWidget {",
-      "\tconst ${1}({Key? key}):super(key:key);",
+      "\tconst ${1}({super.key});",
       "",
       "\t@override",
       "\tWidget build(BuildContext context) {",

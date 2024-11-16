@@ -111,7 +111,7 @@ return {
   keys = {
     -- suggested keymap
     {
-      "<space>P",
+      "<space>p",
       "<cmd>PasteImage<cr>",
       desc = "Paste image from system clipboard",
     },

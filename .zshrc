@@ -151,6 +151,13 @@ export PATH=$PATH:$HOME/.maestro/bin
 # export BUN_INSTALL="$HOME/.bun"
 # export PATH="$BUN_INSTALL/bin:$PATH"
 
+NPM_PACKAGES="${HOME}/.npm-packages"
+
+export PATH="$PATH:$NPM_PACKAGES/bin"
+
+# Preserve MANPATH if you already defined it somewhere in your config.
+# Otherwise, fall back to `manpath` so we can inherit from `/etc/manpath`.
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 # Created by `pipx` on 2024-07-01 17:59:06
 if [ -f "/Users/mike/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/mike/.config/fabric/fabric-bootstrap.inc"; fi

@@ -10,6 +10,7 @@ vim.g.loaded_syntastic_dart_dartanalyzer_checker = 0
 
 local function SetIsFlutterProject()
   local pubspec = vim.fn.glob("pubspec.yaml")
+
   -- vim.g.x_is_flutter_project = pubspec ~= ""
 
   if pubspec == "" then return false end

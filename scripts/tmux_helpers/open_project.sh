@@ -1,31 +1,31 @@
 PROJECT=$1
+
 if [ -z "$PROJECT" ]; then
   echo "PROJECT is not set"
   exit 1
-else 
- echo "Setting up projects/$PROJECT"
+else
+  echo "Setting up projects/$PROJECT"
 fi
 
-session_name="p/${PROJECT}"
+session_name="${PROJECT}"
 
 if tmux has-session -t $session_name 2>/dev/null; then
- # tmux new-session  -s "tmp" -n "tmp" -d 'tmux switch-client -t "$session_name"'
- tmux switch-client -t $sesison_name
+  tmux switch-client -t $session_name
 else
-session_root="$HOME/projects/$PROJECT"
-tmux new-session -c "$session_root" -s "$session_name" -n "code" -d  
-tmux new-window -c "$session_root" -t "$session_name" -n term 
-tmux new-window -c "$session_root" -t "$session_name" -n git 
+  session_root="$HOME/projects/$PROJECT"
 
-sleep 1
+  if [ -d "$session_root/app" ]; then
+    session_root="$session_root/app"
+  fi
 
-tmux send-keys -t "$session_name:code" "v" C-m
-tmux send-keys -t "$session_name:term" "flutter doctor && flutter pub get" C-m
-tmux send-keys -t "$session_name:git" "lazygit" C-m
+  tmux new-session -c "$session_root" -s "$session_name" -n "code" -d
+  tmux new-window -c "$session_root" -t "$session_name" -n "term"
 
-echo "created windows"
+  sleep 1
 
-tmux select-window -t "$session_name:code"
-tmux switch-client -t "$session_name"
+  tmux send-keys -t "$session_name:code" "v" C-m
+  tmux send-keys -t "$session_name:term" "flutter devices" C-m
+
+  tmux select-window -t "$session_name:code"
+  tmux switch-client -t "$session_name"
 fi
-

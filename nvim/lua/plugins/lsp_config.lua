@@ -36,6 +36,8 @@ local function setupServers(opts)
     opts.capabilities or {}
   )
 
+  require'lspconfig'.nushell.setup{}
+
   local function setupServer(server)
     local server_opts = vim.tbl_deep_extend("force", {
       capabilities = vim.deepcopy(capabilities),
@@ -77,13 +79,13 @@ local function setupServers(opts)
     mlsp.setup({ ensure_installed = ensure_installed, handlers = { setupServer } })
   end
 
-  if Util.lsp.get_config("denols") and Util.lsp.get_config("tsserver") then
-    local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
-    Util.lsp.disable("tsserver", is_deno)
-    Util.lsp.disable("denols", function(root_dir)
-      return not is_deno(root_dir)
-    end)
-  end
+  -- if Util.lsp.get_config("denols") and Util.lsp.get_config("tsserver") then
+  --   local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
+  --   Util.lsp.disable("tsserver", is_deno)
+  --   Util.lsp.disable("denols", function(root_dir)
+  --     return not is_deno(root_dir)
+  --   end)
+  -- end
 end
 
 return {
@@ -102,7 +104,7 @@ return {
           spacing = 4,
           source = "if_many",
           prefix = "",
-          format = diagnostic_message_only_code,
+          -- format = diagnostic_message_only_code,
         },
         severity_sort = true,
       },

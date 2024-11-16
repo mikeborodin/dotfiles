@@ -10,7 +10,8 @@ return {
     -- event = { "VeryLazy", },
     dependencies = {
       {
-        "nvim-treesitter/nvim-treesitter-textobjects"
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
       },
     },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },

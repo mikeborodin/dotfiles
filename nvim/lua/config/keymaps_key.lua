@@ -258,6 +258,7 @@ local keys = {
   { "<space>kk",      function() print("spc kk") end,                                                  "SaveCommandHistory" },
   { "<C-w>",          function() print("Cw") end,                                                      "?", },
   { "tk",             function() print("tk") end,                                                      "?" },
+  { "tuy",             function() require('neoclip.fzf')() end,                                         "Clip History" },
   -- {
   -- 	"<C-h>",
   -- 	function()
