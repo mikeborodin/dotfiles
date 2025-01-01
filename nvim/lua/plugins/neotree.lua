@@ -2,6 +2,13 @@ local Util = require("lazyvim.util")
 
 require('utils.table_to_string')
 
+vim.g.neotree_autoclose = true
+
+function NeotreeAutocloseToggle()
+  vim.g.neotree_autoclose = not vim.g.neotree_autoclose
+end
+
+
 function TableToString(tbl, indent)
   local result = {}
   indent = indent or 0
@@ -53,6 +60,29 @@ return {
       },
     },
     opts = {
+      event_handlers = {
+
+        {
+          event = "file_open_requested",
+          handler = function()
+            if vim.g.neotree_autoclose then
+              require("neo-tree.command").execute({ action = "close" })
+            end
+          end
+        },
+        {
+          event = "neo_tree_buffer_enter",
+          handler = function()
+            vim.cmd("highlight! Cursor blend=100")
+          end,
+        },
+        {
+          event = "neo_tree_buffer_leave",
+          handler = function()
+            vim.cmd("highlight! Cursor guibg=#5f87af blend=0")
+          end,
+        },
+      },
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
       open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
       filesystem = {

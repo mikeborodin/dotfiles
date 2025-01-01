@@ -26,7 +26,8 @@ return {
 
     require('mason-nvim-dap').setup {
       automatic_setup = true,
-      ensure_installed = {},
+      automatic_installation = true,
+      ensure_installed = { 'codelldb', 'rust_analyzer' },
     }
 
     vim.keymap.set('n', 'sst', function()
@@ -37,17 +38,37 @@ return {
     end)
 
 
-    require("dap").adapters.dart = {
+    dap.adapters.rust = {
+      type = "executable",
+      command = "codelldb", -- Adjust this if you use a different debugger
+      name = "codelldb"
+    }
+
+    dap.adapters.dart = {
       type = "executable",
       command = "dart",
       name = "dart",
       args = { 'debug_adapter' }
     }
 
+    dap.configurations.rust = {
+      {
+        name = "Launch",
+        type = "rust",
+        request = "launch",
+        program = function()
+          return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+        end,
+        cwd = '${workspaceFolder}',
+        stopOnEntry = false,
+        args = {},
+      },
+    }
+
     dap.configurations.dart = {
       {
         type = "dart",
-        request = "launch main.dart",
+        request = "launch",
         name = "launch main.dart",
         program = "${workspaceFolder}/lib/main.dart",
         cwd = "${workspaceFolder}",
@@ -55,6 +76,7 @@ return {
         runInTerminal = true,
       },
     }
+
     -- require('fidget').notify('sat dart launch main')
 
     dapui.setup {

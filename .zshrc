@@ -1,3 +1,29 @@
+export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:$HOME/fvm/default/bin"
+export PATH="$PATH":"$HOME/programs/nnn/source"
+export PATH="$PATH:$HOME/.tmux/tmuxifier/bin"
+export PATH="$PATH":"$HOME/scripts"
+export PATH="$PATH:$HOME/programs/bin"
+export PATH="$PATH:$HOME/go/bin"
+
+export PATH="$PATH:$HOME/.android/sdk/platform-tools"
+export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
+export PATH="$PATH:$HOME/Library/Android/sdk/cmdline-tools/latest/bin"
+export PATH="$PATH:$HOME/Library/Python/3.9/bin"
+export PATH="$PATH:$HOME/Library/Android/sdk/emulator"
+export PATH="$PATH":"$HOME/programs/sonar-scanner/bin"
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH="$PATH":"$HOME/.maestro/bin"
+
+export PATH="$PATH":"$HOME/personal_projects/extract/bin"
+export PATH="$PATH":"$HOME/personal_projects/other/bin"
+export PATH="$PATH":"$HOME/personal_projects/status/bin"
+export PATH="$PATH":"$HOME/personal_projects/testui/bin"
+export PATH="$PATH":"$HOME/personal_projects/buildrunnerui/bin"
+export PATH="$PATH:/Users/mike/.local/bin"
+export PATH="$PATH":"/Applications/Firefox.app/Contents/MacOS"
+export PATH="$PATH:/opt/homebrew/bin"
+
 # source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 eval "$(devbox global shellenv)"
  
@@ -21,33 +47,9 @@ ZSH_DISABLE_COMPFIX=true
 # export TERM=xterm-256color
 
 # agnostic 
-export PATH="$PATH:$HOME/fvm/default/bin"
-export PATH="$PATH":"$HOME/programs/nnn/source"
-export PATH="$PATH:$HOME/.tmux/tmuxifier/bin"
-export PATH="$PATH":"$HOME/scripts"
-export PATH="$PATH:$HOME/programs/bin"
-export PATH="$PATH:$HOME/go/bin"
 
-export PATH="$PATH:$HOME/.android/sdk/platform-tools"
-export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
-export PATH="$PATH:$HOME/Library/Android/sdk/cmdline-tools/latest/bin"
-export PATH="$PATH:$HOME/Library/Python/3.9/bin"
-export PATH="$PATH:$HOME/Library/Android/sdk/emulator"
-export PATH="$PATH":"$HOME/programs/sonar-scanner/bin"
-export PATH="$PATH":"$HOME/.pub-cache/bin"
-export PATH="$PATH":"$HOME/.maestro/bin"
-
-export PATH="$PATH":"$HOME/personal_projects/extract/bin"
-export PATH="$PATH":"$HOME/personal_projects/other/bin"
-export PATH="$PATH":"$HOME/personal_projects/status/bin"
-export PATH="$PATH":"$HOME/personal_projects/testui/bin"
-export PATH="$PATH":"$HOME/personal_projects/buildrunnerui//bin"
-export PATH="$PATH:/Users/mike/.local/bin"
-
-export PATH="$PATH:/opt/homebrew/bin"
 export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
 
-export PATH="$PATH":"/Applications/Firefox.app/Contents/MacOS"
 
 # export JAVA_HOME='/Applications/Android Studio.app/Contents/jre/Contents/Home'
 export ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -97,7 +99,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 # eval "$(tmuxifier init -)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="$HOME/.rd/bin:$PATH"
@@ -161,3 +163,10 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 # Created by `pipx` on 2024-07-01 17:59:06
 if [ -f "/Users/mike/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/mike/.config/fabric/fabric-bootstrap.inc"; fi
+
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

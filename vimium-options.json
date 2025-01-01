@@ -1,5 +1,5 @@
 {
-  "keyMappings": "# Insert your preferred key mappings here.\nmap e scrollDown\nmap u scrollUp\nmap n previousTab\nmap i nextTab\nmap N goBack\n# map I goForward\nmap d removeTab\nmap D restoreTab\nmap E scrollPageDown\nmap U scrollPageUp\nmap o Vomnibar.activateInNewTab\nmap O Vomnibar.activate\nmap s focusInput",
+  "keyMappings": "# Insert your preferred key mappings here.\nmap e scrollDown\nmap u scrollUp\nmap n previousTab\nmap i nextTab\nmap h goBack\n# map I goForward\nmap d removeTab\nmap D restoreTab\nmap E scrollPageDown\nmap U scrollPageUp\nmap o Vomnibar.activateInNewTab\nmap O Vomnibar.activate\nmap s focusInput\nmap ae restoreTab",
   "linkHintCharacters": "neiotsrahdluygpfw",
   "searchEngines": "w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\ng: https://www.google.com/search?q=%s Google\ny: https://www.youtube.com/results?search_query=%s Youtube\ngm: https://www.google.com/maps?q=%s Google maps\nd: https://duckduckgo.com/?q=%s DuckDuckGo\naz: https://www.amazon.com/s/?field-keywords=%s Amazon",
   "settingsVersion": "2.1.2",
@@ -7,6 +7,14 @@
     {
       "passKeys": "",
       "pattern": "https?://keyboard-test.space/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://asciiflow.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://emupedia.org/*"
     }
   ]
 }

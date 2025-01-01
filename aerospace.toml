@@ -123,20 +123,22 @@ PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 ctrl-shift-l = 'focus left'
 ctrl-shift-y = 'focus right'
+
+ctrl-shift-j = 'mode resize'
 ctrl-shift-k = 'layout accordion tiles'
 
 # ctrl-shift-j = 'focus down'
 # ctrl-shift-l = 'focus right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
-alt-shift-h = 'move left'
-alt-shift-j = 'move down'
-alt-shift-k = 'move up'
-alt-shift-l = 'move right'
+# alt-shift-h = 'move left'
+# alt-shift-j = 'move down'
+# alt-shift-k = 'move up'
+# alt-shift-l = 'move right'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#resize
-alt-shift-minus = 'resize smart -50'
-alt-shift-equal = 'resize smart +50'
+# alt-shift-minus = 'resize smart -50'
+# alt-shift-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 ctrl-shift-h = 'workspace 1'
@@ -158,13 +160,13 @@ alt-tab = 'workspace-back-and-forth'
 alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
-ctrl-shift-q = 'mode service'
+# ctrl-shift-q = 'mode service'
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
-[mode.service.binding]
-esc = ['reload-config', 'mode main']
-r = ['flatten-workspace-tree', 'mode main'] # reset layout
+# [mode.service.binding]
+# esc = ['reload-config', 'mode main']
+# r = ['flatten-workspace-tree', 'mode main'] # reset layout
 #s = ['layout sticky tiling', 'mode main'] # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
 # f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 # backspace = ['close-all-windows-but-current', 'mode main']
@@ -174,13 +176,30 @@ r = ['flatten-workspace-tree', 'mode main'] # reset layout
 # alt-shift-k = ['join-with up', 'mode main']
 # alt-shift-l = ['join-with right', 'mode main']
 
-ctrl-shift-alt-j = 'mode resize'
 
 [mode.resize.binding]
-n = 'resize width -50'
-i = 'resize height +50'
-e = 'resize height -50'
-u = 'resize width +50'
+e = 'resize height +150'
+u = 'resize height -150'
+n = 'resize width +150'
+i = 'resize width -150'
 
 enter = 'mode main'
+space = 'mode main'
 esc = 'mode main'
+
+
+# [[on-window-detected]]
+# if.app-id = 'com.apple.systempreferences'
+# # if.app-name-regex-substring = 'Simulator'
+# # if.window-title-regex-substring = 'Simul'
+# if.workspace = 'workspace-name'
+# if.during-aerospace-startup = true
+# check-further-callbacks = true
+# run = ['layout floating', 'move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iphonesimulator'
+if.during-aerospace-startup = true
+check-further-callbacks = true
+run = ['layout floating', 'move-node-to-workspace 2']
+

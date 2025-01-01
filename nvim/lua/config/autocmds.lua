@@ -7,7 +7,8 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
   command = "checktime",
 })
 
-vim.cmd([[ autocmd BufNewFile,BufRead *.arb set filetype=json ]])
+vim.cmd([[ autocmd BufNewFile,BufRead *.metadata set filetype=yaml ]])
+vim.cmd([[ autocmd BufNewFile,BufRead *.fvmrc set filetype=json ]])
 vim.cmd([[ autocmd BufNewFile,BufRead *.arb set filetype=json ]])
 vim.cmd([[ autocmd BufNewFile,BufRead *.code-snippets set filetype=json ]])
 vim.cmd([[ autocmd FileType dap-repl set filetype=log ]])

@@ -36,7 +36,7 @@ local function setupServers(opts)
     opts.capabilities or {}
   )
 
-  require'lspconfig'.nushell.setup{}
+  require 'lspconfig'.nushell.setup {}
 
   local function setupServer(server)
     local server_opts = vim.tbl_deep_extend("force", {
@@ -132,6 +132,9 @@ return {
         },
       },
       setup = {
+        rust_analyzer = function()
+          return true
+        end,
         -- example to setup with typescript.nvim
         -- tsserver = function(_, opts)
         --   require("typescript").setup({ server = opts })

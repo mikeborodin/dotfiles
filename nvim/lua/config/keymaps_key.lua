@@ -7,6 +7,16 @@ require("utils.diagnostics")
 
 local Util = require("lazyvim.util")
 
+function _G.open_next_terminal()
+  local Terminal  = require('toggleterm.terminal').Terminal
+  local terms     = require('toggleterm.terminal').get_all()
+  local direction = terms[1].direction
+  Terminal:new({
+    close_on_exit = true,
+    direction = direction,
+  }):toggle()
+end
+
 function SelectConfigAndRun()
   require('utils.select_run_config').selectRunConfig()
 end
@@ -252,13 +262,13 @@ local keys = {
   { "<space>tf",      Cmd ':TestNearest',                                                              "Test Nearest" },
   { "<space>tw",      Cmd ':TestFile',                                                                 "Test File" },
   { "<space>l",       function() print("spc l") end,                                                   "?" },
-  { "<C-l>",          toggle_flutter_dev_log,                                                          "Toggle Lsp Log", },
+  -- { "<C-l>",          toggle_flutter_dev_log,                                                          "Toggle Lsp Log", },
 
   { "<space>tv",      Cmd ":CoverageToggle",                                                           "Coverage" },
   { "<space>kk",      function() print("spc kk") end,                                                  "SaveCommandHistory" },
   { "<C-w>",          function() print("Cw") end,                                                      "?", },
   { "tk",             function() print("tk") end,                                                      "?" },
-  { "tuy",             function() require('neoclip.fzf')() end,                                         "Clip History" },
+  { "tuy",            function() require('neoclip.fzf')() end,                                         "Clip History" },
   -- {
   -- 	"<C-h>",
   -- 	function()
