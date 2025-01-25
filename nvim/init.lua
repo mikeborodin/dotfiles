@@ -34,6 +34,7 @@ if (vim.g.vscode == nil) then
   require('config.keymaps_crosseditor')
   require('config.keymaps_key')
   require('config.repl_highlight')
+  require('config.snippets')
 else
   require('config.init_plugins_vscode_only')
 end

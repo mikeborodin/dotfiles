@@ -20,9 +20,11 @@ return {
       { "<bs>", desc = "Decrement selection", mode = "x" },
     },
     opts = {
+      ensure_installed = { "dart", "bruno" },
       auto_install = vim.fn.executable "tree-sitter" == 1, -- only enable auto install if `tree-sitter` cli is installed
       highlight = { enable = true },
       incremental_selection = { enable = true },
+      -- parser_install_dir = vim.fn.stdpath('data') .. '/parsers', -- Optional custom parser location
       indent = { enable = true },
       -- ignore_install = { "dart" },
       textobjects = {
@@ -94,6 +96,18 @@ return {
       --     return true
       --   end, opts.ensure_installed)
       -- end
+
+      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      parser_config.bruno = {
+        install_info = {
+          url = "https://github.com/Scalamando/tree-sitter-bruno", -- local path or git repo
+          files = { "src/parser.c", "src/scanner.c" },             -- note that some parsers also require src/scanner.c or src/scanner.cc
+          branch = "main",                                         -- default branch in case of git repo if different from master
+          generate_requires_npm = false,                           -- if stand-alone parser without npm dependencies
+          requires_generate_from_grammar = true,                   -- if folder contains pre-generated src/parser.c
+        },
+        -- filetype = "bruno",                                        -- if filetype does not match the parser name
+      }
       require("nvim-treesitter.configs").setup(opts)
     end,
   },

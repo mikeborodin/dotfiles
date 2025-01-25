@@ -4,6 +4,10 @@ vim.o.hlsearch = false
 vim.o.pumheight = 10
 vim.o.pumwidth = 120
 
+vim.o.foldenable = true   -- enable fold
+vim.o.foldlevel = 99      -- start editing with all folds opened
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- Make line numbers default
 vim.wo.number = true
 

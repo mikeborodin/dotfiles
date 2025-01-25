@@ -1,13 +1,13 @@
 return {
   'David-Kunz/gen.nvim',
   opts = {
-    model = "deepseek-coder:6.7b-instruct-q5_0", -- The default model to use.
+    model = "llama3.1", -- The default model to use.
     host = "localhost",                          -- The host running the Ollama service.
     port = "11434",                              -- The port on which the Ollama service is listening.
     quit_map = "q",                              -- set keymap for close the response window
     retry_map = "r",                             -- set keymap to re-send the current prompt
     debug = false,
-    display_mode = "split",                      -- The display mode. Can be "float" or "split".
+    display_mode = "float",                      -- The display mode. Can be "float" or "split".
     show_prompt = false,                         -- Shows the Prompt submitted to Ollama.
     show_model = false,                          -- Displays which model you are using at the beginning of your chat session.
     no_auto_close = false,                       -- Never closes the window automatically.

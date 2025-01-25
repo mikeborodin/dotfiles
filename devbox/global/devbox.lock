@@ -1,6 +1,34 @@
 {
   "lockfile_version": "1",
   "packages": {
+    "aerospace@latest": {
+      "last_modified": "2024-12-23T21:10:33Z",
+      "resolved": "github:NixOS/nixpkgs/de1864217bfa9b5845f465e771e0ecb48b30e02d#aerospace",
+      "source": "devbox-search",
+      "version": "0.16.2-Beta",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/9lc9cpig3dwfzxf38796ag401l7qkxd7-aerospace-0.16.2-Beta",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/9lc9cpig3dwfzxf38796ag401l7qkxd7-aerospace-0.16.2-Beta"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/n3j5qd792wvh7hy4snvz3glwbnscnigc-aerospace-0.16.2-Beta",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/n3j5qd792wvh7hy4snvz3glwbnscnigc-aerospace-0.16.2-Beta"
+        }
+      }
+    },
     "aichat@latest": {
       "last_modified": "2024-12-23T21:10:33Z",
       "resolved": "github:NixOS/nixpkgs/de1864217bfa9b5845f465e771e0ecb48b30e02d#aichat",
@@ -426,54 +454,6 @@
             }
           ],
           "store_path": "/nix/store/x7iyvipjzd0bi0mgs2c4pdx1x0ibgmpk-delta-0.18.2"
-        }
-      }
-    },
-    "devenv@latest": {
-      "last_modified": "2024-12-26T01:25:00Z",
-      "resolved": "github:NixOS/nixpkgs/16e046229f3b4f53257973a5532bcbb72457d2f2#devenv",
-      "source": "devbox-search",
-      "version": "1.3.1",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/cvh9jkk8f7ly9phcp0pia3l9bpak4mg7-devenv-1.3.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/cvh9jkk8f7ly9phcp0pia3l9bpak4mg7-devenv-1.3.1"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/ikl4xivgvq1vlylixnmdngpvqiz3ifwk-devenv-1.3.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/ikl4xivgvq1vlylixnmdngpvqiz3ifwk-devenv-1.3.1"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/6f0pmj3sn298raj2i93vd9g0rdfyxqak-devenv-1.3.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/6f0pmj3sn298raj2i93vd9g0rdfyxqak-devenv-1.3.1"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/9a52r441drqci9ibnr6akglni8rq5ich-devenv-1.3.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/9a52r441drqci9ibnr6akglni8rq5ich-devenv-1.3.1"
         }
       }
     },

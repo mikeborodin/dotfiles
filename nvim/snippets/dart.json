@@ -1,0 +1,8 @@
+{
+    "mike": {
+        "body": "\/\/\/ This method will  ",
+        "prefix": "tdms",
+        "scope": "dart",
+        "description": "tearDown useful in tests"
+    }
+}

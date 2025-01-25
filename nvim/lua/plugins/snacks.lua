@@ -11,44 +11,21 @@ return {
       sections = {
         {
           pane = 1,
-          {
-            icon = " ",
-            section = "terminal",
-            title = "Top contributors",
-            cmd = "git shortlog -s -n",
-            height = 5,
-            gap = 1,
-            padding = 1,
-            action = function()
-              vim.cmd [[FzfLua git_commits]]
-            end,
-          },
-          -- { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+          { section = 'header', ttl = 0 },
+          { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
           -- {
-          --   icon = " ",
-          --   title = "Open PRs",
-          --   cmd = "gh pr list -L 3",
-          --   key = "p",
+          --   section = "terminal",
+          --   key = "s",
+          --   indent = 0,
+          --   cmd = "~/scripts/git_streak.nu",
           --   action = function()
-          --     vim.fn.jobstart("gh pr list --web", { detach = true })
+          --     vim.cmd [[ TermExec cmd=git-cal ]]
           --   end,
-          --   height = 7,
-          -- },
-          -- {
-          --   title = "Notifications",
-          --   cmd = "gh notify -s -a -n5",
-          --   action = function()
-          --     vim.ui.open("https://github.com/notifications")
-          --   end,
-          --   key = "n",
-          --   icon = " ",
-          --   height = 5,
-          --   enabled = true,
           -- },
         },
       }
     },
-    notifier = { enabled = true },
+    -- notifier = { enabled = true },
     quickfile = { enabled = true },
     statuscolumn = { enabled = true },
     -- words = { enabled = true },

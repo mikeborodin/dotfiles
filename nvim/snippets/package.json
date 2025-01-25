@@ -8,6 +8,10 @@
             {
                 "language": "dart",
                 "path": "./dart.json"
+            },
+            {
+                "language": "lua",
+                "path": "./lua.json"
             }
         ]
     }

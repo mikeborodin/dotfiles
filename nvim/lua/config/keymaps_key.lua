@@ -212,9 +212,8 @@ local keys = {
   { "tr",             function() vim.lsp.buf.rename() end,                                             "Rename", },
   { "Tr",             Cmd ":FlutterRename",                                                            "Flutter Rename", },
   { "<space>H",       function() vim.diagnostic.open_float() end,                                      "Floating diagnos", },
+  { '<space>nn',      Cmd ':AvanteToggle',                                                            'AI Actions' },
   { '<space>ae',      ':Gen<cr>',                                                                      'AI Actions' },
-  { '<space>nn',      implementDirect,                                                                 'AI Actions' },
-  { '<space>ai',      selectAiCommand,                                                                 'AI Actions' },
   -- { '<space>ai', function()
   -- 	if is_default_buffer() then
   -- 		local menu = require("utils.ollama_picker")
@@ -244,6 +243,7 @@ local keys = {
   { "<space>rr",      Cmd ":FlutterLspRestart",                                                        "FlutterLspRestart", },
   -- searches
   { "<space>fb",      Cmd ":free",                                                                     desc = "Switch Buffer" },
+  { "<space>ff",      Cmd ":Telescope commander",                                                      desc = "Switch Buffer" },
   { "<space>fF",      Util.telescope("files", { cwd = false }),                                        desc = "Find Files (cwd)" },
   { "<space>fR",      Util.telescope("oldfiles", { cwd = vim.loop.cwd() }),                            desc = "Recent (cwd)" },
   { "<space>ts",      Cmd ":FzfLua git_status",                                                        desc = "status" },
