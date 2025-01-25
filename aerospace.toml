@@ -1,6 +1,5 @@
 start-at-login = true
 
-# Available commands: https://nikitabobko.github.io/AeroSpace/commands
 after-login-command = [
   
 ]
@@ -9,9 +8,8 @@ after-login-command = [
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-
+  'exec-and-forget borders active_color=0xffa177aa inactive_color=0xff433147 width=5.0'
 ]
-
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
