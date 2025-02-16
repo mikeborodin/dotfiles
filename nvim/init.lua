@@ -21,7 +21,6 @@ local function SetIsFlutterProject()
   vim.g.x_is_flutter_project = flutter_dependency ~= nil
 end
 
-
 SetIsFlutterProject()
 
 if (vim.g.vscode == nil) then
@@ -38,3 +37,4 @@ if (vim.g.vscode == nil) then
 else
   require('config.init_plugins_vscode_only')
 end
+

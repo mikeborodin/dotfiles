@@ -1,5 +1,6 @@
 return {
   'alfredosa/devtime.nvim',
+  enabled = false,
   dependencies = {
     { '3rd/sqlite.nvim' },
   },

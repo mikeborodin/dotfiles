@@ -78,8 +78,8 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-h>u'] = cmp.mapping.scroll_docs(-4),
-    ['<C-h>h'] = cmp.mapping.scroll_docs(4),
+    -- ['<C-h>u'] = cmp.mapping.scroll_docs(-4),
+    -- ['<C-h>h'] = cmp.mapping.scroll_docs(4),
     ['<tab>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,

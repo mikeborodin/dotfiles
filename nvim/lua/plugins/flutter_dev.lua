@@ -58,7 +58,7 @@ return {
             virtual_text_str = "■",
           },
           settings = {
-            lineLength = 80,
+            lineLength = 100,
             showTodos = false,
             enableSnippets = false,
             updateImportsOnRename = true,

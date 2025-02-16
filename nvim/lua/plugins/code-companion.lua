@@ -6,7 +6,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         "hrsh7th/nvim-cmp",
         "nvim-telescope/telescope.nvim",
-        { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }, -- Optional: For prettier markdown rendering
+        -- { "MeanderingProgrammer/render-markdown.nvim", ft = { "markdown", "codecompanion" } }, -- Optional: For prettier markdown rendering
         { "stevearc/dressing.nvim",                    opts = {} },
     },
     config = function()
@@ -43,7 +43,7 @@ return {
                 },
                 window = {
                     layout = "float", -- float|vertical|horizontal|buffer
-                    position = nil,      -- left|right|top|bottom (nil will default depending on vim.opt.splitright|vim.opt.splitbelow)
+                    position = nil,   -- left|right|top|bottom (nil will default depending on vim.opt.splitright|vim.opt.splitbelow)
                     border = "single",
                     height = 0.8,
                     width = 0.45,
