@@ -4,9 +4,10 @@ if ($env.config? | is-not-empty) {
 }
 
 $env.POWERLINE_COMMAND = 'oh-my-posh'
-$env.POSH_THEME = (echo "/Users/mike/personal_projects/dotfiles/nushell/themes/star.omp.json")
+$env.POSH_THEME = (echo "/Users/mike/personal_projects/dotfiles/nushell/themes/emodipo.omp.json")
 $env.PROMPT_INDICATOR = ""
-$env.POSH_SESSION_ID = (echo "88a074e2-cfbe-4e59-bf69-b82f16ea3b64")
+$env.POSH_SESSION_ID = (echo "52551ca7-c0fc-4bff-b98b-ff83df075e9a")
+$env.POSH_SHELL = "nu"
 $env.POSH_SHELL_VERSION = (version | get version)
 
 let _omp_executable: string = (echo "/Users/mike/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/oh-my-posh")
@@ -62,4 +63,3 @@ $env.PROMPT_COMMAND = {||
 
 $env.PROMPT_COMMAND_RIGHT = {|| _omp_get_prompt right }
 
-^$_omp_executable notice
