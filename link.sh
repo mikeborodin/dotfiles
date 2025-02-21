@@ -9,3 +9,5 @@ ln -s -f $(pwd)/tmux/.tmux.conf ~/.tmux.conf
 ln -s -f $(pwd)/.global-gitignore ~/.global-gitignore
 ln -s -f $(pwd)/.zshrc ~/.zshrc
 
+# nushell folder there will be removed from outside nu, otherwise it's recreated
+ln -s -f "$(pwd)/nushell" "/Users/mike/Library/Application Support"
