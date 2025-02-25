@@ -1,7 +1,7 @@
 return {
     "otavioschwanck/arrow.nvim",
     opts = {
-        separate_by_branch = true,
+        separate_by_branch = false,
         mappings = {
             edit = "E",
             delete_mode = "D",

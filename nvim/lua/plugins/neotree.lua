@@ -2,7 +2,7 @@ local Util = require("lazyvim.util")
 
 require('utils.table_to_string')
 
-vim.g.neotree_autoclose = true
+vim.g.neotree_autoclose = false
 
 function NeotreeAutocloseToggle()
   vim.g.neotree_autoclose = not vim.g.neotree_autoclose
