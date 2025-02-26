@@ -1867,54 +1867,6 @@
         }
       }
     },
-    "scrcpy@latest": {
-      "last_modified": "2025-02-07T11:26:36Z",
-      "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#scrcpy",
-      "source": "devbox-search",
-      "version": "3.1",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/27njp4978rs071g0qh5bahkfb436xkbz-scrcpy-3.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/27njp4978rs071g0qh5bahkfb436xkbz-scrcpy-3.1"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/v4dxkqdfibnzcs1ifz7ziwah0zf64mc5-scrcpy-3.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/v4dxkqdfibnzcs1ifz7ziwah0zf64mc5-scrcpy-3.1"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/adk6hwzy28wizw6pyg1b7mcgzcn6slgn-scrcpy-3.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/adk6hwzy28wizw6pyg1b7mcgzcn6slgn-scrcpy-3.1"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/dxyam0105hkgr3hq02rc2lj10pcifcw6-scrcpy-3.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/dxyam0105hkgr3hq02rc2lj10pcifcw6-scrcpy-3.1"
-        }
-      }
-    },
     "sd@latest": {
       "last_modified": "2025-02-07T11:26:36Z",
       "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#sd",

@@ -212,7 +212,7 @@ local keys = {
   { "tr",             function() vim.lsp.buf.rename() end,                                             "Rename", },
   { "Tr",             Cmd ":FlutterRename",                                                            "Flutter Rename", },
   { "<space>H",       function() vim.diagnostic.open_float() end,                                      "Floating diagnos", },
-  { '<space>nn',      Cmd ':AvanteToggle',                                                            'AI Actions' },
+  { '<space>nn',      Cmd ':AvanteToggle',                                                             'AI Actions' },
   { '<space>ae',      ':Gen<cr>',                                                                      'AI Actions' },
   -- { '<space>ai', function()
   -- 	if is_default_buffer() then
@@ -265,10 +265,13 @@ local keys = {
   -- { "<C-l>",          toggle_flutter_dev_log,                                                          "Toggle Lsp Log", },
 
   { "<space>tv",      Cmd ":CoverageToggle",                                                           "Coverage" },
-  { "<space>kk",      function() print("spc kk") end,                                                  "SaveCommandHistory" },
-  { "<C-w>",          function() print("Cw") end,                                                      "?", },
-  { "tk",             function() print("tk") end,                                                      "?" },
-  { "tuy",            function() require('neoclip.fzf')() end,                                         "Clip History" },
+  { "<C-g>", function()
+    Snacks.lazygit()
+  end, "Snacks Lazygit" },
+  { "<space>kk", function() print("spc kk") end,          "SaveCommandHistory" },
+  { "<C-w>",     function() print("Cw") end,              "?", },
+  { "tk",        function() print("tk") end,              "?" },
+  { "tuy",       function() require('neoclip.fzf')() end, "Clip History" },
   -- {
   -- 	"<C-h>",
   -- 	function()
