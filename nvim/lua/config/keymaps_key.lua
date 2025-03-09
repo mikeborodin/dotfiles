@@ -265,9 +265,11 @@ local keys = {
   -- { "<C-l>",          toggle_flutter_dev_log,                                                          "Toggle Lsp Log", },
 
   { "<space>tv",      Cmd ":CoverageToggle",                                                           "Coverage" },
-  { "<C-g>", function()
-    Snacks.lazygit()
-  end, "Snacks Lazygit" },
+  { "<space>fm", function()
+    local path = GetFilePath()
+    vim.notify('opening' .. path)
+    Snacks.terminal.open('yazi ' .. path)
+  end, "Yazi" },
   { "<space>kk", function() print("spc kk") end,          "SaveCommandHistory" },
   { "<C-w>",     function() print("Cw") end,              "?", },
   { "tk",        function() print("tk") end,              "?" },

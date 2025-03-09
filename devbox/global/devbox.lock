@@ -1963,54 +1963,6 @@
         }
       }
     },
-    "superfile@latest": {
-      "last_modified": "2025-02-07T11:26:36Z",
-      "resolved": "github:NixOS/nixpkgs/d98abf5cf5914e5e4e9d57205e3af55ca90ffc1d#superfile",
-      "source": "devbox-search",
-      "version": "1.1.7.1",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/d9mmq6gjn0bjyn9hpcck0fpbazx5qg8n-superfile-1.1.7.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/d9mmq6gjn0bjyn9hpcck0fpbazx5qg8n-superfile-1.1.7.1"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/ca9j5ix74r95bb234w0xckrpnr6qizn7-superfile-1.1.7.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/ca9j5ix74r95bb234w0xckrpnr6qizn7-superfile-1.1.7.1"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/38jzgkyq7bb12pmilsjqbv70nj3iaalj-superfile-1.1.7.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/38jzgkyq7bb12pmilsjqbv70nj3iaalj-superfile-1.1.7.1"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/hgbqqmdnka801wg3d4b4x7dyf2rbfhc0-superfile-1.1.7.1",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/hgbqqmdnka801wg3d4b4x7dyf2rbfhc0-superfile-1.1.7.1"
-        }
-      }
-    },
     "temurin-bin-17@latest": {
       "last_modified": "2024-07-07T07:43:47Z",
       "resolved": "github:NixOS/nixpkgs/b60793b86201040d9dee019a05089a9150d08b5b#temurin-bin-17",
