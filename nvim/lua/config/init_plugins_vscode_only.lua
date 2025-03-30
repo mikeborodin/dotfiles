@@ -18,7 +18,7 @@ require('lazy').setup({
   {
     'numToStr/Comment.nvim',
     config = function()
-      require('Comment').setup({
+      require('Comment').setup {
         toggler = {
           ---Line-comment toggle keymap
           line = '<leader>l',
@@ -31,16 +31,16 @@ require('lazy').setup({
           ---Block-comment keymap
           block = '<leader>j',
         },
-      })
-    end
+      }
+    end,
   },
   {
-    "kylechui/nvim-surround",
-    version = "*",
+    'kylechui/nvim-surround',
+    version = '*',
     config = function()
-      require("nvim-surround").setup({
+      require('nvim-surround').setup {
         -- Configuration here, or leave empty to use defaults
-      })
-    end
+      }
+    end,
   },
 }, {})

@@ -3,25 +3,25 @@ return {
   -- use in Neovim to power faster and more accurate
   -- syntax highlighting.
   {
-    "nvim-treesitter/nvim-treesitter",
+    'nvim-treesitter/nvim-treesitter',
     version = false, -- last release is way too old and doesn't work on Windows
     enabled = true,
-    build = ":TSUpdate",
+    build = ':TSUpdate',
     -- event = { "VeryLazy", },
     dependencies = {
       {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        { "nushell/tree-sitter-nu", build = ":TSUpdate nu" },
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        { 'nushell/tree-sitter-nu', build = ':TSUpdate nu' },
       },
     },
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+    cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
     keys = {
-      { "=",    desc = "Increment selection" },
-      { "<bs>", desc = "Decrement selection", mode = "x" },
+      { '=', desc = 'Increment selection' },
+      { '<bs>', desc = 'Decrement selection', mode = 'x' },
     },
     opts = {
-      ensure_installed = { "dart", "bruno" },
-      auto_install = vim.fn.executable "tree-sitter" == 1, -- only enable auto install if `tree-sitter` cli is installed
+      ensure_installed = { 'dart', 'bruno' },
+      auto_install = vim.fn.executable 'tree-sitter' == 1, -- only enable auto install if `tree-sitter` cli is installed
       highlight = { enable = true },
       incremental_selection = { enable = true },
       -- parser_install_dir = vim.fn.stdpath('data') .. '/parsers', -- Optional custom parser location
@@ -97,41 +97,41 @@ return {
       --   end, opts.ensure_installed)
       -- end
 
-      local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+      local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
       parser_config.bruno = {
         install_info = {
-          url = "https://github.com/Scalamando/tree-sitter-bruno", -- local path or git repo
-          files = { "src/parser.c", "src/scanner.c" },             -- note that some parsers also require src/scanner.c or src/scanner.cc
-          branch = "main",                                         -- default branch in case of git repo if different from master
-          generate_requires_npm = false,                           -- if stand-alone parser without npm dependencies
-          requires_generate_from_grammar = true,                   -- if folder contains pre-generated src/parser.c
+          url = 'https://github.com/Scalamando/tree-sitter-bruno', -- local path or git repo
+          files = { 'src/parser.c', 'src/scanner.c' }, -- note that some parsers also require src/scanner.c or src/scanner.cc
+          branch = 'main', -- default branch in case of git repo if different from master
+          generate_requires_npm = false, -- if stand-alone parser without npm dependencies
+          requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
         },
         -- filetype = "bruno",                                        -- if filetype does not match the parser name
       }
-      require("nvim-treesitter.configs").setup(opts)
+      require('nvim-treesitter.configs').setup(opts)
     end,
   },
 
   -- Show context of the current function
   {
-    "nvim-treesitter/nvim-treesitter-context",
-    event = "VeryLazy",
+    'nvim-treesitter/nvim-treesitter-context',
+    event = 'VeryLazy',
     enabled = true,
-    opts = { mode = "cursor" },
+    opts = { mode = 'cursor' },
     keys = {
       {
-        "<space>ut",
+        '<space>ut',
         function()
-          local Util = require("lazyvim.util")
-          local tsc = require("treesitter-context")
+          local Util = require 'lazyvim.util'
+          local tsc = require 'treesitter-context'
           tsc.toggle()
-          if Util.inject.get_upvalue(tsc.toggle, "enabled") then
-            Util.info("Enabled Treesitter Context", { title = "Option" })
+          if Util.inject.get_upvalue(tsc.toggle, 'enabled') then
+            Util.info('Enabled Treesitter Context', { title = 'Option' })
           else
-            Util.warn("Disabled Treesitter Context", { title = "Option" })
+            Util.warn('Disabled Treesitter Context', { title = 'Option' })
           end
         end,
-        desc = "Toggle Treesitter Context",
+        desc = 'Toggle Treesitter Context',
       },
     },
   },

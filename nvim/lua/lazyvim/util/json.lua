@@ -1,5 +1,5 @@
-local Config = require("lazyvim.config")
-local Util = require("lazyvim.util")
+local Config = require 'lazyvim.config'
+local Util = require 'lazyvim.util'
 
 ---@class lazyvim.util.json
 local M = {}
@@ -9,14 +9,14 @@ local M = {}
 local function encode(value, indent)
   local t = type(value)
 
-  if t == "string" then
-    return string.format("%q", value)
-  elseif t == "number" or t == "boolean" then
+  if t == 'string' then
+    return string.format('%q', value)
+  elseif t == 'number' or t == 'boolean' then
     return tostring(value)
-  elseif t == "table" then
+  elseif t == 'table' then
     local is_list = Util.is_list(value)
     local parts = {}
-    local next_indent = indent .. "  "
+    local next_indent = indent .. '  '
 
     if is_list then
       ---@diagnostic disable-next-line: no-unknown
@@ -26,7 +26,7 @@ local function encode(value, indent)
           table.insert(parts, next_indent .. e)
         end
       end
-      return "[\n" .. table.concat(parts, ",\n") .. "\n" .. indent .. "]"
+      return '[\n' .. table.concat(parts, ',\n') .. '\n' .. indent .. ']'
     else
       local keys = vim.tbl_keys(value)
       table.sort(keys)
@@ -34,22 +34,22 @@ local function encode(value, indent)
       for _, k in ipairs(keys) do
         local e = encode(value[k], next_indent)
         if e then
-          table.insert(parts, next_indent .. string.format("%q", k) .. ": " .. e)
+          table.insert(parts, next_indent .. string.format('%q', k) .. ': ' .. e)
         end
       end
-      return "{\n" .. table.concat(parts, ",\n") .. "\n" .. indent .. "}"
+      return '{\n' .. table.concat(parts, ',\n') .. '\n' .. indent .. '}'
     end
   end
 end
 
 function M.encode(value)
-  return encode(value, "")
+  return encode(value, '')
 end
 
 function M.save()
   Config.json.data.version = Config.json.version
-  local path = vim.fn.stdpath("config") .. "/lazyvim.json"
-  local f = io.open(path, "w")
+  local path = vim.fn.stdpath 'config' .. '/lazyvim.json'
+  local f = io.open(path, 'w')
   if f then
     f:write(Util.json.encode(Config.json.data))
     f:close()
@@ -57,7 +57,7 @@ function M.save()
 end
 
 function M.migrate()
-  Util.info("Migrating `lazyvim.json` to version `" .. Config.json.version .. "`")
+  Util.info('Migrating `lazyvim.json` to version `' .. Config.json.version .. '`')
   local json = Config.json
 
   -- v0
@@ -67,12 +67,12 @@ function M.migrate()
       json.data.hashes = nil
     end
     json.data.extras = vim.tbl_map(function(extra)
-      return "lazyvim.plugins.extras." .. extra
+      return 'lazyvim.plugins.extras.' .. extra
     end, json.data.extras or {})
   elseif json.data.version == 1 then
     json.data.extras = vim.tbl_map(function(extra)
       -- replace double extras module name
-      return extra:gsub("^lazyvim%.plugins%.extras%.lazyvim%.plugins%.extras%.", "lazyvim.plugins.extras.")
+      return extra:gsub('^lazyvim%.plugins%.extras%.lazyvim%.plugins%.extras%.', 'lazyvim.plugins.extras.')
     end, json.data.extras or {})
   end
 

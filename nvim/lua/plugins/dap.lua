@@ -1,13 +1,8 @@
-vim.fn.sign_define('DapBreakpoint',
-  { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
-vim.fn.sign_define('DapBreakpointCondition',
-  { text = 'ﳁ', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
-vim.fn.sign_define('DapBreakpointRejected',
-  { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
-vim.fn.sign_define('DapLogPoint',
-  { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpoint', { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointCondition', { text = 'ﳁ', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapBreakpointRejected', { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
+vim.fn.sign_define('DapLogPoint', { text = '', texthl = 'DapBreakpoint', linehl = '', numhl = '' })
 vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapBreakpoint', linehl = 'DiffText', numhl = '' })
-
 
 return {
   'mfussenegger/nvim-dap',
@@ -23,7 +18,6 @@ return {
     local dapui = require 'dapui'
     vim.api.nvim_set_hl(0, 'DapBreakpoint', { ctermbg = 0, fg = '#FF5555', bg = '' })
 
-
     require('mason-nvim-dap').setup {
       automatic_setup = true,
       automatic_installation = true,
@@ -34,28 +28,29 @@ return {
       dap.set_breakpoint(vim.fn.input 'Breakpoint Condition: ')
     end)
     vim.keymap.set('n', 'se', function()
-      require('dap.ui.variables').hover(function() vim.fn.expand('<cexpr>') end)
+      require('dap.ui.variables').hover(function()
+        vim.fn.expand '<cexpr>'
+      end)
     end)
 
-
     dap.adapters.rust = {
-      type = "executable",
-      command = "codelldb", -- Adjust this if you use a different debugger
-      name = "codelldb"
+      type = 'executable',
+      command = 'codelldb', -- Adjust this if you use a different debugger
+      name = 'codelldb',
     }
 
     dap.adapters.dart = {
-      type = "executable",
-      command = "dart",
-      name = "dart",
-      args = { 'debug_adapter' }
+      type = 'executable',
+      command = 'dart',
+      name = 'dart',
+      args = { 'debug_adapter' },
     }
 
     dap.configurations.rust = {
       {
-        name = "Launch",
-        type = "rust",
-        request = "launch",
+        name = 'Launch',
+        type = 'rust',
+        request = 'launch',
         program = function()
           return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
         end,
@@ -67,11 +62,11 @@ return {
 
     dap.configurations.dart = {
       {
-        type = "dart",
-        request = "launch",
-        name = "launch main.dart",
-        program = "${workspaceFolder}/lib/main.dart",
-        cwd = "${workspaceFolder}",
+        type = 'dart',
+        request = 'launch',
+        name = 'launch main.dart',
+        program = '${workspaceFolder}/lib/main.dart',
+        cwd = '${workspaceFolder}',
         args = {},
         runInTerminal = true,
       },
@@ -81,12 +76,12 @@ return {
 
     dapui.setup {
       mappings = {
-        edit = "E",
-        expand = { "<CR>", "<2-LeftMouse>" },
-        open = "o",
-        remove = "d",
-        repl = "r",
-        toggle = "t"
+        edit = 'E',
+        expand = { '<CR>', '<2-LeftMouse>' },
+        open = 'o',
+        remove = 'd',
+        repl = 'r',
+        toggle = 't',
       },
       layouts = {
         {
@@ -100,10 +95,10 @@ return {
             -- { id = "stacks",      size = 0.25 },
             -- { id = "watches",     size = 0.25 },
             -- "console",
-            "repl",
+            'repl',
           },
           size = 40,
-          position = "bottom", -- Can be "left" or "right"
+          position = 'bottom', -- Can be "left" or "right"
         },
         -- {
         --   elements = {
@@ -120,19 +115,19 @@ return {
         current_frame = '',
       },
       controls = {
-        element = "repl",
+        element = 'repl',
         enabled = false,
         icons = {
-          disconnect = "",
-          pause = "",
-          play = "",
-          run_last = "",
-          step_back = "",
-          step_into = "",
-          step_out = "",
-          step_over = "",
-          terminate = ""
-        }
+          disconnect = '',
+          pause = '',
+          play = '',
+          run_last = '',
+          step_back = '',
+          step_into = '',
+          step_out = '',
+          step_over = '',
+          terminate = '',
+        },
       },
     }
 

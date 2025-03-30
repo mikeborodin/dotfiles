@@ -2,26 +2,26 @@ return {
   {
     'nvim-tree/nvim-web-devicons',
     config = function()
-      require 'nvim-web-devicons'.setup {
+      require('nvim-web-devicons').setup {
         override = {
           dart = {
-            icon = "",
-            color = "#1E88E5",
-            name = "Dart"
-          }
-        }
+            icon = '',
+            color = '#1E88E5',
+            name = 'Dart',
+          },
+        },
       }
-    end
+    end,
   },
   {
     'akinsho/bufferline.nvim',
-    version = "*",
+    version = '*',
     enabled = false,
     dependencies = {
       'nvim-tree/nvim-web-devicons',
     },
     config = function()
-      require("bufferline").setup({
+      require('bufferline').setup {
         options = {
           show_buffer_close_icons = false,
           close_command = 'Bdelete! %d',
@@ -32,10 +32,10 @@ return {
             style = 'none',
           },
           offsets = {
-            { filetype = "neo-tree", text = '', padding = 1, }
-          }
-        }
-      })
-    end
+            { filetype = 'neo-tree', text = '', padding = 1 },
+          },
+        },
+      }
+    end,
   },
 }

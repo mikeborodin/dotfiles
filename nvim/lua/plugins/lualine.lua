@@ -1,4 +1,4 @@
-vim.g.selectedFlutterDevice = 'none'
+vim.g.selectedFlutterDevice = ''
 
 return {
   {
@@ -11,42 +11,56 @@ return {
         return vim.g.selected_run_config.name
       end
 
-      require('lualine').setup({
+      local colorscheme = require 'lualine.themes.auto'
+
+      colorscheme.command.a.bg = 'Normal'
+
+      colorscheme.normal.c.bg = 'Normal'
+      colorscheme.insert.c.bg = 'Normal'
+      colorscheme.replace.c.bg = 'Normal'
+      colorscheme.command.c.bg = 'Normal'
+      colorscheme.visual.c.bg = 'Normal'
+
+      require('lualine').setup {
         options = {
-          icons_enabled = true,
-          theme = 'auto',
+          icons_enabled = false,
+          theme = colorscheme,
           component_separators = '',
           section_separators = { left = '', right = '' },
-          disabled_filetypes = {
-            statusline = {},
-            winbar = {},
-          },
           ignore_focus = {},
+          disabled_filetypes = {
+            statusline = { 'toggleterm' },
+            winbar = { 'toggleterm' },
+            tabline = { 'toggleterm' },
+          },
           always_divide_middle = true,
           globalstatus = true,
           refresh = {
             statusline = 1000,
             tabline = 1000,
             winbar = 1000,
-          }
+          },
         },
         sections = {
-          lualine_a = { 'mode' },
-          lualine_b = { 'branch', },
-          lualine_c = { runConfig, statusMode },
+          lualine_a = {},
+          lualine_b = { runConfig },
+          lualine_c = { statusMode },
 
           lualine_x = {},
           lualine_y = {},
-          lualine_z = {}
+          lualine_z = {},
         },
+        inactive_tabline = {},
         tabline = {
-          lualine_c = {
+          lualine_b = {
+            { 'branch' },
             {
               'filename',
               style = 'default',
+              color = 'User2',
               file_status = true,
               newfile_status = false,
-              path = 1,
+              path = 4,
               -- 1: Relative path
               -- 2: Absolute path
               -- 3: Absolute path, with tilde as the home directory
@@ -54,21 +68,53 @@ return {
               shorting_target = 40, -- Shortens path to leave 40 spaces in the window
               symbols = {
                 modified = '●',
-                readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
+                readonly = '(readonly)', -- Text to show when the file is non-modifiable or readonly.
                 unnamed = '[no-name]', -- Text to show for unnamed buffers.
-                newfile = '[new]',     -- Text to show for newly created file before first write
-              }
+                newfile = '[new]', -- Text to show for newly created file before first write
+              },
             },
           },
-          lualine_x = {
-            'diagnostics'
-          }
+          lualine_y = {
+            {
+              'diagnostics',
+              color = 'TabLine',
+            },
+            'filetype',
+            {
+              'lsp_status',
+              icon = '', -- f013
+              symbols = {
+                -- Standard unicode symbols to cycle through for LSP progress:
+                spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' },
+                -- Standard unicode symbol for when LSP is done:
+                done = '✓',
+                -- Delimiter inserted between LSP names:
+                separator = ' ',
+              },
+              -- List of LSP names to ignore (e.g., `null-ls`):
+              ignore_lsp = {},
+            },
+            {
+              'diff',
+              colored = true, -- Displays a colored diff status if set to true
+              diff_color = {
+                -- Same color values as the general color option can be used here.
+                added = 'Added', -- Changes the diff's added color
+                modified = 'Changed', -- Changes the diff's modified color
+                removed = 'Removed', -- Changes the diff's removed color you
+              },
+              symbols = { added = '+', modified = '~', removed = '-' }, -- Changes the symbols used by the diff.
+              source = nil, -- A function that works as a data source for diff.
+              -- It must return a table as such:
+              --   { added = add_count, modified = modified_count, removed = removed_count }
+              -- or nil on failure. count <= 0 won't be displayed.
+            },
+          },
         },
         winbar = {},
         inactive_winbar = {},
-        extensions = {}
-      })
-    end
-
-  }
+        extensions = {},
+      }
+    end,
+  },
 }

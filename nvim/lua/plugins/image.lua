@@ -1,13 +1,13 @@
 return {
   {
-    "3rd/image.nvim",
+    '3rd/image.nvim',
     dependencies = {
-      "kiyoon/magick.nvim",
+      'kiyoon/magick.nvim',
     },
     config = function()
-      require("image").setup({
-        backend = "kitty",
-        kitty_method = "normal",
+      require('image').setup {
+        backend = 'kitty',
+        kitty_method = 'normal',
         integrations = {
           -- Notice these are the settings for markdown files
           markdown = {
@@ -22,14 +22,14 @@ return {
             -- it will be laggy and will take time for the initial load
             only_render_image_at_cursor = true,
             -- markdown extensions (ie. quarto) can go here
-            filetypes = { "markdown", "vimwiki" },
+            filetypes = { 'markdown', 'vimwiki' },
           },
           neorg = {
             enabled = true,
             clear_in_insert_mode = false,
             download_remote_images = true,
             only_render_image_at_cursor = false,
-            filetypes = { "norg" },
+            filetypes = { 'norg' },
           },
           -- This is disabled by default
           -- Detect and render images referenced in HTML files
@@ -57,7 +57,7 @@ return {
 
         -- toggles images when windows are overlapped
         window_overlap_clear_enabled = false,
-        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+        window_overlap_clear_ft_ignore = { 'cmp_menu', 'cmp_docs', '' },
 
         -- auto show/hide images when the editor gains/looses focus
         editor_only_render_when_focused = true,
@@ -68,14 +68,14 @@ return {
 
         -- render image files as images when opened
         hijack_file_patterns = {
-          "*.png",
-          "*.jpg",
-          "*.jpeg",
-          "*.gif",
-          "*.webp",
-          "*.avif",
+          '*.png',
+          '*.jpg',
+          '*.jpeg',
+          '*.gif',
+          '*.webp',
+          '*.avif',
         },
-      })
+      }
     end,
   },
 }

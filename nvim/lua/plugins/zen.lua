@@ -1,9 +1,9 @@
 return {
-  "folke/zen-mode.nvim",
+  'folke/zen-mode.nvim',
   opts = {
     kitty = {
       enabled = true,
-      font = "+4",
+      font = '+4',
     },
-  }
+  },
 }

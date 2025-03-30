@@ -1,15 +1,15 @@
-require("utils.find_replace")
-require("utils.common_utils")
-require("utils.go_to_test")
-require("utils.run_script")
-require("utils.select_run_config")
-require("utils.diagnostics")
+require 'utils.find_replace'
+require 'utils.common_utils'
+require 'utils.go_to_test'
+require 'utils.run_script'
+require 'utils.select_run_config'
+require 'utils.diagnostics'
 
-local Util = require("lazyvim.util")
+local Util = require 'lazyvim.util'
 
 function _G.open_next_terminal()
-  local Terminal  = require('toggleterm.terminal').Terminal
-  local terms     = require('toggleterm.terminal').get_all()
+  local Terminal = require('toggleterm.terminal').Terminal
+  local terms = require('toggleterm.terminal').get_all()
   local direction = terms[1].direction
   Terminal:new({
     close_on_exit = true,
@@ -43,7 +43,7 @@ function toggle_flutter_dev_log()
 
   -- If the buffer doesn't exist, print an error and return
   if not bufnr then
-    print("Buffer with filename '__FLUTTER_DEV_LOG__' not found")
+    print "Buffer with filename '__FLUTTER_DEV_LOG__' not found"
     return
   end
 
@@ -66,7 +66,7 @@ function toggle_flutter_dev_log()
       row = row,
       col = col,
       style = 'minimal',
-      border = 'single'
+      border = 'single',
     })
   end
 end
@@ -77,12 +77,12 @@ local function implementSpec4()
   local other = '$(other ' .. path .. ')'
   local createFileCommand = '  mkdir -p $(dirname ' .. other .. ') && touch ' .. other
 
-  local command = "ai_task_implement_spec4 " .. path .. " | extract | tee " .. other
+  local command = 'ai_task_implement_spec4 ' .. path .. ' | extract | tee ' .. other
   executeShell(createFileCommand .. ' && ' .. command)
 end
 
 local function selectOllamaModel()
-  executeShell('selectOllamaModel && clear')
+  executeShell 'selectOllamaModel && clear'
 end
 
 local function implementDirect()
@@ -91,7 +91,7 @@ local function implementDirect()
   local other = '$(other ' .. path .. ')'
   local createFileCommand = '  mkdir -p $(dirname ' .. other .. ') && touch ' .. other
 
-  local command = "ai_task_implement_direct " .. path .. " | extract | tee " .. other
+  local command = 'ai_task_implement_direct ' .. path .. ' | extract | tee ' .. other
   executeShell(createFileCommand .. ' && ' .. command)
 end
 local function updateSpec4()
@@ -100,7 +100,7 @@ local function updateSpec4()
   local other = '$(other ' .. path .. ')'
   local createFileCommand = '  mkdir -p $(dirname ' .. other .. ') && touch ' .. other
 
-  local command = "ai_task_update_spec4 " .. path .. " | extract | tee " .. other
+  local command = 'ai_task_update_spec4 ' .. path .. ' | extract | tee ' .. other
   executeShell(createFileCommand .. ' && ' .. command)
 end
 
@@ -108,7 +108,7 @@ local function criticizeThisFile()
   local path = GetFilePath()
   vim.notify(path)
 
-  local command = "ai_task_criticize " .. path .. " | glow"
+  local command = 'ai_task_criticize ' .. path .. ' | glow'
   executeShell(command)
 end
 
@@ -117,7 +117,7 @@ function executeShell(command)
 end
 
 function executeShellAndPrintToSplitPane(command)
-  vim.cmd('vsplit')
+  vim.cmd 'vsplit'
   vim.cmd("TermExec cmd='" .. command .. "'")
 end
 
@@ -125,7 +125,7 @@ local function findLogicFlaws()
   local path = GetFilePath()
   vim.notify(path)
 
-  local command = "ai_task_logic_flaws " .. path .. " | glow"
+  local command = 'ai_task_logic_flaws ' .. path .. ' | glow'
   executeShell(command)
 end
 
@@ -139,22 +139,20 @@ end
 
 local function selectAiCommand()
   local tasks = {
-    ["Implement under test (spec)"] = implementSpec4,
-    ["Update code under test (spec)"] = updateSpec4,
-    ["Implenent under test (direct)"] = implementDirect,
-    ["Criticize code this file"] = criticizeThisFile,
-    ["Find logic flaws in this file"] = findLogicFlaws,
-    ["Select Model"] = selectOllamaModel,
+    ['Implement under test (spec)'] = implementSpec4,
+    ['Update code under test (spec)'] = updateSpec4,
+    ['Implenent under test (direct)'] = implementDirect,
+    ['Criticize code this file'] = criticizeThisFile,
+    ['Find logic flaws in this file'] = findLogicFlaws,
+    ['Select Model'] = selectOllamaModel,
   }
-  vim.ui.select(
-    getKeys(tasks),
-    { prompt = "Select task" },
-    function(choice)
-      if (choice == nil) then return end
-
-      tasks[choice]()
+  vim.ui.select(getKeys(tasks), { prompt = 'Select task' }, function(choice)
+    if choice == nil then
+      return
     end
-  )
+
+    tasks[choice]()
+  end)
 end
 
 -- command can be one of:
@@ -162,18 +160,17 @@ end
 -- * source.organizeImports
 -- * source.fixAll
 local function executeLsp(command)
-  vim.lsp.buf.code_action({
+  vim.lsp.buf.code_action {
     filter = function(action)
       return action.kind == command
     end,
     apply = true,
-  })
+  }
 end
-
 
 local function autoFix()
   if vim.bo.filetype == 'dart' then
-    executeLsp('source.fixAll')
+    executeLsp 'source.fixAll'
   else
     vim.lsp.buf.format()
   end
@@ -181,39 +178,128 @@ end
 
 local keys = {
   --navigation
-  { "<space>0",       Key "%",                                                                         "% Parenthese" },
-  { "<C-cr>",         Key "n",                                                                         "?" },
-  { "<space>ne",      function() vim.lsp.buf.definition() end,                                         "Go to definition", },
-  { "<space>ni",      require("fzf-lua").lsp_implementations,                                          "Impl" },
-  { "<space>no",      require("fzf-lua").lsp_references,                                               "Reference" },
-  { "<space>i",       function() vim.lsp.buf.definition() end,                                         "Go to definition", },
+  { '<space>0', Key '%', '% Parenthese' },
+  { '<C-cr>', Key 'n', '?' },
+  {
+    '<space>ne',
+    function()
+      vim.lsp.buf.definition()
+    end,
+    'Go to definition',
+  },
+  { '<space>ni', require('fzf-lua').lsp_implementations, 'Impl' },
+  { '<space>no', require('fzf-lua').lsp_references, 'Reference' },
+  {
+    '<space>i',
+    function()
+      vim.lsp.buf.definition()
+    end,
+    'Go to definition',
+  },
   -- jumps
-  { "<space>nu",      function() require("trouble").next({ skip_groups = true, jump = true, }) end,    "Next problem" },
+  {
+    '<space>nu',
+    function()
+      require('trouble').next { skip_groups = true, jump = true }
+    end,
+    'Next problem',
+  },
   -- { "<space>aa",      Cmd ":Arrow open",                                                               "Arrow open", },
-  { "afn",            function() require("trouble").previous({ skip_groups = true, jump = true }) end, "Previous diagnos", },
-  { "<space>fw",      Cmd ":FzfLua blines",                                                            "Find in buff", },
-  { "<C-f>",          require("fzf-lua").live_grep,                                                    "Live grep" },
-  { "af",             require("fzf-lua").live_grep,                                                    "Live grep" },
-  { "<space>fr",      Key ":lua find_replace_prompt()",                                                "File find/rep", },
-  { "<space>z",       Cmd ':Zen',                                                                      "Zen" },
-  { "<C-e>",          function() require("fzf-lua").files() end,                                       "Find files", },
-  { "<C-o>",          Cmd ":Other",                                                                    "Open other", },
+  {
+    'afn',
+    function()
+      require('trouble').previous { skip_groups = true, jump = true }
+    end,
+    'Previous diagnos',
+  },
+  {
+    '<space>fw',
+    Cmd ':FzfLua blines',
+    'Find in buff',
+  },
+  { '<C-f>', require('fzf-lua').live_grep, 'Live grep' },
+  { 'af', require('fzf-lua').live_grep, 'Live grep' },
+  {
+    '<space>fr',
+    Key ':lua find_replace_prompt()',
+    'File find/rep',
+  },
+  { '<space>z', Cmd ':Zen', 'Zen' },
+  -- { "<C-h>",          function () vim.cmd(':ToggleTerm') end,                                                                      "ToggleTerm" },
+  {
+    '<C-e>',
+    function()
+      require('fzf-lua').files()
+    end,
+    'Find files',
+  },
+  { '<C-o>', Cmd ':Other', 'Open other' },
   -- Code actions
-  { "<space>e",       function() vim.lsp.buf.code_action() end,                                        "Code action (visual)", },
+  {
+    '<space>e',
+    function()
+      vim.lsp.buf.code_action()
+    end,
+    'Code action (visual)',
+  },
   -- { "<space><space>", Cmd ":silent !dart format %",                                                           "Format", },
-  { "<space><space>", function() vim.lsp.buf.format() end,                                             "Format", },
-  { "<BS><BS>",       autoFix,                                                                         "Fix All & organizeImports" },
-  { "<space>df",      Cmd ':silent !dart format %',                                                    "Format", },
-  { "<space>h",       function() require("hover").hover() end,                                         "Format", },
-  { "tr",             Cmd ":Other",                                                                    "Open other", },
-  { "<space>O",       Cmd ":Other test",                                                               "Find files", },
-  { "<space>e",       function() vim.lsp.buf.code_action() end,                                        "Code action (visual)", },
-  { "<space>h",       function() require("hover").hover() end,                                         "Format", },
-  { "tr",             function() vim.lsp.buf.rename() end,                                             "Rename", },
-  { "Tr",             Cmd ":FlutterRename",                                                            "Flutter Rename", },
-  { "<space>H",       function() vim.diagnostic.open_float() end,                                      "Floating diagnos", },
-  { '<space>nn',      Cmd ':AvanteToggle',                                                             'AI Actions' },
-  { '<space>ae',      ':Gen<cr>',                                                                      'AI Actions' },
+  {
+    '<space><space>',
+    function()
+      vim.lsp.buf.format()
+    end,
+    'Format',
+  },
+  {
+    '<BS><BS>',
+    autoFix,
+    'Fix All & organizeImports',
+  },
+  { '<space>df', Cmd ':silent !dart format %', 'Format' },
+  {
+    '<space>h',
+    function()
+      require('hover').hover()
+    end,
+    'Format',
+  },
+  { 'tr', Cmd ':Other', 'Open other' },
+  { '<space>O', Cmd ':Other test', 'Find files' },
+  {
+    '<space>e',
+    function()
+      vim.lsp.buf.code_action()
+    end,
+    'Code action (visual)',
+  },
+  {
+    '<space>h',
+    function()
+      require('hover').hover()
+    end,
+    'Format',
+  },
+  {
+    'tr',
+    function()
+      vim.lsp.buf.rename()
+    end,
+    'Rename',
+  },
+  {
+    'Tr',
+    Cmd ':FlutterRename',
+    'Flutter Rename',
+  },
+  {
+    '<space>H',
+    function()
+      vim.diagnostic.open_float()
+    end,
+    'Floating diagnos',
+  },
+  { '<space>nn', Cmd ':AvanteToggle', 'AI Actions' },
+  { '<space>ae', ':Gen<cr>', 'AI Actions' },
   -- { '<space>ai', function()
   -- 	if is_default_buffer() then
   -- 		local menu = require("utils.ollama_picker")
@@ -222,58 +308,222 @@ local keys = {
   -- end, 'Gen toggle' },
   --editor windows
   --
-  { "<space>Y",       Key ":%bdelete\n:Neotree focus\n",                                               "Close all buffers", },
-  { "ta",             Cmd ":AerialToggle",                                                             "AerialToggle", },
-  { "<C-y>",          function() require('bufdelete').bufdelete() end,                                 "Close buffer", },
+  {
+    '<space>Y',
+    Key ':%bdelete\n:Neotree focus\n',
+    'Close all buffers',
+  },
+  {
+    'ta',
+    Cmd ':AerialToggle',
+    'AerialToggle',
+  },
+  {
+    '<C-y>',
+    function()
+      require('bufdelete').bufdelete()
+    end,
+    'Close buffer',
+  },
   --flutter runs
-  { "<space>su",      SelectConfigAndRun,                                                              "SelectRunConfig", },
+  {
+    '<space>su',
+    SelectConfigAndRun,
+    'SelectRunConfig',
+  },
   -- { "<space>n",       FlutterCmdOrDefault(":FlutterRun", ":DapContinue"),                              "Run" },
-  { "<space>n",       Cmd(":FlutterRun"),                                                              "Run" },
-  { "<space>u",       Cmd ":FlutterRestart",                                                           "FlutterRestart" },
-  { "<space>y",       Cmd ":FlutterQuit",                                                              "FlutterQuit" },
-  { "ao",             function() require('yazi').yazi({}, vim.fn.expand("%:p")) end,                   "Yazi" },
+  { '<space>n', Cmd ':FlutterRun', 'Run' },
+  {
+    '<space>u',
+    Cmd ':FlutterRestart',
+    'FlutterRestart',
+  },
+  { '<space>y', Cmd ':FlutterQuit', 'FlutterQuit' },
+  { 'ao', nil, 'vacant' },
   -- { "sd",             PopulateLoclistWithDiagnostics,                                                  "Populate diagns" },
 
-  { "<space>N",       Cmd ":FlutterRun",                                                               "FlutterRun" },
-  { "<space>NY",      Cmd ":FlutterQuit",                                                              "FlutterRestart" },
-  { "<space>K",       Cmd ":FlutterLogClear",                                                          "FlutterLogClear", },
-  { "as",             Cmd ":FlutterVisualDebug",                                                       "Flutter Quit", },
-  { "<space>lv",      Cmd ":FlutterVisualDebug",                                                       "Flutter Visual Debug", },
-  { "alr",            Cmd ":FlutterReanalyze",                                                         "FlutterReanalyze", },
-  { "<space>rr",      Cmd ":FlutterLspRestart",                                                        "FlutterLspRestart", },
+  { '<space>N', Cmd ':FlutterRun', 'FlutterRun' },
+  {
+    '<space>NY',
+    Cmd ':FlutterQuit',
+    'FlutterRestart',
+  },
+  {
+    '<space>K',
+    Cmd ':FlutterLogClear',
+    'FlutterLogClear',
+  },
+  {
+    'as',
+    Cmd ':FlutterVisualDebug',
+    'Flutter Quit',
+  },
+  {
+    '<space>lv',
+    Cmd ':FlutterVisualDebug',
+    'Flutter Visual Debug',
+  },
+  {
+    'alr',
+    Cmd ':FlutterReanalyze',
+    'FlutterReanalyze',
+  },
+  {
+    '<space>rr',
+    Cmd ':FlutterLspRestart',
+    'FlutterLspRestart',
+  },
   -- searches
-  { "<space>fb",      Cmd ":free",                                                                     desc = "Switch Buffer" },
-  { "<space>ff",      Cmd ":Telescope commander",                                                      desc = "Switch Buffer" },
-  { "<space>fF",      Util.telescope("files", { cwd = false }),                                        desc = "Find Files (cwd)" },
-  { "<space>fR",      Util.telescope("oldfiles", { cwd = vim.loop.cwd() }),                            desc = "Recent (cwd)" },
-  { "<space>ts",      Cmd ":FzfLua git_status",                                                        desc = "status" },
-  { "<space>re",      Cmd ":FzfLua resume",                                                            desc = "Resume" },
-  { "<space>ab",      require("fzf-lua").buffers,                                                      "Buffers", },
-  { "ah",             require('fzf-lua').diagnostics_workspace,                                        "Diagnosis", },
+  {
+    '<space>fb',
+    Cmd ':free',
+    desc = 'Switch Buffer',
+  },
+  {
+    '<space>ff',
+    Cmd ':Telescope commander',
+    desc = 'Switch Buffer',
+  },
+  {
+    '<space>fF',
+    Util.telescope('files', { cwd = false }),
+    desc = 'Find Files (cwd)',
+  },
+  {
+    '<space>fR',
+    Util.telescope('oldfiles', { cwd = vim.loop.cwd() }),
+    desc = 'Recent (cwd)',
+  },
+  {
+    '<space>ts',
+    Cmd ':FzfLua git_status',
+    desc = 'status',
+  },
+  {
+    '<space>re',
+    Cmd ':FzfLua resume',
+    desc = 'Resume',
+  },
+  { '<space>ab', require('fzf-lua').buffers, 'Buffers' },
+  { 'ah', require('fzf-lua').diagnostics_workspace, 'Diagnosis' },
   --debugging starts with S
-  { "su",             Cmd ":DapContinue",                                                              "DapContinue", },
-  { "st",             Cmd ":DapToggleBreakpoint",                                                      "Toggle breakpnt", },
-  { "sh",             function() require("dapui").toggle() end,                                        "Open DapUI Repl", },
-  { "sv",             function() require("dapui").toggle() end,                                        "Open DapUI Repl", },
-  { "se",             function() require('dapui').eval(nil, { enter = true }) end,                     "Evaluate this", },
-  { "sa",             function() require("dapui").float_element('stack') end,                          "Open DapUI stacks", },
-  { "sc",             function() require("dapui").float_element('scopes') end,                         "Open DapUI stacks", },
+  { 'su', Cmd ':DapContinue', 'DapContinue' },
+  {
+    'st',
+    Cmd ':DapToggleBreakpoint',
+    'Toggle breakpnt',
+  },
+  {
+    'sh',
+    function()
+      require('dapui').toggle()
+    end,
+    'Open DapUI Repl',
+  },
+  {
+    'sv',
+    function()
+      require('dapui').toggle()
+    end,
+    'Open DapUI Repl',
+  },
+  {
+    'se',
+    function()
+      require('dapui').eval(nil, { enter = true })
+    end,
+    'Evaluate this',
+  },
+  {
+    'sa',
+    function()
+      require('dapui').float_element 'stack'
+    end,
+    'Open DapUI stacks',
+  },
+  {
+    'sc',
+    function()
+      require('dapui').float_element 'scopes'
+    end,
+    'Open DapUI stacks',
+  },
   --testing
-  { "<space>tf",      Cmd ':TestNearest',                                                              "Test Nearest" },
-  { "<space>tw",      Cmd ':TestFile',                                                                 "Test File" },
-  { "<space>l",       function() print("spc l") end,                                                   "?" },
+  { '<space>tf', Cmd ':TestNearest', 'Test Nearest' },
+  { '<space>tw', Cmd ':TestFile', 'Test File' },
+  {
+    '<space>l',
+    function()
+      print 'spc l'
+    end,
+    '?',
+  },
   -- { "<C-l>",          toggle_flutter_dev_log,                                                          "Toggle Lsp Log", },
 
-  { "<space>tv",      Cmd ":CoverageToggle",                                                           "Coverage" },
-  { "<space>fm", function()
-    local path = GetFilePath()
-    vim.notify('opening' .. path)
-    Snacks.terminal.open('yazi ' .. path)
-  end, "Yazi" },
-  { "<space>kk", function() print("spc kk") end,          "SaveCommandHistory" },
-  { "<C-w>",     function() print("Cw") end,              "?", },
-  { "tk",        function() print("tk") end,              "?" },
-  { "tuy",       function() require('neoclip.fzf')() end, "Clip History" },
+  { '<space>tv', Cmd ':CoverageToggle', 'Coverage' },
+  {
+    '<space>fm',
+    function()
+      local path = GetFilePath()
+      vim.notify('opening' .. path)
+      Snacks.terminal.open('yazi ' .. path)
+    end,
+    'Yazi',
+  },
+  { '<C-l>', Cmd ':CodeCompanionChat Toggle', 'CodeCompanionChat Toggle' },
+  { '<space>sa', Cmd ':TermExec cmd=analyze', 'Analyze' },
+  { '<space>sf', Cmd ':TermExec cmd=dart_format', 'DartFormat' },
+  { '<space>su', Cmd ':TermExec cmd=submit', 'Submit' },
+  {
+    '<space>sp',
+    function()
+      vim.ui.input({
+        prompt = 'describe changes:',
+        default = 'feat: ',
+      }, function(input)
+        if input then
+          vim.cmd(':TermExec cmd=\'push "' .. input .. '"\'')
+          vim.notify(input)
+        end
+      end)
+    end,
+    'Push',
+  },
+  {
+    '<space>sb',
+    function()
+      vim.ui.input({
+        prompt = 'branch name:',
+        default = 'feat/CONN-',
+      }, function(input)
+        if input then
+          vim.cmd(":TermExec cmd='branch " .. input .. "'")
+        end
+      end)
+    end,
+    'Push',
+  },
+  {
+    '<C-w>',
+    function()
+      print 'Cw'
+    end,
+    '?',
+  },
+  {
+    'tk',
+    function()
+      print 'tk'
+    end,
+    '?',
+  },
+  {
+    'tuy',
+    function()
+      require 'neoclip.fzf'()
+    end,
+    'Clip History',
+  },
   -- {
   -- 	"<C-h>",
   -- 	function()
@@ -282,11 +532,11 @@ local keys = {
   -- 	"?",
   -- },
   {
-    "<C-i>",
+    '<C-i>',
     function()
       require('arrow.ui').openMenu()
     end,
-    "?",
+    '?',
   },
 }
 -- {

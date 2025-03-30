@@ -1,6 +1,6 @@
-vim.g.selected_run_config = { name = 'no config' }
+vim.g.selected_run_config = { name = '' }
 
-local dap = require('dap')
+local dap = require 'dap'
 local notify = require('dap.utils').notify
 local M = {}
 
@@ -8,7 +8,7 @@ M.json_decode = vim.json.decode
 M.type_to_filetypes = {}
 
 local function create_input(type_, input)
-  if type_ == "promptString" then
+  if type_ == 'promptString' then
     return function()
       local description = input.description or 'Input'
       if not vim.endswith(description, ': ') then
@@ -30,9 +30,9 @@ local function create_input(type_, input)
         return vim.fn.input(description, input.default or '')
       end
     end
-  elseif type_ == "pickString" then
+  elseif type_ == 'pickString' then
     return function()
-      local options = assert(input.options, "input of type pickString must have an `options` property")
+      local options = assert(input.options, 'input of type pickString must have an `options` property')
       local opts = {
         prompt = input.description,
         format_item = function(x)
@@ -49,18 +49,17 @@ local function create_input(type_, input)
       return coroutine.yield()
     end
   else
-    local msg = "Unsupported input type in vscode launch.json: " .. type_
+    local msg = 'Unsupported input type in vscode launch.json: ' .. type_
     notify(msg, vim.log.levels.WARN)
   end
 end
 
-
 local function create_inputs(inputs)
   local result = {}
   for _, input in ipairs(inputs) do
-    local id = assert(input.id, "input must have a `id`")
-    local key = "${input:" .. id .. "}"
-    local type_ = assert(input.type, "input must have a `type`")
+    local id = assert(input.id, 'input must have a `id`')
+    local key = '${input:' .. id .. '}'
+    local type_ = assert(input.type, 'input must have a `type`')
     local fn = create_input(type_, input)
     if fn then
       result[key] = fn
@@ -79,29 +78,28 @@ local function chain(default, fns)
   end
 end
 
-
 local function apply_input(inputs, value)
-  if type(value) == "table" then
+  if type(value) == 'table' then
     local new_value = {}
     for k, v in pairs(value) do
       new_value[k] = apply_input(inputs, v)
     end
     value = new_value
   end
-  if type(value) ~= "string" then
+  if type(value) ~= 'string' then
     return value
   end
-  local matches = string.gmatch(value, "${input:([%w_]+)}")
+  local matches = string.gmatch(value, '${input:([%w_]+)}')
   local input_functions = {}
   for input_id in matches do
-    local input_key = "${input:" .. input_id .. "}"
+    local input_key = '${input:' .. input_id .. '}'
     local input = inputs[input_key]
     if not input then
-      local msg = "No input with id `" .. input_id .. "` found in inputs"
+      local msg = 'No input with id `' .. input_id .. '` found in inputs'
       notify(msg, vim.log.levels.WARN)
     end
     table.insert(input_functions, function(val)
-      assert(coroutine.running(), "Must run in coroutine")
+      assert(coroutine.running(), 'Must run in coroutine')
       local input_value = input()
       return val:gsub(input_key, input_value)
     end)
@@ -113,7 +111,6 @@ local function apply_input(inputs, value)
   end
 end
 
-
 local function apply_inputs(config, inputs)
   local result = {}
   for key, value in pairs(config) do
@@ -121,7 +118,6 @@ local function apply_inputs(config, inputs)
   end
   return result
 end
-
 
 --- Lift properties of a child table to top-level
 local function lift(tbl, key)
@@ -133,18 +129,17 @@ local function lift(tbl, key)
   return tbl
 end
 
-
 function M._load_json(jsonstr)
-  local data = assert(M.json_decode(jsonstr), "launch.json must contain a JSON object")
+  local data = assert(M.json_decode(jsonstr), 'launch.json must contain a JSON object')
   local inputs = create_inputs(data.inputs or {})
   local has_inputs = next(inputs) ~= nil
 
   local sysname
-  if vim.fn.has('linux') == 1 then
+  if vim.fn.has 'linux' == 1 then
     sysname = 'linux'
-  elseif vim.fn.has('mac') == 1 then
+  elseif vim.fn.has 'mac' == 1 then
     sysname = 'osx'
-  elseif vim.fn.has('win32') == 1 then
+  elseif vim.fn.has 'win32' == 1 then
     sysname = 'windows'
   end
 
@@ -162,11 +157,11 @@ function M.load_run_configurations_from_vscode(path, type_to_filetypes)
   if not vim.loop.fs_stat(resolved_path) then
     local configs = {
       {
-        type = "dart",
-        request = "launch",
-        name = "launch main.dart",
-        program = "${workspaceFolder}/lib/main.dart",
-        cwd = "${workspaceFolder}",
+        type = 'dart',
+        request = 'launch',
+        name = 'launch main.dart',
+        program = '${workspaceFolder}/lib/main.dart',
+        cwd = '${workspaceFolder}',
       },
     }
     return configs

@@ -14,7 +14,7 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
-vim.cmd('autocmd FileType dart setlocal textwidth=120')
+vim.cmd 'autocmd FileType dart setlocal textwidth=120'
 
 local servers = {
   -- clangd = {},
@@ -31,9 +31,9 @@ local servers = {
         -- Put format options here
         -- NOTE: the value should be STRING!!
         defaultConfig = {
-          indent_style = "space",
-          indent_size = "2",
-        }
+          indent_style = 'space',
+          indent_size = '2',
+        },
       },
     },
   },
@@ -65,7 +65,6 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
-
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
@@ -105,7 +104,7 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = "copilot" },
+    { name = 'copilot' },
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
@@ -116,7 +115,7 @@ cmp.setup {
     completion = {
       border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
       winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
-    }
+    },
   },
 }
 

@@ -1,16 +1,16 @@
 return {
   {
     'nvim-flutter/flutter-tools.nvim',
-    event        = { "VeryLazy" },
+    event = { 'VeryLazy' },
     -- enabled      = vim.g.x_is_flutter_project,
     dependencies = {
       'nvim-lua/plenary.nvim',
       'stevearc/dressing.nvim',
     },
-    config       = function()
+    config = function()
       -- local isFvmProject = IsFvmProject()
-      require("flutter-tools").setup({
-        closing_tags = { enabled = false, },
+      require('flutter-tools').setup {
+        closing_tags = { enabled = false },
         decorations = {
           statusline = {
             app_version = false,
@@ -21,7 +21,7 @@ return {
         dev_log = {
           enabled = false,
           notify_errors = false, -- if there is an error whilst running then notify the user
-          open_cmd = "tabedit",  -- command to use to open the log buffer
+          open_cmd = 'tabedit', -- command to use to open the log buffer
         },
         debugger = {
           enabled = true,
@@ -29,8 +29,7 @@ return {
           exception_breakpoints = {},
           evaluate_to_string_in_debug_views = true,
           register_configurations = function(_)
-            require('dap').configurations.dart =
-                require('utils.select_run_config').selectRunConfig()
+            require('dap').configurations.dart = require('utils.select_run_config').selectRunConfig()
             -- require('dap').configurations.dart = { {
             --   type = "dart",
             --   request = "launch",
@@ -55,7 +54,7 @@ return {
             background_color = nil,
             foreground = false,
             virtual_text = true,
-            virtual_text_str = "■",
+            virtual_text_str = '■',
           },
           settings = {
             lineLength = 100,
@@ -64,13 +63,14 @@ return {
             updateImportsOnRename = true,
             closingLabels = false,
             analysisExcludedFolders = {
-              vim.fn.expand(".fvm"),
-              vim.fn.expand("$HOME/fvm"),
-              ".fvm",
-              vim.fn.expand("$HOME/.pub-cache"),
+              vim.fn.expand '.fvm',
+              vim.fn.expand '$HOME/fvm',
+              '.fvm',
+              vim.fn.expand '$HOME/.pub-cache',
             },
-            flutterOutline = false,
-            outline = false,
+            outline = {
+              enabled = false,
+            },
             -- enableSdkFormatter = false,
             includeDependenciesInWorkspaceSymbols = false,
             onlyAnalyzeProjectsWithOpenFiles = true,
@@ -78,13 +78,13 @@ return {
             checkForSdkUpdates = false,
             suggestFromUnimportedLibraries = true,
             projectSearchDepth = 1,
-            documentation = "full",
+            documentation = 'full',
             debugSdkLibraries = false,
             debugExternalLibraries = false,
             debugExternalPackageLibraries = false,
           },
-        }
-      })
+        },
+      }
     end,
   },
 }

@@ -2,25 +2,25 @@ return {
 
   -- copilot
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    event = "InsertEnter",
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    build = ':Copilot auth',
+    event = 'InsertEnter',
     enabled = false,
     config = function()
-      require('copilot').setup({
+      require('copilot').setup {
         suggestion = { enabled = false },
         panel = { enabled = false },
         filetypes = {
           markdown = true,
           help = true,
         },
-      })
-      vim.cmd("Copilot disable")
+      }
+      vim.cmd 'Copilot disable'
     end,
     keys = {
-      { "<space>at", "<cmd>Copilot toggle<cr>", desc = "Toggle copilot" },
-    }
+      { '<space>at', '<cmd>Copilot toggle<cr>', desc = 'Toggle copilot' },
+    },
   },
 
   -- copilot cmp source

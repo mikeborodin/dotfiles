@@ -1,18 +1,18 @@
-local Util = require("lazyvim.util")
+local Util = require 'lazyvim.util'
 return {
   {
-    "nvim-telescope/telescope.nvim",
-    cmd = "Telescope",
+    'nvim-telescope/telescope.nvim',
+    cmd = 'Telescope',
     version = false, -- telescope did only one release, so use HEAD for now
     dependencies = {
-      "nvim-telescope/telescope-dap.nvim",
+      'nvim-telescope/telescope-dap.nvim',
       {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-        enabled = vim.fn.executable("make") == 1,
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'make',
+        enabled = vim.fn.executable 'make' == 1,
         config = function()
-          Util.on_load("telescope.nvim", function()
-            require("telescope").load_extension("fzf")
+          Util.on_load('telescope.nvim', function()
+            require('telescope').load_extension 'fzf'
           end)
         end,
       },
@@ -69,53 +69,51 @@ return {
       -- },
     },
     opts = function()
-      local actions = require("telescope.actions")
+      local actions = require 'telescope.actions'
 
       local open_with_trouble = function(...)
-        return require("trouble.providers.telescope").open_with_trouble(...)
+        return require('trouble.providers.telescope').open_with_trouble(...)
       end
       local open_selected_with_trouble = function(...)
-        return require("trouble.providers.telescope").open_selected_with_trouble(
-          ...
-        )
+        return require('trouble.providers.telescope').open_selected_with_trouble(...)
       end
       local find_files_no_ignore = function()
-        local action_state = require("telescope.actions.state")
+        local action_state = require 'telescope.actions.state'
         local line = action_state.get_current_line()
-        Util.telescope("find_files", { no_ignore = true, default_text = line })()
+        Util.telescope('find_files', { no_ignore = true, default_text = line })()
       end
       local find_files_with_hidden = function()
-        local action_state = require("telescope.actions.state")
+        local action_state = require 'telescope.actions.state'
         local line = action_state.get_current_line()
-        Util.telescope("find_files", { hidden = true, default_text = line })()
+        Util.telescope('find_files', { hidden = true, default_text = line })()
       end
 
       return {
         defaults = {
-          sorting_strategy = "ascending",
+          sorting_strategy = 'ascending',
           file_ignore_patterns = {
-            "node_modules",
-            ".git",
-            ".idea",
-            ".fvm",
-            ".run",
-            ".mason",
+            'node_modules',
+            '.git',
+            '.idea',
+            '.fvm',
+            '.run',
+            '.mason',
           },
           pickers = {
             live_grep = {
               additional_args = function(opts)
-                return { "--hidden" }
+                return { '--hidden' }
               end,
             },
           },
           layout_config = {
-            prompt_position = "top",
+            prompt_position = 'top',
             height = 0.7,
             preview_cutoff = 40,
             width = 0.8,
           },
-          prompt_prefix = " ",
-          selection_caret = " ",
+          prompt_prefix = ' ',
+          selection_caret = ' ',
           -- open files in the first window that is an actual file.
           -- use the current window if no other window is available.
           get_selection_window = function()
@@ -123,7 +121,7 @@ return {
             table.insert(wins, 1, vim.api.nvim_get_current_win())
             for _, win in ipairs(wins) do
               local buf = vim.api.nvim_win_get_buf(win)
-              if vim.bo[buf].buftype == "" then
+              if vim.bo[buf].buftype == '' then
                 return win
               end
             end
@@ -141,7 +139,7 @@ return {
               -- ["<C-b>"] = actions.preview_scrolling_up,
             },
             n = {
-              ["q"] = actions.close,
+              ['q'] = actions.close,
             },
           },
         },
@@ -149,11 +147,11 @@ return {
     end,
 
     config = function(_, opts)
-      require("telescope").setup(opts)
-      require("telescope").load_extension("dap")
+      require('telescope').setup(opts)
+      require('telescope').load_extension 'dap'
 
-      if (vim.g.x_is_flutter_project) then
-        require("telescope").load_extension("flutter")
+      if vim.g.x_is_flutter_project then
+        require('telescope').load_extension 'flutter'
       end
     end,
   },

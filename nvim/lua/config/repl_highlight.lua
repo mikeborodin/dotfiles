@@ -1,16 +1,19 @@
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+  [[
   highlight FlutterHighlight guifg=yellow ctermfg=yellow
-]], false)
+]],
+  false
+)
 
-vim.cmd([[
+vim.cmd [[
   augroup DAPREPLHighlight
     autocmd!
     autocmd BufEnter,BufWinEnter,TabEnter * lua HighlightFlutter()
   augroup END
-]])
+]]
 
 function HighlightFlutter()
   if vim.bo.buftype == 'dap-repl' then
-    vim.cmd('syntax match FlutterHighlight /^flutter.*/')
+    vim.cmd 'syntax match FlutterHighlight /^flutter.*/'
   end
 end

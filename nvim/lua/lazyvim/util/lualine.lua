@@ -1,4 +1,4 @@
-local Util = require("lazyvim.util")
+local Util = require 'lazyvim.util'
 
 ---@class lazyvim.util.lualine
 local M = {}
@@ -6,33 +6,33 @@ local M = {}
 function M.cmp_source(name, icon)
   local started = false
   local function status()
-    if not package.loaded["cmp"] then
+    if not package.loaded['cmp'] then
       return
     end
-    for _, s in ipairs(require("cmp").core.sources) do
+    for _, s in ipairs(require('cmp').core.sources) do
       if s.name == name then
         if s.source:is_available() then
           started = true
         else
-          return started and "error" or nil
+          return started and 'error' or nil
         end
         if s.status == s.SourceStatus.FETCHING then
-          return "pending"
+          return 'pending'
         end
-        return "ok"
+        return 'ok'
       end
     end
   end
 
   local colors = {
-    ok = Util.ui.fg("Special"),
-    error = Util.ui.fg("DiagnosticError"),
-    pending = Util.ui.fg("DiagnosticWarn"),
+    ok = Util.ui.fg 'Special',
+    error = Util.ui.fg 'DiagnosticError',
+    pending = Util.ui.fg 'DiagnosticWarn',
   }
 
   return {
     function()
-      return icon or require("lazyvim.config").icons.kinds[name:sub(1, 1):upper() .. name:sub(2)]
+      return icon or require('lazyvim.config').icons.kinds[name:sub(1, 1):upper() .. name:sub(2)]
     end,
     cond = function()
       return status() ~= nil

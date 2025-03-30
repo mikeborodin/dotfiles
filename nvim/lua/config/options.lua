@@ -4,10 +4,10 @@ vim.o.hlsearch = false
 vim.o.pumheight = 10
 vim.o.pumwidth = 120
 
-vim.o.foldenable = true   -- enable fold
-vim.o.foldlevel = 99      -- start editing with all folds opened
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldenable = true -- enable fold
+vim.o.foldlevel = 99 -- start editing with all folds opened
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- Make line numbers default
 vim.wo.number = true
 
@@ -43,7 +43,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 vim.o.completeopt = 'menuone,noselect'
-vim.cmd('set shortmess+=F')
+vim.cmd 'set shortmess+=F'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
@@ -55,7 +55,8 @@ vim.o.number = true
 
 -- views can only be fully collapsed with the global statusline
 vim.opt.laststatus = 3
+vim.opt.showmode = false
 -- Default splitting will cause your main splits to jump when opening an edgebar.
 -- To prevent this, set `splitkeep` to either `screen` or `topline`.
-vim.opt.splitkeep = "screen"
-vim.opt.cmdheight = 1
+vim.opt.splitkeep = 'screen'
+vim.opt.cmdheight = 0

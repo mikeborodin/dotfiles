@@ -1,13 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.12.0/.schema/devbox.schema.json",
   "packages": [
-    "neovim@latest",
+    "neovim@0.11.0",
     "gh@latest",
     "btop@latest",
     "temurin-bin-17@latest",
     "nodePackages.firebase-tools@latest",
     "jq@latest",
-    "aichat@latest",
+    "aichat@0.28.0",
     "gh-dash@latest",
     "delta@latest",
     "jless@latest",
@@ -49,7 +49,8 @@
     "hugo@latest",
     "zsh@latest",
     "github:mikeborodin/fvm-flake",
-    "aerospace@latest"
+    "aerospace@latest",
+    "uv@latest"
   ],
   "env": {
     "JAVA_HOME": "$DEVBOX_PROJECT_ROOT/.devbox/nix/profile/default/Contents/Home"

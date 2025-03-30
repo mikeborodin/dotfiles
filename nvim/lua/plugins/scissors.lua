@@ -1,21 +1,21 @@
 return {
   'chrisgrieser/nvim-scissors',
   opts = {
-    snippetDir = vim.fn.stdpath("config") .. "/snippets",
+    snippetDir = vim.fn.stdpath 'config' .. '/snippets',
     editSnippetPopup = {
       height = 0.4, -- relative to the window, between 0-1
       width = 0.6,
-      border = "rounded",
+      border = 'rounded',
       keymaps = {
         -- if not mentioned otherwise, the keymaps apply to normal mode
-        cancel = "q",
-        saveChanges = "<CR>", -- alternatively, can also use `:w`
-        goBackToSearch = "<BS>",
-        deleteSnippet = "<C-BS>",
-        duplicateSnippet = "<C-d>",
-        openInFile = "<C-o>",
-        insertNextPlaceholder = "<C-p>", -- insert & normal mode
-        showHelp = "?",
+        cancel = 'q',
+        saveChanges = '<CR>', -- alternatively, can also use `:w`
+        goBackToSearch = '<BS>',
+        deleteSnippet = '<C-BS>',
+        duplicateSnippet = '<C-d>',
+        openInFile = '<C-o>',
+        insertNextPlaceholder = '<C-p>', -- insert & normal mode
+        showHelp = '?',
       },
     },
     telescope = {
@@ -25,7 +25,7 @@ return {
 
       -- accepts the common telescope picker config
       opts = {
-        layout_strategies = "horizontal",
+        layout_strategies = 'horizontal',
         layout_config = {
           horizontal = { width = 0.9 },
           preview_width = 0.6,
@@ -38,15 +38,14 @@ return {
     -- you version control your snippets. To use a custom formatter, set to a
     -- list of strings, which will then be passed to `vim.system()`.
     ---@type "yq"|"jq"|"none"|string[]
-    jsonFormatter = "jq",
+    jsonFormatter = 'jq',
 
     backdrop = {
       enabled = true,
       blend = 50, -- between 0-100
     },
     icons = {
-      scissors = "󰩫",
+      scissors = '󰩫',
     },
-
-  }
+  },
 }

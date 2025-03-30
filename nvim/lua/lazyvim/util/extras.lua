@@ -1,9 +1,9 @@
-local Config = require("lazyvim.config")
-local Float = require("lazy.view.float")
-local LazyConfig = require("lazy.core.config")
-local Plugin = require("lazy.core.plugin")
-local Text = require("lazy.view.text")
-local Util = require("lazyvim.util")
+local Config = require 'lazyvim.config'
+local Float = require 'lazy.view.float'
+local LazyConfig = require 'lazy.core.config'
+local Plugin = require 'lazy.core.plugin'
+local Text = require 'lazy.view.text'
+local Util = require 'lazyvim.util'
 
 ---@class LazyExtraSource
 ---@field name string
@@ -26,11 +26,11 @@ local M = {}
 
 ---@type LazyExtraSource[]
 M.sources = {
-  { name = "LazyVim", desc = "LazyVim extras", module = "lazyvim.plugins.extras" },
-  { name = "User", desc = "User extras", module = "plugins.extras" },
+  { name = 'LazyVim', desc = 'LazyVim extras', module = 'lazyvim.plugins.extras' },
+  { name = 'User', desc = 'User extras', module = 'plugins.extras' },
 }
 
-M.ns = vim.api.nvim_create_namespace("lazyvim.extras")
+M.ns = vim.api.nvim_create_namespace 'lazyvim.extras'
 ---@type string[]
 M.state = nil
 
@@ -42,9 +42,9 @@ function M.get()
     local root = Util.find_root(source.module)
     if root then
       Util.walk(root, function(path, name, type)
-        if type == "file" and name:match("%.lua$") then
-          name = path:sub(#root + 2, -5):gsub("/", ".")
-          extras[#extras + 1] = M.get_extra(source, source.module .. "." .. name)
+        if type == 'file' and name:match '%.lua$' then
+          name = path:sub(#root + 2, -5):gsub('/', '.')
+          extras[#extras + 1] = M.get_extra(source, source.module .. '.' .. name)
         end
       end)
     end
@@ -95,10 +95,10 @@ local X = {}
 ---@return LazyExtraView
 function X.new()
   local self = setmetatable({}, { __index = X })
-  self.float = Float.new({ title = "LazyVim Extras" })
-  self.float:on_key("x", function()
+  self.float = Float.new { title = 'LazyVim Extras' }
+  self.float:on_key('x', function()
     self:toggle()
-  end, "Toggle extra")
+  end, 'Toggle extra')
   self.diag = {}
   self:update()
   return self
@@ -117,8 +117,8 @@ function X:toggle()
     if extra.row == pos[1] then
       if not extra.managed then
         Util.error(
-          "Not managed by LazyExtras. Remove from your config to enable/disable here.",
-          { title = "LazyExtras" }
+          'Not managed by LazyExtras. Remove from your config to enable/disable here.',
+          { title = 'LazyExtras' }
         )
         return
       end
@@ -136,13 +136,13 @@ function X:toggle()
       table.sort(Config.json.data.extras)
       Util.json.save()
       Util.info(
-        "`"
+        '`'
           .. extra.name
-          .. "`"
-          .. " "
-          .. (extra.enabled and "**enabled**" or "**disabled**")
-          .. "\nPlease restart LazyVim to apply the changes.",
-        { title = "LazyExtras" }
+          .. '`'
+          .. ' '
+          .. (extra.enabled and '**enabled**' or '**disabled**')
+          .. '\nPlease restart LazyVim to apply the changes.',
+        { title = 'LazyExtras' }
       )
       self:update()
       return
@@ -174,47 +174,47 @@ function X:update()
 end
 
 function X:render()
-  self.text:nl():nl():append("LazyVim Extras", "LazyH1"):nl():nl()
+  self.text:nl():nl():append('LazyVim Extras', 'LazyH1'):nl():nl()
   self.text
-    :append("This is a list of all enabled/disabled LazyVim extras.", "LazyComment")
+    :append('This is a list of all enabled/disabled LazyVim extras.', 'LazyComment')
     :nl()
-    :append("Each extra shows the required and optional plugins it may install.", "LazyComment")
+    :append('Each extra shows the required and optional plugins it may install.', 'LazyComment')
     :nl()
-    :append("Enable/disable extras with the ", "LazyComment")
-    :append("<x>", "LazySpecial")
-    :append(" key", "LazyComment")
+    :append('Enable/disable extras with the ', 'LazyComment')
+    :append('<x>', 'LazySpecial')
+    :append(' key', 'LazyComment')
     :nl()
-  self:section({ enabled = true, title = "Enabled" })
-  self:section({ enabled = false, title = "Disabled" })
+  self:section { enabled = true, title = 'Enabled' }
+  self:section { enabled = false, title = 'Disabled' }
 end
 
 ---@param extra LazyExtra
 function X:extra(extra)
   if not extra.managed then
-    self:diagnostic({
-      message = "Not managed by LazyExtras (config)",
+    self:diagnostic {
+      message = 'Not managed by LazyExtras (config)',
       severity = vim.diagnostic.severity.WARN,
-    })
+    }
   end
   extra.row = self.text:row()
-  local hl = extra.managed and "LazySpecial" or "LazyLocal"
+  local hl = extra.managed and 'LazySpecial' or 'LazyLocal'
   if extra.enabled then
-    self.text:append("  " .. LazyConfig.options.ui.icons.loaded .. " ", hl)
+    self.text:append('  ' .. LazyConfig.options.ui.icons.loaded .. ' ', hl)
   else
-    self.text:append("  " .. LazyConfig.options.ui.icons.not_loaded .. " ", hl)
+    self.text:append('  ' .. LazyConfig.options.ui.icons.not_loaded .. ' ', hl)
   end
   self.text:append(extra.name)
-  if extra.source.name ~= "LazyVim" then
-    self.text:append(" "):append(LazyConfig.options.ui.icons.event .. " " .. extra.source.name, "LazyReasonEvent")
+  if extra.source.name ~= 'LazyVim' then
+    self.text:append(' '):append(LazyConfig.options.ui.icons.event .. ' ' .. extra.source.name, 'LazyReasonEvent')
   end
   for _, plugin in ipairs(extra.plugins) do
-    self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. plugin, "LazyReasonPlugin")
+    self.text:append(' '):append(LazyConfig.options.ui.icons.plugin .. '' .. plugin, 'LazyReasonPlugin')
   end
   for _, plugin in ipairs(extra.optional) do
-    self.text:append(" "):append(LazyConfig.options.ui.icons.plugin .. "" .. plugin, "LazyReasonRequire")
+    self.text:append(' '):append(LazyConfig.options.ui.icons.plugin .. '' .. plugin, 'LazyReasonRequire')
   end
   if extra.desc then
-    self.text:nl():append("    " .. extra.desc, "LazyComment")
+    self.text:nl():append('    ' .. extra.desc, 'LazyComment')
   end
   self.text:nl()
 end
@@ -227,7 +227,7 @@ function X:section(opts)
     return opts.enabled == nil or extra.enabled == opts.enabled
   end, self.extras)
 
-  self.text:nl():append(opts.title .. ":", "LazyH2"):append(" (" .. #extras .. ")", "LazyComment"):nl()
+  self.text:nl():append(opts.title .. ':', 'LazyH2'):append(' (' .. #extras .. ')', 'LazyComment'):nl()
   for _, extra in ipairs(extras) do
     self:extra(extra)
   end

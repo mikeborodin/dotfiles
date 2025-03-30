@@ -1,7 +1,7 @@
 -- https://github.com/HakonHarnes/img-clip.nvim
 return {
-  "HakonHarnes/img-clip.nvim",
-  event = "VeryLazy",
+  'HakonHarnes/img-clip.nvim',
+  event = 'VeryLazy',
   opts = {
     -- add options here
     -- or leave it empty to use the default settings
@@ -29,7 +29,7 @@ return {
       -- I want to save the images in a directory named after the current file,
       -- but I want the name of the dir to end with `-img`
       dir_path = function()
-        return vim.fn.expand("%:t:r") .. "-img"
+        return vim.fn.expand '%:t:r' .. '-img'
       end,
 
       -- If you want to get prompted for the filename when pasting an image
@@ -40,7 +40,7 @@ return {
       -- I don't want to give my images a name, but instead autofill it using
       -- the date and time as shown on `file_name` below
       prompt_for_file_name = false, ---@type boolean
-      file_name = "%y%m%d-%H%M%S", ---@type string
+      file_name = '%y%m%d-%H%M%S', ---@type string
 
       -- -- Set the extension that the image file will have
       -- -- I'm also specifying the image options with the `process_cmd`
@@ -56,8 +56,8 @@ return {
       -- extension = "png", ---@type string
       -- process_cmd = "convert - -quality 75 png:-", ---@type string
 
-      extension = "jpg", ---@type string
-      process_cmd = "convert - -quality 75 jpg:-", ---@type string
+      extension = 'jpg', ---@type string
+      process_cmd = 'convert - -quality 75 jpg:-', ---@type string
 
       -- -- Here are other conversion options to play around
       -- -- Notice that with this other option you resize all the images
@@ -98,7 +98,7 @@ return {
         -- template = "![$CURSOR]($FILE_PATH)", ---@type string
         --
         -- -- This will just statically type "Image" in the alternative text
-        template = "![Image]($FILE_PATH)", ---@type string
+        template = '![Image]($FILE_PATH)', ---@type string
         --
         -- -- This will dynamically configure the alternative text to show the
         -- -- same that you configured as the "file_name" above
@@ -111,9 +111,9 @@ return {
   keys = {
     -- suggested keymap
     {
-      "<space>p",
-      "<cmd>PasteImage<cr>",
-      desc = "Paste image from system clipboard",
+      '<space>p',
+      '<cmd>PasteImage<cr>',
+      desc = 'Paste image from system clipboard',
     },
   },
 }

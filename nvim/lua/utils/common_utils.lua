@@ -1,36 +1,26 @@
 function Nmap(keys, cmd, desc)
   local function runAndLog()
-    if type(cmd) == "function" then
+    if type(cmd) == 'function' then
       cmd()
     end
     --
-    local file = io.open(os.getenv("HOME") .. "/neovim_keys.log", "a")
+    local file = io.open(os.getenv 'HOME' .. '/neovim_keys.log', 'a')
     if file == nil then
       return
     end
-    file:write(keys .. "\n")
+    file:write(keys .. '\n')
     file:close()
   end
 
-  if type(cmd) == "string" then
-    vim.keymap.set(
-      "n",
-      keys,
-      cmd,
-      { noremap = true, desc = desc, silent = true }
-    )
+  if type(cmd) == 'string' then
+    vim.keymap.set('n', keys, cmd, { noremap = true, desc = desc, silent = true })
   else
-    vim.keymap.set(
-      "n",
-      keys,
-      runAndLog,
-      { noremap = true, desc = desc, silent = true }
-    )
+    vim.keymap.set('n', keys, runAndLog, { noremap = true, desc = desc, silent = true })
   end
 end
 
 function Clear(keys)
-  vim.keymap.set({ "n", "v" }, keys, "<Nop>", { noremap = true, silent = true })
+  vim.keymap.set({ 'n', 'v' }, keys, '<Nop>', { noremap = true, silent = true })
 end
 
 function UseKeymapTable(keys)
@@ -54,7 +44,7 @@ function Cmd(cmd)
 end
 
 function FlutterCmdOrDefault(cmd, fallback)
-  if (vim.g.x_is_flutter_project) then
+  if vim.g.x_is_flutter_project then
     return function()
       vim.cmd(cmd)
     end
@@ -67,6 +57,6 @@ end
 
 function Key(cmd)
   return function()
-    vim.api.nvim_feedkeys(cmd, "n", true)
+    vim.api.nvim_feedkeys(cmd, 'n', true)
   end
 end
