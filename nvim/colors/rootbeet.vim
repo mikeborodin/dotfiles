@@ -33,7 +33,7 @@ highlight DiffAdd guifg=NONE guibg=#1C3129 guisp=NONE blend=NONE gui=NONE
 highlight DiffChange guifg=NONE guibg=#3F2C17 guisp=NONE blend=NONE gui=NONE
 highlight DiffDelete guifg=#E25A6A guibg=#471A26 guisp=NONE blend=NONE gui=NONE
 highlight DiffText guifg=NONE guibg=#6C4B28 guisp=NONE blend=NONE gui=NONE
-highlight Directory guifg=#565B8F guibg=NONE guisp=NONE blend=NONE gui=NONE
+highlight Directory guifg=#6f76b9 guibg=NONE guisp=NONE blend=NONE gui=NONE
 highlight EndOfBuffer guifg=#393D6A guibg=NONE guisp=NONE blend=NONE gui=NONE
 highlight! link VertSplit EndOfBuffer
 highlight! link WinSeparator EndOfBuffer
@@ -106,10 +106,10 @@ highlight SpellLocal guifg=#E6A64C guibg=NONE guisp=NONE blend=NONE gui=undercur
 highlight SpellRare guifg=#D1AF9F guibg=NONE guisp=NONE blend=NONE gui=undercurl
 highlight Statement guifg=#9C9FC9 guibg=NONE guisp=NONE blend=NONE gui=NONE
 highlight StatusLine guifg=NONE guibg=#393D6A guisp=NONE blend=NONE gui=bold
-highlight! link TabLineSel StatusLine
-highlight! link TabLine StatusLineNC
 highlight String guifg=#7FC79B guibg=NONE guisp=NONE blend=NONE gui=NONE
+highlight TabLine guifg=NONE guibg=NONE guisp=NONE blend=NONE gui=NONE
 highlight! link TabLineFill TabLine
+highlight TabLineSel guifg=NONE guibg=NONE guisp=NONE blend=NONE gui=NONE
 highlight Title guifg=#9C9FC9 guibg=NONE guisp=NONE blend=NONE gui=bold
 highlight! link FzfLuaTabTitle Title
 highlight! link FzfLuaTitle Title

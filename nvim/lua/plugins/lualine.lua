@@ -60,7 +60,7 @@ return {
               color = 'User2',
               file_status = true,
               newfile_status = false,
-              path = 4,
+              path = 1,
               -- 1: Relative path
               -- 2: Absolute path
               -- 3: Absolute path, with tilde as the home directory

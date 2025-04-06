@@ -125,6 +125,54 @@
         }
       }
     },
+    "argc@latest": {
+      "last_modified": "2025-03-11T17:52:14Z",
+      "resolved": "github:NixOS/nixpkgs/0d534853a55b5d02a4ababa1d71921ce8f0aee4c#argc",
+      "source": "devbox-search",
+      "version": "1.22.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/6ahx5d79nqaw0ix1fqdb2bnacf9361bq-argc-1.22.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/6ahx5d79nqaw0ix1fqdb2bnacf9361bq-argc-1.22.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/k8bp2pb8qzcaqhcff955f9h6581zlsa8-argc-1.22.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/k8bp2pb8qzcaqhcff955f9h6581zlsa8-argc-1.22.0"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/nqba9fw3ikmxhyrb7724ynm7qyqnhyfv-argc-1.22.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/nqba9fw3ikmxhyrb7724ynm7qyqnhyfv-argc-1.22.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/06qkrbsd874wp4ckmkpbpl4ppkqjyj59-argc-1.22.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/06qkrbsd874wp4ckmkpbpl4ppkqjyj59-argc-1.22.0"
+        }
+      }
+    },
     "azure-cli@latest": {
       "last_modified": "2025-02-13T04:03:32Z",
       "resolved": "github:NixOS/nixpkgs/2d55b4c1531187926c2a423f6940b3b1301399b5#azure-cli",

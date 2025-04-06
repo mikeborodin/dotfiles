@@ -103,6 +103,20 @@ return {
         },
       },
       default_component_configs = {
+        diagnostics = {
+          symbols = {
+            hint = "H",
+            info = "I",
+            warn = "!",
+            error = "X",
+          },
+          highlights = {
+            hint = "DiagnosticSignHint",
+            info = "DiagnosticSignInfo",
+            warn = "DiagnosticSignWarn",
+            error = "DiagnosticSignError",
+          },
+        },
         file_size = { enabled = false },
         indent = {
           indent_size = 2,
@@ -121,10 +135,10 @@ return {
         git_status = {
           symbols = {
             -- Change type
-            added = '', -- or "✚", but this is redundant info if you use git_status_colors on the name
+            added = '',    -- or "✚", but this is redundant info if you use git_status_colors on the name
             modified = '', -- or "", but this is redundant info if you use git_status_colors on the name
-            deleted = '', -- this can only be used in the git_status source
-            renamed = '', -- this can only be used in the git_status source
+            deleted = '',  -- this can only be used in the git_status source
+            renamed = '',  -- this can only be used in the git_status source
             -- Status type
             untracked = '',
             ignored = '',
@@ -211,7 +225,7 @@ return {
           local cwd = vim.loop.cwd()
           local relative_path = absolutePath:gsub(cwd .. '/', '')
           vim.fn.setreg('+', relative_path)
-          require 'notify'('copied ' .. relative_path)
+          require 'notify' ('copied ' .. relative_path)
         end,
         create_test_file = function(state)
           local node = state.tree:get_node()
@@ -220,7 +234,7 @@ return {
           local relative_path = absolutePath:gsub(cwd .. '/', '')
           vim.fn.setreg('+', relative_path)
 
-          require 'notify'('copied ' .. relative_path)
+          require 'notify' ('copied ' .. relative_path)
         end,
         open_terminal_in_folder = function(state)
           local node = state.tree:get_node()
@@ -248,7 +262,7 @@ return {
       local events = require 'neo-tree.events'
       opts.event_handlers = opts.event_handlers or {}
       vim.list_extend(opts.event_handlers, {
-        { event = events.FILE_MOVED, handler = on_move },
+        { event = events.FILE_MOVED,   handler = on_move },
         { event = events.FILE_RENAMED, handler = on_move },
       })
 

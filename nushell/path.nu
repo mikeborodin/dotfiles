@@ -31,5 +31,5 @@ path add ($env.HOME | path join "/personal_projects/testui/bin")
 path add ($env.HOME | path join "/personal_projects/buildrunnerui/bin")
 
 
-# $env.DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
+$env.AICHAT_CONFIG_DIR = "/Users/mike/personal_projects/dotfiles/aichat"
 

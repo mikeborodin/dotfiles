@@ -39,3 +39,4 @@ $env.NU_PLUGIN_DIRS = [
 source ($nu.default-config-dir | path join 'path.nu')
 source ($nu.default-config-dir | path join 'oh-my-posh.nu')
 source ($nu.default-config-dir | path join 'aliases.nu')
+source ($nu.default-config-dir | path join 'secrets.nu')

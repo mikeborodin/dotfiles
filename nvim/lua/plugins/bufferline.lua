@@ -1,19 +1,5 @@
 return {
   {
-    'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('nvim-web-devicons').setup {
-        override = {
-          dart = {
-            icon = '',
-            color = '#1E88E5',
-            name = 'Dart',
-          },
-        },
-      }
-    end,
-  },
-  {
     'akinsho/bufferline.nvim',
     version = '*',
     enabled = false,
