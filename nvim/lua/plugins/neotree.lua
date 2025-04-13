@@ -52,11 +52,11 @@ return {
         end,
         desc = 'Git explorer',
       },
-      {
-        'tf',
-        '<cmd>Neotree reveal<cr>',
-        desc = 'Explorer NeoTree (cwd)',
-      },
+      -- {
+      --   'tf',
+      --   '<cmd>Neotree reveal<cr>',
+      --   desc = 'Explorer NeoTree (cwd)',
+      -- },
     },
     opts = {
       event_handlers = {

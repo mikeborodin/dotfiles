@@ -17,7 +17,7 @@
     "nodejs_20@latest",
     "python39@latest",
     "bat@latest",
-    "yazi@latest",
+    "github:NixOS/nixpkgs/nixos-unstable#yazi",
     "tmux@latest",
     "fzf@latest",
     "erdtree@latest",

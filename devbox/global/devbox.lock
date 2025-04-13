@@ -901,6 +901,10 @@
         }
       }
     },
+    "github:NixOS/nixpkgs/nixos-unstable#yazi": {
+      "last_modified": "2025-04-12T13:19:24Z",
+      "resolved": "github:NixOS/nixpkgs/2631b0b7abcea6e640ce31cd78ea58910d31e650?lastModified=1744463964&narHash=sha256-LWqduOgLHCFxiTNYi3Uj5Lgz0SR%2BXhw3kr%2F3Xd0GPTM%3D#yazi"
+    },
     "github:NixOS/nixpkgs/nixpkgs-unstable": {
       "resolved": "github:NixOS/nixpkgs/dad564433178067be1fbdfcce23b546254b6d641?lastModified=1740019556&narHash=sha256-vn285HxnnlHLWnv59Og7muqECNMS33mWLM14soFIv2g%3D"
     },
@@ -2408,54 +2412,6 @@
             }
           ],
           "store_path": "/nix/store/g1h11ccyw7c4ngx4375fsbdylxdyscp6-xcodes-1.6.0"
-        }
-      }
-    },
-    "yazi@latest": {
-      "last_modified": "2025-02-14T06:00:41Z",
-      "resolved": "github:NixOS/nixpkgs/fada727ee7c0bd487e311dede0a2b0725a0f7765#yazi",
-      "source": "devbox-search",
-      "version": "25.2.11",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/jhh09g42ibx7f3nzf3xjw54jqbp03gn2-yazi-25.2.11",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/jhh09g42ibx7f3nzf3xjw54jqbp03gn2-yazi-25.2.11"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/ayxfv9hczaabjxs37pmmlkkzszcww02w-yazi-25.2.11",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/ayxfv9hczaabjxs37pmmlkkzszcww02w-yazi-25.2.11"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/lpml02dgalhs1589vf1sr00x3wk59qvv-yazi-25.2.11",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/lpml02dgalhs1589vf1sr00x3wk59qvv-yazi-25.2.11"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/6ggaani57bzhg673w4ff86zf6zag7snw-yazi-25.2.11",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/6ggaani57bzhg673w4ff86zf6zag7snw-yazi-25.2.11"
         }
       }
     },

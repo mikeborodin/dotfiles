@@ -1,8 +1,12 @@
 {
   "mcpServers": {
-    "fetch": {
-      "command": "uvx",
-      "args": ["mcp-server-fetch"]
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/mike/personal_projects/sandbox"
+      ]
     }
   }
 }
