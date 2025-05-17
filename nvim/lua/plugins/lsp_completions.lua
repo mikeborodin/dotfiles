@@ -7,11 +7,11 @@ return {
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-nvim-lsp-signature-help',
     },
-    enabled = true,
+    enabled = false,
   },
   {
     'onsails/lspkind.nvim',
-    enabled = true,
+    enabled = false,
     config = function()
       require('lspkind').init {
         mode = 'symbol_text',

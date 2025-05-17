@@ -246,7 +246,7 @@ local keys = {
   {
     '<space><space>',
     function()
-      vim.lsp.buf.format()
+      require('conform').format()
     end,
     'Format',
   },

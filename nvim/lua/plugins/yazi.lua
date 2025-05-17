@@ -11,13 +11,13 @@ return {
   keys = {
     -- 👇 in this section, choose your own keymappings!
     {
-      "<space>fm",
+      "tf",
       mode = { "n", "v" },
       "<cmd>Yazi<cr>",
       desc = "Reveal yazi",
     },
     {
-      "tf",
+      "TF",
       mode = { "n", "v" },
       "<cmd>Yazi toggle<cr>",
       desc = "Last yazi",

@@ -11,14 +11,14 @@ local function setupDiagnostics(opts)
   end
   if type(opts.diagnostics.virtual_text) == 'table' and opts.diagnostics.virtual_text.prefix == 'icons' then
     opts.diagnostics.virtual_text.prefix = vim.fn.has 'nvim-0.10.0' == 0 and '●'
-      or function(diagnostic)
-        local icons = require('lazyvim.config').icons.diagnostics
-        for d, icon in pairs(icons) do
-          if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-            return icon
+        or function(diagnostic)
+          local icons = require('lazyvim.config').icons.diagnostics
+          for d, icon in pairs(icons) do
+            if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+              return icon
+            end
           end
         end
-      end
   end
 
   vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -76,21 +76,19 @@ local function setupServers(opts)
   if have_mason then
     mlsp.setup { ensure_installed = ensure_installed, handlers = { setupServer } }
   end
-
-  -- if Util.lsp.get_config("denols") and Util.lsp.get_config("tsserver") then
-  --   local is_deno = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")
-  --   Util.lsp.disable("tsserver", is_deno)
-  --   Util.lsp.disable("denols", function(root_dir)
-  --     return not is_deno(root_dir)
-  --   end)
-  -- end
 end
 
 return {
   {
     'neovim/nvim-lspconfig',
+    enabled = false,
     dependencies = {
-      { 'folke/neoconf.nvim', cmd = 'Neoconf', config = false, dependencies = { 'nvim-lspconfig' } },
+      {
+        'folke/neoconf.nvim',
+        cmd = 'Neoconf',
+        config = false,
+        dependencies = { 'nvim-lspconfig' }
+      },
       'mason.nvim',
       'williamboman/mason-lspconfig.nvim',
     },
@@ -148,56 +146,55 @@ return {
         require('neoconf').setup(require('lazy.core.plugin').values(plugin, 'opts', false))
       end
 
-      -- setup autoformat
-      Util.format.register(Util.lsp.formatter())
-
-      -- deprectaed options
-      if opts.autoformat ~= nil then
-        vim.g.autoformat = opts.autoformat
-        Util.deprecate('nvim-lspconfig.opts.autoformat', 'vim.g.autoformat')
-      end
+      require('mason').setup(opts)
+      require("mason-lspconfig").setup()
 
       setupDiagnostics(opts)
       setupServers(opts)
     end,
   },
-
-  {
-
-    'williamboman/mason.nvim',
-    cmd = 'Mason',
-    build = ':MasonUpdate',
-    opts = {
-      ensure_installed = {
-        'stylua',
-        'shfmt',
-        'dart-debug-adapter',
-      },
-    },
-    config = function(_, opts)
-      require('mason').setup(opts)
-      local mr = require 'mason-registry'
-      mr:on('package:install:success', function()
-        vim.defer_fn(function()
-          require('lazy.core.handler.event').trigger {
-            event = 'FileType',
-            buf = vim.api.nvim_get_current_buf(),
-          }
-        end, 100)
-      end)
-      local function ensure_installed()
-        for _, tool in ipairs(opts.ensure_installed) do
-          local p = mr.get_package(tool)
-          if not p:is_installed() then
-            p:install()
-          end
-        end
-      end
-      if mr.refresh then
-        mr.refresh(ensure_installed)
-      else
-        ensure_installed()
-      end
-    end,
-  },
+  -- {
+  --   'williamboman/mason.nvim',
+  --   dependencies = {
+  --     "williamboman/mason-lspconfig.nvim",
+  --     "neovim/nvim-lspconfig",
+  --   },
+  --   cmd = 'Mason',
+  --   -- build = ':MasonUpdate',
+  --   opts = {
+  --     ensure_installed = {
+  --       'stylua',
+  --       'shfmt',
+  --       'dart-debug-adapter',
+  --       'yaml-language-server',
+  --       'json-lsp',
+  --     },
+  --   },
+  --   config = function(_, opts)
+  --     require('mason').setup(opts)
+  --     require("mason-lspconfig").setup()
+  --     -- local mr = require 'mason-registry'
+  --     -- mr:on('package:install:success', function()
+  --     --   vim.defer_fn(function()
+  --     --     require('lazy.core.handler.event').trigger {
+  --     --       event = 'FileType',
+  --     --       buf = vim.api.nvim_get_current_buf(),
+  --     --     }
+  --     --   end, 100)
+  --     -- end)
+  --     -- local function ensure_installed()
+  --     --   for _, tool in ipairs(opts.ensure_installed) do
+  --     --     local p = mr.get_package(tool)
+  --     --     if not p:is_installed() then
+  --     --       p:install()
+  --     --     end
+  --     --   end
+  --     -- end
+  --     -- if mr.refresh then
+  --     --   mr.refresh(ensure_installed)
+  --     -- else
+  --     --   ensure_installed()
+  --     -- end
+  --   end,
+  -- },
 }

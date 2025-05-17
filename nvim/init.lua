@@ -1,6 +1,7 @@
 require 'config.options'
 require 'config.colemak'
 require 'config.enable_leaders'
+
 vim.cmd [[:source ~/personal_projects/dotfiles/nvim/colors/rootbeet.vim]]
 
 vim.g.copilot_filetypes = {
@@ -37,6 +38,39 @@ if vim.g.vscode == nil then
   require 'config.keymaps_key'
   require 'config.repl_highlight'
   require 'config.snippets'
+  require 'config.tabline'
 else
   require 'config.init_plugins_vscode_only'
 end
+-- Defined in init.lua
+vim.lsp.config('*', {
+  capabilities = {
+    textDocument = {
+      semanticTokens = {
+        multilineTokenSupport = true,
+      }
+    }
+  },
+  root_markers = { '.git' },
+})
+
+vim.lsp.enable({
+  'luals',
+  'dartls',
+  'jsonls'
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

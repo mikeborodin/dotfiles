@@ -140,6 +140,7 @@ return {
   -- Fix bufferline offsets when edgy is loaded
   {
     'akinsho/bufferline.nvim',
+    enabled = false,
     optional = true,
     opts = function()
       local Offset = require 'bufferline.offset'

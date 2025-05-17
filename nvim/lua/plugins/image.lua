@@ -1,9 +1,8 @@
 return {
   {
     '3rd/image.nvim',
-    dependencies = {
-      'kiyoon/magick.nvim',
-    },
+    enabled = false,
+    build = false,
     config = function()
       require('image').setup {
         backend = 'kitty',
