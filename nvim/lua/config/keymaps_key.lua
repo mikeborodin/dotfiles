@@ -171,6 +171,8 @@ end
 local function autoFix()
   if vim.bo.filetype == 'dart' then
     executeLsp 'source.fixAll'
+  elseif vim.bo.filetype == 'json' then
+    vim.cmd "%!fixjson"
   else
     vim.lsp.buf.format()
   end
@@ -366,6 +368,11 @@ local keys = {
     '<space>rr',
     Cmd ':FlutterLspRestart',
     'FlutterLspRestart',
+  },
+  {
+    '<space>rl',
+    Cmd ':!~/scripts/brl $(dirname %)',
+    'Create barrel file',
   },
   -- searches
   {

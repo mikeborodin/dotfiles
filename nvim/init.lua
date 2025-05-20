@@ -43,21 +43,23 @@ else
   require 'config.init_plugins_vscode_only'
 end
 -- Defined in init.lua
-vim.lsp.config('*', {
-  capabilities = {
-    textDocument = {
-      semanticTokens = {
-        multilineTokenSupport = true,
-      }
-    }
-  },
-  root_markers = { '.git' },
-})
+-- vim.lsp.config('*', {
+--   capabilities = {
+--     textDocument = {
+--       semanticTokens = {
+--         multilineTokenSupport = true,
+--       }
+--     }
+--   },
+--   root_markers = { '.git' },
+-- })
 
 vim.lsp.enable({
   'luals',
   'dartls',
-  'jsonls'
+  'jsonls',
+  'nushell',
+  'gh_actions_ls',
 })
 
 

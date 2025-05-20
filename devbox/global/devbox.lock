@@ -1823,51 +1823,51 @@
         }
       }
     },
-    "nufmt@latest": {
-      "last_modified": "2025-04-11T04:58:38Z",
-      "resolved": "github:NixOS/nixpkgs/642c54c23609fefb5708b0e2be261446c59138f6#nufmt",
+    "nufmt@0-unstable-2025-04-28": {
+      "last_modified": "2025-05-12T14:38:58Z",
+      "resolved": "github:NixOS/nixpkgs/eaeed9530c76ce5f1d2d8232e08bec5e26f18ec1#nufmt",
       "source": "devbox-search",
-      "version": "0-unstable-2025-04-09",
+      "version": "0-unstable-2025-04-28",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/dbnr26rnz6bqdz0gga94kaw25jrz3ifi-nufmt-0-unstable-2025-04-09",
+              "path": "/nix/store/p8zky4b2g9kq0jic03bix4g3x6p1h279-nufmt-0-unstable-2025-04-28",
               "default": true
             }
           ],
-          "store_path": "/nix/store/dbnr26rnz6bqdz0gga94kaw25jrz3ifi-nufmt-0-unstable-2025-04-09"
+          "store_path": "/nix/store/p8zky4b2g9kq0jic03bix4g3x6p1h279-nufmt-0-unstable-2025-04-28"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/nwp0k46112fq0dnddj15w9r4qh9xhlvk-nufmt-0-unstable-2025-04-09",
+              "path": "/nix/store/5anqzxzw8xx44bhgk34gryp5jkdz8ayb-nufmt-0-unstable-2025-04-28",
               "default": true
             }
           ],
-          "store_path": "/nix/store/nwp0k46112fq0dnddj15w9r4qh9xhlvk-nufmt-0-unstable-2025-04-09"
+          "store_path": "/nix/store/5anqzxzw8xx44bhgk34gryp5jkdz8ayb-nufmt-0-unstable-2025-04-28"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/qyi2vlpla0qd93842lf27prljz1hin4s-nufmt-0-unstable-2025-04-09",
+              "path": "/nix/store/xr8zca05khyjg49qvmsf97kf1qsk9gsn-nufmt-0-unstable-2025-04-28",
               "default": true
             }
           ],
-          "store_path": "/nix/store/qyi2vlpla0qd93842lf27prljz1hin4s-nufmt-0-unstable-2025-04-09"
+          "store_path": "/nix/store/xr8zca05khyjg49qvmsf97kf1qsk9gsn-nufmt-0-unstable-2025-04-28"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/vah25px9v5c3y4dc4q4n2ws5vwsvc6l0-nufmt-0-unstable-2025-04-09",
+              "path": "/nix/store/dbps83hs116vidv651yia7d8khz86qvs-nufmt-0-unstable-2025-04-28",
               "default": true
             }
           ],
-          "store_path": "/nix/store/vah25px9v5c3y4dc4q4n2ws5vwsvc6l0-nufmt-0-unstable-2025-04-09"
+          "store_path": "/nix/store/dbps83hs116vidv651yia7d8khz86qvs-nufmt-0-unstable-2025-04-28"
         }
       }
     },

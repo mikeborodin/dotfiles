@@ -1,0 +1,29 @@
+{
+  "testfile": {
+    "prefix": "testfile",
+    "description": "Complete Test File",
+    "body": [
+      "import 'package:flutter_test/flutter_test.dart';",
+      "import 'package:mocktail/mocktail.dart';",
+      "",
+      "void main() {",
+      "setUp((){",
+      "});",
+      "",
+      "  group('${1}', () {",
+      "    test('${2}', () {",
+      "      ${0}",
+      "    });",
+      "  });",
+      "}"
+    ]
+  },
+  "aftdown": {
+    "prefix": "aftdown",
+    "description": "tearDown mocktail state",
+    "body": [
+      "tearDown(()=> resetMocktailState());"
+    ],
+    "scope": "dart"
+  }
+}

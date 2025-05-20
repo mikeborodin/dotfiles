@@ -1,0 +1,57 @@
+{
+  "clhw": {
+    "prefix": "afhw",
+    "body": [
+      "",
+      "class ${1} extends HookConsumerWidget {",
+      "\tconst ${1}({Key? key}):super(key:key);",
+      "",
+      "\t@override",
+      "\tWidget build(BuildContext context, WidgetRef ref) {",
+      "\treturn\t${0};",
+      "\t}",
+      "}"
+    ],
+    "description": "Hook Widget"
+  },
+  "clsw": {
+    "prefix": "clsw",
+    "body": [
+      "",
+      "class ${1} extends StatelessWidget {",
+      "\tconst ${1}({Key? key}):super(key:key);",
+      "",
+      "\t@override",
+      "\tWidget build(BuildContext context) {",
+      "\treturn\t${0};",
+      "\t}",
+      "}"
+    ],
+    "description": "StatelessWidget"
+  },
+  "clcw": {
+    "prefix": "clcw",
+    "body": [
+      "",
+      "class ${1} extends ConsumerWidget {",
+      "\tconst ${1}({Key? key}):super(key:key);",
+      "",
+      "\t@override",
+      "\tWidget build(BuildContext context) {",
+      "\treturn\t${0};",
+      "\t}",
+      "}"
+    ],
+    "description": "ConsumerWidget"
+  },
+  "bwidgetbook": {
+    "prefix": "bwidgetbook",
+    "body": [
+      "@UseCase(name: 'Default', type: ${1})",
+      "Widget build${1}(BuildContext context) {",
+      "\treturn ${1}(${0});",
+      "}"
+    ],
+    "description": "Build Widgetbook UseCase"
+  }
+}

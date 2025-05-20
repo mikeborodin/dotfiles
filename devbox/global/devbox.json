@@ -35,7 +35,6 @@
     "exa@latest",
     "eza@latest",
     "nushell@latest",
-    "nufmt@latest",
     "chafa@latest",
     "zellij@latest",
     "starship@latest",
@@ -54,7 +53,8 @@
     "aider-chat@latest",
     "imagemagick@latest",
     "pkg-config@latest",
-    "oauth2l@latest"
+    "oauth2l@latest",
+    "nufmt@0-unstable-2025-04-28"
   ],
   "env": {
     "JAVA_HOME": "$DEVBOX_PROJECT_ROOT/.devbox/nix/profile/default/Contents/Home"

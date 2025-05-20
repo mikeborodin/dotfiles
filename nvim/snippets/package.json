@@ -1,18 +1,26 @@
 {
-    "name": "friendly-snippets2",
-    "engines": {
-        "vscode": "^1.11.0"
-    },
-    "contributes": {
-        "snippets": [
-            {
-                "language": "dart",
-                "path": "./dart.json"
-            },
-            {
-                "language": "lua",
-                "path": "./lua.json"
-            }
-        ]
-    }
+  "name": "friendly-snippets2",
+  "engines": {
+    "vscode": "^1.11.0"
+  },
+  "contributes": {
+    "snippets": [
+      {
+        "language": "dart",
+        "path": "./widgets.json"
+      },
+      {
+        "language": "dart",
+        "path": "./classes.json"
+      },
+      {
+        "language": "dart",
+        "path": "./tests.json"
+      },
+      {
+        "language": "lua",
+        "path": "./lua.json"
+      }
+    ]
+  }
 }

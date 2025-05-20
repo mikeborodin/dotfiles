@@ -1,0 +1,43 @@
+{
+  "clai": {
+    "prefix": "clai",
+    "body": [
+      "",
+      "abstract class ${1} {",
+      "",
+      "\t${0}",
+      "}",
+      "",
+      "class ${2} implements ${1}{",
+      "",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Abstract+Impl"
+  },
+  "clus": {
+    "prefix": "clus",
+    "body": [
+      "",
+      "class ${1}UseCase {",
+      "",
+      "\t${2} execute() {",
+      "\t${0}",
+      "\t}",
+      "}"
+    ],
+    "description": "UseCase class"
+  },
+  "clcon": {
+    "prefix": "afco",
+    "body": [
+      "final ${1}Controller = StateNotifierProvider.autoDispose<${1}Controller, ${2}>((ref) => ${1}Controller(),);",
+      "",
+      "class ${1}Controller extends StateNotifier<${2}> {",
+      "",
+      "\t${0}",
+      "}"
+    ],
+    "description": "Controller class + Provider (auto dispose)"
+  }
+}
