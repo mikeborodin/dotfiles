@@ -54,6 +54,13 @@ end
 --   root_markers = { '.git' },
 -- })
 
+
+vim.filetype.add({
+  pattern = {
+    ['.*/%.github[%w/]+workflows[%w/]+.*%.ya?ml'] = 'yaml.github',
+  },
+})
+
 vim.lsp.enable({
   'luals',
   'dartls',
@@ -61,18 +68,3 @@ vim.lsp.enable({
   'nushell',
   'gh_actions_ls',
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

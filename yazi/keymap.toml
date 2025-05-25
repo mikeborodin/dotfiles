@@ -94,8 +94,9 @@ keymap = [
 	# Copy
 	{ on = [ "c", "c" ], run = "copy path",             desc = "Copy the absolute path" },
 	{ on = [ "c", "d" ], run = "copy dirname",          desc = "Copy the path of the parent directory" },
-	{ on = [ "c", "f" ], run = "copy filename",         desc = "Copy the name of the file" },
+	{ on = [ "c", "F" ], run = "copy filename",         desc = "Copy the name of the file" },
 	{ on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy the name of the file without the extension" },
+	{ on = [ "c", "f" ], run = "plugin nu -- open --raw $hover | clip", desc = "Copy the file contents" },
 
 	# Filter
 	{ on = [ "f" ], run = "filter --smart", desc = "Filter the files" },
@@ -316,5 +317,15 @@ desc = "Paste into the hovered directory or CWD"
 
 [[manager.prepend_keymap]]
 on   = "!"
-run  = 'shell "devbox run shell" --block'
-desc = "run Nu here"
+run  = 'shell "zsh" --block'
+desc = "run zsh here"
+
+[[manager.prepend_keymap]]
+on = [ "c", "s" ]
+run = ["plugin telegram-send"]
+desc = "Send with Telegram"
+
+[[manager.prepend_keymap]]
+on = [ "c", "r" ]
+run = "plugin path-from-root"
+desc = "Copies path from git root"

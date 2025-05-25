@@ -2156,6 +2156,106 @@
         }
       }
     },
+    "qrencode@latest": {
+      "last_modified": "2025-05-16T20:19:48Z",
+      "resolved": "github:NixOS/nixpkgs/12a55407652e04dcf2309436eb06fef0d3713ef3#qrencode",
+      "source": "devbox-search",
+      "version": "4.1.1",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "bin",
+              "path": "/nix/store/mqzdmcj4mgf0rjaf3gqd24p44149nx3w-qrencode-4.1.1-bin",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/pgag2nmr043hx99sfha6xqrmli1c835l-qrencode-4.1.1-man",
+              "default": true
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/clvaz28ic14hps0a1bicybqvkci4ilqy-qrencode-4.1.1-dev"
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/i08vhr73ap0xs11fa22n1vslh64sh3iz-qrencode-4.1.1"
+            }
+          ],
+          "store_path": "/nix/store/mqzdmcj4mgf0rjaf3gqd24p44149nx3w-qrencode-4.1.1-bin"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "bin",
+              "path": "/nix/store/p7y0xavdyqqv29swidnr2ag39rmr6gdr-qrencode-4.1.1-bin",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/1b2clqk1s9jpqw5xp0cdf11k9asn304k-qrencode-4.1.1-man",
+              "default": true
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/rq57dz8xhc479rgs88cncw5k0cpd1h0h-qrencode-4.1.1-dev"
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/8a8l593a1x3vbfdwbcz81wfysrih4m94-qrencode-4.1.1"
+            }
+          ],
+          "store_path": "/nix/store/p7y0xavdyqqv29swidnr2ag39rmr6gdr-qrencode-4.1.1-bin"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "bin",
+              "path": "/nix/store/7g5wn9gysh34z632q6d9395h3msarngw-qrencode-4.1.1-bin",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/jb81k3pxi07p1v5qg21bnz20jpqqwx3g-qrencode-4.1.1-man",
+              "default": true
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/8iqydpf6bw9d1k7m074ljnxvfk729j90-qrencode-4.1.1"
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/95cm9w2h512ilgrd7fagpas7slria857-qrencode-4.1.1-dev"
+            }
+          ],
+          "store_path": "/nix/store/7g5wn9gysh34z632q6d9395h3msarngw-qrencode-4.1.1-bin"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "bin",
+              "path": "/nix/store/9qx6w7fqxbdg1pmz5i5c0sc2k40rrmwv-qrencode-4.1.1-bin",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/h5shvkji1yb5rfc8alkrxl3achnlw3yy-qrencode-4.1.1-man",
+              "default": true
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/r9zby9lmzacfyxgnfml6ykqh1vzs8hq0-qrencode-4.1.1-dev"
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/1l2x502h3j9bkp2ln3axm9qp70ibg7a1-qrencode-4.1.1"
+            }
+          ],
+          "store_path": "/nix/store/9qx6w7fqxbdg1pmz5i5c0sc2k40rrmwv-qrencode-4.1.1-bin"
+        }
+      }
+    },
     "ruby_3_2@latest": {
       "last_modified": "2025-03-23T05:31:05Z",
       "plugin_version": "0.0.2",
@@ -2363,6 +2463,54 @@
             }
           ],
           "store_path": "/nix/store/d2g5lzr45z3ysszbmvqzz6yskzp2wd6q-starship-1.22.1"
+        }
+      }
+    },
+    "taplo@latest": {
+      "last_modified": "2025-05-16T20:19:48Z",
+      "resolved": "github:NixOS/nixpkgs/12a55407652e04dcf2309436eb06fef0d3713ef3#taplo",
+      "source": "devbox-search",
+      "version": "0.9.3",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/akknbkv2bxcxrmkh62v2r81jgba1b8wp-taplo-0.9.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/akknbkv2bxcxrmkh62v2r81jgba1b8wp-taplo-0.9.3"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/wms6dk5nz2x319s3gh4rnvmzzjxk5igj-taplo-0.9.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/wms6dk5nz2x319s3gh4rnvmzzjxk5igj-taplo-0.9.3"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/qf1v8wxl9z9qs980zcrdqq3hrb99s3h7-taplo-0.9.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/qf1v8wxl9z9qs980zcrdqq3hrb99s3h7-taplo-0.9.3"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/bmk3h49csg5xfv6h6xisyz60r0zgdc21-taplo-0.9.3",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/bmk3h49csg5xfv6h6xisyz60r0zgdc21-taplo-0.9.3"
         }
       }
     },

@@ -15,7 +15,7 @@
 --- ```
 return {
   cmd = { 'gh-actions-language-server', '--stdio' },
-  filetypes = { 'yaml' },
+  filetypes = { 'yaml.github' },
   root_markers = {
     '.github',
   },
