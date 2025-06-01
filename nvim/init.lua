@@ -67,4 +67,5 @@ vim.lsp.enable({
   'jsonls',
   'nushell',
   'gh_actions_ls',
+  'yaml_ls',
 })

@@ -28,5 +28,25 @@ use = "pareix/telegram-send"
 rev = "6f91162"
 hash = "f84d828d2b77607c6b066f8cd85598b7"
 
+[[plugin.deps]]
+use = "Ape/open-with-cmd"
+rev = "433cf30"
+hash = "86e0312b01bc5762813c6c1d0517f073"
+
+[[plugin.deps]]
+use = "stelcodes/bunny"
+rev = "ea27f37"
+hash = "7956295208401cdbdf2b673b73437edd"
+
+[[plugin.deps]]
+use = "h-hg/yamb"
+rev = "22af003"
+hash = "7cc42012a7c2099f80064d228feb8d44"
+
+[[plugin.deps]]
+use = "KKV9/compress"
+rev = "2ab7a42"
+hash = "8dfe746e7ccb1481f87ded5252e16678"
+
 [flavor]
 deps = []

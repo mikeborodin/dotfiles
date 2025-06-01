@@ -7,7 +7,6 @@
     "temurin-bin-17@latest",
     "nodePackages.firebase-tools@latest",
     "jq@latest",
-    "aichat@0.28.0",
     "gh-dash@latest",
     "delta@latest",
     "jless@latest",
@@ -56,7 +55,12 @@
     "oauth2l@latest",
     "nufmt@0-unstable-2025-04-28",
     "qrencode@latest",
-    "taplo@latest"
+    "taplo@latest",
+    "codex@latest",
+    "rmpc@latest",
+    "aichat@0.29.0",
+    "mods@latest",
+    "yazi@25.5.28"
   ],
   "env": {
     "JAVA_HOME": "$DEVBOX_PROJECT_ROOT/.devbox/nix/profile/default/Contents/Home"

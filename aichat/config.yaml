@@ -1,15 +1,13 @@
-model: gemini:gemini-1.5-flash-latest            # Specify the LLM to use
-
+model: gemini:gemini-1.5-flash-latest # Specify the LLM to use
 clients:
   - type: openai-compatible
     name: ollama
     api_base: http://localhost:11434/v1
-
   - type: gemini
     api_base: https://generativelanguage.googleapis.com/v1beta
     patch:
       chat_completions:
-        '.*':
+        ".*":
           body:
             safetySettings:
               - category: HARM_CATEGORY_HARASSMENT

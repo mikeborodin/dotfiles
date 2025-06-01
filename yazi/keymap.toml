@@ -144,9 +144,8 @@ keymap = [
 	{ on = [ "w" ], run = "tasks_show", desc = "Show the tasks manager" },
 
 	# Goto
-	{ on = [ "g", "h" ],       run = "cd ~",             desc = "Go to the home directory" },
-	{ on = [ "g", "c" ],       run = "cd ~/.config",     desc = "Go to the config directory" },
-	{ on = [ "g", "d" ],       run = "cd ~/Downloads",   desc = "Go to the downloads directory" },
+	{ on = [ "g", "h" ],       run = "cd .",             desc = "Go to the home directory" },
+	{ on = [ "g", "l" ],       run = "cd ./lib",   desc = "Go to lib" },
 	{ on = [ "g", "t" ],       run = "cd /tmp",          desc = "Go to the temporary directory" },
 	{ on = [ "g", "<Space>" ], run = "cd --interactive", desc = "Go to a directory interactively" },
 
@@ -310,22 +309,69 @@ keymap = [
 	{ on = [ "/" ], run = "filter", desc = "Apply a filter for the help items" },
 ]
 
+
 [[manager.prepend_keymap]]
 on   = "p"
 run  = "plugin smart-paste"
 desc = "Paste into the hovered directory or CWD"
 
 [[manager.prepend_keymap]]
-on   = "!"
+on   = ["!","z"]
 run  = 'shell "zsh" --block'
 desc = "run zsh here"
 
 [[manager.prepend_keymap]]
-on = [ "c", "s" ]
-run = ["plugin telegram-send"]
-desc = "Send with Telegram"
+on   = ["!","a"]
+run  = 'shell "nu ~/personal_projects/dotfiles/scripts/ai/summarize.nu README.md"'
+desc = "run zsh here"
 
 [[manager.prepend_keymap]]
 on = [ "c", "r" ]
 run = "plugin path-from-root"
 desc = "Copies path from git root"
+
+# Optionally, add another keymap to immediately fuzzy search bookmarks
+[[manager.prepend_keymap]]
+on = [ "b", "a" ]
+run = "plugin yamb save"
+desc = "Add bookmark"
+
+[[manager.prepend_keymap]]
+on = [ "b", "g" ]
+run = "plugin yamb jump_by_key"
+desc = "Jump bookmark by key"
+
+[[manager.prepend_keymap]]
+on = [ "b", "G" ]
+run = "plugin yamb jump_by_fzf"
+desc = "Jump bookmark by fzf"
+
+[[manager.prepend_keymap]]
+on = [ "b", "d" ]
+run = "plugin yamb delete_by_key"
+desc = "Delete bookmark by key"
+
+[[manager.prepend_keymap]]
+on = [ "b", "D" ]
+run = "plugin yamb delete_by_fzf"
+desc = "Delete bookmark by fzf"
+
+[[manager.prepend_keymap]]
+on = [ "b", "A" ]
+run = "plugin yamb delete_all"
+desc = "Delete all bookmarks"
+
+[[manager.prepend_keymap]]
+on = [ "b", "r" ]
+run = "plugin yamb rename_by_key"
+desc = "Rename bookmark by key"
+
+[[manager.prepend_keymap]]
+on = [ "b", "R" ]
+run = "plugin yamb rename_by_fzf"
+desc = "Rename bookmark by fzf"
+
+[[manager.prepend_keymap]]
+on   = [ "c", "h" ]
+run  = "plugin mike-actions summarize"
+desc = "Run ai summary"

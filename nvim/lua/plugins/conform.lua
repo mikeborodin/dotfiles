@@ -11,10 +11,10 @@ return {
       -- python = { "isort", "black" },
       -- You can customize some of the format options for the filetype (:help conform.format)
       -- Conform will run the first available formatter
-      yaml = { "prettierd", "prettier", stop_after_first = true },
+      yaml = { 'yamlfmt', lsp_format = 'fallback' },
     },
     default_format_opts = {
-      lsp_format = "fallback",
+      lsp_format = 'fallback',
     },
     --   format_on_save = {
     --     -- These options will be passed to conform.format()
