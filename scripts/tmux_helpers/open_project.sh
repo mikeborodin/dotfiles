@@ -23,8 +23,8 @@ else
 
   sleep 1
 
-  tmux send-keys -t "$session_name:code" "v" C-m
-  tmux send-keys -t "$session_name:term" "flutter devices" C-m
+  tmux send-keys -t "$session_name:code" "drd" C-m
+  tmux send-keys -t "$session_name:term" "drd" C-m
 
   tmux select-window -t "$session_name:code"
   tmux switch-client -t "$session_name"

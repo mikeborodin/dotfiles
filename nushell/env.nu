@@ -36,6 +36,8 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
+$env.ANDROID_AVD_HOME = $"($env.HOME)/.config/.android/avd"
+
 source ($nu.default-config-dir | path join 'path.nu')
 source ($nu.default-config-dir | path join 'oh-my-posh.nu')
 source ($nu.default-config-dir | path join 'aliases.nu')

@@ -62,6 +62,7 @@ return {
 ]] .. command
 
     local hover = get_hover()
+
     local output, err = Command("nu")
       :args({
         "--login",

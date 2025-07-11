@@ -5,7 +5,7 @@ return {
   dependencies = {
     { 'L3MON4D3/LuaSnip', version = 'v2.*' },
     {
-      'rafamadriz/friendly-snippets'
+      'rafamadriz/friendly-snippets',
     },
   },
 
@@ -48,7 +48,7 @@ return {
     --   }
     -- end
 
-    require('blink.cmp').setup({
+    require('blink.cmp').setup {
       -- 'default' for mappings similar to built-in completion
       -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
       -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
@@ -59,21 +59,18 @@ return {
       --   menu = { auto_show = function(ctx) return ctx.mode ~= 'cmdline' end }
       -- },
       enabled = function()
-        if vim.bo.filetype == 'dap-repl' then
-          return false
-        end
-        if vim.bo.filetype == 'markdown' then
-          return false
-        end
-
-        return true
+        return not vim.list_contains({
+          'DressingInput',
+          'dap-repl',
+          'markdown',
+        }, vim.bo.filetype) and vim.bo.buftype ~= 'prompt' and vim.b.completion ~= false
       end,
       completion = {
         menu = {
           draw = {
             treesitter = { 'lsp' },
             columns = {
-              { 'label',     'label_description', gap = 1 },
+              { 'label', 'label_description', gap = 1 },
               { 'kind_icon', 'kind' },
             },
           },
@@ -92,7 +89,7 @@ return {
         use_nvim_cmp_as_default = false,
         -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- Adjusts spacing to ensure icons are aligned
-        nerd_font_variant = 'mono',
+        nerd_font_variant = 'normal',
       },
 
       snippets = {
@@ -110,7 +107,7 @@ return {
         end,
       },
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'path', 'snippets' },
         -- providers = {
         --   snippets = {
         --     opts = {
@@ -123,9 +120,9 @@ return {
       },
 
       -- experimental signature help support
-      signature = { enabled = true },
-    })
-  end
+      signature = { enabled = false },
+    }
+  end,
   -- allows extending the providers array elsewhere in your config
   -- without having to redefine it
   -- opts_extend = { "sources.default" }

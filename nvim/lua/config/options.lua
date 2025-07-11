@@ -60,3 +60,4 @@ vim.opt.showmode = false
 -- To prevent this, set `splitkeep` to either `screen` or `topline`.
 vim.opt.splitkeep = 'screen'
 vim.opt.cmdheight = 0
+vim.opt.modeline = false

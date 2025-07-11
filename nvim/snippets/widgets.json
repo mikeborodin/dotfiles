@@ -1,6 +1,6 @@
 {
   "clhw": {
-    "prefix": "afhw",
+    "prefix": "clhw",
     "body": [
       "",
       "class ${1} extends HookConsumerWidget {",

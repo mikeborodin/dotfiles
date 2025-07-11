@@ -43,29 +43,22 @@ else
   require 'config.init_plugins_vscode_only'
 end
 -- Defined in init.lua
--- vim.lsp.config('*', {
---   capabilities = {
---     textDocument = {
---       semanticTokens = {
---         multilineTokenSupport = true,
---       }
---     }
---   },
---   root_markers = { '.git' },
--- })
+vim.lsp.config('*', {
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
+  root_markers = { '.git' },
+})
 
-
-vim.filetype.add({
+vim.filetype.add {
   pattern = {
     ['.*/%.github[%w/]+workflows[%w/]+.*%.ya?ml'] = 'yaml.github',
   },
-})
+}
 
-vim.lsp.enable({
+vim.lsp.enable {
   'luals',
   'dartls',
   'jsonls',
   'nushell',
   'gh_actions_ls',
   'yaml_ls',
-})
+}

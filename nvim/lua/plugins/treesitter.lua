@@ -11,7 +11,12 @@ return {
     dependencies = {
       {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        { 'nushell/tree-sitter-nu', build = ':TSUpdate nu' },
+        -- { 'nushell/tree-sitter-nu', build = ':TSUpdate nu' },
+        -- {
+        --   'LhKipp/nvim-nu',
+        --   build = ':TSInstall nu',
+        --   opts = {},
+        -- },
       },
     },
     cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
@@ -20,7 +25,7 @@ return {
       { '<bs>', desc = 'Decrement selection', mode = 'x' },
     },
     opts = {
-      ensure_installed = { 'dart', 'bruno' },
+      ensure_installed = { 'dart', 'bruno', 'nu' },
       auto_install = vim.fn.executable 'tree-sitter' == 1, -- only enable auto install if `tree-sitter` cli is installed
       highlight = { enable = true },
       incremental_selection = { enable = true },

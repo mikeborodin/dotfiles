@@ -5,24 +5,24 @@ return {
       rememberBuffers = false,
       mappings = {
         -- screen controller
-        {
-          pattern = '/lib/(.*)/(.*)_screen.dart$',
-          target = {
-            {
-              target = '/lib/%1/%2_controller.dart',
-              context = 'Controller',
-            },
-          },
-        },
-        {
-          pattern = '/lib/(.*)/(.*)_controller.dart$',
-          target = {
-            {
-              target = '/lib/%1/%2_screen.dart',
-              context = 'Screen',
-            },
-          },
-        },
+        -- {
+        --   pattern = '/lib/(.*)/(.*)_screen.dart$',
+        --   target = {
+        --     {
+        --       target = '/lib/%1/%2_controller.dart',
+        --       context = 'Controller',
+        --     },
+        --   },
+        -- },
+        -- {
+        --   pattern = '/lib/(.*)/(.*)_controller.dart$',
+        --   target = {
+        --     {
+        --       target = '/lib/%1/%2_screen.dart',
+        --       context = 'Screen',
+        --     },
+        --   },
+        -- },
         -- test implementation
         {
           pattern = '/lib/(.*)/(.*).dart$',

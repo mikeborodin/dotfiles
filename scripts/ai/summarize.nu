@@ -6,16 +6,22 @@ def main [file:string] {
      
     print $in
     if ( ($file | path type) == 'dir' ) {
-      tree -L 5 $file | ai 
+        let summary = tree -L 5 $file | aichat -S -s -m ollama:qwen3:1.7b ' TASK: summarize this information with 5 bullet points, output YAML'
+        
+        let name = $"($file).sum.md"
+
+        $summary | save -f $name
+
+        print $"saved ($name)"
+
     } else {
-        print "running"
-        open --raw $file
         let summary = open --raw $file | aichat -S -s -m ollama:qwen3:1.7b ' TASK: summarize this information with 5 bullet points, output YAML'
         
-        let name = $"($file).sum"
+        let name = $"($file).sum.md"
 
-        print "saving"
         $summary | save -f $name
+
+        print $"saved ($name)"
     }
   }
 }
