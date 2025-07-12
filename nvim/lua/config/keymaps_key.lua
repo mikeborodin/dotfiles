@@ -181,7 +181,7 @@ end
 local keys = {
   --navigation
   { '<space>0', Key '%', '% Parenthese' },
-  { '<C-cr>',   Key 'n', '?' },
+  { '<D-cr>',   Key 'n', '?' },
   {
     '<space>ne',
     function()
@@ -219,7 +219,7 @@ local keys = {
     Cmd ':FzfLua blines',
     'Find in buff',
   },
-  { '<C-f>', require('fzf-lua').live_grep, 'Live grep' },
+  { '<D-f>', require('fzf-lua').live_grep, 'Live grep' },
   { 'af',    require('fzf-lua').live_grep, 'Live grep' },
   {
     '<space>fr',
@@ -229,13 +229,13 @@ local keys = {
   { '<space>z', Cmd ':Zen',   'Zen' },
   -- { "<C-h>",          function () vim.cmd(':ToggleTerm') end,                                                                      "ToggleTerm" },
   {
-    '<C-e>',
+    '<D-e>',
     function()
       require('fzf-lua').files()
     end,
     'Find files',
   },
-  { '<C-o>',    Cmd ':Other', 'Open other' },
+  { '<D-o>',    Cmd ':Other', 'Open other' },
   -- Code actions
   {
     '<space>e',
@@ -315,7 +315,7 @@ local keys = {
     'AerialToggle',
   },
   {
-    '<C-y>',
+    '<D-y>',
     function()
       require('bufdelete').bufdelete()
     end,
@@ -471,7 +471,7 @@ local keys = {
     end,
     'Yazi',
   },
-  { '<C-l>',     Cmd ':CodeCompanionChat Toggle', 'CodeCompanionChat Toggle' },
+  { '<D-l>',     Cmd ':CodeCompanionChat Toggle', 'CodeCompanionChat Toggle' },
   { '<space>sa', Cmd ':TermExec cmd=analyze',     'Analyze' },
   { '<space>sf', Cmd ':TermExec cmd=dart_format', 'DartFormat' },
   { '<space>su', Cmd ':TermExec cmd=submit',      'Submit' },
@@ -505,7 +505,7 @@ local keys = {
     'Push',
   },
   {
-    '<C-w>',
+    '<D-w>',
     function()
       print 'Cw'
     end,
@@ -533,7 +533,7 @@ local keys = {
   -- 	"?",
   -- },
   {
-    '<C-i>',
+    '<D-i>',
     function()
       require('arrow.ui').openMenu()
     end,

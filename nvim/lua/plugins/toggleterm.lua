@@ -2,7 +2,7 @@ return {
   'akinsho/toggleterm.nvim',
   config = function()
     require('toggleterm').setup {
-      open_mapping = '<C-h>',
+      open_mapping = '<D-h>',
       direction = 'float',
       shell = function()
         if vim.env.DEVBOX_PROJECT_ROOT == vim.loop.cwd() then
