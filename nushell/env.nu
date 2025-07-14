@@ -1,14 +1,22 @@
 # Nushell Environment Config File
-$env.PROMPT_INDICATOR = {|| "> " }
+$env.PROMPT_INDICATOR = {|| " " }
 $env.PROMPT_INDICATOR_VI_INSERT = {|| " " }
-$env.PROMPT_INDICATOR_VI_NORMAL = {|| "󰘳 " }
+$env.PROMPT_INDICATOR_VI_NORMAL = {|| "󱊷 " }
 $env.PROMPT_MULTILINE_INDICATOR = {|| "| " }
-$env.TRANSIENT_PROMPT_COMMAND = {|| ". " }
+$env.TRANSIENT_PROMPT_COMMAND = {|| "* " }
 $env.TRANSIENT_PROMPT_INDICATOR = {|| "" }
 $env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = {|| "" }
 $env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = {|| "" }
 $env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = {|| "" }
 $env.TRANSIENT_PROMPT_COMMAND_RIGHT = {|| "" }
+
+$env.CMD_DURATION_MS = '0823'
+
+$env.ANDROID_AVD_HOME = $"($env.HOME)/.config/.android/avd"
+$env.ANDROID_HOME =  "$HOME/Library/Android/sdk"
+$env.ANDROID_SDK_ROOT = $env.ANDROID_HOME
+$env.QEMU_AUDIO_DRV = 'none'
+
 
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)
@@ -36,9 +44,17 @@ $env.NU_PLUGIN_DIRS = [
     ($nu.default-config-dir | path join 'plugins') # add <nushell-config-dir>/plugins
 ]
 
-$env.ANDROID_AVD_HOME = $"($env.HOME)/.config/.android/avd"
 
 source ($nu.default-config-dir | path join 'path.nu')
 source ($nu.default-config-dir | path join 'oh-my-posh.nu')
 source ($nu.default-config-dir | path join 'aliases.nu')
 source ($nu.default-config-dir | path join 'secrets.nu')
+
+load-env (
+   (devbox global shellenv)
+   | str trim
+   | lines
+   | parse 'export {name}="{value}";'
+   | transpose --header-row --as-record
+ )
+ 
