@@ -172,7 +172,7 @@ local function autoFix()
   if vim.bo.filetype == 'dart' then
     executeLsp 'source.fixAll'
   elseif vim.bo.filetype == 'json' then
-    vim.cmd "%!fixjson"
+    vim.cmd '%!fixjson'
   else
     vim.lsp.buf.format()
   end
@@ -181,7 +181,7 @@ end
 local keys = {
   --navigation
   { '<space>0', Key '%', '% Parenthese' },
-  { '<D-cr>',   Key 'n', '?' },
+  { '<D-cr>', Key 'n', '?' },
   {
     '<space>ne',
     function()
@@ -190,7 +190,7 @@ local keys = {
     'Go to definition',
   },
   { '<space>ni', require('fzf-lua').lsp_implementations, 'Impl' },
-  { '<space>no', require('fzf-lua').lsp_references,      'Reference' },
+  { '<space>no', require('fzf-lua').lsp_references, 'Reference' },
   {
     '<space>i',
     function()
@@ -219,23 +219,23 @@ local keys = {
     Cmd ':FzfLua blines',
     'Find in buff',
   },
-  { '<D-f>', require('fzf-lua').live_grep, 'Live grep' },
-  { 'af',    require('fzf-lua').live_grep, 'Live grep' },
+  { '<Char-0xA4>', require('fzf-lua').live_grep, 'Live grep' },
+  { 'af', require('fzf-lua').live_grep, 'Live grep' },
   {
     '<space>fr',
     Key ':lua find_replace_prompt()',
     'File find/rep',
   },
-  { '<space>z', Cmd ':Zen',   'Zen' },
+  { '<space>z', Cmd ':Zen', 'Zen' },
   -- { "<C-h>",          function () vim.cmd(':ToggleTerm') end,                                                                      "ToggleTerm" },
   {
-    '<D-e>',
+    '<Char-0xA0>',
     function()
       require('fzf-lua').files()
     end,
     'Find files',
   },
-  { '<D-o>',    Cmd ':Other', 'Open other' },
+  { '<Char-0xA2>', Cmd ':Other', 'Open other' },
   -- Code actions
   {
     '<space>e',
@@ -265,8 +265,8 @@ local keys = {
     end,
     'Format',
   },
-  { 'tr',        Cmd ':Other',                 'Open other' },
-  { '<space>O',  Cmd ':Other test',            'Find files' },
+  { 'tr', Cmd ':Other', 'Open other' },
+  { '<space>O', Cmd ':Other test', 'Find files' },
   {
     '<space>e',
     function()
@@ -294,7 +294,7 @@ local keys = {
     'Floating diagnos',
   },
   { '<space>nn', Cmd ':AvanteToggle', 'AI Actions' },
-  { '<space>ae', ':Gen<cr>',          'AI Actions' },
+  { '<space>ae', ':Gen<cr>', 'AI Actions' },
   -- { '<space>ai', function()
   -- 	if is_default_buffer() then
   -- 		local menu = require("utils.ollama_picker")
@@ -315,7 +315,7 @@ local keys = {
     'AerialToggle',
   },
   {
-    '<D-y>',
+    '<Char-0xA1>',
     function()
       require('bufdelete').bufdelete()
     end,
@@ -328,17 +328,17 @@ local keys = {
     'SelectRunConfig',
   },
   -- { "<space>n",       FlutterCmdOrDefault(":FlutterRun", ":DapContinue"),                              "Run" },
-  { '<space>n', Cmd ':FlutterRun',  'Run' },
+  { '<space>n', Cmd ':FlutterRun', 'Run' },
   {
     '<space>u',
     Cmd ':FlutterRestart',
     'FlutterRestart',
   },
   { '<space>y', Cmd ':FlutterQuit', 'FlutterQuit' },
-  { 'ao',       nil,                'vacant' },
+  { 'ao', nil, 'vacant' },
   -- { "sd",             PopulateLoclistWithDiagnostics,                                                  "Populate diagns" },
 
-  { '<space>N', Cmd ':FlutterRun',  'FlutterRun' },
+  { '<space>N', Cmd ':FlutterRun', 'FlutterRun' },
   {
     '<space>NY',
     Cmd ':FlutterQuit',
@@ -405,10 +405,10 @@ local keys = {
     Cmd ':FzfLua resume',
     desc = 'Resume',
   },
-  { '<space>ab', require('fzf-lua').buffers,               'Buffers' },
-  { 'ah',        require('fzf-lua').diagnostics_workspace, 'Diagnosis' },
+  { '<space>ab', require('fzf-lua').buffers, 'Buffers' },
+  { 'ah', require('fzf-lua').diagnostics_workspace, 'Diagnosis' },
   --debugging starts with S
-  { 'su',        Cmd ':DapContinue',                       'DapContinue' },
+  { 'su', Cmd ':DapContinue', 'DapContinue' },
   {
     'st',
     Cmd ':DapToggleBreakpoint',
@@ -451,7 +451,7 @@ local keys = {
   },
   --testing
   { '<space>tf', Cmd ':TestNearest', 'Test Nearest' },
-  { '<space>tw', Cmd ':TestFile',    'Test File' },
+  { '<space>tw', Cmd ':TestFile', 'Test File' },
   {
     '<space>l',
     function()
@@ -461,7 +461,7 @@ local keys = {
   },
   -- { "<C-l>",          toggle_flutter_dev_log,                                                          "Toggle Lsp Log", },
 
-  { '<space>tv', Cmd ':CoverageToggle',           'Coverage' },
+  { '<space>tv', Cmd ':CoverageToggle', 'Coverage' },
   {
     '<space>dm',
     function()
@@ -471,10 +471,10 @@ local keys = {
     end,
     'Yazi',
   },
-  { '<D-l>',     Cmd ':CodeCompanionChat Toggle', 'CodeCompanionChat Toggle' },
-  { '<space>sa', Cmd ':TermExec cmd=analyze',     'Analyze' },
+  { '<D-l>', Cmd ':CodeCompanionChat Toggle', 'CodeCompanionChat Toggle' },
+  { '<space>sa', Cmd ':TermExec cmd=analyze', 'Analyze' },
   { '<space>sf', Cmd ':TermExec cmd=dart_format', 'DartFormat' },
-  { '<space>su', Cmd ':TermExec cmd=submit',      'Submit' },
+  { '<space>su', Cmd ':TermExec cmd=submit', 'Submit' },
   {
     '<space>sp',
     function()
@@ -504,13 +504,13 @@ local keys = {
     end,
     'Push',
   },
-  {
-    '<D-w>',
-    function()
-      print 'Cw'
-    end,
-    '?',
-  },
+  -- {
+  --   '<D-w>',
+  --   function()
+  --     print 'Cw'
+  --   end,
+  --   '?',
+  -- },
   {
     'tk',
     function()
@@ -521,7 +521,7 @@ local keys = {
   {
     'tuy',
     function()
-      require 'neoclip.fzf' ()
+      require 'neoclip.fzf'()
     end,
     'Clip History',
   },
@@ -533,7 +533,7 @@ local keys = {
   -- 	"?",
   -- },
   {
-    '<D-i>',
+    '<Char-0xA3>',
     function()
       require('arrow.ui').openMenu()
     end,

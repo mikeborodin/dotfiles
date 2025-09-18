@@ -1,20 +1,197 @@
-model: gemini:gemini-1.5-flash-latest # Specify the LLM to use
+model: openrouter:deepseek/deepseek-chat-v3-0324:free
+
 clients:
+
   - type: openai-compatible
     name: ollama
     api_base: http://localhost:11434/v1
-  - type: gemini
-    api_base: https://generativelanguage.googleapis.com/v1beta
-    patch:
-      chat_completions:
-        ".*":
+
+  - type: openai-compatible
+    name: openrouter
+    api_base: https://openrouter.ai/api/v1
+    models:
+      - name: deepseek/deepseek-chat-v3-0324:free
+        max_input_tokens: 163840
+        max_output_tokens: 32768
+        input_price: 0
+        output_price: 0
+        supports_vision: false
+        supports_function_calling: true
+
+  - type: openai-compatible
+    name: af
+    api_base: https://af-owui-litellm-dev.azurewebsites.net/v1
+    models:
+      - name: gpt4.1
+        max_input_tokens: 1047576
+        max_output_tokens: 32768
+        input_price: 2
+        output_price: 8
+        supports_vision: true
+        supports_function_calling: true
+      - name: gpt-4.1-mini
+        max_input_tokens: 1047576
+        max_output_tokens: 32768
+        input_price: 0.4
+        output_price: 1.6
+        supports_vision: true
+        supports_function_calling: true
+      - name: gpt-4.1-nano
+        max_input_tokens: 1047576
+        max_output_tokens: 32768
+        input_price: 0.1
+        output_price: 0.4
+        supports_vision: true
+        supports_function_calling: true
+      - name: gpt-4o
+        max_input_tokens: 128000
+        max_output_tokens: 16384
+        input_price: 2.5
+        output_price: 10
+        supports_vision: true
+        supports_function_calling: true
+      - name: gpt-4o-search-preview
+        max_input_tokens: 128000
+        max_output_tokens: 16384
+        input_price: 2.5
+        output_price: 10
+        supports_vision: true
+      - name: chatgpt-4o-latest
+        max_input_tokens: 128000
+        max_output_tokens: 16384
+        input_price: 5
+        output_price: 15
+        supports_vision: true
+        supports_function_calling: true
+      - name: gpt-4o-mini
+        max_input_tokens: 128000
+        max_output_tokens: 16384
+        input_price: 0.15
+        output_price: 0.6
+        supports_vision: true
+        supports_function_calling: true
+      - name: gpt-4o-mini-search-preview
+        max_input_tokens: 128000
+        max_output_tokens: 16384
+        input_price: 0.15
+        output_price: 0.6
+        supports_vision: true
+      - name: gpt-4-turbo
+        max_input_tokens: 128000
+        max_output_tokens: 4096
+        input_price: 10
+        output_price: 30
+        supports_vision: true
+        supports_function_calling: true
+      - name: gpt-4.5-preview
+        max_input_tokens: 128000
+        max_output_tokens: 16384
+        input_price: 75
+        output_price: 150
+        supports_vision: true
+        supports_function_calling: true
+      - name: o4-mini
+        max_input_tokens: 200000
+        input_price: 1.1
+        output_price: 4.4
+        supports_vision: true
+        supports_function_calling: true
+        system_prompt_prefix: Formatting re-enabled
+        patch:
           body:
-            safetySettings:
-              - category: HARM_CATEGORY_HARASSMENT
-                threshold: BLOCK_NONE
-              - category: HARM_CATEGORY_HATE_SPEECH
-                threshold: BLOCK_NONE
-              - category: HARM_CATEGORY_SEXUALLY_EXPLICIT
-                threshold: BLOCK_NONE
-              - category: HARM_CATEGORY_DANGEROUS_CONTENT
-                threshold: BLOCK_NONE
+            max_tokens: null
+            temperature: null
+            top_p: null
+      - name: o4-mini-high
+        real_name: o4-mini
+        max_input_tokens: 200000
+        input_price: 1.1
+        output_price: 4.4
+        supports_vision: true
+        supports_function_calling: true
+        system_prompt_prefix: Formatting re-enabled
+        patch:
+          body:
+            reasoning_effort: high
+            max_tokens: null
+            temperature: null
+            top_p: null
+      - name: o3
+        max_input_tokens: 200000
+        input_price: 10
+        output_price: 40
+        supports_vision: true
+        supports_function_calling: true
+        system_prompt_prefix: Formatting re-enabled
+        patch:
+          body:
+            max_tokens: null
+            temperature: null
+            top_p: null
+      - name: o3-mini
+        max_input_tokens: 200000
+        input_price: 1.1
+        output_price: 4.4
+        supports_vision: true
+        supports_function_calling: true
+        system_prompt_prefix: Formatting re-enabled
+        patch:
+          body:
+            max_tokens: null
+            temperature: null
+            top_p: null
+      - name: o3-mini-high
+        real_name: o3-mini
+        max_input_tokens: 200000
+        input_price: 1.1
+        output_price: 4.4
+        supports_vision: true
+        supports_function_calling: true
+        system_prompt_prefix: Formatting re-enabled
+        patch:
+          body:
+            reasoning_effort: high
+            max_tokens: null
+            temperature: null
+            top_p: null
+      - name: o1
+        max_input_tokens: 200000
+        input_price: 15
+        output_price: 60
+        supports_vision: true
+        supports_function_calling: true
+        system_prompt_prefix: Formatting re-enabled
+        patch:
+          body:
+            max_tokens: null
+            temperature: null
+            top_p: null
+      - name: o1-mini
+        max_input_tokens: 128000
+        max_output_tokens: 65536
+        input_price: 3
+        output_price: 12
+        no_system_message: true
+        patch:
+          body:
+            max_tokens: null
+            temperature: null
+            top_p: null
+      - name: gpt-3.5-turbo
+        max_input_tokens: 16385
+        max_output_tokens: 4096
+        input_price: 0.5
+        output_price: 1.5
+        supports_function_calling: true
+      - name: text-embedding-3-large
+        type: embedding
+        input_price: 0.13
+        max_tokens_per_chunk: 8191
+        default_chunk_size: 2000
+        max_batch_size: 100
+      - name: text-embedding-3-small
+        type: embedding
+        input_price: 0.02
+        max_tokens_per_chunk: 8191
+        default_chunk_size: 2000
+        max_batch_size: 100

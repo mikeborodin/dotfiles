@@ -1,0 +1,53 @@
+{
+  "ptf": {
+    "prefix": "ptf",
+    "body": [
+      "part '${TM_FILENAME_BASE}.freezed.dart';"
+    ],
+    "description": "part .freezed"
+  },
+  "ptg": {
+    "prefix": "ptg",
+    "body": [
+      "part '${TM_FILENAME_BASE}.g.dart';"
+    ],
+    "description": "part .g"
+  },
+  "ptfg": {
+    "prefix": "ptfg",
+    "body": [
+      "part '${TM_FILENAME_BASE}.freezed.dart';",
+      "part '${TM_FILENAME_BASE}.g.dart';"
+    ],
+    "description": "part .g"
+  },
+  "funion": {
+    "prefix": "funion",
+    "body": [
+      "",
+      "@freezed",
+      "class ${1} with _$${1}{",
+      "  const factory ${1}.data() = _Data;",
+      "}"
+    ],
+    "description": "Freezed Union"
+  },
+  "fdata": {
+    "prefix": "fdata",
+    "body": [
+      "",
+      "@freezed",
+      "class ${1} with _$${1}{",
+      "  const factory ${1}({${0}}) = _${1};",
+      "}"
+    ],
+    "description": "Freezed Union"
+  },
+  "fjson": {
+    "prefix": "fjson",
+    "body": [
+      "factory ${0}.fromJson(Map<String, dynamic> json) =>_$${0}FromJson(json);"
+    ],
+    "description": "Freezed fromJson"
+  }
+}

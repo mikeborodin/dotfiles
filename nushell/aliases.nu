@@ -7,7 +7,14 @@ alias y = yazi
 alias gg = lazygit
 alias python = python3
 alias ai = aichat -S
+alias drd = devbox run shell
 alias aio = aichat -S -m ollama:llama3.1
+
+alias python = python3
+
+def swd [] {
+  ls -s ~/projects | get name | to text | fzf | kitten @ action launch --type=tab --cwd=$"/Users/Mike/projects/($in)"
+}
 
 def dif [name:string = 'main'] {
     (

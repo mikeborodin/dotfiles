@@ -17,7 +17,7 @@ return {
       actions = {
         files = {
           ['enter'] = actions.file_edit_or_qf,
-          ['ctrl-i'] = actions.file_vsplit,
+          ['tab'] = actions.file_vsplit,
         },
       },
       files = {

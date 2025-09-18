@@ -1,7 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.12.0/.schema/devbox.schema.json",
   "packages": [
-    "neovim@0.11.2",
     "gh@latest",
     "btop@latest",
     "temurin-bin-17@latest",
@@ -32,7 +31,6 @@
     "lua-language-server@latest",
     "exa@latest",
     "eza@latest",
-    "nushell@latest",
     "chafa@latest",
     "zellij@latest",
     "starship@latest",
@@ -51,7 +49,6 @@
     "imagemagick@latest",
     "pkg-config@latest",
     "oauth2l@latest",
-    "nufmt@0-unstable-2025-04-28",
     "qrencode@latest",
     "taplo@latest",
     "codex@latest",
@@ -67,7 +64,13 @@
     "nvimpager@latest",
     "mitmproxy@latest",
     "yq@latest",
-    "yazi@25.5.31"
+    "opencode@latest",
+    "lazygit@latest",
+    "nufmt@latest",
+    "yazi@25.5.31",
+    "nushell@0.105.1",
+    "neovim@0.11.3",
+    "typioca@latest"
   ],
   "env": {
     "JAVA_HOME": "$DEVBOX_PROJECT_ROOT/.devbox/nix/profile/default/Contents/Home"

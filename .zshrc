@@ -1,5 +1,4 @@
 export PATH="$PATH:/usr/local/bin"
-# disabled to give way to devbox
 export PATH="$PATH:$HOME/fvm/default/bin"
 export PATH="$PATH":"$HOME/programs/nnn/source"
 export PATH="$PATH:$HOME/.tmux/tmuxifier/bin"

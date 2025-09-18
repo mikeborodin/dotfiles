@@ -7,3 +7,5 @@ local/
 project_context.md
 
 .gooseignore
+.aiderignore.local
+.aider*

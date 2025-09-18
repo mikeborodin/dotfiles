@@ -1,12 +1,12 @@
 return {
   'saghen/blink.cmp',
-  lazy = false, -- lazy loading handled internally
   -- optional: provides snippets for the snippet source
   dependencies = {
     { 'L3MON4D3/LuaSnip', version = 'v2.*' },
-    {
-      'rafamadriz/friendly-snippets',
-    },
+
+    -- {
+    --   'rafamadriz/friendly-snippets',
+    -- },
   },
 
   -- use a release tag to download pre-built binaries
@@ -47,7 +47,6 @@ return {
     --     path = file,
     --   }
     -- end
-
     require('blink.cmp').setup {
       -- 'default' for mappings similar to built-in completion
       -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
@@ -83,9 +82,6 @@ return {
         },
       },
       appearance = {
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- Useful for when your theme doesn't support blink.cmp
-        -- will be removed in a future release
         use_nvim_cmp_as_default = false,
         -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
         -- Adjusts spacing to ensure icons are aligned
@@ -108,6 +104,10 @@ return {
       },
       sources = {
         default = { 'lsp', 'path', 'snippets' },
+        per_filetype = {
+          -- optionally inherit from the `default` sources
+          lua = { inherit_defaults = true, 'lazydev' },
+        },
         -- providers = {
         --   snippets = {
         --     opts = {
@@ -117,6 +117,13 @@ return {
         --     }
         --   }
         -- }
+        providers = {
+          lazydev = {
+            name = 'LazyDev',
+            module = 'lazydev.integrations.blink',
+            score_offset = 100, -- show at a higher priority than lsp
+          },
+        },
       },
 
       -- experimental signature help support

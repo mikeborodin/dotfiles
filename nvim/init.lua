@@ -43,10 +43,6 @@ else
   require 'config.init_plugins_vscode_only'
 end
 -- Defined in init.lua
-vim.lsp.config('*', {
-  capabilities = require('blink.cmp').get_lsp_capabilities(),
-  root_markers = { '.git' },
-})
 
 vim.filetype.add {
   pattern = {
@@ -55,10 +51,31 @@ vim.filetype.add {
 }
 
 vim.lsp.enable {
-  'luals',
+  'lua_ls',
   'dartls',
   'jsonls',
   'nushell',
   'gh_actions_ls',
   'yaml_ls',
+}
+
+vim.lsp.handlers['window/showMessage'] = function(_, result, ctx)
+  if result.message:match 'didChange' then
+    return -- ignore these messages
+  end
+  local client = vim.lsp.get_client_by_id(ctx.client_id)
+  local lvl = ({ 'ERROR', 'WARN', 'INFO', 'DEBUG' })[result.type]
+  vim.notify(result.message, vim.log.levels[lvl], { title = client and client.name or 'LSP' })
+end
+
+vim.diagnostic.config {
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    border = 'rounded',
+    source = 'always',
+  },
 }

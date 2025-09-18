@@ -18,6 +18,10 @@
         "path": "./tests.json"
       },
       {
+        "language": "dart",
+        "path": "./freezed.json"
+      },
+      {
         "language": "lua",
         "path": "./lua.json"
       }
