@@ -1,5 +1,5 @@
+---@type Wezterm
 local wezterm = require("wezterm")
-local tabbar = require("tabbar")
 local act = wezterm.action
 
 local function is_vim(pane)
@@ -40,6 +40,7 @@ return {
   cmd("i", 0xA3),
   cmd("f", 0xA4),
   cmd("h", 0xA5),
+  --- spawning
   {
     mods = "LEADER",
     key = "h",
@@ -64,6 +65,16 @@ return {
     }),
   },
   {
+    mods = "CMD",
+    key = "g",
+    action = act.SpawnCommandInNewTab({
+      label = "lazygit",
+      args = {
+        "/Users/mike/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/lazygit",
+      },
+    }),
+  },
+  {
     mods = "LEADER",
     key = "o",
     action = wezterm.action.SpawnCommandInNewTab({ args = { "zsh" } }),
@@ -80,7 +91,7 @@ return {
     action = wezterm.action.CloseCurrentTab({ confirm = true }),
   },
   {
-    key = "?",
+    key = "f",
     mods = "LEADER",
     action = wezterm.action.PaneSelect,
   },
@@ -128,24 +139,15 @@ return {
   },
   {
     mods = "CMD",
-    key = "g",
-    action = act.SpawnCommandInNewTab({
-      label = "lazygit",
-      args = {
-        "/Users/mike/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/lazygit",
-      },
-    }),
-  },
-  {
-    mods = "LEADER",
-    key = "?",
-    action = act.ActivateCommandPalette,
-  },
-  {
-    mods = "CMD",
     key = "n",
     action = act.ActivateTabRelative(-1),
   },
+  {
+    mods = "CMD|SHIFT",
+    key = "y",
+    action = wezterm.action.CloseCurrentPane({ confirm = false }),
+  },
+  --- panes nav
   {
     mods = "CMD|SHIFT",
     key = "n",
@@ -166,9 +168,25 @@ return {
     key = "e",
     action = act.ActivatePaneDirection("Down"),
   },
+  --- fonts
   {
-    key = "y",
-    mods = "CMD|SHIFT",
-    action = wezterm.action.CloseCurrentPane({ confirm = false }),
+    mods = "CMD",
+    key = "+",
+    action = act.IncreaseFontSize,
+  },
+  {
+    mods = "CMD",
+    key = "-",
+    action = act.DecreaseFontSize,
+  },
+  {
+    mods = "LEADER",
+    key = "=",
+    action = act.ResetFontSize,
+  },
+  {
+    mods = "LEADER",
+    key = "?",
+    action = act.ActivateCommandPalette,
   },
 }

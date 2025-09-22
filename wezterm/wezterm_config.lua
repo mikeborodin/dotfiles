@@ -68,12 +68,9 @@ function get_tab_title_or_pane(tab_info)
   if title and #title > 0 then
     return title
   end
-  -- Otherwise, use the title from the active pane
-  -- in that tab
   return tab_info.active_pane.title
 end
 
--- local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
 local SOLID_RIGHT_ARROW = utf8.char(0xe0b0)
 
 local Grey = "#0f1419"
@@ -107,6 +104,23 @@ wezterm.on(
       foreground = HOVER_TAB_FG
     end
 
+    local name = get_current_working_dir(tab)
+    local process_name = string.gsub(
+      tab.active_pane.foreground_process_name,
+      "(.*[/\\])(.*)",
+      "%2"
+    )
+
+    for _, pane in ipairs(tab.panes) do
+      if
+        pane.has_unseen_output
+        and process_name ~= "nvim"
+        and process_name ~= "lazygit"
+      then
+        name = name .. "*"
+      end
+    end
+
     local leading_fg = NORMAL_TAB_FG
     local leading_bg = background
 
@@ -135,7 +149,7 @@ wezterm.on(
       { Text = get_process(tab) },
       { Text = " " },
       { Foreground = { Color = foreground } },
-      { Text = get_current_working_dir(tab) },
+      { Text = name },
       { Background = { Color = trailing_bg } },
       { Foreground = { Color = trailing_fg } },
       { Text = SOLID_RIGHT_ARROW },
@@ -145,15 +159,51 @@ wezterm.on(
 
 function get_tab_title_or_pane(tab_info)
   local title = tab_info.tab_title
-  -- if the tab title is explicitly set, take that
   if title and #title > 0 then
     return title
   end
-  -- Otherwise, use the title from the active pane
-  -- in that tab
   return tab_info.active_pane.title
 end
 
 config.keys = require("keybindings")
+
+flag = true
+
+-- wezterm.on("update-right-status", function(window, pane)
+--   local date = wezterm.strftime("  %H:%M")
+--   flag = not flag
+--   window:set_right_status("> mike: " .. tostring(flag) .. " " .. date)
+--
+
+local function read_status_reports()
+  local home = os.getenv("HOME") or ""
+  local reports_dir = home .. "/status_reports"
+  local statuses = {}
+
+  local p = io.popen("ls -1 " .. reports_dir .. "/status_*.txt 2>/dev/null")
+  if p then
+    for file in p:lines() do
+      local f = io.open(file, "r")
+      if f then
+        local content = f:read("*a") or ""
+        f:close()
+        content = content:gsub("%s+$", "") -- trim trailing whitespace
+        if content ~= "" then
+          table.insert(statuses, content)
+        end
+      end
+    end
+    p:close()
+  end
+
+  return table.concat(statuses, " | ")
+end
+
+wezterm.on("update-right-status", function(window, pane)
+  local status_str = read_status_reports()
+  local date = wezterm.strftime("  %H:%M")
+  local display = status_str ~= "" and (status_str .. "  " .. date) or date
+  window:set_right_status(display)
+end)
 
 return config

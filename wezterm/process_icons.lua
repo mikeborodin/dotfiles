@@ -27,8 +27,12 @@ return {
     { Text = "󰋘" },
   },
   ["zsh"] = {
-    { Foreground = { Color = colors.peach } },
+    { Foreground = { Color = colors.green } },
     { Text = "" },
+  },
+  ["nu"] = {
+    { Foreground = { Color = colors.green } },
+    { Text = "" },
   },
   ["bash"] = {
     { Foreground = { Color = colors.overlay1 } },
@@ -39,8 +43,8 @@ return {
     { Text = "" },
   },
   ["btop"] = {
-    { Foreground = { Color = colors.rosewater } },
-    { Text = "" },
+    { Foreground = { Color = colors.red } },
+    { Text = "" },
   },
   ["cargo"] = {
     { Foreground = { Color = colors.peach } },
