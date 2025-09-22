@@ -21,7 +21,7 @@
     "httpie@latest",
     "apktool@latest",
     "trivy@latest",
-    "cocoapods@latest",
+    "cocoapods@1.16.2",
     "ruby_3_2@latest",
     "sd@latest",
     "termshark@latest",

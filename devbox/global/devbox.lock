@@ -535,9 +535,9 @@
         }
       }
     },
-    "cocoapods@latest": {
-      "last_modified": "2025-06-20T02:24:11Z",
-      "resolved": "github:NixOS/nixpkgs/076e8c6678d8c54204abcb4b1b14c366835a58bb#cocoapods",
+    "cocoapods@1.16.2": {
+      "last_modified": "2025-07-28T17:09:23Z",
+      "resolved": "github:NixOS/nixpkgs/648f70160c03151bc2121d179291337ad6bc564b#cocoapods",
       "source": "devbox-search",
       "version": "1.16.2",
       "systems": {
@@ -545,21 +545,21 @@
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/qy4krmn7qmjhya8brbz5skkcjspic8lb-cocoapods-1.16.2",
+              "path": "/nix/store/6xmhpzq8gindcclr6r5kb8gm3xhqd1cd-cocoapods-1.16.2",
               "default": true
             }
           ],
-          "store_path": "/nix/store/qy4krmn7qmjhya8brbz5skkcjspic8lb-cocoapods-1.16.2"
+          "store_path": "/nix/store/6xmhpzq8gindcclr6r5kb8gm3xhqd1cd-cocoapods-1.16.2"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/wcm4s7sdcz2yh4fkyrvd82xzh6wkyaxy-cocoapods-1.16.2",
+              "path": "/nix/store/x5iwnyig8h1d9xgx10ggn3s6vz3wv5b2-cocoapods-1.16.2",
               "default": true
             }
           ],
-          "store_path": "/nix/store/wcm4s7sdcz2yh4fkyrvd82xzh6wkyaxy-cocoapods-1.16.2"
+          "store_path": "/nix/store/x5iwnyig8h1d9xgx10ggn3s6vz3wv5b2-cocoapods-1.16.2"
         }
       }
     },
