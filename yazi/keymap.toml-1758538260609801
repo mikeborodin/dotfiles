@@ -2,7 +2,7 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
-[mgr]
+[manager]
 
 keymap = [
 	{ on = [ "<Esc>" ], run = "escape",             desc = "Exit visual mode, clear selected, or cancel search" },
@@ -310,68 +310,68 @@ keymap = [
 ]
 
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on   = "p"
 run  = "plugin smart-paste"
 desc = "Paste into the hovered directory or CWD"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on   = ["!","z"]
 run  = 'shell "zsh" --block'
 desc = "run zsh here"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on   = ["!","a"]
 run  = 'shell "nu ~/personal_projects/dotfiles/scripts/ai/summarize.nu README.md"'
 desc = "run zsh here"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = [ "c", "r" ]
 run = "plugin path-from-root"
 desc = "Copies path from git root"
 
 # Optionally, add another keymap to immediately fuzzy search bookmarks
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = [ "b", "a" ]
 run = "plugin yamb save"
 desc = "Add bookmark"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = [ "b", "g" ]
 run = "plugin yamb jump_by_key"
 desc = "Jump bookmark by key"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = [ "b", "G" ]
 run = "plugin yamb jump_by_fzf"
 desc = "Jump bookmark by fzf"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = [ "b", "d" ]
 run = "plugin yamb delete_by_key"
 desc = "Delete bookmark by key"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = [ "b", "D" ]
 run = "plugin yamb delete_by_fzf"
 desc = "Delete bookmark by fzf"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = [ "b", "A" ]
 run = "plugin yamb delete_all"
 desc = "Delete all bookmarks"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = [ "b", "r" ]
 run = "plugin yamb rename_by_key"
 desc = "Rename bookmark by key"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = [ "b", "R" ]
 run = "plugin yamb rename_by_fzf"
 desc = "Rename bookmark by fzf"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on   = [ "h", "s" ]
 run  = "plugin mike-actions summarize"
 desc = "create ai summary"

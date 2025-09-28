@@ -147,6 +147,22 @@ return {
     key = "y",
     action = wezterm.action.CloseCurrentPane({ confirm = false }),
   },
+  --copypaste
+  {
+    mods = "CMD",
+    key = "c",
+    action = wezterm.action.CopyTo("Clipboard"),
+  },
+  {
+    mods = "CMD",
+    key = "c",
+    action = wezterm.action.CopyTo("Clipboard"),
+  },
+  {
+    mods = "CMD",
+    key = "v",
+    action = wezterm.action.PasteFrom("Clipboard"),
+  },
   --- panes nav
   {
     mods = "CMD|SHIFT",

@@ -16,6 +16,11 @@ config.use_fancy_tab_bar = false
 config.show_tabs_in_tab_bar = true
 config.show_new_tab_button_in_tab_bar = false
 config.show_tab_index_in_tab_bar = false
+config.command_palette_bg_color = "#383d6d"
+config.command_palette_font_size = 22
+config.command_palette_rows = 10
+config.command_palette_fg_color = "white"
+config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
 local function get_current_working_dir(tab)
   local cwd_uri = tab.active_pane.current_working_dir

@@ -2,7 +2,7 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/theme.json"
 
-[mgr]
+[manager]
 cwd = { fg = "#94e2d5" }
 
 hovered         = { fg = "#cdcfe4", bg = "#3a3a62" }
