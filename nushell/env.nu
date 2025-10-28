@@ -17,6 +17,7 @@ $env.ANDROID_HOME =  $"($env.HOME)/Library/Android/sdk"
 $env.ANDROID_SDK_ROOT = $env.ANDROID_HOME
 $env.QEMU_AUDIO_DRV = 'none'
 $env.PATROL_MIGRATED = true
+$env.HOMEBREW_NO_AUTO_UPDATE = 1
 
 $env.QEMU_AUDIO_DRV = 'none'
 

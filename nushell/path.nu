@@ -8,7 +8,7 @@ path add ($env.HOME | path join ".local" "bin")
 path add ($env.HOME | path join "/fvm/default/bin")
 
 path add ($env.HOME | path join "/programs/nnn/source")
-path add ($env.HOME | path join "/.tmux/tmuxifier/bin")
+path add ($env.HOME | path join "/programs/neovim/out/bin")
 path add ($env.HOME | path join "/go/bin")
 
 path add ($env.HOME | path join "/scripts")
@@ -23,6 +23,7 @@ path add ($env.HOME | path join "/Library/Python/3.9/bin")
 path add ($env.HOME | path join "/Library/Android/sdk/emulator")
 path add ($env.HOME | path join "/.pub-cache/bin")
 path add ($env.HOME | path join "/.maestro/bin")
+path add ($env.HOME | path join "/Users/mike/personal_projects/testui3")
 
 path add ($env.HOME | path join "/personal_projects/extract/bin")
 path add ($env.HOME | path join "/personal_projects/other/bin")

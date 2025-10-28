@@ -13,6 +13,20 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter', 'WinEnter', 'TabEnter',
   end,
 })
 
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = '*',
+  callback = function()
+    local flutter_bin = vim.fn.getcwd() .. '/.fvm/flutter_sdk/bin'
+
+    if vim.fn.isdirectory(flutter_bin) == 1 then
+      local path = vim.env.PATH or ''
+      if not string.find(path, vim.pesc(flutter_bin)) then
+        vim.env.PATH = flutter_bin .. ':' .. path
+      end
+    end
+  end,
+})
+
 vim.cmd [[ autocmd BufNewFile,BufRead *.metadata set filetype=yaml ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.fvmrc set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.arb set filetype=json ]]

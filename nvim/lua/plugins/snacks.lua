@@ -12,16 +12,13 @@ return {
         {
           pane = 1,
           { section = 'header', ttl = 0 },
-          { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
-          -- {
-          --   section = "terminal",
-          --   key = "s",
-          --   indent = 0,
-          --   cmd = "~/scripts/git_streak.nu",
-          --   action = function()
-          --     vim.cmd [[ TermExec cmd=git-cal ]]
-          --   end,
-          -- },
+          { icon = ' ', title = 'Recent Files', cwd = true, section = 'recent_files', indent = 2, padding = 1 },
+          {
+            action = ':FzfLua files',
+            key = 'f',
+            desc = 'Find File',
+            icon = ' ',
+          },
         },
       },
     },

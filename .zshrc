@@ -1,7 +1,6 @@
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/fvm/default/bin"
 export PATH="$PATH":"$HOME/programs/nnn/source"
-export PATH="$PATH:$HOME/.tmux/tmuxifier/bin"
 export PATH="$PATH":"$HOME/scripts"
 export PATH="$PATH:$HOME/programs/bin"
 export PATH="$PATH:$HOME/go/bin"
@@ -24,9 +23,12 @@ export PATH="$PATH:/Users/mike/.local/bin"
 export PATH="$PATH":"/Applications/Firefox.app/Contents/MacOS"
 export PATH="$PATH:/opt/homebrew/bin"
 
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 # source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 eval "$(devbox global shellenv)"
  
+export PATH="$HOME/programs/neovim/out/bin:$PATH"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
