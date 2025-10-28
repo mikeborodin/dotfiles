@@ -226,7 +226,6 @@ local keys = {
     Key ':lua find_replace_prompt()',
     'File find/rep',
   },
-  { '<space>z', Cmd ':Zen', 'Zen' },
   -- { "<C-h>",          function () vim.cmd(':ToggleTerm') end,                                                                      "ToggleTerm" },
   {
     '<Char-0xA0>',

@@ -33,7 +33,9 @@ $env.FZF_DEFAULT_OPTS = (
 )
 
 
-$env.PATH = ($env.PATH
+$env.PATH = (
+    ($env.HOME | path join 'programs/neovim/out/bin') 
+    | append $env.PATH
     | append '/usr/local/bin'
     | append ($env.HOME | path join 'fvm/default/bin')
     | append ($env.HOME | path join 'programs/nnn/source')

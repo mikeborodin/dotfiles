@@ -1,5 +1,7 @@
 use std "path add"
 
+# $env.PATH = $"($env.HOME)/programs/neovim/out/bin:($env.PATH)"
+
 path add "/opt/homebrew/bin"
 path add "/Applications/Firefox.app/Contents/MacOS"
 path add "/opt/homebrew/bin"
@@ -8,7 +10,6 @@ path add ($env.HOME | path join ".local" "bin")
 path add ($env.HOME | path join "/fvm/default/bin")
 
 path add ($env.HOME | path join "/programs/nnn/source")
-path add ($env.HOME | path join "/programs/neovim/out/bin")
 path add ($env.HOME | path join "/go/bin")
 
 path add ($env.HOME | path join "/scripts")

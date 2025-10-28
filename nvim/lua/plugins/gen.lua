@@ -1,5 +1,6 @@
 return {
   'David-Kunz/gen.nvim',
+  enabled = false,
   opts = {
     model = 'llama3.1', -- The default model to use.
     host = 'localhost', -- The host running the Ollama service.
