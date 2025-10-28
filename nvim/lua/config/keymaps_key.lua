@@ -179,366 +179,116 @@ local function autoFix()
 end
 
 local keys = {
-  --navigation
-  { '<space>0', Key '%', '% Parenthese' },
-  { '<D-cr>', Key 'n', '?' },
-  {
-    '<space>ne',
-    function()
-      vim.lsp.buf.definition()
-    end,
-    'Go to definition',
-  },
-  { '<space>ni', require('fzf-lua').lsp_implementations, 'Impl' },
-  { '<space>no', require('fzf-lua').lsp_references, 'Reference' },
-  {
-    '<space>i',
-    function()
-      vim.lsp.buf.definition()
-    end,
-    'Go to definition',
-  },
-  -- jumps
-  {
-    '<space>nu',
-    function()
-      require('trouble').next { skip_groups = true, jump = true }
-    end,
-    'Next problem',
-  },
-  -- { "<space>aa",      Cmd ":Arrow open",                                                               "Arrow open", },
-  {
-    'afn',
-    function()
-      require('trouble').previous { skip_groups = true, jump = true }
-    end,
-    'Previous diagnos',
-  },
-  {
-    '<space>fw',
-    Cmd ':FzfLua blines',
-    'Find in buff',
-  },
-  { '<Char-0xA4>', require('fzf-lua').live_grep, 'Live grep' },
-  { 'af', require('fzf-lua').live_grep, 'Live grep' },
-  {
-    '<space>fr',
-    Key ':lua find_replace_prompt()',
-    'File find/rep',
-  },
-  -- { "<C-h>",          function () vim.cmd(':ToggleTerm') end,                                                                      "ToggleTerm" },
-  {
-    '<Char-0xA0>',
-    function()
-      require('fzf-lua').files()
-    end,
-    'Find files',
-  },
-  { '<Char-0xA2>', Cmd ':Other', 'Open other' },
+  -- Navigation
+  { "<space>0", Key "%", desc = "Jump to match" },
+  { "<D-cr>", Key "n", desc = "Next match" },
+  { "<space>ne", function() vim.lsp.buf.definition() end, desc = "Go to definition" },
+  { "<space>ni", require("fzf-lua").lsp_implementations, desc = "List implementations" },
+  { "<space>no", require("fzf-lua").lsp_references, desc = "List references" },
+  { "<space>i", function() vim.lsp.buf.definition() end, desc = "Go to definition" },
+
+  -- Diagnostics navigation
+  { "<space>nu", function() require("trouble").next { skip_groups = true, jump = true } end, desc = "Next diagnostic" },
+  { "afn", function() require("trouble").previous { skip_groups = true, jump = true } end, desc = "Prev diagnostic" },
+
+  -- File & search
+  { "<space>fw", Cmd ":FzfLua blines", desc = "Find in buffer" },
+  { "<Char-0xA4>", require("fzf-lua").live_grep, desc = "Search in project" },
+  { "af", require("fzf-lua").live_grep, desc = "Search in project" },
+  { "<space>fr", Key ":lua find_replace_prompt()", desc = "Find and replace" },
+  { "<Char-0xA0>", function() require("fzf-lua").files() end, desc = "Find files" },
+  { "<Char-0xA2>", Cmd ":Other", desc = "Open alternate file" },
+
   -- Code actions
-  {
-    '<space>e',
-    function()
-      vim.lsp.buf.code_action()
-    end,
-    'Code action (visual)',
-  },
-  -- { "<space><space>", Cmd ":silent !dart format %",                                                           "Format", },
-  {
-    '<space><space>',
-    function()
-      require('conform').format()
-    end,
-    'Format',
-  },
-  {
-    '<BS><BS>',
-    autoFix,
-    'Fix All & organizeImports',
-  },
-  { '<space>df', Cmd ':silent !dart format %', 'Format' },
-  {
-    '<space>h',
-    function()
-      require('hover').hover()
-    end,
-    'Format',
-  },
-  { 'tr', Cmd ':Other', 'Open other' },
-  { '<space>O', Cmd ':Other test', 'Find files' },
-  {
-    '<space>e',
-    function()
-      vim.lsp.buf.code_action()
-    end,
-    'Code action (visual)',
-  },
-  {
-    'tr',
-    function()
-      vim.lsp.buf.rename()
-    end,
-    'Rename',
-  },
-  {
-    'Tr',
-    Cmd ':FlutterRename',
-    'Flutter Rename',
-  },
-  {
-    '<space>H',
-    function()
-      vim.diagnostic.open_float()
-    end,
-    'Floating diagnos',
-  },
-  { '<space>nn', Cmd ':AvanteToggle', 'AI Actions' },
-  { '<space>ae', ':Gen<cr>', 'AI Actions' },
-  -- { '<space>ai', function()
-  -- 	if is_default_buffer() then
-  -- 		local menu = require("utils.ollama_picker")
-  -- 		menu.toggle()
-  -- 	end
-  -- end, 'Gen toggle' },
-  --editor windows
-  --
-  {
-    '<space>Y',
-    Key ':%bdelete\n:Neotree focus\n',
-    'Close all buffers',
-  },
-  {
-    'ta',
-    '',
-    -- Cmd ':AerialToggle',
-    'AerialToggle',
-  },
-  {
-    '<Char-0xA1>',
-    function()
-      require('bufdelete').bufdelete()
-    end,
-    'Close buffer',
-  },
-  --flutter runs
-  {
-    '<space>su',
-    SelectConfigAndRun,
-    'SelectRunConfig',
-  },
-  -- { "<space>n",       FlutterCmdOrDefault(":FlutterRun", ":DapContinue"),                              "Run" },
-  { '<space>n', Cmd ':FlutterRun', 'Run' },
-  {
-    '<space>u',
-    Cmd ':FlutterRestart',
-    'FlutterRestart',
-  },
-  { '<space>y', Cmd ':FlutterQuit', 'FlutterQuit' },
-  { 'ao', nil, 'vacant' },
-  -- { "sd",             PopulateLoclistWithDiagnostics,                                                  "Populate diagns" },
+  { "<space>e", function() vim.lsp.buf.code_action() end, desc = "Code actions" },
+  { "<space><space>", function() require("conform").format() end, desc = "Format code" },
+  { "<BS><BS>", autoFix, desc = "Auto-fix & organize imports" },
+  { "<space>df", Cmd ":silent !dart format %", desc = "Format (Dart)" },
+  { "<space>h", function() require("hover").hover() end, desc = "Show hover info" },
+  { "tr", function() vim.lsp.buf.rename() end, desc = "Rename symbol" },
+  { "Tr", Cmd ":FlutterRename", desc = "Rename (Flutter)" },
+  { "<space>H", function() vim.diagnostic.open_float() end, desc = "Show diagnostics" },
+  { "<space>nn", Cmd ":AvanteToggle", desc = "Toggle AI actions" },
+  { "<space>ae", ":Gen<cr>", desc = "AI generate" },
 
-  { '<space>N', Cmd ':FlutterRun', 'FlutterRun' },
-  {
-    '<space>NY',
-    Cmd ':FlutterQuit',
-    'FlutterRestart',
-  },
-  {
-    '<space>K',
-    Cmd ':FlutterLogClear',
-    'FlutterLogClear',
-  },
-  {
-    'as',
-    Cmd ':FlutterVisualDebug',
-    'Flutter Quit',
-  },
-  {
-    '<space>lv',
-    Cmd ':FlutterVisualDebug',
-    'Flutter Visual Debug',
-  },
-  {
-    'alr',
-    Cmd ':FlutterReanalyze',
-    'FlutterReanalyze',
-  },
-  {
-    '<space>rr',
-    Cmd ':FlutterLspRestart',
-    'FlutterLspRestart',
-  },
-  {
-    '<space>rl',
-    Cmd ':!~/scripts/brl $(dirname %)',
-    'Create barrel file',
-  },
-  -- searches
-  {
-    '<space>fb',
-    Cmd ':free',
-    desc = 'Switch Buffer',
-  },
-  {
-    '<space>ff',
-    Cmd ':Telescope commander',
-    desc = 'Switch Buffer',
-  },
-  {
-    '<space>fF',
-    Util.telescope('files', { cwd = false }),
-    desc = 'Find Files (cwd)',
-  },
-  {
-    '<space>fR',
-    Util.telescope('oldfiles', { cwd = vim.loop.cwd() }),
-    desc = 'Recent (cwd)',
-  },
-  {
-    '<space>ts',
-    Cmd ':FzfLua git_status',
-    desc = 'status',
-  },
-  {
-    '<space>re',
-    Cmd ':FzfLua resume',
-    desc = 'Resume',
-  },
-  { '<space>ab', require('fzf-lua').buffers, 'Buffers' },
-  { 'ah', require('fzf-lua').diagnostics_workspace, 'Diagnosis' },
-  --debugging starts with S
-  { 'su', Cmd ':DapContinue', 'DapContinue' },
-  {
-    'st',
-    Cmd ':DapToggleBreakpoint',
-    'Toggle breakpnt',
-  },
-  {
-    'sh',
-    function()
-      require('dapui').toggle()
-    end,
-    'Open DapUI Repl',
-  },
-  {
-    'sv',
-    function()
-      require('dapui').toggle()
-    end,
-    'Open DapUI Repl',
-  },
-  {
-    'se',
-    function()
-      require('dapui').eval(nil, { enter = true })
-    end,
-    'Evaluate this',
-  },
-  {
-    'sa',
-    function()
-      require('dapui').float_element 'stack'
-    end,
-    'Open DapUI stacks',
-  },
-  {
-    'sc',
-    function()
-      require('dapui').float_element 'scopes'
-    end,
-    'Open DapUI stacks',
-  },
-  --testing
-  { '<space>tf', Cmd ':TestNearest', 'Test Nearest' },
-  { '<space>tw', Cmd ':TestFile', 'Test File' },
-  {
-    '<space>l',
-    function()
-      print 'spc l'
-    end,
-    '?',
-  },
-  -- { "<C-l>",          toggle_flutter_dev_log,                                                          "Toggle Lsp Log", },
+  -- Buffers / windows
+  { "<space>Y", Key ":%bdelete\n:Neotree focus\n", desc = "Close all buffers" },
+  { "ta", "", desc = "Toggle Aerial outline" },
+  { "<Char-0xA1>", function() require("bufdelete").bufdelete() end, desc = "Close buffer" },
 
-  { '<space>tv', Cmd ':CoverageToggle', 'Coverage' },
+  -- Flutter
+  { "<space>su", SelectConfigAndRun, desc = "Select run config" },
+  { "<space>n", Cmd ":FlutterRun", desc = "Run app" },
+  { "<space>u", Cmd ":FlutterRestart", desc = "Hot restart" },
+  { "<space>y", Cmd ":FlutterQuit", desc = "Quit app" },
+  { "<space>N", Cmd ":FlutterRun", desc = "Run Flutter" },
+  { "<space>NY", Cmd ":FlutterQuit", desc = "Quit Flutter" },
+  { "<space>K", Cmd ":FlutterLogClear", desc = "Clear logs" },
+  { "as", Cmd ":FlutterVisualDebug", desc = "Toggle visual debug" },
+  { "<space>lv", Cmd ":FlutterVisualDebug", desc = "Visual debug" },
+  { "alr", Cmd ":FlutterReanalyze", desc = "Reanalyze project" },
+  { "<space>rr", Cmd ":FlutterLspRestart", desc = "Restart LSP" },
+  { "<space>rl", Cmd ":!~/scripts/brl $(dirname %)", desc = "Create barrel file" },
+
+  -- Search & files (continued)
+  { "<space>fb", Cmd ":free", desc = "Switch buffer" },
+  { "<space>ff", Cmd ":Telescope commander", desc = "Command palette" },
+  { "<space>fF", Util.telescope("files", { cwd = false }), desc = "Find files (cwd)" },
+  { "<space>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }), desc = "Recent files" },
+  { "<space>ts", Cmd ":FzfLua git_status", desc = "Git status" },
+  { "<space>re", Cmd ":FzfLua resume", desc = "Resume search" },
+  { "<space>ab", require("fzf-lua").buffers, desc = "List buffers" },
+  { "ah", require("fzf-lua").diagnostics_workspace, desc = "Workspace diagnostics" },
+
+  -- Debugging
+  { "su", Cmd ":DapContinue", desc = "Continue debug" },
+  { "st", Cmd ":DapToggleBreakpoint", desc = "Toggle breakpoint" },
+  { "sh", function() require("dapui").toggle() end, desc = "Toggle DAP UI" },
+  { "sv", function() require("dapui").toggle() end, desc = "Toggle DAP UI" },
+  { "se", function() require("dapui").eval(nil, { enter = true }) end, desc = "Eval expression" },
+  { "sa", function() require("dapui").float_element "stack" end, desc = "View call stack" },
+  { "sc", function() require("dapui").float_element "scopes" end, desc = "View scopes" },
+
+  -- Testing
+  { "<space>tf", Cmd ":TestNearest", desc = "Run nearest test" },
+  { "<space>tw", Cmd ":TestFile", desc = "Run test file" },
+  { "<space>tv", Cmd ":CoverageToggle", desc = "Toggle coverage" },
+
+  -- Tasks / commands
+  { "<space>sa", Cmd ":TermExec cmd=analyze", desc = "Run analyzer" },
+  { "<space>sf", Cmd ":TermExec cmd=dart_format", desc = "Run formatter" },
+  { "<space>su", Cmd ":TermExec cmd=submit", desc = "Submit code" },
+  { "<space>gm", Cmd ":silent !git switch main", desc = "Git: switch to main" },
   {
-    '<space>dm',
+    "<space>sp",
     function()
-      local path = GetFilePath()
-      vim.notify('opening' .. path)
-      Snacks.terminal.open('yazi ' .. path)
-    end,
-    'Yazi',
-  },
-  { '<D-l>', Cmd ':CodeCompanionChat Toggle', 'CodeCompanionChat Toggle' },
-  { '<space>sa', Cmd ':TermExec cmd=analyze', 'Analyze' },
-  { '<space>sf', Cmd ':TermExec cmd=dart_format', 'DartFormat' },
-  { '<space>su', Cmd ':TermExec cmd=submit', 'Submit' },
-  {
-    '<space>sp',
-    function()
-      vim.ui.input({
-        prompt = 'describe changes:',
-        default = 'feat: ',
-      }, function(input)
+      vim.ui.input({ prompt = "Describe changes:", default = "feat: " }, function(input)
         if input then
-          vim.cmd(':TermExec cmd=\'push "' .. input .. '"\'')
+          vim.cmd(":TermExec cmd='push \"" .. input .. "\"'")
           vim.notify(input)
         end
       end)
     end,
-    'Push',
+    desc = "Git: push with message",
   },
   {
-    '<space>sb',
+    "<space>sb",
     function()
-      vim.ui.input({
-        prompt = 'branch name:',
-        default = 'feat/CONN-',
-      }, function(input)
+      vim.ui.input({ prompt = "Branch name:", default = "feat/CONN-" }, function(input)
         if input then
           vim.cmd(":TermExec cmd='branch " .. input .. "'")
         end
       end)
     end,
-    'Push',
+    desc = "Git: create branch",
   },
-  -- {
-  --   '<D-w>',
-  --   function()
-  --     print 'Cw'
-  --   end,
-  --   '?',
-  -- },
-  {
-    'tk',
-    function()
-      print 'tk'
-    end,
-    '?',
-  },
-  {
-    'tuy',
-    function()
-      require 'neoclip.fzf'()
-    end,
-    'Clip History',
-  },
-  -- {
-  -- 	"<C-h>",
-  -- 	function()
-  -- 		print("Ch")
-  -- 	end,
-  -- 	"?",
-  -- },
-  {
-    '<Char-0xA3>',
-    function()
-      require('arrow.ui').openMenu()
-    end,
-    '?',
-  },
+
+  -- Misc
+  { "tk", function() print("tk") end, desc = "Test key" },
+  { "tuy", function() require("neoclip.fzf")() end, desc = "Clipboard history" },
+  { "<Char-0xA3>", function() require("arrow.ui").openMenu() end, desc = "Open Arrow menu" },
 }
+
 -- {
 -- 	"adn",
 -- 	function()
@@ -553,4 +303,7 @@ local keys = {
 -- 	"Select Flutter Devices",
 -- },
 
-UseKeymapTable(keys)
+-- UseKeymapTable(keys)
+
+local wk = require 'which-key'
+wk.add(keys)

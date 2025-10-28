@@ -57,7 +57,8 @@
     "nushell@0.106.1",
     "typioca@latest",
     "github-copilot-cli@latest",
-    "lazygit@0.55.1"
+    "lazygit@0.55.1",
+    "git@latest"
   ],
   "env": {
     "JAVA_HOME": "$DEVBOX_PROJECT_ROOT/.devbox/nix/profile/default/Contents/Home"
