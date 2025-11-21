@@ -100,6 +100,8 @@ source ($nu.default-config-dir | path join 'path.nu')
 source ($nu.default-config-dir | path join 'aliases.nu')
 source ($nu.default-config-dir | path join 'secrets.nu')
 
+$env.OPENCODE_CONFIG = ($env.HOME)/personal_projects/dotfiles/opencode/opencode.json
+
 load-env (
    (devbox global shellenv)
    | str trim

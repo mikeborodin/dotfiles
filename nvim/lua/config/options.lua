@@ -5,6 +5,9 @@ vim.o.pumheight = 10
 vim.o.pumwidth = 120
 vim.o.shell = '/Users/mike/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/nu'
 
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = 'nc'
+
 vim.o.foldenable = true -- enable fold
 vim.o.foldlevel = 99 -- start editing with all folds opened
 vim.o.foldmethod = 'expr'

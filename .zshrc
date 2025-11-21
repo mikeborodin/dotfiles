@@ -173,3 +173,6 @@ if [ -f "/Users/mike/.config/fabric/fabric-bootstrap.inc" ]; then . "/Users/mike
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# opencode
+export PATH=/Users/mike/.opencode/bin:$PATH

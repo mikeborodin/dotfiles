@@ -5,6 +5,18 @@ return {
     local actions = require('fzf-lua').actions
 
     require('fzf-lua').setup {
+      previewers = {
+        builtin = {
+          extensions = {
+            -- neovim terminal only supports `viu` block output
+            ['png'] = { 'head' },
+            -- by default the filename is added as last argument
+            -- if required, use `{file}` for argument positioning
+            ['svg'] = { 'head' },
+            ['jpg'] = { 'head' },
+          },
+        },
+      },
       winopts = {
         preview = {
           layout = 'vertical',
