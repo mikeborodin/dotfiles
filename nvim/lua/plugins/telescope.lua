@@ -6,16 +6,16 @@ return {
     version = false, -- telescope did only one release, so use HEAD for now
     dependencies = {
       'nvim-telescope/telescope-dap.nvim',
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        build = 'make',
-        enabled = vim.fn.executable 'make' == 1,
-        config = function()
-          Util.on_load('telescope.nvim', function()
-            require('telescope').load_extension 'fzf'
-          end)
-        end,
-      },
+      -- {
+      --   'nvim-telescope/telescope-fzf-native.nvim',
+      --   build = 'make',
+      --   enabled = vim.fn.executable 'make' == 1,
+      --   config = function()
+      --     Util.on_load('telescope.nvim', function()
+      --       require('telescope').load_extension 'fzf'
+      --     end)
+      --   end,
+      -- },
     },
     keys = {
       -- { "<space>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },

@@ -192,16 +192,12 @@ M.keys = {
   },
   {
     '<space>ni',
-    function()
-      require('fzf-lua').lsp_implementations()
-    end,
+    Cmd 'Telescope lsp_implementations',
     desc = 'List implementations',
   },
   {
     '<space>no',
-    function()
-      require('fzf-lua').lsp_references()
-    end,
+    Cmd 'Telescope lsp_references',
     desc = 'List references',
   },
   {
@@ -229,27 +225,23 @@ M.keys = {
   },
 
   -- File & search
-  { '<space>fw', Cmd ':FzfLua blines', desc = 'Find in buffer' },
+  { '<space>fw', Cmd ':Telescope blines', desc = 'Find in buffer' },
   {
     '<Char-0xA4>',
     function()
-      require('fzf-lua').live_grep()
+      require('telescope.builtin').live_grep()
     end,
     desc = 'Search in project',
   },
   {
     'af',
-    function()
-      require('fzf-lua').live_grep()
-    end,
+    Cmd 'Telescope live_grep',
     desc = 'Search in project',
   },
   { '<space>fr', Key ':lua find_replace_prompt()', desc = 'Find and replace' },
   {
     '<Char-0xA0>',
-    function()
-      require('fzf-lua').files()
-    end,
+    Cmd 'Telescope find_files',
     desc = 'Find files',
   },
   { '<Char-0xA2>', Cmd ':Other', desc = 'Open alternate file' },
@@ -338,23 +330,18 @@ M.keys = {
     end,
     desc = 'Recent files',
   },
-  { '<space>ts', Cmd ':FzfLua git_status', desc = 'Git status' },
-  { '<space>re', Cmd ':FzfLua resume', desc = 'Resume search' },
+  { '<space>ts', Cmd ':Telescope git_status', desc = 'Git status' },
+  { '<space>re', Cmd ':Telescope resume', desc = 'Resume search' },
   {
     '<space>ab',
-    function()
-      require('fzf-lua').buffers()
-    end,
+    Cmd ':Telescope buffers',
     desc = 'List buffers',
   },
   {
     'ah',
-    function()
-      require('fzf-lua').diagnostics_workspace()
-    end,
+    Cmd ':Telescope diagnostics',
     desc = 'Workspace diagnostics',
   },
-
   -- Debugging
   { 'su', Cmd ':DapContinue', desc = 'Continue debug' },
   { 'st', Cmd ':DapToggleBreakpoint', desc = 'Toggle breakpoint' },
