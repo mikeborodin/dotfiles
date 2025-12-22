@@ -1,13 +1,16 @@
+-- Freeze cursor shape during startup
+-- vim.o.guicursor = "a:ver0"
+-- vim.o.guicursor = 'n-v-c:block,' .. 'i:ver25,' .. 'r-cr:hor20,' .. 'o:hor50,' .. 'a:blinkon0'
+-- vim.o.guicursor = 'a:block-blinkon0'
+--
+vim.o.guicursor = "a:block-blinkon0"
+
 require 'config.options'
 require 'config.colemak'
 require 'config.enable_leaders'
 
 vim.cmd [[:source ~/personal_projects/dotfiles/nvim/colors/rootbeet.vim]]
 
-vim.g.copilot_filetypes = {
-  ['xml'] = false,
-  ['md'] = false,
-}
 vim.g.loaded_syntastic_dart_dartanalyzer_checker = 0
 
 local function SetIsFlutterProject()
@@ -23,24 +26,18 @@ local function SetIsFlutterProject()
   vim.g.x_is_flutter_project = flutter_dependency ~= nil
 end
 
-SetIsFlutterProject()
+-- SetIsFlutterProject()
 
-if vim.g.vscode == nil then
-  require 'config.setup_lazy'
-  require 'config.keymaps_clear'
-  require 'config.callbacks'
-
-  require 'config.keymaps_x'
-  require 'config.autocmds'
-  require 'config.keymaps_crosseditor'
-  require 'config.keymaps_key'
-  require 'config.repl_highlight'
-  require 'config.snippets'
-  require 'config.tabline'
-else
-  require 'config.init_plugins_vscode_only'
-end
--- Defined in init.lua
+require 'config.setup_lazy'
+require 'config.keymaps_clear'
+-- require 'config.callbacks'
+require 'config.keymaps_x'
+-- require 'config.autocmds'
+require 'config.keymaps_crosseditor'
+require 'config.keymaps_key'
+-- require 'config.repl_highlight'
+require 'config.snippets'
+-- require 'config.tabline'
 
 vim.filetype.add {
   pattern = {

@@ -1,4 +1,45 @@
 return {
+  -- {
+  --   'folke/noice.nvim',
+  --   enabled = false,
+  --   dependencies = {
+  --     'MunifTanjim/nui.nvim',
+  --   },
+  --   config = function()
+  --     require('noice').setup {
+  --       notify = { enabled = false },
+  --       messages = { enabled = false },
+  --       popupmenu = { enabled = false },
+  --     }
+  --   end,
+  -- },
+  -- {
+  --   'grapp-dev/nui-components.nvim',
+  --   dependencies = {
+  --     'MunifTanjim/nui.nvim',
+  --   },
+  -- },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    -- lazy = false, -- This plugin is already lazy
+  },
+  {
+    'akinsho/toggleterm.nvim',
+    config = function()
+      require('toggleterm').setup {
+        open_mapping = '<Char-0xA5>',
+        direction = 'float',
+        shell = function()
+          if vim.env.DEVBOX_PROJECT_ROOT == vim.loop.cwd() then
+            return 'devbox run shell'
+          else
+            return 'zsh'
+          end
+        end,
+      }
+    end,
+  },
   -- Treesitter is a new parser generator tool that we can
   -- use in Neovim to power faster and more accurate
   -- syntax highlighting.
@@ -137,6 +178,40 @@ return {
           end
         end,
         desc = 'Toggle Treesitter Context',
+      },
+    },
+  },
+  {
+    'nvim-treesitter/playground',
+  },
+  {
+    'vim-test/vim-test',
+    config = function()
+      vim.cmd [[
+         let g:test#strategy = "toggleterm"
+
+         function! FvmTransform(cmd) abort
+            return ''.a:cmd
+         endfunction
+        let g:test#custom_transformations = {'fvm': function('FvmTransform')}
+        let g:test#transformation = 'fvm'
+        ]]
+    end,
+  },
+  {
+    'folke/zen-mode.nvim',
+    keys = {
+      {
+        '<space>z',
+        mode = { 'n', 'v' },
+        '<cmd>Zen<cr>',
+        desc = 'Enter Zen',
+      },
+    },
+    opts = {
+      kitty = {
+        enabled = true,
+        font = '+4',
       },
     },
   },

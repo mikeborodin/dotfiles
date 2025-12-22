@@ -22,6 +22,14 @@ config.command_palette_rows = 10
 config.command_palette_fg_color = "white"
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
+config.initial_cols = 120
+config.initial_rows = 40
+config.adjust_window_size_when_changing_font_size = false
+
+config.animation_fps = 1
+config.max_fps = 60
+config.front_end = "Software"
+
 local function get_current_working_dir(tab)
   local cwd_uri = tab.active_pane.current_working_dir
 

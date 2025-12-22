@@ -1,5 +1,12 @@
 return {
   {
+    'nvim-flutter/pubspec-assist.nvim',
+    dependencies = { 'plenary.nvim' },
+    config = function()
+      require('pubspec-assist').setup({})
+    end,
+  },
+  {
     'nvim-flutter/flutter-tools.nvim',
     event = { 'VeryLazy' },
     -- enabled      = vim.g.x_is_flutter_project,

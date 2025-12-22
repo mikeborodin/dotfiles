@@ -2,7 +2,7 @@ require 'utils.find_replace'
 require 'utils.common_utils'
 require 'utils.go_to_test'
 require 'utils.run_script'
-require 'utils.select_run_config'
+-- require 'utils.select_run_config'
 require 'utils.diagnostics'
 
 local Util = require 'lazyvim.util'
@@ -178,7 +178,9 @@ local function autoFix()
   end
 end
 
-local keys = {
+local M = {}
+
+M.keys = {
   -- Navigation
   { '<space>0', Key '%', desc = 'Jump to match' },
   { '<D-cr>', Key 'n', desc = 'Next match' },
@@ -189,8 +191,20 @@ local keys = {
     end,
     desc = 'Go to definition',
   },
-  { '<space>ni', require('fzf-lua').lsp_implementations, desc = 'List implementations' },
-  { '<space>no', require('fzf-lua').lsp_references, desc = 'List references' },
+  {
+    '<space>ni',
+    function()
+      require('fzf-lua').lsp_implementations()
+    end,
+    desc = 'List implementations',
+  },
+  {
+    '<space>no',
+    function()
+      require('fzf-lua').lsp_references()
+    end,
+    desc = 'List references',
+  },
   {
     '<space>i',
     function()
@@ -217,8 +231,20 @@ local keys = {
 
   -- File & search
   { '<space>fw', Cmd ':FzfLua blines', desc = 'Find in buffer' },
-  { '<Char-0xA4>', require('fzf-lua').live_grep, desc = 'Search in project' },
-  { 'af', require('fzf-lua').live_grep, desc = 'Search in project' },
+  {
+    '<Char-0xA4>',
+    function()
+      require('fzf-lua').live_grep()
+    end,
+    desc = 'Search in project',
+  },
+  {
+    'af',
+    function()
+      require('fzf-lua').live_grep()
+    end,
+    desc = 'Search in project',
+  },
   { '<space>fr', Key ':lua find_replace_prompt()', desc = 'Find and replace' },
   {
     '<Char-0xA0>',
@@ -303,8 +329,20 @@ local keys = {
   { '<space>fR', Util.telescope('oldfiles', { cwd = vim.loop.cwd() }), desc = 'Recent files' },
   { '<space>ts', Cmd ':FzfLua git_status', desc = 'Git status' },
   { '<space>re', Cmd ':FzfLua resume', desc = 'Resume search' },
-  { '<space>ab', require('fzf-lua').buffers, desc = 'List buffers' },
-  { 'ah', require('fzf-lua').diagnostics_workspace, desc = 'Workspace diagnostics' },
+  {
+    '<space>ab',
+    function()
+      require('fzf-lua').buffers()
+    end,
+    desc = 'List buffers',
+  },
+  {
+    'ah',
+    function()
+      require('fzf-lua').diagnostics_workspace()
+    end,
+    desc = 'Workspace diagnostics',
+  },
 
   -- Debugging
   { 'su', Cmd ':DapContinue', desc = 'Continue debug' },
@@ -353,7 +391,7 @@ local keys = {
   -- Tasks / commands
   { '<space>sa', Cmd ':TermExec cmd=analyze', desc = 'Run analyzer' },
   { '<space>sf', Cmd ':TermExec cmd=dart_format', desc = 'Run formatter' },
-  { '<space>su', Cmd ':TermExec cmd=submit', desc = 'Submit code' },
+  -- { '<space>su', Cmd ':TermExec cmd=submit', desc = 'Submit code' },
   { '<space>gm', Cmd ':silent !git switch main', desc = 'Git: switch to main' },
   {
     '<space>sp',
@@ -366,6 +404,26 @@ local keys = {
       end)
     end,
     desc = 'Git: push with message',
+  },
+  -- nu -c \"source devenv.nu; dart_format\"
+  {
+    '<space>su',
+    function()
+      local fidget_notify = require('fidget').notify
+      vim.fn.jobstart('devbox run script submit', {
+        stdout_buffered = true,
+        stderr_buffered = true,
+        on_exit = function(_, exit_code, stdout, stderr)
+          if exit_code == 0 then
+            fidget_notify 'Finished'
+          else
+            fidget_notify('Error: \n stdout:' .. (stdout or '') .. '\n stderr:' .. (stderr or ''))
+          end
+        end,
+      })
+      fidget_notify 'Submitting...'
+    end,
+    desc = 'Git: submit',
   },
   {
     '<space>sb',
@@ -429,6 +487,5 @@ local keys = {
 -- },
 
 -- UseKeymapTable(keys)
-
-local wk = require 'which-key'
-wk.add(keys)
+--
+return M

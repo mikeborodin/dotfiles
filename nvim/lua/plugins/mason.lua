@@ -1,15 +1,14 @@
 return {
-  "mason-org/mason.nvim"
-  ,
+  'mason-org/mason.nvim',
   config = function()
-    require("mason").setup({
+    require('mason').setup {
       ui = {
         icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗"
-        }
-      }
-    })
-  end
+          package_installed = '✓',
+          package_pending = '➜',
+          package_uninstalled = '✗',
+        },
+      },
+    }
+  end,
 }

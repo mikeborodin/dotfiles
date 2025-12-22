@@ -9,7 +9,7 @@ return {
         'antoinemadec/FixCursorHold.nvim',
         {
           'sidlatau/neotest-dart',
-          lazy = false,
+          -- lazy = false,
           -- dir = "~/personal_projects/neotest-dart",
         },
       },

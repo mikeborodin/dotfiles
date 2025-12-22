@@ -6,6 +6,8 @@ vim.fn.sign_define('DapStopped', { text = '', texthl = 'DapBreakpoint', lineh
 
 return {
   'mfussenegger/nvim-dap',
+  enabled = true,
+  event = 'VeryLazy',
   dependencies = {
     {
       'rcarriga/nvim-dap-ui',

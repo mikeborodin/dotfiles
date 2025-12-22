@@ -7,6 +7,7 @@ end
 return {
   'L3MON4D3/LuaSnip',
   version = 'v2.*',
+  event = 'VeryLazy',
   build = (not jit.os:find 'Windows')
       and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
     or nil,
@@ -30,13 +31,17 @@ return {
         return files
       end
 
-      local snippets_dir = vim.fn.expand '.vscode' -- Adjust this path as needed
-      local snippets_files = scan_directory_for_snippets(snippets_dir)
+      local vscodeExists = vim.fn.glob '.vscode'
 
-      for _, file in ipairs(snippets_files) do
-        require('luasnip.loaders.from_vscode').load_standalone {
-          path = file,
-        }
+      if vscodeExists ~= '' then
+        local snippets_dir = vim.fn.expand '.vscode' -- Adjust this path as needed
+        local snippets_files = scan_directory_for_snippets(snippets_dir)
+
+        for _, file in ipairs(snippets_files) do
+          require('luasnip.loaders.from_vscode').load_standalone {
+            path = file,
+          }
+        end
       end
 
       registerPostfix()

@@ -3,7 +3,8 @@ vim.g.selectedFlutterDevice = ''
 return {
   {
     'nvim-lualine/lualine.nvim',
-    enabled = true,
+    enabled = false,
+    -- lazy = false,
     config = function()
       local function statusMode()
         return vim.g.selectedFlutterDevice
@@ -29,7 +30,7 @@ return {
           disabled_filetypes = {
             statusline = { 'toggleterm' },
             winbar = { 'toggleterm' },
-            tabline = { 'toggleterm', 'log', },
+            tabline = { 'toggleterm', 'log' },
           },
           always_divide_middle = true,
           refresh = {
@@ -38,8 +39,7 @@ return {
             winbar = 1000,
           },
         },
-        sections = {
-        },
+        sections = {},
         tabline = {
           lualine_b = {
             {
@@ -60,8 +60,8 @@ return {
               symbols = {
                 modified = '●',
                 readonly = '(readonly)', -- Text to show when the file is non-modifiable or readonly.
-                unnamed = '[no-name]',   -- Text to show for unnamed buffers.
-                newfile = '[new]',       -- Text to show for newly created file before first write
+                unnamed = '[no-name]', -- Text to show for unnamed buffers.
+                newfile = '[new]', -- Text to show for newly created file before first write
               },
             },
           },
@@ -90,12 +90,12 @@ return {
               colored = true, -- Displays a colored diff status if set to true
               diff_color = {
                 -- Same color values as the general color option can be used here.
-                added = 'Added',                                        -- Changes the diff's added color
-                modified = 'Changed',                                   -- Changes the diff's modified color
-                removed = 'Removed',                                    -- Changes the diff's removed color you
+                added = 'Added', -- Changes the diff's added color
+                modified = 'Changed', -- Changes the diff's modified color
+                removed = 'Removed', -- Changes the diff's removed color you
               },
               symbols = { added = '+', modified = '~', removed = '-' }, -- Changes the symbols used by the diff.
-              source = nil,                                             -- A function that works as a data source for diff.
+              source = nil, -- A function that works as a data source for diff.
               -- It must return a table as such:
               --   { added = add_count, modified = modified_count, removed = removed_count }
               -- or nil on failure. count <= 0 won't be displayed.

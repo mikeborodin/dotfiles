@@ -41,3 +41,15 @@ vim.cmd [[ autocmd BufNewFile,BufRead *.bru set filetype=bruno ]]
 vim.cmd [[autocmd ColorScheme * highlight NvimTreeNormal guibg=#ffff00]]
 
 vim.cmd [[autocmd bufwritepost kitty.conf :silent !kill -SIGUSR1 $(pgrep kitty)]]
+
+local function update_columns_env()
+  vim.env.COLUMNS = tostring(vim.o.columns)
+end
+
+-- Set once on startup
+update_columns_env()
+
+-- Update on resize
+vim.api.nvim_create_autocmd('VimResized', {
+  callback = update_columns_env,
+})

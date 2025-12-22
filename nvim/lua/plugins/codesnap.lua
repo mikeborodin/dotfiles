@@ -1,8 +1,8 @@
 return {
   'mistricky/codesnap.nvim',
   build = 'make',
+  enabled = false,
   opts = {
-
     title = 'CodeSnap.nvim',
     code_font_family = 'CaskaydiaCove Nerd Font',
     watermark_font_family = 'Pacifico',

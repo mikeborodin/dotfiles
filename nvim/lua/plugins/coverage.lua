@@ -1,6 +1,7 @@
 return {
   {
     'andythigpen/nvim-coverage',
+    enabled = false,
     config = function()
       require('coverage').setup {
         coverage_file = 'coverage/lcov.info',

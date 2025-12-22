@@ -53,7 +53,7 @@
     "mitmproxy@latest",
     "yq@latest",
     "yazi@25.5.31",
-    "nushell@0.106.1",
+    "nushell@0.108.0",
     "typioca@latest",
     "github-copilot-cli@latest",
     "lazygit@0.55.1",
