@@ -13,6 +13,46 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter', 'WinEnter', 'TabEnter',
   end,
 })
 
+-- Minimal smart autosave
+local function should_save(buf)
+    local fn = vim.fn
+
+    -- List of filetypes to ignore
+    local ignore_filetypes = {
+        "TelescopePrompt",
+        "help",
+        "qf",
+        "dashboard",
+        "gitcommit",
+        "toggleterm",
+        "lazy",
+    }
+    local modifiable = fn.getbufvar(buf, "&modifiable") == 1
+    local buftype = fn.getbufvar(buf, "&buftype") -- "" for normal files
+    local filetype = fn.getbufvar(buf, "&filetype")
+
+    -- Save only if modifiable, normal buffer, and filetype not ignored
+    if modifiable and buftype == "" then
+        for _, ft in ipairs(ignore_filetypes) do
+            if filetype == ft then
+                return false
+            end
+        end
+        return true
+    end
+    return false
+end
+
+-- Autocmd for autosave
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+    callback = function(args)
+        local buf = args.buf
+        if should_save(buf) and vim.bo[buf].modified then
+            vim.cmd("silent write")
+        end
+    end,
+})
+
 vim.api.nvim_create_autocmd('BufEnter', {
   pattern = '*',
   callback = function()
