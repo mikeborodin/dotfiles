@@ -1,7 +1,6 @@
 require 'utils.find_replace'
 require 'utils.common_utils'
 require 'utils.go_to_test'
-require 'utils.run_script'
 -- require 'utils.select_run_config'
 require 'utils.diagnostics'
 
@@ -325,8 +324,20 @@ M.keys = {
   -- Search & files (continued)
   { '<space>fb', Cmd ':free', desc = 'Switch buffer' },
   { '<space>ff', Cmd ':Telescope commander', desc = 'Command palette' },
-  { '<space>fF', Util.telescope('files', { cwd = false }), desc = 'Find files (cwd)' },
-  { '<space>fR', Util.telescope('oldfiles', { cwd = vim.loop.cwd() }), desc = 'Recent files' },
+  {
+    '<space>fF',
+    function()
+      Util.telescope('files', { cwd = false })
+    end,
+    desc = 'Find files (cwd)',
+  },
+  {
+    '<space>fR',
+    function()
+      Util.telescope('oldfiles', { cwd = vim.loop.cwd() })
+    end,
+    desc = 'Recent files',
+  },
   { '<space>ts', Cmd ':FzfLua git_status', desc = 'Git status' },
   { '<space>re', Cmd ':FzfLua resume', desc = 'Resume search' },
   {

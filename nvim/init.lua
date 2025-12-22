@@ -3,7 +3,16 @@
 -- vim.o.guicursor = 'n-v-c:block,' .. 'i:ver25,' .. 'r-cr:hor20,' .. 'o:hor50,' .. 'a:blinkon0'
 -- vim.o.guicursor = 'a:block-blinkon0'
 --
-vim.o.guicursor = "a:block-blinkon0"
+-- Hide cursor completely
+vim.o.guicursor = ""
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyDone",
+  callback = function()
+    vim.o.guicursor = "n-v-c:block,i:ver25,r-cr:hor20,o:hor50,a:blinkon0"  -- valid
+    vim.cmd("redraw!")
+  end,
+})
 
 require 'config.options'
 require 'config.colemak'

@@ -1,31 +1,33 @@
 return {
-  -- {
-  --   'folke/noice.nvim',
-  --   enabled = false,
-  --   dependencies = {
-  --     'MunifTanjim/nui.nvim',
-  --   },
-  --   config = function()
-  --     require('noice').setup {
-  --       notify = { enabled = false },
-  --       messages = { enabled = false },
-  --       popupmenu = { enabled = false },
-  --     }
-  --   end,
-  -- },
-  -- {
-  --   'grapp-dev/nui-components.nvim',
-  --   dependencies = {
-  --     'MunifTanjim/nui.nvim',
-  --   },
-  -- },
+  {
+    'folke/noice.nvim',
+    -- enabled = false,
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+    },
+    config = function()
+      require('noice').setup {
+        notify = { enabled = false },
+        messages = { enabled = false },
+        popupmenu = { enabled = false },
+      }
+    end,
+  },
+  {
+    'grapp-dev/nui-components.nvim',
+    dependencies = {
+      'MunifTanjim/nui.nvim',
+    },
+  },
   {
     'mrcjkb/rustaceanvim',
+    enabled = false,
     version = '^5', -- Recommended
     -- lazy = false, -- This plugin is already lazy
   },
   {
     'akinsho/toggleterm.nvim',
+    -- enabled = true,
     config = function()
       require('toggleterm').setup {
         open_mapping = '<Char-0xA5>',
@@ -46,7 +48,8 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     version = false, -- last release is way too old and doesn't work on Windows
-    enabled = true,
+    -- enabled = true,
+    -- enabled = false,
     build = ':TSUpdate',
     -- event = { "VeryLazy", },
     dependencies = {
@@ -161,8 +164,9 @@ return {
   -- Show context of the current function
   {
     'nvim-treesitter/nvim-treesitter-context',
-    event = 'VeryLazy',
-    enabled = true,
+    -- event = 'VeryLazy',
+    -- enabled = true,
+    -- enabled = false,
     opts = { mode = 'cursor' },
     keys = {
       {

@@ -3,7 +3,7 @@ vim.g.selectedFlutterDevice = ''
 return {
   {
     'nvim-lualine/lualine.nvim',
-    enabled = false,
+    enabled = true,
     -- lazy = false,
     config = function()
       local function statusMode()
