@@ -20,6 +20,33 @@ function SelectConfigAndRun()
   require('utils.select_run_config').selectRunConfig()
 end
 
+-- Function to delete current file buffer
+local function delete_current_file()
+  local buf = vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(buf)
+  local notify = vim.notify
+
+  if bufname == '' then
+    notify('Cannot delete: Buffer has no name', vim.log.levels.ERROR)
+    return
+  end
+
+  local stat = vim.loop.fs_stat(bufname)
+  if stat and stat.type == 'file' then
+    -- Close buffer first
+    vim.cmd 'bdelete!'
+    -- Delete the actual file
+    local ok, err = os.remove(bufname)
+    if ok then
+      notify('File deleted: ' .. bufname, vim.log.levels.INFO)
+    else
+      notify('Failed to delete file: ' .. err, vim.log.levels.ERROR)
+    end
+  else
+    notify('Cannot delete: Not a file', vim.log.levels.ERROR)
+  end
+end
+
 -- local is_default_buffer = function()
 -- 	return require('utils.buffers').is_not_focused_buffer("NvimTree_1", "mind")
 -- end
@@ -468,22 +495,11 @@ M.keys = {
     end,
     desc = 'Open Arrow menu',
   },
+  {
+    '<space>dd',
+    delete_current_file,
+    desc = 'Delete currently open if it is a file',
+  },
 }
 
--- {
--- 	"adn",
--- 	function()
--- 		--TODO: make it work
--- 		-- it wokrs for selecting devices
--- 		require("flutter-tools").setup_project({
--- 			{
--- 				device = "3D2FCA91-D8F9-44C2-AEB2-C1712B59E9F2",
--- 			},
--- 		})
--- 	end,
--- 	"Select Flutter Devices",
--- },
-
--- UseKeymapTable(keys)
---
 return M
