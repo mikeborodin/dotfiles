@@ -1,7 +1,6 @@
-# my config
+# My config
 
-
-✅ format json via jq
-✅ fix json via fixjson
-   nushell lsp
-
+- [x] format json via jq
+- [x] fix json via fixjson
+- [x] setup nushell lsp
+- [x] fix nvim starup glitch
