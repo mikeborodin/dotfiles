@@ -51,7 +51,7 @@ return {
     -- enabled = true,
     -- enabled = false,
     build = ':TSUpdate',
-    -- event = { "VeryLazy", },
+    event = { 'VeryLazy' },
     dependencies = {
       {
         'nvim-treesitter/nvim-treesitter-textobjects',
