@@ -35,8 +35,24 @@ local get_hover = ya.sync(function()
   end
 end)
 
+local function get_git_root()
+  local handle = io.popen("git rev-parse --show-toplevel")
+  if handle then
+    local root = handle:read("*a")
+    handle:close()
+    return root:gsub("\n", "")
+  end
+  return nil
+end
+
 return {
   entry = function(self, job)
+    local git_root = get_git_root()
+    if not git_root then
+      ya.notify({ title = "Error", content = "Not a git repository", timeout = 5.0 })
+      return
+    end
+
     local args = job.args
     -- First and only arg is the command to run
     if #args == 0 then
@@ -66,7 +82,7 @@ return {
     local output, err = Command("nu")
       :args({
         "--login",
-        "~/personal_projects/dotfiles/scripts/ai/" .. args[1] .. ".nu",
+        git_root .. "/scripts/ai/" .. args[1] .. ".nu",
         hover,
       })
       :env("yazi_hover", hover)

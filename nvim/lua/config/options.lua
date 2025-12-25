@@ -5,7 +5,7 @@ vim.o.hlsearch = false
 vim.o.pumheight = 10
 vim.o.pumwidth = 120
 
-vim.o.shell = '/Users/mike/personal_projects/dotfiles/nvim/nucmd.sh'
+vim.o.shell = vim.fn.stdpath('config') .. '/nucmd.sh'
 vim.o.shellcmdflag = ''
 vim.o.shellpipe = ''
 vim.o.shelltemp = false

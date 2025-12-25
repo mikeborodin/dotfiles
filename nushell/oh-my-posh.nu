@@ -4,7 +4,7 @@ if ($env.config? | is-not-empty) {
 }
 
 $env.POWERLINE_COMMAND = 'oh-my-posh'
-$env.POSH_THEME = (echo "/Users/mike/personal_projects/dotfiles/nushell/themes/emodipo.omp.json")
+$env.POSH_THEME = ($nu.default-config-dir | path join 'themes/emodipo.omp.json')
 $env.PROMPT_INDICATOR = ""
 $env.POSH_SESSION_ID = (echo "52551ca7-c0fc-4bff-b98b-ff83df075e9a")
 $env.POSH_SHELL = "nu"

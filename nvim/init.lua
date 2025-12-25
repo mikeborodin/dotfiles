@@ -11,7 +11,7 @@ require 'config.options'
 require 'config.colemak'
 require 'config.enable_leaders'
 
-vim.cmd [[:source ~/personal_projects/dotfiles/nvim/colors/rootbeet.vim]]
+vim.cmd("source " .. vim.fn.stdpath("config") .. "/colors/rootbeet.vim")
 
 vim.g.loaded_syntastic_dart_dartanalyzer_checker = 0
 

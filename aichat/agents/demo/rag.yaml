@@ -6,7 +6,7 @@ top_k: 5
 batch_size: 100
 next_file_id: 2
 document_paths:
-- /Users/mike/personal_projects/dotfiles/aichat/functions/agents/demo/README.md
+- aichat/functions/agents/demo/README.md
 - https://github.com/sigoden/llm-functions/blob/main/README.md
 files:
   0:
@@ -112,7 +112,7 @@ files:
       metadata: {}
   1:
     hash: 1e8051b86670c58fb77495f7b022b444c124bd8ac7d0c73391150d62f83e9d59
-    path: /Users/mike/personal_projects/dotfiles/aichat/functions/agents/demo/README.md
+    path: aichat/functions/agents/demo/README.md
     documents:
     - page_content: |-
         # Demo
