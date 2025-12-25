@@ -9,6 +9,7 @@ alias python = python3
 alias ai = aichat -S
 alias drd = devbox run shell
 alias aio = aichat -S -m ollama:llama3.1
+alias tailscale = /Applications/Tailscale.app/Contents/MacOS/Tailscale
 
 alias python = python3
 

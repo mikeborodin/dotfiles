@@ -3,6 +3,7 @@
   "packages": [
     "gh@latest",
     "btop@latest",
+    "gemini-cli@latest",
     "temurin-bin-17@latest",
     "nodePackages.firebase-tools@latest",
     "jq@latest",
@@ -49,7 +50,6 @@
     "aider-chat@0.84.0",
     "piper-tts@latest",
     "fzf@0.62.0",
-    "nvimpager@latest",
     "mitmproxy@latest",
     "yq@latest",
     "yazi@25.5.31",

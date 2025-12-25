@@ -252,7 +252,7 @@ M.keys = {
   },
 
   -- File & search
-  { '<space>fw', Cmd ':Telescope blines', desc = 'Find in buffer' },
+  { '<space>fw', Cmd ':Telescope current_buffer_fuzzy_find', desc = 'Find in buffer' },
   {
     '<Char-0xA4>',
     function()

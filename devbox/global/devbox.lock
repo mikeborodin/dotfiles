@@ -911,6 +911,54 @@
         }
       }
     },
+    "gemini-cli@latest": {
+      "last_modified": "2025-12-18T02:44:17Z",
+      "resolved": "github:NixOS/nixpkgs/def3da69945bbe338c373fddad5a1bb49cf199ce#gemini-cli",
+      "source": "devbox-search",
+      "version": "0.21.1",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/3azp1pc8nfk403msr62qxad9nzmvlqdh-gemini-cli-0.21.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/3azp1pc8nfk403msr62qxad9nzmvlqdh-gemini-cli-0.21.1"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/2khjkc2zkc5hqq8apgmwlpxkjr1jz1h6-gemini-cli-0.21.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/2khjkc2zkc5hqq8apgmwlpxkjr1jz1h6-gemini-cli-0.21.1"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/7qbp9br8wb6vvy9pqkr1gfix1kypzgjq-gemini-cli-0.21.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/7qbp9br8wb6vvy9pqkr1gfix1kypzgjq-gemini-cli-0.21.1"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/vv4kbv1pc9zfwz1z24h9l2ibjhwypl87-gemini-cli-0.21.1",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/vv4kbv1pc9zfwz1z24h9l2ibjhwypl87-gemini-cli-0.21.1"
+        }
+      }
+    },
     "gh-dash@latest": {
       "last_modified": "2025-06-20T02:24:11Z",
       "resolved": "github:NixOS/nixpkgs/076e8c6678d8c54204abcb4b1b14c366835a58bb#gh-dash",
@@ -2064,54 +2112,6 @@
             }
           ],
           "store_path": "/nix/store/kx4ic1nmgsfh3qhr74vxq7g97pal7mn4-nushell-0.108.0"
-        }
-      }
-    },
-    "nvimpager@latest": {
-      "last_modified": "2025-06-20T02:24:11Z",
-      "resolved": "github:NixOS/nixpkgs/076e8c6678d8c54204abcb4b1b14c366835a58bb#nvimpager",
-      "source": "devbox-search",
-      "version": "0.13.0",
-      "systems": {
-        "aarch64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/kcsl1xbpybg8s8010gjc1wbkrhziy1b1-nvimpager-0.13.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/kcsl1xbpybg8s8010gjc1wbkrhziy1b1-nvimpager-0.13.0"
-        },
-        "aarch64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/9jsy41hgcy6f03783v6jff20ysbwk75a-nvimpager-0.13.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/9jsy41hgcy6f03783v6jff20ysbwk75a-nvimpager-0.13.0"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/w6bx8hy0x51p6xpm7p674zqlsb4fz40f-nvimpager-0.13.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/w6bx8hy0x51p6xpm7p674zqlsb4fz40f-nvimpager-0.13.0"
-        },
-        "x86_64-linux": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/c3bzkl4ydb50i3dzcll87ycsai3hhgzk-nvimpager-0.13.0",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/c3bzkl4ydb50i3dzcll87ycsai3hhgzk-nvimpager-0.13.0"
         }
       }
     },

@@ -33,6 +33,9 @@ local function cmd(key, char)
   }
 end
 
+local nu =
+  "/Users/mike/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/nu"
+
 return {
   cmd("e", 0xA0),
   cmd("y", 0xA1),
@@ -46,7 +49,7 @@ return {
     key = "h",
     action = wezterm.action.SplitPane({
       direction = "Right",
-      command = { args = { "zsh" } },
+      command = { args = { nu } },
       size = { Percent = 50 },
     }),
   },
@@ -60,7 +63,7 @@ return {
     key = "H",
     action = wezterm.action.SplitPane({
       direction = "Down",
-      command = { args = { "zsh" } },
+      command = { args = { nu } },
       size = { Percent = 50 },
     }),
   },
@@ -77,7 +80,7 @@ return {
   {
     mods = "LEADER",
     key = "o",
-    action = wezterm.action.SpawnCommandInNewTab({ args = { "zsh" } }),
+    action = wezterm.action.SpawnCommandInNewTab({ args = { nu } }),
   },
   { key = "L", mods = "LEADER", action = wezterm.action.ShowDebugOverlay },
   {
@@ -123,7 +126,7 @@ return {
     action = act.SwitchToWorkspace({
       name = "monitoring",
       spawn = {
-        args = { "zsh" },
+        args = { nu },
       },
     }),
   },
