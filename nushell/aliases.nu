@@ -2,6 +2,7 @@ alias dr = devbox run
 alias drs = devbox run shell
 
 alias v = nvim
+
 alias e = exit
 alias y = yazi
 alias gg = lazygit
@@ -13,8 +14,10 @@ alias tailscale = /Applications/Tailscale.app/Contents/MacOS/Tailscale
 
 alias python = python3
 
+def ll [] { ls | sort-by type }
+
 def swd [] {
-  ls -s ~/projects | get name | to text | fzf | kitten @ action launch --type=tab --cwd=$"/Users/Mike/projects/($in)"
+  ls -s ~/projects | get name | to text | fzf | kitten @ action launch --type=tab --cwd=$"/Users/mike/projects/($in)"
 }
 
 def dif [name:string = 'main'] {
