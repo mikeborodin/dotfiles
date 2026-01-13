@@ -67,6 +67,7 @@ $env.PATH = (
     | append '/opt/homebrew/bin'
 )
 
+$env.AGENT_BASE_URL = 'https://openrouter.ai/api/v1'
 
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)

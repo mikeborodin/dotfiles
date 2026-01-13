@@ -7,6 +7,7 @@
     "temurin-bin-17@latest",
     "nodePackages.firebase-tools@latest",
     "jq@latest",
+    "acli@latest",
     "gh-dash@latest",
     "delta@latest",
     "jless@latest",
@@ -58,7 +59,8 @@
     "github-copilot-cli@latest",
     "lazygit@0.55.1",
     "git@latest",
-    "aerospace@0.19.2-Beta"
+    "aerospace@0.19.2-Beta",
+    "github:Nano-Collective/nanocoder"
   ],
   "env": {
     "JAVA_HOME": "$DEVBOX_PROJECT_ROOT/.devbox/nix/profile/default/Contents/Home"

@@ -36,7 +36,7 @@ return {
           if vim.env.DEVBOX_PROJECT_ROOT == vim.loop.cwd() then
             return 'devbox run shell'
           else
-            return 'zsh'
+            return 'nu'
           end
         end,
       }
@@ -77,6 +77,7 @@ return {
       indent = { enable = true },
       -- ignore_install = { "dart" },
       textobjects = {
+        disable = { 'dart' },
         -- select = {
         --   enable = true,
         --   lookahead = true,

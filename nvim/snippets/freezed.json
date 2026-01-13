@@ -26,7 +26,7 @@
     "body": [
       "",
       "@freezed",
-      "class ${1} with _$${1}{",
+      "abstract class ${1} with _$${1}{",
       "  const factory ${1}.data() = _Data;",
       "}"
     ],
@@ -37,7 +37,7 @@
     "body": [
       "",
       "@freezed",
-      "class ${1} with _$${1}{",
+      "abstract class ${1} with _$${1}{",
       "  const factory ${1}({${0}}) = _${1};",
       "}"
     ],

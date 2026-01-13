@@ -5,12 +5,12 @@ vim.o.hlsearch = false
 vim.o.pumheight = 10
 vim.o.pumwidth = 120
 
-vim.o.shell = vim.fn.stdpath('config') .. '/nucmd.sh'
-vim.o.shellcmdflag = ''
-vim.o.shellpipe = ''
-vim.o.shelltemp = false
-vim.o.shellredir = '>%s'
-vim.o.shortmess = vim.o.shortmess .. 'c'
+-- vim.o.shell = vim.fn.stdpath('config') .. '/nucmd.sh'
+-- vim.o.shellcmdflag = ''
+-- vim.o.shellpipe = ''
+-- vim.o.shelltemp = false
+-- vim.o.shellredir = '>%s'
+-- vim.o.shortmess = vim.o.shortmess .. 'c'
 
 
 -- UI & responsiveness
@@ -24,7 +24,6 @@ vim.o.backup = false
 vim.o.writebackup = false
 vim.o.undofile = true
 
-vim.opt.conceallevel = 2
 vim.opt.concealcursor = 'nc'
 vim.o.cursorline = true
 
@@ -77,5 +76,5 @@ vim.opt.fillchars = { eob = ' ' }
 -- Default splitting will cause your main splits to jump when opening an edgebar.
 -- To prevent this, set `splitkeep` to either `screen` or `topline`.
 vim.opt.splitkeep = 'screen'
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.modeline = false

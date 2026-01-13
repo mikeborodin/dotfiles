@@ -6,6 +6,12 @@ alias v = nvim
 alias e = exit
 alias y = yazi
 alias gg = lazygit
+
+def dot [] {
+   cd ~/personal_projects/dotfiles/
+   v
+}
+
 alias python = python3
 alias ai = aichat -S
 alias drd = devbox run shell

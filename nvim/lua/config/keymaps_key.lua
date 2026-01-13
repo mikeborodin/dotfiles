@@ -209,6 +209,7 @@ local M = {}
 M.keys = {
   -- Navigation
   { '<space>0', Key '%', desc = 'Jump to match' },
+  { '<space>b', Cmd 'Telescope git_branches', desc = 'Git branches' },
   { '<D-cr>', Key 'n', desc = 'Next match' },
   {
     '<space>ne',

@@ -29,6 +29,8 @@ path add ($env.HOME | path join "personal_projects/other/bin")
 path add ($env.HOME | path join "personal_projects/status/bin")
 path add ($env.HOME | path join "personal_projects/testui/bin")
 path add ($env.HOME | path join "personal_projects/buildrunnerui/bin")
+path add ($env.HOME | path join "Downloads/ioquake3.app/Contents/MacOS")
+
 
 
 $env.AICHAT_CONFIG_DIR = (($nu.default-config-dir | path dirname) | path join 'aichat')

@@ -3,7 +3,21 @@ return {
     'nvim-flutter/pubspec-assist.nvim',
     dependencies = { 'plenary.nvim' },
     config = function()
-      require('pubspec-assist').setup({})
+      require('pubspec-assist').setup {}
+    end,
+  },
+  {
+    'm00qek/baleia.nvim',
+    config = function()
+      vim.g.baleia = require('baleia').setup { log = 'INFO', line_starts_at = 6 }
+      vim.api.nvim_create_autocmd('BufWinEnter', {
+        pattern = '__FLUTTER_DEV_LOG__',
+        callback = function()
+          -- vim.o.modifiable = true
+          vim.g.baleia.automatically(vim.api.nvim_get_current_buf())
+        end,
+      })
+      vim.api.nvim_create_user_command('BaleiaLogs', vim.g.baleia.logger.show, { bang = true })
     end,
   },
   {
@@ -74,6 +88,7 @@ return {
               vim.fn.expand '$HOME/fvm',
               '.fvm',
               vim.fn.expand '$HOME/.pub-cache',
+              vim.fn.expand '.dart-tool',
             },
             outline = {
               enabled = false,

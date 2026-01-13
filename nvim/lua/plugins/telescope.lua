@@ -6,16 +6,10 @@ return {
     version = false, -- telescope did only one release, so use HEAD for now
     dependencies = {
       'nvim-telescope/telescope-dap.nvim',
-      -- {
-      --   'nvim-telescope/telescope-fzf-native.nvim',
-      --   build = 'make',
-      --   enabled = vim.fn.executable 'make' == 1,
-      --   config = function()
-      --     Util.on_load('telescope.nvim', function()
-      --       require('telescope').load_extension 'fzf'
-      --     end)
-      --   end,
-      -- },
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install',
+      },
     },
     keys = {
       -- { "<space>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
@@ -87,25 +81,64 @@ return {
         local line = action_state.get_current_line()
         Util.telescope('find_files', { hidden = true, default_text = line })()
       end
+      local telescope = require 'telescope'
+      local telescopeConfig = require 'telescope.config'
+
+      -- Clone the default Telescope configuration
+      local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
+
+      -- I want to search in hidden/dot files.
+      table.insert(vimgrep_arguments, '--hidden')
+      -- Exclude common ignored folders
+      local ignored_folders = {
+        '.git',
+        'build',
+        'node_modules',
+        'dist',
+        'venv',
+        '.fvm',
+        '.devbox',
+        '.dart-tool',
+        'ios/Pods',
+        'macos/Pods',
+        'macos/build',
+        'ios/build',
+        '.venv',
+        '.idea',
+        '.pub-cache',
+        'simulator/src',
+      }
+      for _, folder in ipairs(ignored_folders) do
+        table.insert(vimgrep_arguments, '--glob')
+        table.insert(vimgrep_arguments, '!**/' .. folder .. '/*')
+      end
+
+      local fd_command = {
+        'fd',
+        '--type',
+        'f',
+        '--hidden',
+        '--no-ignore',
+      }
+
+      for _, folder in ipairs(ignored_folders) do
+        table.insert(fd_command, '--exclude')
+        table.insert(fd_command, folder)
+      end
 
       return {
+        pickers = {
+          live_grep = {
+            additional_args = function(opts)
+              return { '--hidden' }
+            end,
+          },
+          find_files = {
+            fd_command = fd_command,
+          },
+        },
         defaults = {
           sorting_strategy = 'ascending',
-          file_ignore_patterns = {
-            'node_modules',
-            '.git',
-            '.idea',
-            '.fvm',
-            '.run',
-            '.mason',
-          },
-          pickers = {
-            live_grep = {
-              additional_args = function(opts)
-                return { '--hidden' }
-              end,
-            },
-          },
           layout_config = {
             prompt_position = 'top',
             height = 0.7,
@@ -149,10 +182,11 @@ return {
     config = function(_, opts)
       require('telescope').setup(opts)
       require('telescope').load_extension 'dap'
+      require('telescope').load_extension 'fzf'
 
-      if vim.g.x_is_flutter_project then
-        require('telescope').load_extension 'flutter'
-      end
+      -- if vim.g.x_is_flutter_project then
+      --   require('telescope').load_extension 'flutter'
+      -- end
     end,
   },
 }
