@@ -98,6 +98,7 @@ vim.api.nvim_create_autocmd('TextChanged', {
 vim.cmd [[ autocmd BufNewFile,BufRead *.metadata set filetype=yaml ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.fvmrc set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.arb set filetype=json ]]
+vim.cmd [[ autocmd BufNewFile,BufRead *.xctestplan set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.code-snippets set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead devbox.lock set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead pubspec.lock set filetype=json ]]
