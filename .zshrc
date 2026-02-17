@@ -26,7 +26,10 @@ export PATH="$PATH:/opt/homebrew/bin"
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 # source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
+if command -v git >/dev/null 2>&1; then
 eval "$(devbox global shellenv)"
+fi
  
 export PATH="$HOME/programs/neovim/out/bin:$PATH"
 
