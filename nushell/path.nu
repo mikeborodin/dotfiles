@@ -20,6 +20,7 @@ path add ($env.HOME | path join "Library/Android/sdk/cmdline-tools/latest/bin")
 path add ($env.HOME | path join "Library/Python/3.9/bin")
 path add ($env.HOME | path join "Library/Android/sdk/emulator")
 path add ($env.HOME | path join ".pub-cache/bin")
+path add ($env.HOME | path join ".npm-packages/bin")
 path add ($env.HOME | path join ".maestro/bin")
 path add ($env.HOME | path join "personal_projects/testui3")
 

@@ -7,5 +7,6 @@ local/
 project_context.md
 
 .gooseignore
+opencode.json
 .aiderignore.local
 .aider*

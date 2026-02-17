@@ -121,9 +121,9 @@ vim.api.nvim_create_autocmd('VimResized', {
   callback = update_columns_env,
 })
 
-vim.api.nvim_create_autocmd({ 'BufWritePost', 'TextChanged', 'TextChangedI' }, {
-  pattern = '*.dart',
-  callback = function(ev)
-    require('fidget').notify('Event: ' .. ev.event .. ' | File: ' .. ev.file)
-  end,
-})
+-- vim.api.nvim_create_autocmd({ 'BufWritePost', 'TextChanged', 'TextChangedI' }, {
+--   pattern = '*.dart',
+--   callback = function(ev)
+--     require('fidget').notify('Event: ' .. ev.event .. ' | File: ' .. ev.file)
+--   end,
+-- })
