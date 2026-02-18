@@ -33,8 +33,7 @@ local function cmd(key, char)
   }
 end
 
-local nu =
-  "/Users/mike/.local/share/mise/installs/aqua-nushell-nushell/0.110.0/nu-0.110.0-aarch64-apple-darwin/nu"
+local nu = "/Users/mike/.local/share/mise/shims/nu"
 
 return {
   cmd("e", 0xA0),
