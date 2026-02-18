@@ -1,5 +1,6 @@
 ln -s -f $(pwd)/nvim ~/.config/nvim
 ln -s -f $(pwd)/wezterm ~/.config/wezterm
+ln -s -f $(pwd)/karabiner ~/.config/karabiner
 ln -s -f $(pwd)/skhd ~/.config/skhd
 ln -s -f $(pwd)/scripts ~/scripts
 ln -s -f $(pwd)/kitty/kitty.conf ~/.config/kitty
