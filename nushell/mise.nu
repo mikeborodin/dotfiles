@@ -17,10 +17,7 @@ def --env "update-env" [] {
 }
 export-env {
   
-  'set,PATH,/Users/mike/.local/share/devbox/global/default/.devbox/virtenv/ruby_3_2/bin:/Users/mike/.local/share/devbox/global/default/.devbox/nix/profile/default/bin:/Users/mike/Downloads/ioquake3.app/Contents/MacOS:/Users/mike/personal_projects/buildrunnerui/bin:/Users/mike/personal_projects/testui/bin:/Users/mike/personal_projects/status/bin:/Users/mike/personal_projects/other/bin:/Users/mike/personal_projects/extract/bin:/Users/mike/personal_projects/testui3:/Users/mike/.maestro/bin:/Users/mike/.npm-packages/bin:/Users/mike/.pub-cache/bin:/Users/mike/Library/Android/sdk/emulator:/Users/mike/Library/Python/3.9/bin:/Users/mike/Library/Android/sdk/cmdline-tools/latest/bin:/Users/mike/Library/Android/sdk/platform-tools:/Users/mike/.android/sdk/platform-tools:/Users/mike/.opencode/bin:/Users/mike/programs/neovim/out/bin:/Users/mike/programs/bin:/Users/mike/scripts:/Users/mike/go/bin:/Users/mike/programs/nnn/source:/Users/mike/fvm/default/bin:/Users/mike/.local/bin:/Applications/Firefox.app/Contents/MacOS:/opt/homebrew/bin:/Users/mike/.local/share/nvim/mason/bin:/Users/mike/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/mike/.tmux/tmuxifier/bin:/Users/mike/.rvm/bin:/Users/mike/.rd/bin:/Users/mike/.shorebird/bin:/Users/mike/.amplify/bin:/Users/mike/.npm-packages:/Users/mike/programs/sonar-scanner/bin:/Users/mike/.local/share/devbox/global/default/.devbox/virtenv/runx/bin
-hide,MISE_SHELL,
-hide,__MISE_DIFF,
-hide,__MISE_DIFF,' | parse vars | update-env
+  '' | parse vars | update-env
   $env.MISE_SHELL = "nu"
   let mise_hook = {
     condition: { "MISE_SHELL" in $env }
