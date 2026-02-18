@@ -104,13 +104,15 @@ source ($nu.default-config-dir | path join 'secrets.nu')
 let dotfiles_dir = ($nu.default-config-dir | path dirname)
 $env.OPENCODE_CONFIG = ($dotfiles_dir | path join 'opencode/opencode.json')
 
-load-env (
-   (devbox global shellenv)
-   | str trim
-   | lines
-   | parse 'export {name}="{value}";'
-   | transpose --header-row --as-record
-)
+if (which devbox | is-not-empty) {
+    load-env (
+       (devbox global shellenv)
+       | str trim
+       | lines
+       | parse 'export {name}="{value}";'
+       | transpose --header-row --as-record
+    )
+} 
 
 let mise_path = $nu.default-config-dir | path join mise.nu
 ^mise activate nu | save $mise_path --force
