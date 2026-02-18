@@ -1,7 +1,7 @@
 ln -s -f $(pwd)/nvim ~/.config/nvim
 ln -s -f $(pwd)/wezterm ~/.config/wezterm
 ln -s -f $(pwd)/karabiner ~/.config/karabiner
-ln -s -f $(pwd)/skhd ~/.config/skhd
+ln -s -f $(pwd)/aerospace.toml ~/.config/aerospace/aerospace.toml
 ln -s -f $(pwd)/scripts ~/scripts
 ln -s -f $(pwd)/kitty/kitty.conf ~/.config/kitty
 ln -s -f $(pwd)/grc ~/.grc
