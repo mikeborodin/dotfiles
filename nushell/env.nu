@@ -111,3 +111,6 @@ load-env (
    | parse 'export {name}="{value}";'
    | transpose --header-row --as-record
 )
+
+let mise_path = $nu.default-config-dir | path join mise.nu
+^mise activate nu | save $mise_path --force

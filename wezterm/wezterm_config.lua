@@ -21,6 +21,7 @@ config.command_palette_font_size = 22
 config.command_palette_rows = 10
 config.command_palette_fg_color = "white"
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
+config.default_prog = { "/Users/mike/.local/share/mise/installs/aqua-nushell-nushell/0.110.0/nu-0.110.0-aarch64-apple-darwin/nu" }
 
 config.initial_cols = 120
 config.initial_rows = 40

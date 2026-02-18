@@ -386,3 +386,5 @@ $env.config = {
 }
 
 source ($nu.default-config-dir | path join 'keys.nu')
+
+use ($nu.default-config-dir | path join mise.nu)
