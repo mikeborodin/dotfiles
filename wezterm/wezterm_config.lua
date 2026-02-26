@@ -59,7 +59,7 @@ end
 local function get_process(tab)
   local PROCESS_ICONS = require("process_icons")
   local process_name =
-    string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)", "%2")
+      string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)", "%2")
 
   if PROCESS_ICONS[process_name] then
     return " " .. wezterm.format(PROCESS_ICONS[process_name])
@@ -97,6 +97,30 @@ local HOVER_TAB_FG = "White"
 local NORMAL_TAB_BG = LightGrey
 local NORMAL_TAB_FG = "Grey"
 
+local WORKSPACE_BG = colors.mauve
+local WORKSPACE_FG = colors.crust
+
+local function update_left_status(window)
+  local workspace = window:active_workspace()
+  window:set_left_status(wezterm.format({
+    { Background = { Color = WORKSPACE_BG } },
+    { Foreground = { Color = WORKSPACE_FG } },
+    { Attribute = { Intensity = "Bold" } },
+    { Text = "  " .. workspace .. " " },
+    { Background = { Color = NORMAL_TAB_BG } },
+    { Foreground = { Color = WORKSPACE_BG } },
+    { Text = SOLID_RIGHT_ARROW },
+  }))
+end
+
+wezterm.on("update-status", function(window)
+  update_left_status(window)
+end)
+
+wezterm.on("refresh-status", function(window)
+  update_left_status(window)
+end)
+
 wezterm.on(
   "format-tab-title",
   function(tab, tabs, panes, config, hover, max_width)
@@ -118,7 +142,9 @@ wezterm.on(
       foreground = HOVER_TAB_FG
     end
 
-    local name = get_current_working_dir(tab)
+    local tab_title = tab.tab_title
+    local name = (tab_title and #tab_title > 0) and tab_title
+      or get_current_working_dir(tab)
     local process_name = string.gsub(
       tab.active_pane.foreground_process_name,
       "(.*[/\\])(.*)",
@@ -127,25 +153,19 @@ wezterm.on(
 
     for _, pane in ipairs(tab.panes) do
       if
-        pane.has_unseen_output
-        and process_name ~= "nvim"
-        and process_name ~= "lazygit"
+          pane.has_unseen_output
+          and process_name ~= "nvim"
+          and process_name ~= "lazygit"
       then
         name = name .. "*"
       end
     end
 
-    local leading_fg = NORMAL_TAB_FG
+    local leading_fg = NORMAL_TAB_BG
     local leading_bg = background
 
     local trailing_fg = background
     local trailing_bg = NORMAL_TAB_BG
-
-    if is_first then
-      leading_fg = TAB_BAR_BG
-    else
-      leading_fg = NORMAL_TAB_BG
-    end
 
     if is_last then
       trailing_bg = TAB_BAR_BG
@@ -158,7 +178,7 @@ wezterm.on(
       { Attribute = { Intensity = hover and "Bold" or "Normal" } },
       { Background = { Color = leading_bg } },
       { Foreground = { Color = leading_fg } },
-      { Text = not is_first and SOLID_RIGHT_ARROW or "" },
+      { Text = SOLID_RIGHT_ARROW },
       { Background = { Color = background } },
       { Text = get_process(tab) },
       { Text = " " },

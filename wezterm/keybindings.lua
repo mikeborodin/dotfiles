@@ -79,7 +79,13 @@ return {
   {
     mods = "LEADER",
     key = "o",
-    action = wezterm.action.SpawnCommandInNewTab({ args = { nu } }),
+    action = wezterm.action_callback(function(window, pane)
+      window:perform_action(
+        wezterm.action.SpawnCommandInNewTab({ args = { nu } }),
+        pane
+      )
+      wezterm.emit("refresh-status", window)
+    end),
   },
   { key = "L", mods = "LEADER", action = wezterm.action.ShowDebugOverlay },
   {
@@ -107,7 +113,35 @@ return {
   {
     key = "r",
     mods = "LEADER",
-    action = act.ReloadConfiguration,
+    action = act.PromptInputLine({
+      description = wezterm.format({
+        { Attribute = { Intensity = "Bold" } },
+        { Foreground = { AnsiColor = "Fuchsia" } },
+        { Text = "Enter new tab name" },
+      }),
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:active_tab():set_title(line)
+        end
+      end),
+    }),
+  },
+  {
+    key = "R",
+    mods = "LEADER",
+    action = act.PromptInputLine({
+      description = wezterm.format({
+        { Attribute = { Intensity = "Bold" } },
+        { Foreground = { AnsiColor = "Fuchsia" } },
+        { Text = "Enter new workspace name" },
+      }),
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          wezterm.mux.rename_workspace(window:active_workspace(), line)
+          wezterm.emit("refresh-status", window)
+        end
+      end),
+    }),
   },
   {
     key = "t",
@@ -127,6 +161,25 @@ return {
       spawn = {
         args = { nu },
       },
+    }),
+  },
+  {
+    key = "O",
+    mods = "LEADER",
+    action = act.PromptInputLine({
+      description = wezterm.format({
+        { Attribute = { Intensity = "Bold" } },
+        { Foreground = { AnsiColor = "Fuchsia" } },
+        { Text = "Enter name for new workspace" },
+      }),
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:perform_action(
+            act.SwitchToWorkspace({ name = line }),
+            pane
+          )
+        end
+      end),
     }),
   },
   {
