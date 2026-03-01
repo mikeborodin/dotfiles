@@ -79,13 +79,7 @@ return {
   {
     mods = "LEADER",
     key = "o",
-    action = wezterm.action_callback(function(window, pane)
-      window:perform_action(
-        wezterm.action.SpawnCommandInNewTab({ args = { nu } }),
-        pane
-      )
-      wezterm.emit("refresh-status", window)
-    end),
+    action = wezterm.action.SpawnCommandInNewTab({ args = { nu } }),
   },
   { key = "L", mods = "LEADER", action = wezterm.action.ShowDebugOverlay },
   {
@@ -138,7 +132,6 @@ return {
       action = wezterm.action_callback(function(window, pane, line)
         if line then
           wezterm.mux.rename_workspace(window:active_workspace(), line)
-          wezterm.emit("refresh-status", window)
         end
       end),
     }),
