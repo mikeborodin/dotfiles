@@ -12,3 +12,6 @@ ln -s -f $(pwd)/environment-launch-agent.plist ~/Library/LaunchAgents/environmen
 
 # nushell folder there will be removed from outside nu, otherwise it's recreated
 ln -s -f $(pwd)/nushell ~/.config/nushell
+
+mkdir -p ~/.config/opencode
+ln -s -f $(pwd)/opencode/themes ~/.config/opencode/themes
