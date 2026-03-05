@@ -110,6 +110,7 @@ return {
     action = act.PromptInputLine({
       description = wezterm.format({
         { Attribute = { Intensity = "Bold" } },
+        { Attribute = { Underline = "Curly" } },
         { Foreground = { AnsiColor = "Fuchsia" } },
         { Text = "Enter new tab name" },
       }),
@@ -126,6 +127,7 @@ return {
     action = act.PromptInputLine({
       description = wezterm.format({
         { Attribute = { Intensity = "Bold" } },
+        { Attribute = { Underline = "Curly" } },
         { Foreground = { AnsiColor = "Fuchsia" } },
         { Text = "Enter new workspace name" },
       }),
@@ -162,15 +164,13 @@ return {
     action = act.PromptInputLine({
       description = wezterm.format({
         { Attribute = { Intensity = "Bold" } },
+        { Attribute = { Underline = "Curly" } },
         { Foreground = { AnsiColor = "Fuchsia" } },
         { Text = "Enter name for new workspace" },
       }),
       action = wezterm.action_callback(function(window, pane, line)
         if line then
-          window:perform_action(
-            act.SwitchToWorkspace({ name = line }),
-            pane
-          )
+          window:perform_action(act.SwitchToWorkspace({ name = line }), pane)
         end
       end),
     }),
@@ -196,11 +196,6 @@ return {
     action = wezterm.action.CloseCurrentPane({ confirm = false }),
   },
   --copypaste
-  {
-    mods = "CMD",
-    key = "c",
-    action = wezterm.action.CopyTo("Clipboard"),
-  },
   {
     mods = "CMD",
     key = "c",
@@ -252,5 +247,10 @@ return {
     mods = "LEADER",
     key = "?",
     action = act.ActivateCommandPalette,
+  },
+  {
+    mods = "LEADER",
+    key = "x",
+    action = act.ReloadConfiguration,
   },
 }

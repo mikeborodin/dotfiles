@@ -1,6 +1,7 @@
 ---@type Wezterm
 local wezterm = require("wezterm")
 local colors = require("colors")
+local PROCESS_ICONS = require("process_icons")
 
 local config = wezterm.config_builder()
 
@@ -27,9 +28,9 @@ config.initial_cols = 120
 config.initial_rows = 40
 config.adjust_window_size_when_changing_font_size = false
 
-config.animation_fps = 1
+config.animation_fps = 10
 config.max_fps = 60
-config.front_end = "Software"
+config.front_end = "WebGpu"
 
 local function get_current_working_dir(tab)
   local cwd_uri = tab.active_pane.current_working_dir
@@ -57,7 +58,6 @@ local function get_current_working_dir(tab)
 end
 
 local function get_process(tab)
-  local PROCESS_ICONS = require("process_icons")
   local process_name =
       string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)", "%2")
 
@@ -89,7 +89,7 @@ local SOLID_RIGHT_ARROW = utf8.char(0xe0b0)
 
 local Grey = "#0f1419"
 local LightGrey = "#191f26"
-local TAB_BAR_BG = "181927"
+local TAB_BAR_BG = "#181927"
 local ACTIVE_TAB_BG = "#383d6d"
 local ACTIVE_TAB_FG = "White"
 local HOVER_TAB_BG = Grey
@@ -113,25 +113,21 @@ local function update_left_status(window)
   }))
 end
 
-wezterm.on("update-status", function(window)
-  update_left_status(window)
-end)
-
-wezterm.on("refresh-status", function(window)
-  update_left_status(window)
-end)
+-- wezterm.on("update-status", function(window)
+--   update_left_status(window)
+-- end)
+--
+-- wezterm.on("refresh-status", function(window)
+--   update_left_status(window)
+-- end)
 
 wezterm.on(
   "format-tab-title",
-  function(tab, tabs, panes, config, hover, max_width)
-    panes = panes
-    config = config
-    max_width = max_width
+  function(tab, tabs, _panes, _config, hover, _max_width)
 
     local background = NORMAL_TAB_BG
     local foreground = NORMAL_TAB_FG
 
-    local is_first = tab.tab_id == tabs[1].tab_id
     local is_last = tab.tab_id == tabs[#tabs].tab_id
 
     if tab.is_active then
@@ -145,21 +141,7 @@ wezterm.on(
     local tab_title = tab.tab_title
     local name = (tab_title and #tab_title > 0) and tab_title
       or get_current_working_dir(tab)
-    local process_name = string.gsub(
-      tab.active_pane.foreground_process_name,
-      "(.*[/\\])(.*)",
-      "%2"
-    )
-
-    for _, pane in ipairs(tab.panes) do
-      if
-          pane.has_unseen_output
-          and process_name ~= "nvim"
-          and process_name ~= "lazygit"
-      then
-        name = name .. "*"
-      end
-    end
+      or ""
 
     local leading_fg = NORMAL_TAB_BG
     local leading_bg = background
@@ -191,17 +173,7 @@ wezterm.on(
   end
 )
 
-function get_tab_title_or_pane(tab_info)
-  local title = tab_info.tab_title
-  if title and #title > 0 then
-    return title
-  end
-  return tab_info.active_pane.title
-end
-
 config.keys = require("keybindings")
-
-flag = true
 
 -- wezterm.on("update-right-status", function(window, pane)
 --   local date = wezterm.strftime("  %H:%M")
@@ -209,7 +181,15 @@ flag = true
 --   window:set_right_status("> mike: " .. tostring(flag) .. " " .. date)
 --
 
+local status_cache = { text = "", last_read = 0 }
+local STATUS_CACHE_TTL = 30 -- seconds between disk reads
+
 local function read_status_reports()
+  local now = os.time()
+  if now - status_cache.last_read < STATUS_CACHE_TTL then
+    return status_cache.text
+  end
+
   local home = os.getenv("HOME") or ""
   local reports_dir = home .. "/status_reports"
   local statuses = {}
@@ -221,7 +201,7 @@ local function read_status_reports()
       if f then
         local content = f:read("*a") or ""
         f:close()
-        content = content:gsub("%s+$", "") -- trim trailing whitespace
+        content = content:gsub("%s+$", "")
         if content ~= "" then
           table.insert(statuses, content)
         end
@@ -230,12 +210,14 @@ local function read_status_reports()
     p:close()
   end
 
-  return table.concat(statuses, " | ")
+  status_cache.text = table.concat(statuses, " | ")
+  status_cache.last_read = now
+  return status_cache.text
 end
 
 wezterm.on("update-right-status", function(window, pane)
   local status_str = read_status_reports()
-  local date = wezterm.strftime("  %H:%M")
+  local date = wezterm.strftime("  %H:%M")
   local display = status_str ~= "" and (status_str .. "  " .. date) or date
   window:set_right_status(display)
 end)

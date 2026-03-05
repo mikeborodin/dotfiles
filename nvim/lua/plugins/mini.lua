@@ -4,7 +4,7 @@ return {
   enabled = false,
   config = function()
     require('mini.ai').setup {}
-    require('mini.surround').setup {}
+    -- require('mini.surround').setup {}
     require('mini.operators').setup {}
     require('mini.pick').setup {}
     require('mini.files').setup {

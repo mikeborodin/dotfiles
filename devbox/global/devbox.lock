@@ -2618,6 +2618,54 @@
         }
       }
     },
+    "scrcpy@latest": {
+      "last_modified": "2026-02-23T15:40:43Z",
+      "resolved": "github:NixOS/nixpkgs/80d901ec0377e19ac3f7bb8c035201e2e098cc97#scrcpy",
+      "source": "devbox-search",
+      "version": "3.3.4",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/ricw9nl1qfb8iwyvqj50d54v3li6l065-scrcpy-3.3.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/ricw9nl1qfb8iwyvqj50d54v3li6l065-scrcpy-3.3.4"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/r6hpf2yk2yaj756sbvxs69n0dgpfv5sk-scrcpy-3.3.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/r6hpf2yk2yaj756sbvxs69n0dgpfv5sk-scrcpy-3.3.4"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/0j9cv6nwp26il4maj28w5dsqk4lpnzlq-scrcpy-3.3.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/0j9cv6nwp26il4maj28w5dsqk4lpnzlq-scrcpy-3.3.4"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/vx1rg2ixaqnail3z35lfmainvj14hn6h-scrcpy-3.3.4",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/vx1rg2ixaqnail3z35lfmainvj14hn6h-scrcpy-3.3.4"
+        }
+      }
+    },
     "sd@latest": {
       "last_modified": "2025-06-20T02:24:11Z",
       "resolved": "github:NixOS/nixpkgs/076e8c6678d8c54204abcb4b1b14c366835a58bb#sd",
