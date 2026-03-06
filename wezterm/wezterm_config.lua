@@ -97,6 +97,8 @@ local HOVER_TAB_FG = "White"
 local NORMAL_TAB_BG = LightGrey
 local NORMAL_TAB_FG = "Grey"
 
+local TAB_TITLE_MAX_LEN = 25
+
 local WORKSPACE_BG = colors.mauve
 local WORKSPACE_FG = colors.crust
 
@@ -112,74 +114,6 @@ local function update_left_status(window)
     { Text = SOLID_RIGHT_ARROW },
   }))
 end
-
--- wezterm.on("update-status", function(window)
---   update_left_status(window)
--- end)
---
--- wezterm.on("refresh-status", function(window)
---   update_left_status(window)
--- end)
-
-wezterm.on(
-  "format-tab-title",
-  function(tab, tabs, _panes, _config, hover, _max_width)
-
-    local background = NORMAL_TAB_BG
-    local foreground = NORMAL_TAB_FG
-
-    local is_last = tab.tab_id == tabs[#tabs].tab_id
-
-    if tab.is_active then
-      background = ACTIVE_TAB_BG
-      foreground = ACTIVE_TAB_FG
-    elseif hover then
-      background = HOVER_TAB_BG
-      foreground = HOVER_TAB_FG
-    end
-
-    local tab_title = tab.tab_title
-    local name = (tab_title and #tab_title > 0) and tab_title
-      or get_current_working_dir(tab)
-      or ""
-
-    local leading_fg = NORMAL_TAB_BG
-    local leading_bg = background
-
-    local trailing_fg = background
-    local trailing_bg = NORMAL_TAB_BG
-
-    if is_last then
-      trailing_bg = TAB_BAR_BG
-    else
-      trailing_bg = NORMAL_TAB_BG
-    end
-
-    return {
-      { Attribute = { Italic = false } },
-      { Attribute = { Intensity = hover and "Bold" or "Normal" } },
-      { Background = { Color = leading_bg } },
-      { Foreground = { Color = leading_fg } },
-      { Text = SOLID_RIGHT_ARROW },
-      { Background = { Color = background } },
-      { Text = get_process(tab) },
-      { Text = " " },
-      { Foreground = { Color = foreground } },
-      { Text = name },
-      { Background = { Color = trailing_bg } },
-      { Foreground = { Color = trailing_fg } },
-      { Text = SOLID_RIGHT_ARROW },
-    }
-  end
-)
-
-config.keys = require("keybindings")
-
--- wezterm.on("update-right-status", function(window, pane)
---   local date = wezterm.strftime("  %H:%M")
---   flag = not flag
---   window:set_right_status("> mike: " .. tostring(flag) .. " " .. date)
---
 
 local status_cache = { text = "", last_read = 0 }
 local STATUS_CACHE_TTL = 30 -- seconds between disk reads
@@ -215,11 +149,71 @@ local function read_status_reports()
   return status_cache.text
 end
 
-wezterm.on("update-right-status", function(window, pane)
+wezterm.on("update-status", function(window)
+  update_left_status(window)
+
   local status_str = read_status_reports()
   local date = wezterm.strftime("  %H:%M")
   local display = status_str ~= "" and (status_str .. "  " .. date) or date
   window:set_right_status(display)
 end)
+
+wezterm.on(
+  "format-tab-title",
+  function(tab, tabs, _panes, _config, hover, _max_width)
+
+    local background = NORMAL_TAB_BG
+    local foreground = NORMAL_TAB_FG
+
+    local is_last = tab.tab_id == tabs[#tabs].tab_id
+
+    if tab.is_active then
+      background = ACTIVE_TAB_BG
+      foreground = ACTIVE_TAB_FG
+    elseif hover then
+      background = HOVER_TAB_BG
+      foreground = HOVER_TAB_FG
+    end
+
+    local tab_title = tab.tab_title
+    local name = (tab_title and #tab_title > 0) and tab_title
+      or get_current_working_dir(tab)
+      or ""
+
+    if #name > TAB_TITLE_MAX_LEN then
+      name = name:sub(1, TAB_TITLE_MAX_LEN) .. "…"
+    end
+
+    local leading_fg = NORMAL_TAB_BG
+    local leading_bg = background
+
+    local trailing_fg = background
+    local trailing_bg = NORMAL_TAB_BG
+
+    if is_last then
+      trailing_bg = TAB_BAR_BG
+    else
+      trailing_bg = NORMAL_TAB_BG
+    end
+
+    return {
+      { Attribute = { Italic = false } },
+      { Attribute = { Intensity = hover and "Bold" or "Normal" } },
+      { Background = { Color = leading_bg } },
+      { Foreground = { Color = leading_fg } },
+      { Text = SOLID_RIGHT_ARROW },
+      { Background = { Color = background } },
+      { Text = get_process(tab) },
+      { Text = " " },
+      { Foreground = { Color = foreground } },
+      { Text = name },
+      { Background = { Color = trailing_bg } },
+      { Foreground = { Color = trailing_fg } },
+      { Text = SOLID_RIGHT_ARROW },
+    }
+  end
+)
+
+config.keys = require("keybindings")
 
 return config
