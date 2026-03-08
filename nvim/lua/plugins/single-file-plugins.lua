@@ -30,7 +30,7 @@ return {
     -- enabled = true,
     config = function()
       require('toggleterm').setup {
-        open_mapping = '<Char-0xA5>',
+        open_mapping = '<D-h>',
         direction = 'float',
         shell = function()
           if vim.env.DEVBOX_PROJECT_ROOT == vim.loop.cwd() then

@@ -255,7 +255,7 @@ M.keys = {
   -- File & search
   { '<space>fw', Cmd ':Telescope current_buffer_fuzzy_find', desc = 'Find in buffer' },
   {
-    '<Char-0xA4>',
+    '<D-f>',
     function()
       require('telescope.builtin').live_grep()
     end,
@@ -268,11 +268,11 @@ M.keys = {
   },
   { '<space>fr', Key ':lua find_replace_prompt()', desc = 'Find and replace' },
   {
-    '<Char-0xA0>',
+    '<D-e>',
     Cmd 'Telescope find_files',
     desc = 'Find files',
   },
-  { '<Char-0xA2>', Cmd ':Other', desc = 'Open alternate file' },
+  { '<D-o>', Cmd ':Other', desc = 'Open alternate file' },
 
   -- Code actions
   {
@@ -320,7 +320,7 @@ M.keys = {
   { '<space>Y', Key ':%bdelete\n:Neotree focus\n', desc = 'Close all buffers' },
   { 'ta', '', desc = 'Toggle Aerial outline' },
   {
-    '<Char-0xA1>',
+    '<D-y>',
     function()
       require('bufdelete').bufdelete()
     end,
@@ -490,7 +490,7 @@ M.keys = {
     desc = 'Clipboard history',
   },
   {
-    '<Char-0xA3>',
+    '<D-i>',
     function()
       require('arrow.ui').openMenu()
     end,

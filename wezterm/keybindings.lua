@@ -50,16 +50,13 @@ end
 local nu = "/Users/mike/.local/share/mise/shims/nu"
 
 return {
-  -- Neovim-aware CMD passthrough (Unicode remap for nvim, raw CMD for other apps)
-  cmd("e", 0xA0),
-  cmd("y", 0xA1),
-  cmd("o", 0xA2),
-  cmd("i", 0xA3),
-  cmd("f", 0xA4),
-  cmd("h", 0xA5),
-  -- CMD passthrough as Kitty CSI u with Super modifier
-  -- for TUI apps that support Kitty keyboard protocol (opencode, etc.)
+  super("i"),
+  super("y"),
   super("a"),
+  super("e"),
+  super("h"),
+  super("f"),
+  super("o"),
   super("b"),
   super("d"),
   super("j"),
