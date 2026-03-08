@@ -15,3 +15,4 @@ ln -s -f $(pwd)/nushell ~/.config/nushell
 
 mkdir -p ~/.config/opencode
 ln -s -f $(pwd)/opencode/themes ~/.config/opencode/themes
+ln -s -f (pwd)/opencode/tui.json ~/.config/opencode/tui.json
