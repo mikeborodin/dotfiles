@@ -33,15 +33,46 @@ local function cmd(key, char)
   }
 end
 
+-- Forward CMD+key as Kitty keyboard protocol CSI u with Super modifier bit
+-- Encoding: ESC [ <codepoint> ; <1 + modifier_bitmask> u
+-- Super = bit 3 (value 8), so modifier param = 1 + 8 = 9
+local function super(key)
+  local seq = string.format("\x1b[%d;9u", string.byte(key))
+  return { key = key, mods = "CMD", action = act.SendString(seq) }
+end
+
+local function super_shift(key)
+  -- super (8) + shift (1) = 9, encoded as 1 + 9 = 10
+  local seq = string.format("\x1b[%d;10u", string.byte(key))
+  return { key = key, mods = "CMD|SHIFT", action = act.SendString(seq) }
+end
+
 local nu = "/Users/mike/.local/share/mise/shims/nu"
 
 return {
+  -- Neovim-aware CMD passthrough (Unicode remap for nvim, raw CMD for other apps)
   cmd("e", 0xA0),
   cmd("y", 0xA1),
   cmd("o", 0xA2),
   cmd("i", 0xA3),
   cmd("f", 0xA4),
   cmd("h", 0xA5),
+  -- CMD passthrough as Kitty CSI u with Super modifier
+  -- for TUI apps that support Kitty keyboard protocol (opencode, etc.)
+  super("a"),
+  super("b"),
+  super("d"),
+  super("j"),
+  super("k"),
+  super("l"),
+  super("m"),
+  super("p"),
+  super("q"),
+  super("r"),
+  super("s"),
+  super("x"),
+  super("z"),
+  super_shift("z"),
   --- spawning
   {
     mods = "LEADER",

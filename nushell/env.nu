@@ -116,5 +116,5 @@ if (which devbox | is-not-empty) {
 
 path add ($env.HOME | path join ".local" "bin")
 
-let mise_path = $nu.default-config-dir | path join mise.nu
-^mise activate nu | save $mise_path --force
+# let mise_path = $nu.default-config-dir | path join mise.nu
+# ^mise activate nu | save $mise_path --force
