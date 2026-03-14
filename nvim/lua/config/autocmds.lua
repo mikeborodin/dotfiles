@@ -104,6 +104,7 @@ vim.cmd [[ autocmd BufNewFile,BufRead devbox.lock set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead pubspec.lock set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead package.lock set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead .tmux.conf set filetype=bash ]]
+vim.cmd [[ autocmd BufNewFile,BufRead .kitty-session set filetype=bash ]]
 vim.cmd [[ autocmd FileType dap-repl set filetype=log ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.bru set filetype=bruno ]]
 
