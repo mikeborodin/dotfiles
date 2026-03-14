@@ -2,6 +2,7 @@ alias dr = devbox run
 alias drs = devbox run shell
 
 alias v = nvim
+alias o = opencode
 
 alias e = exit
 alias y = yazi
