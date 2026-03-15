@@ -99,6 +99,7 @@ $env.NU_PLUGIN_DIRS = [
 source ($nu.default-config-dir | path join 'path.nu')
 # source ($nu.default-config-dir | path join 'oh-my-posh.nu')
 source ($nu.default-config-dir | path join 'aliases.nu')
+source ($nu.default-config-dir | path join 'kitty.nu')
 source ($nu.default-config-dir | path join 'secrets.nu')
 
 let dotfiles_dir = ($nu.default-config-dir | path dirname)
