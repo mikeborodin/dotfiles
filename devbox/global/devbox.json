@@ -62,7 +62,8 @@
     "aerospace@0.19.2-Beta",
     "github:Nano-Collective/nanocoder",
     "llmfit@latest",
-    "tuios@latest"
+    "tuios@latest",
+    "speedtest-cli@latest"
   ],
   "env": {
     "JAVA_HOME": "$DEVBOX_PROJECT_ROOT/.devbox/nix/profile/default/Contents/Home"

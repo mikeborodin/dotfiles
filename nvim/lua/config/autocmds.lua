@@ -7,6 +7,19 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
   command = 'checktime',
 })
 
+-- Nvim 0.12: floating windows show a statusline by default. Suppress it for all
+-- floats so plugins that haven't opted in to style='minimal' don't show a blank bar.
+vim.api.nvim_create_autocmd('WinNew', {
+  group = augroup 'float_no_statusline',
+  callback = function(args)
+    local win = vim.api.nvim_get_current_win()
+    local cfg = vim.api.nvim_win_get_config(win)
+    if cfg.relative ~= '' then
+      vim.wo[win].statusline = ' '
+    end
+  end,
+})
+
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter', 'WinEnter', 'TabEnter' }, {
   callback = function()
     require('lualine').refresh()
@@ -92,6 +105,24 @@ vim.api.nvim_create_autocmd('InsertLeave', {
 vim.api.nvim_create_autocmd('TextChanged', {
   callback = function(args)
     schedule_autosave(args.buf)
+  end,
+})
+
+-- Nvim 0.12: dartls may start async and miss the FileType autocmd attach.
+-- Re-attach any running dartls client that isn't yet attached to this buffer.
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup 'dartls_attach',
+  pattern = 'dart',
+  callback = function(args)
+    local buf = args.buf
+    vim.defer_fn(function()
+      if not vim.api.nvim_buf_is_valid(buf) then return end
+      for _, client in ipairs(vim.lsp.get_clients({ name = 'dartls' })) do
+        if not client.attached_buffers[buf] then
+          vim.lsp.buf_attach_client(buf, client.id)
+        end
+      end
+    end, 500)
   end,
 })
 

@@ -136,17 +136,6 @@ return {
       },
     },
     config = function(_, opts)
-      -- if type(opts.ensure_installed) == "table" then
-      --   local added = {}
-      --   opts.ensure_installed = vim.tbl_filter(function(lang)
-      --     if added[lang] then
-      --       return false
-      --     end
-      --     added[lang] = true
-      --     return true
-      --   end, opts.ensure_installed)
-      -- end
-
       local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
       parser_config.bruno = {
         install_info = {
@@ -159,6 +148,76 @@ return {
         -- filetype = "bruno",                                        -- if filetype does not match the parser name
       }
       require('nvim-treesitter.configs').setup(opts)
+
+      -- nvim-treesitter/master's query_predicates.lua was written for the old
+      -- iter_matches API where match[id] was a single TSNode. In nvim 0.12 the
+      -- "all" behaviour became permanent: match[id] is now always TSNode[].
+      -- Passing an array to get_node_text → get_range → node:range() crashes.
+      -- Override the affected directives with 0.12-compatible versions.
+      local ts_query = vim.treesitter.query
+      local force_opts = { force = true, all = false }
+
+      local html_script_type_languages = {
+        importmap = 'json',
+        module = 'javascript',
+        ['application/ecmascript'] = 'javascript',
+        ['text/ecmascript'] = 'javascript',
+      }
+      local non_filetype_aliases = {
+        ex = 'elixir', pl = 'perl', sh = 'bash', uxn = 'uxntal', ts = 'typescript',
+      }
+      local function lang_from_info_string(alias)
+        return vim.filetype.match { filename = 'a.' .. alias }
+          or non_filetype_aliases[alias]
+          or alias
+      end
+
+      ts_query.add_directive('set-lang-from-mimetype!', function(match, _, bufnr, pred, metadata)
+        local nodes = match[pred[2]]
+        local node = nodes and nodes[1]
+        if not node then return end
+        local val = vim.treesitter.get_node_text(node, bufnr)
+        metadata['injection.language'] = html_script_type_languages[val]
+          or vim.split(val, '/')[2]
+          or val
+      end, force_opts)
+
+      ts_query.add_directive('set-lang-from-info-string!', function(match, _, bufnr, pred, metadata)
+        local nodes = match[pred[2]]
+        local node = nodes and nodes[1]
+        if not node then return end
+        local alias = vim.treesitter.get_node_text(node, bufnr):lower()
+        metadata['injection.language'] = lang_from_info_string(alias)
+      end, force_opts)
+
+      ts_query.add_directive('downcase!', function(match, _, bufnr, pred, metadata)
+        local id = pred[2]
+        local nodes = match[id]
+        local node = nodes and nodes[1]
+        if not node then return end
+        if not metadata[id] then metadata[id] = {} end
+        local text = vim.treesitter.get_node_text(node, bufnr, { metadata = metadata[id] }) or ''
+        metadata[id].text = text:lower()
+      end, force_opts)
+
+      -- Predicates also use match[id] as a single node; patch for safety.
+      ts_query.add_predicate('nth?', function(match, _, _, pred)
+        local nodes = match[pred[2]]
+        local node = nodes and nodes[1]
+        local n = tonumber(pred[3])
+        if node and node:parent() and node:parent():named_child_count() > n then
+          return node:parent():named_child(n) == node
+        end
+        return false
+      end, { force = true })
+
+      ts_query.add_predicate('kind-eq?', function(match, _, _, pred)
+        local nodes = match[pred[2]]
+        local node = nodes and nodes[1]
+        if not node then return true end
+        local types = { unpack(pred, 3) }
+        return vim.tbl_contains(types, node:type())
+      end, { force = true })
     end,
   },
 

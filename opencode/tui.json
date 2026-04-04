@@ -4,7 +4,7 @@
   "keybinds": {
     "leader": "super+o",
     "app_exit": "ctrl+c",
-    "editor_open": "<leader>e",
+    "editor_open": "super+e",
     "theme_list": "none",
     "sidebar_toggle": "<leader>b",
     "scrollbar_toggle": "none",
@@ -13,7 +13,7 @@
     "tool_details": "<leader>t",
     "session_export": "<leader>x",
     "session_new": "<leader>n",
-    "session_list": "super+e",
+    "session_list": "<leader>shift+e",
     "session_timeline": "<leader>g",
     "session_fork": "none",
     "session_rename": "none",

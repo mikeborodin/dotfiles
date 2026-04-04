@@ -33,6 +33,7 @@ return {
             tabline = { 'toggleterm', 'log' },
           },
           always_divide_middle = true,
+          globalstatus = false,
           refresh = {
             statusline = 1000,
             tabline = 1000,
@@ -107,7 +108,12 @@ return {
         extensions = {},
       }
 
-      vim.o.laststatus = 0
+      -- Defer setting laststatus=0 so it runs after lualine's async init,
+      -- which would otherwise restore it to the pre-setup value (3).
+      -- With sections={}, lualine won't render a statusline; we hide it entirely.
+      vim.schedule(function()
+        vim.o.laststatus = 0
+      end)
     end,
   },
 }

@@ -66,12 +66,24 @@ $session_names
 EOF
 
 selected=$(printf '%s' "$fzf_input" | fzf \
-	--prompt="session > " \
-	--header="* = active | Enter = switch" \
-	--layout=reverse \
-	--border \
-	--no-info \
-	--ansi) || exit 0
+	--prompt="Select session: " \
+  --prompt="" \
+  --layout=reverse \
+  --height=60% \
+  --border=rounded \
+  --margin=10%,20% \
+  --padding=1 \
+  --no-info \
+  --ansi \
+  --color=bg:#1a1b26,fg:#c0caf5 \
+  --color=bg+:#24283b,fg+:#c0caf5 \
+  --color=hl:#7aa2f7,hl+:#7aa2f7 \
+  --color=border:#3b4261 \
+  --color=info:#7dcfff,prompt:#7dcfff,pointer:#7aa2f7 \
+  --color=marker:#9ece6a,spinner:#9ece6a \
+  --pointer="" \
+  --marker="" \
+  --separator="─") || exit 0
 
 if [ -z "$selected" ]; then
 	exit 0

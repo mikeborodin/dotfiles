@@ -138,6 +138,14 @@ return {
           },
         },
         defaults = {
+          -- Nvim 0.12 async treesitter parsing can crash on short-lived preview
+          -- buffers (the injections parse is scheduled via vim.schedule, but by
+          -- the time it runs the buffer may already be stale/reused). Disabling
+          -- treesitter in the previewer avoids this entirely; syntax highlighting
+          -- still works via the regex engine fallback.
+          preview = {
+            treesitter = false,
+          },
           sorting_strategy = 'ascending',
           layout_config = {
             prompt_position = 'top',
