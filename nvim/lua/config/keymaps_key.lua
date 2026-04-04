@@ -308,6 +308,29 @@ M.keys = {
   },
   { '<space>nn', Cmd ':AvanteToggle', desc = 'Toggle AI actions' },
   { '<space>ae', ':Gen<cr>', desc = 'AI generate' },
+  {
+    'ae',
+    function()
+      -- Jump to the first ERROR in the workspace; fall back to first WARNING.
+      local diags = vim.diagnostic.get(nil, { severity = vim.diagnostic.severity.ERROR })
+      if #diags == 0 then
+        diags = vim.diagnostic.get(nil, { severity = vim.diagnostic.severity.WARN })
+      end
+      if #diags == 0 then
+        vim.notify('No diagnostics', vim.log.levels.INFO)
+        return
+      end
+      table.sort(diags, function(a, b)
+        if a.bufnr ~= b.bufnr then return a.bufnr < b.bufnr end
+        return a.lnum < b.lnum or (a.lnum == b.lnum and a.col < b.col)
+      end)
+      local d = diags[1]
+      vim.api.nvim_set_current_buf(d.bufnr)
+      vim.api.nvim_win_set_cursor(0, { d.lnum + 1, d.col })
+      vim.diagnostic.open_float()
+    end,
+    desc = 'Go to first LSP error (workspace)',
+  },
 
   -- Buffers / windows
   { '<space>Y', Key ':%bdelete\n:Neotree focus\n', desc = 'Close all buffers' },

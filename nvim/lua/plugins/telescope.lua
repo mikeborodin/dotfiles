@@ -142,11 +142,16 @@ return {
             treesitter = false,
           },
           sorting_strategy = 'ascending',
+          layout_strategy = 'vertical',
           layout_config = {
-            prompt_position = 'top',
-            height = 0.7,
-            preview_cutoff = 40,
-            width = 0.8,
+            vertical = {
+              prompt_position = 'top',
+              mirror = true,        -- prompt+results on top, preview on bottom
+              width = 0.8,
+              height = 0.9,
+              preview_height = 0.6, -- preview gets 60% of picker height
+              preview_cutoff = 0,   -- always show preview regardless of window height
+            },
           },
           prompt_prefix = ' ',
           selection_caret = ' ',
