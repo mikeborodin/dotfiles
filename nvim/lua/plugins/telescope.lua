@@ -1,4 +1,3 @@
-local Util = require 'lazyvim.util'
 return {
   {
     'nvim-telescope/telescope.nvim',
@@ -74,12 +73,12 @@ return {
       local find_files_no_ignore = function()
         local action_state = require 'telescope.actions.state'
         local line = action_state.get_current_line()
-        Util.telescope('find_files', { no_ignore = true, default_text = line })()
+        require('telescope.builtin').find_files { no_ignore = true, default_text = line }
       end
       local find_files_with_hidden = function()
         local action_state = require 'telescope.actions.state'
         local line = action_state.get_current_line()
-        Util.telescope('find_files', { hidden = true, default_text = line })()
+        require('telescope.builtin').find_files { hidden = true, default_text = line }
       end
       local telescope = require 'telescope'
       local telescopeConfig = require 'telescope.config'

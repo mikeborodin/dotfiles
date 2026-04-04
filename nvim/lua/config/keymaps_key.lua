@@ -4,7 +4,6 @@ require 'utils.go_to_test'
 -- require 'utils.select_run_config'
 require 'utils.diagnostics'
 
-local Util = require 'lazyvim.util'
 
 function _G.open_next_terminal()
   local Terminal = require('toggleterm.terminal').Terminal
@@ -31,7 +30,7 @@ local function delete_current_file()
     return
   end
 
-  local stat = vim.loop.fs_stat(bufname)
+  local stat = vim.uv.fs_stat(bufname)
   if stat and stat.type == 'file' then
     -- Close buffer first
     vim.cmd 'bdelete!'
@@ -61,7 +60,7 @@ function toggle_flutter_dev_log()
   -- Find the existing buffer by filename
   local bufnr = nil
   for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_get_option(buffer, 'filetype') == 'log' then
+    if vim.bo[buffer].filetype == 'log' then
       bufnr = buffer
       break
     end
@@ -369,14 +368,14 @@ M.keys = {
   {
     '<space>fF',
     function()
-      Util.telescope('files', { cwd = false })
+      require('telescope.builtin').find_files { cwd = vim.fn.getcwd() }
     end,
     desc = 'Find files (cwd)',
   },
   {
     '<space>fR',
     function()
-      Util.telescope('oldfiles', { cwd = vim.loop.cwd() })
+      require('telescope.builtin').oldfiles { cwd = vim.uv.cwd() }
     end,
     desc = 'Recent files',
   },

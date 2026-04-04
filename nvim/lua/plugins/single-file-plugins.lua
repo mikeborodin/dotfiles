@@ -10,7 +10,7 @@ return {
     -- enabled = true,
     config = function()
       require('toggleterm').setup {
-        open_mapping = '<D-h>',
+        -- open_mapping handled manually below for instant show/hide
         direction = 'float',
         shell = function()
           if vim.env.DEVBOX_PROJECT_ROOT == vim.loop.cwd() then
@@ -20,6 +20,34 @@ return {
           end
         end,
       }
+
+      -- Instead of toggling (destroy/recreate float), keep the window alive
+      -- and just hide/show it. First open still spawns the shell; subsequent
+      -- toggles are instant because the window is never destroyed.
+      local term_win = nil
+      local function smart_toggle()
+        local Terminal = require('toggleterm.terminal').Terminal
+        local terms = require('toggleterm.terminal').get_all(true)
+        local t = terms[1]
+        if not t then
+          -- First open: create and open normally
+          t = Terminal:new({ hidden = false })
+          t:open()
+          term_win = t.window
+          return
+        end
+        if term_win and vim.api.nvim_win_is_valid(term_win) then
+          -- Window is visible: hide it without closing
+          vim.api.nvim_win_hide(term_win)
+          term_win = nil
+        else
+          -- Window was hidden: re-open (reuses existing buffer/process)
+          t:open()
+          term_win = t.window
+        end
+      end
+
+      vim.keymap.set({ 'n', 'v', 'i', 't' }, '<D-h>', smart_toggle, { desc = 'Toggle terminal' })
     end,
   },
   -- Treesitter is a new parser generator tool that we can
