@@ -1,9 +1,39 @@
 # Nushell Environment Config File
+
+# ── Prompt ────────────────────────────────────────────────────────
+# Rootbeet-themed 2-line prompt
+#   Line 1:  <dir> [] [error]
+#   Line 2:  ❯
+$env.PROMPT_COMMAND = {||
+    let dir = ($env.PWD | str replace $env.HOME '~')
+    let path_segment = $"(ansi { fg: '#6CA9EF' })($dir)(ansi reset)"
+
+    let devbox = if ($env.DEVBOX_SHELL_ENABLED? | default '' | str trim) == '1' {
+        $" (ansi { fg: '#E0A8E1' })(ansi reset)"
+    } else {
+        ''
+    }
+
+    let err = if ($env.LAST_EXIT_CODE? | default 0) != 0 {
+        $" (ansi { fg: '#E25A6A' })  (ansi reset)"
+    } else {
+        ''
+    }
+
+    # line 1: info  ·  line 2: prompt char
+    let line1 = $" ($path_segment)($devbox)($err)"
+    let line2 = $"(ansi { fg: '#E0A8E1' })❯(ansi reset)"
+    [$line1 $line2] | str join "\n"
+}
+
+$env.PROMPT_COMMAND_RIGHT = {|| "" }
 $env.PROMPT_INDICATOR = {|| " " }
 $env.PROMPT_INDICATOR_VI_INSERT = {|| " " }
 $env.PROMPT_INDICATOR_VI_NORMAL = {|| "󱊷 " }
-$env.PROMPT_MULTILINE_INDICATOR = {|| "| " }
-$env.TRANSIENT_PROMPT_COMMAND = {|| "* " }
+$env.PROMPT_MULTILINE_INDICATOR = {|| "  " }
+
+# Transient prompt: collapses previous prompts to a clean single line
+$env.TRANSIENT_PROMPT_COMMAND = {|| $"(ansi { fg: '#565B8F' })❯(ansi reset) " }
 $env.TRANSIENT_PROMPT_INDICATOR = {|| "" }
 $env.TRANSIENT_PROMPT_INDICATOR_VI_INSERT = {|| "" }
 $env.TRANSIENT_PROMPT_INDICATOR_VI_NORMAL = {|| "" }
@@ -11,6 +41,8 @@ $env.TRANSIENT_PROMPT_MULTILINE_INDICATOR = {|| "" }
 $env.TRANSIENT_PROMPT_COMMAND_RIGHT = {|| "" }
 
 $env.CMD_DURATION_MS = '0823'
+
+$env.XDG_CONFIG_HOME = ($env.HOME | path join .config)
 
 $env.ANDROID_AVD_HOME = $"($env.HOME)/.config/.android/avd"
 $env.ANDROID_HOME =  $"($env.HOME)/Library/Android/sdk"

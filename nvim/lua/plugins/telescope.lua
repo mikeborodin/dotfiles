@@ -14,12 +14,21 @@ return {
       -- Registered here so lazy.nvim loads telescope on first press (no double-press needed)
       {
         '<D-e>',
-        function() require('telescope.builtin').find_files() end,
+        function()
+          -- Search from project root (git root or cwd fallback) so that hidden
+          -- top-level dirs like .github are always reachable regardless of where
+          -- nvim was launched from.
+          local root = vim.fs.root(0, { '.git', 'pubspec.yaml', '.fvmrc' }) or vim.fn.getcwd()
+          require('telescope.builtin').find_files { cwd = root }
+        end,
         desc = 'Find files',
       },
       {
         '<D-f>',
-        function() require('telescope.builtin').live_grep() end,
+        function()
+          local root = vim.fs.root(0, { '.git', 'pubspec.yaml', '.fvmrc' }) or vim.fn.getcwd()
+          require('telescope.builtin').live_grep { cwd = root }
+        end,
         desc = 'Search in project',
       },
       {
@@ -103,17 +112,17 @@ return {
         'simulator/src',
       }
 
-      local fd_command = {
+      local find_command = {
         'fd',
         '--type', 'f',
-        '--hidden',         -- include dotfiles (.env, .fvmrc, etc.)
-        '--no-ignore-vcs',  -- ignore .gitignore so gitignored files (e.g. .env) are findable
-                            -- but .fdignore / .ignore files per-project still apply
+        '--hidden',         -- include dotfiles (.env, .fvmrc, .github/*, etc.)
+        '--no-ignore-vcs',  -- skip .gitignore so gitignored files are findable;
+                            -- .fdignore / .ignore per-project still apply
       }
 
       for _, folder in ipairs(ignored_folders) do
-        table.insert(fd_command, '--exclude')
-        table.insert(fd_command, folder)
+        table.insert(find_command, '--exclude')
+        table.insert(find_command, folder)
       end
 
       return {
@@ -129,7 +138,7 @@ return {
             end,
           },
           find_files = {
-            fd_command = fd_command,
+            find_command = find_command,
           },
         },
         defaults = {
