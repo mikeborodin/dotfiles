@@ -1,29 +1,9 @@
 return {
   {
-    'folke/noice.nvim',
-    -- enabled = false,
-    dependencies = {
-      'MunifTanjim/nui.nvim',
-    },
-    config = function()
-      require('noice').setup {
-        notify = { enabled = false },
-        messages = { enabled = false },
-        popupmenu = { enabled = false },
-      }
-    end,
-  },
-  {
     'grapp-dev/nui-components.nvim',
     dependencies = {
       'MunifTanjim/nui.nvim',
     },
-  },
-  {
-    'mrcjkb/rustaceanvim',
-    enabled = false,
-    version = '^5', -- Recommended
-    -- lazy = false, -- This plugin is already lazy
   },
   {
     'akinsho/toggleterm.nvim',
@@ -51,7 +31,8 @@ return {
     -- enabled = true,
     -- enabled = false,
     build = ':TSUpdate',
-    event = { 'VeryLazy' },
+    event = { 'BufReadPost', 'BufNewFile' },
+    ft = { 'dart', 'lua', 'nu', 'json', 'yaml', 'markdown', 'bash', 'toml', 'bruno' },
     dependencies = {
       {
         'nvim-treesitter/nvim-treesitter-textobjects',
@@ -224,29 +205,16 @@ return {
   -- Show context of the current function
   {
     'nvim-treesitter/nvim-treesitter-context',
-    -- event = 'VeryLazy',
-    -- enabled = true,
-    -- enabled = false,
     opts = { mode = 'cursor' },
     keys = {
       {
         '<space>ut',
         function()
-          local Util = require 'lazyvim.util'
-          local tsc = require 'treesitter-context'
-          tsc.toggle()
-          if Util.inject.get_upvalue(tsc.toggle, 'enabled') then
-            Util.info('Enabled Treesitter Context', { title = 'Option' })
-          else
-            Util.warn('Disabled Treesitter Context', { title = 'Option' })
-          end
+          require('treesitter-context').toggle()
         end,
         desc = 'Toggle Treesitter Context',
       },
     },
-  },
-  {
-    'nvim-treesitter/playground',
   },
   {
     'vim-test/vim-test',

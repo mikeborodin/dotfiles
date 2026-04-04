@@ -1,3 +1,5 @@
+vim.loader.enable() -- bytecode cache for faster startup
+
 vim.o.guicursor = ""
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyDone",
@@ -72,7 +74,7 @@ vim.diagnostic.config {
   update_in_insert = false,
   severity_sort = true,
   float = {
-    border = 'rounded',
+    border = 'single',
     source = 'always',
   },
 }

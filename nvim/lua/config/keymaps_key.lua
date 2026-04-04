@@ -291,13 +291,21 @@ M.keys = {
   },
   { '<BS><BS>', autoFix, desc = 'Auto-fix & organize imports' },
   { '<space>df', Cmd ':silent !dart format %', desc = 'Format (Dart)' },
+  -- hover: native LSP hover (hover.nvim removed)
   {
     '<space>h',
     function()
-      require('hover').hover()
+      vim.lsp.buf.hover({ border = 'single' })
     end,
     desc = 'Show hover info',
   },
+  -- commenting: native gc/gcc (Comment.nvim removed, built-in since nvim 0.10)
+  -- tl = toggle line comment (gc motion), tj = toggle block comment (gb motion)
+  { 'tl', 'gc', remap = true, desc = 'Toggle line comment' },
+  { 'tj', 'gb', remap = true, desc = 'Toggle block comment' },
+  { 'tl', 'gc', mode = 'v', remap = true, desc = 'Toggle line comment' },
+  { 'tj', 'gb', mode = 'v', remap = true, desc = 'Toggle block comment' },
+
   {
     'tr',
     function()
@@ -322,7 +330,21 @@ M.keys = {
   {
     '<D-y>',
     function()
-      require('bufdelete').bufdelete()
+      -- Native bufdelete: switch to prev buffer then delete, keeping window layout
+      local buf = vim.api.nvim_get_current_buf()
+      local wins = vim.fn.win_findbuf(buf)
+      -- For each window showing this buffer, switch to an alternate buffer first
+      for _, win in ipairs(wins) do
+        local bufs = vim.tbl_filter(function(b)
+          return vim.api.nvim_buf_is_loaded(b) and b ~= buf and vim.bo[b].buflisted
+        end, vim.api.nvim_list_bufs())
+        if #bufs > 0 then
+          vim.api.nvim_win_set_buf(win, bufs[#bufs])
+        else
+          vim.api.nvim_win_set_buf(win, vim.api.nvim_create_buf(false, true))
+        end
+      end
+      vim.api.nvim_buf_delete(buf, { force = false })
     end,
     desc = 'Close buffer',
   },
