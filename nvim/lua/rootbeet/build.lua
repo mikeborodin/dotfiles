@@ -2,7 +2,15 @@ local lush = require 'lush'
 local colors = require 'rootbeet.colors'
 
 local function write_file(path, text)
-  local file = io.open(path, 'w+')
+  -- ensure parent directories exist
+  local dir = path:match('(.+)/[^/]+$')
+  if dir then
+    os.execute('mkdir -p ' .. dir)
+  end
+  local file, err = io.open(path, 'w+')
+  if not file then
+    error('Cannot open file ' .. path .. ': ' .. (err or 'unknown error'))
+  end
   file:write(text)
   file:close()
 end
@@ -33,24 +41,30 @@ end
 
 function M.kitty()
   local template = [[
+foreground $fg
+background $bg
+
+selection_foreground $bg
+selection_background $blue
+
 cursor $green
 cursor_text_color $bg
 
+url_color $blue
+
 active_border_color $bg_white
 inactive_border_color $bg_black
+bell_border_color $yellow
 
 active_tab_foreground $fg
 active_tab_background $bg_white
-active_tab_font_style bold
-inactive_tab_foreground $fg
+inactive_tab_foreground $black
 inactive_tab_background $bg_black
+tab_bar_background $bg
 
 mark1_background $purple
 mark2_background $cyan
 mark3_background $blue
-
-foreground $fg
-background $bg
 
 color0 $black
 color8 $black
@@ -77,7 +91,7 @@ color7  $white
 color15 $white
 ]]
 
-  write_file('dist/kitty/doubletrouble.conf', render(template, colors))
+  write_file('rootbeet-theme/kitty/rootbeet.conf', render(template, colors))
 end
 
 function M.fish()
@@ -93,7 +107,7 @@ set fish_color_valid_path normal --underline
 set fish_pager_color_progress $black
 ]]
 
-  write_file('dist/fish/doubletrouble.fish', string.gsub(render(template, colors), '#', ''))
+  write_file('rootbeet-theme/fish/rootbeet.fish', string.gsub(render(template, colors), '#', ''))
 end
 
 function M.blink()
@@ -110,7 +124,7 @@ t.prefs_.set('foreground-color', '$fg');
 t.prefs_.set('background-color', '$bg');
 ]]
 
-  write_file('dist/blink/blink.js', render(template, colors))
+  write_file('rootbeet-theme/blink/blink.js', render(template, colors))
 end
 
 function M.slack()
@@ -120,7 +134,7 @@ function M.slack()
 $bg,#ff0000,$bg_white,$fg,$bg_black,$fg,$green,$red,$bg,$fg
 ]]
 
-  write_file('dist/slack/slack.txt', render(template, colors))
+  write_file('rootbeet-theme/slack/slack.txt', render(template, colors))
 end
 
 function M.fzf()
@@ -137,8 +151,7 @@ function M.fzf()
     'border:$black',
   }
   local template = '--color ' .. table.concat(theme, ',')
-  print(template)
-  write_file('dist/fzf/fzf.txt', render(template, colors))
+  write_file('rootbeet-theme/fzf/fzf.txt', render(template, colors))
 end
 
 function M.ghostty()
@@ -167,7 +180,7 @@ palette = 14=$cyan
 palette = 15=$white
 ]]
 
-  write_file('dist/ghostty/doubletrouble', render(template, colors))
+  write_file('rootbeet-theme/ghostty/rootbeet', render(template, colors))
 end
 
 function M.tmux()
@@ -181,7 +194,7 @@ set -g window-status-current-style bg='$bg_white'
 set -g window-status-activity-style bg='#{window-status-style}'
 ]]
 
-  write_file('dist/tmux/doubletrouble.conf', render(template, colors))
+  write_file('rootbeet-theme/tmux/rootbeet.conf', render(template, colors))
 end
 
 function M.yazi()

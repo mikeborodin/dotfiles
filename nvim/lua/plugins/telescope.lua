@@ -11,55 +11,57 @@ return {
       },
     },
     keys = {
-      -- { "<space>/", Util.telescope("live_grep"), desc = "Grep (root dir)" },
-      -- { "<space>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      -- find
-      -- { "<space>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-      -- { "<space>fc", Util.telescope.config_files(), desc = "Find Config File" },
-      -- { "<space>ff", Util.telescope("files"), desc = "Find Files (root dir)" },
-      -- { "<space>fR", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-
-      -- -- git
-      -- { "<space>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-      -- -- search
-      -- { '<space>s"', "<cmd>Telescope registers<cr>", desc = "Registers" },
-      -- { "<space>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
-      -- { "<space>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
-      -- { "<space>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      -- { "<space>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
-      -- { "<space>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
-      -- { "<space>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
-      -- { "<space>sg", Util.telescope("live_grep"), desc = "Grep (root dir)" },
-      -- { "<space>sG", Util.telescope("live_grep", { cwd = false }), desc = "Grep (cwd)" },
-      -- { "<space>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-      -- { "<space>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
-      -- { "<space>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
-      -- { "<space>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-      -- { "<space>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-      -- { "<space>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-      -- { "<space>sw", Util.telescope("grep_string", { word_match = "-w" }), desc = "Word (root dir)" },
-      -- { "<space>sW", Util.telescope("grep_string", { cwd = false, word_match = "-w" }), desc = "Word (cwd)" },
-      -- { "<space>sw", Util.telescope("grep_string"), mode = "v", desc = "Selection (root dir)" },
-      -- { "<space>sW", Util.telescope("grep_string", { cwd = false }), mode = "v", desc = "Selection (cwd)" },
-      -- { "<space>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
-      -- {
-      --   "<space>ss",
-      --   function()
-      --     require("telescope.builtin").lsp_document_symbols({
-      --       symbols = require("lazyvim.config").get_kind_filter(),
-      --     })
-      --   end,
-      --   desc = "Goto Symbol",
-      -- },
-      -- {
-      --   "<space>sS",
-      --   function()
-      --     require("telescope.builtin").lsp_dynamic_workspace_symbols({
-      --       symbols = require("lazyvim.config").get_kind_filter(),
-      --     })
-      --   end,
-      --   desc = "Goto Symbol (Workspace)",
-      -- },
+      -- Registered here so lazy.nvim loads telescope on first press (no double-press needed)
+      {
+        '<D-e>',
+        function() require('telescope.builtin').find_files() end,
+        desc = 'Find files',
+      },
+      {
+        '<D-f>',
+        function() require('telescope.builtin').live_grep() end,
+        desc = 'Search in project',
+      },
+      {
+        '<space>fw',
+        '<cmd>Telescope current_buffer_fuzzy_find<cr>',
+        desc = 'Find in buffer',
+      },
+      {
+        '<space>ab',
+        '<cmd>Telescope buffers<cr>',
+        desc = 'List buffers',
+      },
+      {
+        'ah',
+        '<cmd>Telescope diagnostics<cr>',
+        desc = 'Workspace diagnostics',
+      },
+      {
+        '<space>ts',
+        '<cmd>Telescope git_status<cr>',
+        desc = 'Git status',
+      },
+      {
+        '<space>re',
+        '<cmd>Telescope resume<cr>',
+        desc = 'Resume search',
+      },
+      {
+        '<space>b',
+        '<cmd>Telescope git_branches<cr>',
+        desc = 'Git branches',
+      },
+      {
+        '<space>fF',
+        function() require('telescope.builtin').find_files { cwd = vim.fn.getcwd() } end,
+        desc = 'Find files (cwd)',
+      },
+      {
+        '<space>fR',
+        function() require('telescope.builtin').oldfiles { cwd = vim.uv.cwd() } end,
+        desc = 'Recent files',
+      },
     },
     opts = function()
       local actions = require 'telescope.actions'
@@ -81,14 +83,7 @@ return {
         require('telescope.builtin').find_files { hidden = true, default_text = line }
       end
       local telescope = require 'telescope'
-      local telescopeConfig = require 'telescope.config'
 
-      -- Clone the default Telescope configuration
-      local vimgrep_arguments = { unpack(telescopeConfig.values.vimgrep_arguments) }
-
-      -- I want to search in hidden/dot files.
-      table.insert(vimgrep_arguments, '--hidden')
-      -- Exclude common ignored folders
       local ignored_folders = {
         '.git',
         'build',
@@ -107,17 +102,13 @@ return {
         '.pub-cache',
         'simulator/src',
       }
-      for _, folder in ipairs(ignored_folders) do
-        table.insert(vimgrep_arguments, '--glob')
-        table.insert(vimgrep_arguments, '!**/' .. folder .. '/*')
-      end
 
       local fd_command = {
         'fd',
-        '--type',
-        'f',
-        '--hidden',
-        '--no-ignore',
+        '--type', 'f',
+        '--hidden',         -- include dotfiles (.env, .fvmrc, etc.)
+        '--no-ignore-vcs',  -- ignore .gitignore so gitignored files (e.g. .env) are findable
+                            -- but .fdignore / .ignore files per-project still apply
       }
 
       for _, folder in ipairs(ignored_folders) do
@@ -128,8 +119,13 @@ return {
       return {
         pickers = {
           live_grep = {
-            additional_args = function(opts)
-              return { '--hidden' }
+            additional_args = function(_)
+              local args = { '--hidden', '--no-ignore-vcs' }
+              for _, folder in ipairs(ignored_folders) do
+                table.insert(args, '--glob')
+                table.insert(args, '!**/' .. folder .. '/*')
+              end
+              return args
             end,
           },
           find_files = {
@@ -171,8 +167,8 @@ return {
             i = {
               -- ["<c-t>"] = open_with_trouble,
               -- ["<a-t>"] = open_selected_with_trouble,
-              -- ["<a-i>"] = find_files_no_ignore,
-              -- ["<a-h>"] = find_files_with_hidden,
+              ['<a-i>'] = find_files_no_ignore,
+              ['<a-h>'] = find_files_with_hidden,
               -- ["<C-Down>"] = actions.cycle_history_next,
               -- ["<C-Up>"] = actions.cycle_history_prev,
               -- ["<C-f>"] = actions.preview_scrolling_down,

@@ -208,7 +208,6 @@ local M = {}
 M.keys = {
   -- Navigation
   { '<space>0', Key '%', desc = 'Jump to match' },
-  { '<space>b', Cmd 'Telescope git_branches', desc = 'Git branches' },
   { '<D-cr>', Key 'n', desc = 'Next match' },
   {
     '<space>ne',
@@ -252,25 +251,12 @@ M.keys = {
   },
 
   -- File & search
-  { '<space>fw', Cmd ':Telescope current_buffer_fuzzy_find', desc = 'Find in buffer' },
-  {
-    '<D-f>',
-    function()
-      require('telescope.builtin').live_grep()
-    end,
-    desc = 'Search in project',
-  },
   {
     'af',
     Cmd 'Telescope live_grep',
     desc = 'Search in project',
   },
   { '<space>fr', Key ':lua find_replace_prompt()', desc = 'Find and replace' },
-  {
-    '<D-e>',
-    Cmd 'Telescope find_files',
-    desc = 'Find files',
-  },
   { '<D-o>', Cmd ':Other', desc = 'Open alternate file' },
 
   -- Code actions
@@ -365,32 +351,6 @@ M.keys = {
   -- Search & files (continued)
   { '<space>fb', Cmd ':free', desc = 'Switch buffer' },
   { '<space>ff', Cmd ':Telescope commander', desc = 'Command palette' },
-  {
-    '<space>fF',
-    function()
-      require('telescope.builtin').find_files { cwd = vim.fn.getcwd() }
-    end,
-    desc = 'Find files (cwd)',
-  },
-  {
-    '<space>fR',
-    function()
-      require('telescope.builtin').oldfiles { cwd = vim.uv.cwd() }
-    end,
-    desc = 'Recent files',
-  },
-  { '<space>ts', Cmd ':Telescope git_status', desc = 'Git status' },
-  { '<space>re', Cmd ':Telescope resume', desc = 'Resume search' },
-  {
-    '<space>ab',
-    Cmd ':Telescope buffers',
-    desc = 'List buffers',
-  },
-  {
-    'ah',
-    Cmd ':Telescope diagnostics',
-    desc = 'Workspace diagnostics',
-  },
   -- Debugging
   { 'su', Cmd ':DapContinue', desc = 'Continue debug' },
   { 'st', Cmd ':DapToggleBreakpoint', desc = 'Toggle breakpoint' },
