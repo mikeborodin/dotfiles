@@ -208,7 +208,7 @@ local M = {}
 M.keys = {
   -- Navigation
   { '<space>0', Key '%', desc = 'Jump to match' },
-  { '<D-cr>', Key 'n', desc = 'Next match' },
+  { '<D-cr>',   Key 'n', desc = 'Next match' },
   {
     '<space>ne',
     function()
@@ -257,7 +257,7 @@ M.keys = {
     desc = 'Search in project',
   },
   { '<space>fr', Key ':lua find_replace_prompt()', desc = 'Find and replace' },
-  { '<D-o>', Cmd ':Other', desc = 'Open alternate file' },
+  { '<D-o>',     Cmd ':Other',                     desc = 'Open alternate file' },
 
   -- Code actions
   {
@@ -274,7 +274,7 @@ M.keys = {
     end,
     desc = 'Format code',
   },
-  { '<BS><BS>', autoFix, desc = 'Auto-fix & organize imports' },
+  { '<BS><BS>',  autoFix,                      desc = 'Auto-fix & organize imports' },
   { '<space>df', Cmd ':silent !dart format %', desc = 'Format (Dart)' },
   -- hover: native LSP hover (hover.nvim removed)
   {
@@ -288,8 +288,8 @@ M.keys = {
   -- tl = toggle line comment (gc motion), tj = toggle block comment (gb motion)
   { 'tl', 'gc', remap = true, desc = 'Toggle line comment' },
   { 'tj', 'gb', remap = true, desc = 'Toggle block comment' },
-  { 'tl', 'gc', mode = 'v', remap = true, desc = 'Toggle line comment' },
-  { 'tj', 'gb', mode = 'v', remap = true, desc = 'Toggle block comment' },
+  { 'tl', 'gc', mode = 'v',   remap = true,                 desc = 'Toggle line comment' },
+  { 'tj', 'gb', mode = 'v',   remap = true,                 desc = 'Toggle block comment' },
 
   {
     'tr',
@@ -298,7 +298,7 @@ M.keys = {
     end,
     desc = 'Rename symbol',
   },
-  { 'Tr', Cmd ':FlutterRename', desc = 'Rename (Flutter)' },
+  { 'Tr',        Cmd ':FlutterRename', desc = 'Rename (Flutter)' },
   {
     '<space>H',
     function()
@@ -306,8 +306,8 @@ M.keys = {
     end,
     desc = 'Show diagnostics',
   },
-  { '<space>nn', Cmd ':AvanteToggle', desc = 'Toggle AI actions' },
-  { '<space>ae', ':Gen<cr>', desc = 'AI generate' },
+  { '<space>nn', Cmd ':AvanteToggle',  desc = 'Toggle AI actions' },
+  { '<space>ae', ':Gen<cr>',           desc = 'AI generate' },
   {
     'ae',
     function()
@@ -334,7 +334,7 @@ M.keys = {
 
   -- Buffers / windows
   { '<space>Y', Key ':%bdelete\n:Neotree focus\n', desc = 'Close all buffers' },
-  { 'ta', '', desc = 'Toggle Aerial outline' },
+  { 'ta',       '',                                desc = 'Toggle Aerial outline' },
   {
     '<D-y>',
     function()
@@ -358,25 +358,25 @@ M.keys = {
   },
 
   -- Flutter
-  { '<space>su', SelectConfigAndRun, desc = 'Select run config' },
-  { '<space>n', Cmd ':FlutterRun', desc = 'Run app' },
-  { '<space>u', Cmd ':FlutterRestart', desc = 'Hot restart' },
-  { '<space>y', Cmd ':FlutterQuit', desc = 'Quit app' },
-  { '<space>N', Cmd ':FlutterRun', desc = 'Run Flutter' },
-  { '<space>NY', Cmd ':FlutterQuit', desc = 'Quit Flutter' },
-  { '<space>K', Cmd ':FlutterLogClear', desc = 'Clear logs' },
-  { 'as', Cmd ':FlutterVisualDebug', desc = 'Toggle visual debug' },
-  { '<space>lv', Cmd ':FlutterVisualDebug', desc = 'Visual debug' },
-  { 'alr', Cmd ':FlutterReanalyze', desc = 'Reanalyze project' },
-  { '<space>rr', Cmd ':FlutterLspRestart', desc = 'Restart LSP' },
+  { '<space>su', SelectConfigAndRun,                 desc = 'Select run config' },
+  { '<space>n',  Cmd ':FlutterRun',                  desc = 'Run app' },
+  { '<space>u',  Cmd ':FlutterRestart',              desc = 'Hot restart' },
+  { '<space>y',  Cmd ':FlutterQuit',                 desc = 'Quit app' },
+  { '<space>N',  Cmd ':FlutterRun',                  desc = 'Run Flutter' },
+  { '<space>NY', Cmd ':FlutterQuit',                 desc = 'Quit Flutter' },
+  { '<space>K',  Cmd ':FlutterLogClear',             desc = 'Clear logs' },
+  { 'as',        Cmd ':FlutterVisualDebug',          desc = 'Toggle visual debug' },
+  { '<space>lv', Cmd ':FlutterVisualDebug',          desc = 'Visual debug' },
+  { 'alr',       Cmd ':FlutterReanalyze',            desc = 'Reanalyze project' },
+  { '<space>rr', Cmd ':restart',                     desc = 'Restart Neovim' },
   { '<space>rl', Cmd ':!~/scripts/brl $(dirname %)', desc = 'Create barrel file' },
 
   -- Search & files (continued)
-  { '<space>fb', Cmd ':free', desc = 'Switch buffer' },
-  { '<space>ff', Cmd ':Telescope commander', desc = 'Command palette' },
+  { '<space>fb', Cmd ':free',                        desc = 'Switch buffer' },
+  { '<space>ff', Cmd ':Telescope commander',         desc = 'Command palette' },
   -- Debugging
-  { 'su', Cmd ':DapContinue', desc = 'Continue debug' },
-  { 'st', Cmd ':DapToggleBreakpoint', desc = 'Toggle breakpoint' },
+  { 'su',        Cmd ':DapContinue',                 desc = 'Continue debug' },
+  { 'st',        Cmd ':DapToggleBreakpoint',         desc = 'Toggle breakpoint' },
   {
     'sh',
     function()
@@ -414,15 +414,15 @@ M.keys = {
   },
 
   -- Testing
-  { '<space>tf', Cmd ':TestNearest', desc = 'Run nearest test' },
-  { '<space>tw', Cmd ':TestFile', desc = 'Run test file' },
-  { '<space>tv', Cmd ':CoverageToggle', desc = 'Toggle coverage' },
+  { '<space>tf', Cmd ':TestNearest',              desc = 'Run nearest test' },
+  { '<space>tw', Cmd ':TestFile',                 desc = 'Run test file' },
+  { '<space>tv', Cmd ':CoverageToggle',           desc = 'Toggle coverage' },
 
   -- Tasks / commands
-  { '<space>sa', Cmd ':TermExec cmd=analyze', desc = 'Run analyzer' },
+  { '<space>sa', Cmd ':TermExec cmd=analyze',     desc = 'Run analyzer' },
   { '<space>sf', Cmd ':TermExec cmd=dart_format', desc = 'Run formatter' },
   -- { '<space>su', Cmd ':TermExec cmd=submit', desc = 'Submit code' },
-  { '<space>gm', Cmd ':silent !git switch main', desc = 'Git: switch to main' },
+  { '<space>gm', Cmd ':silent !git switch main',  desc = 'Git: switch to main' },
   {
     '<space>sp',
     function()
@@ -489,7 +489,7 @@ M.keys = {
   {
     'tuy',
     function()
-      require 'neoclip.fzf'()
+      require 'neoclip.fzf' ()
     end,
     desc = 'Clipboard history',
   },
