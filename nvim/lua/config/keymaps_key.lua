@@ -282,14 +282,9 @@ M.keys = {
     function()
       vim.lsp.buf.hover({ border = 'single' })
     end,
-    desc = 'Show hover info',
+     desc = 'Show hover info',
   },
-  -- commenting: native gc/gcc (Comment.nvim removed, built-in since nvim 0.10)
-  -- tl = toggle line comment (gc motion), tj = toggle block comment (gb motion)
-  { 'tl', 'gc', remap = true, desc = 'Toggle line comment' },
-  { 'tj', 'gb', remap = true, desc = 'Toggle block comment' },
-  { 'tl', 'gc', mode = 'v',   remap = true,                 desc = 'Toggle line comment' },
-  { 'tj', 'gb', mode = 'v',   remap = true,                 desc = 'Toggle block comment' },
+  -- tl/tj comment keymaps are registered in enable_leaders.lua (early, not via which-key)
 
   {
     'tr',
@@ -358,11 +353,11 @@ M.keys = {
   },
 
   -- Flutter
-  { '<space>su', SelectConfigAndRun,                 desc = 'Select run config' },
-  { '<space>n',  Cmd ':FlutterRun',                  desc = 'Run app' },
-  { '<space>u',  Cmd ':FlutterRestart',              desc = 'Hot restart' },
-  { '<space>y',  Cmd ':FlutterQuit',                 desc = 'Quit app' },
-  { '<space>N',  Cmd ':FlutterRun',                  desc = 'Run Flutter' },
+  { '<space>su', SelectConfigAndRun,                                         desc = 'Select run config' },
+  { '<space>n',  function() require('utils.flutter_project').run() end,      desc = 'Run app' },
+  { '<space>u',  Cmd ':FlutterRestart',                                      desc = 'Hot restart' },
+  { '<space>y',  Cmd ':FlutterQuit',                                         desc = 'Quit app' },
+  { '<space>N',  function() require('utils.flutter_project').run() end,      desc = 'Run Flutter' },
   { '<space>NY', Cmd ':FlutterQuit',                 desc = 'Quit Flutter' },
   { '<space>K',  Cmd ':FlutterLogClear',             desc = 'Clear logs' },
   { 'as',        Cmd ':FlutterVisualDebug',          desc = 'Toggle visual debug' },

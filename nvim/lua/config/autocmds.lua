@@ -309,6 +309,15 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'DirChanged' }, {
   callback = inject_devbox_path,
 })
 
+-- Re-apply flutter-tools project config (reads .flutter-config.lua) when
+-- changing into a different project directory mid-session.
+vim.api.nvim_create_autocmd('DirChanged', {
+  group = augroup 'flutter_project_config',
+  callback = function()
+    require('utils.flutter_project').apply()
+  end,
+})
+
 vim.cmd [[ autocmd BufNewFile,BufRead *.metadata set filetype=yaml ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.fvmrc set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.arb set filetype=json ]]

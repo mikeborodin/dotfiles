@@ -44,17 +44,19 @@ return {
           exception_breakpoints = {},
           evaluate_to_string_in_debug_views = true,
           register_configurations = function(_)
-            require('dap').configurations.dart = require('utils.select_run_config').selectRunConfig()
-            -- require('dap').configurations.dart = { {
-            --   type = "dart",
-            --   request = "launch",
-            --   name = "launch main.dart",
-            --   program = "${workspaceFolder}/lib/main.dart",
-            --   toolArgs = {
-            --     vim.g.x_is_flutter_project and '--no-start-paused' or nil
-            --   },
-            --   cwd = "${workspaceFolder}",
-            -- } }
+            local all = require('utils.select_run_config').selectRunConfig()
+            local cfg = require('utils.flutter_project').flutter_config()
+            if cfg.run_config then
+              local name = cfg.run_config:lower()
+              local match = vim.tbl_filter(function(c)
+                return type(c.name) == 'string' and c.name:lower() == name
+              end, all)
+              if #match > 0 then
+                require('dap').configurations.dart = match
+                return
+              end
+            end
+            require('dap').configurations.dart = all
           end,
         },
         fvm = true,
@@ -70,7 +72,7 @@ return {
       -- commands available immediately, so call setup_project() which triggers
       -- the same internal start() without needing a buffer.
       if vim.g.x_is_flutter_project then
-        require('flutter-tools').setup_project({})
+        require('flutter-tools').setup_project(require('utils.flutter_project').project_config())
       end
     end,
   },

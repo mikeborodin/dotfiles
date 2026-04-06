@@ -3,6 +3,7 @@ local/
 .isflutter
 
 .nvim.lua
+.flutter-config.lua
 .prompts.sh
 project_context.md
 
