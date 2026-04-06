@@ -153,10 +153,15 @@ vim.ui.input = function(opts, on_confirm)
   local buf = vim.api.nvim_create_buf(false, true)
   local width = math.max(40, (opts.prompt and #opts.prompt + 20 or 40))
   local win = vim.api.nvim_open_win(buf, true, {
-    relative = 'cursor', row = 1, col = 0,
-    width = width, height = 1,
-    style = 'minimal', border = 'rounded',
-    title = opts.prompt or 'Input', title_pos = 'center',
+    relative = 'cursor',
+    row = 1,
+    col = 0,
+    width = width,
+    height = 1,
+    style = 'minimal',
+    border = 'rounded',
+    title = opts.prompt or 'Input',
+    title_pos = 'center',
   })
   vim.bo[buf].buftype = 'prompt'
   vim.fn.prompt_setprompt(buf, '')
@@ -258,6 +263,32 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- For Flutter projects: start dartls immediately on VimEnter so the workspace
+-- is already being analyzed before any .dart file is opened (enables :FlutterRun
+-- without needing to open a file first).
+vim.api.nvim_create_autocmd('VimEnter', {
+  group = augroup 'dartls_flutter_eager_start',
+  once = true,
+  callback = function()
+    if not vim.g.x_is_flutter_project then return end
+
+    -- vim.lsp.enable() hooks dartls onto the FileType event, so it won't start
+    -- without a dart buffer in a window. We call vim.lsp.start() directly, but
+    -- we must resolve the dart binary through flutter-tools so that fvm projects
+    -- use the right SDK instead of a bare "dart" that may not be on PATH.
+    require('flutter-tools.executable').dart(function(dart_bin)
+      local dartls_config = vim.tbl_deep_extend('force',
+        vim.lsp.config['dartls'] or {},
+        {
+          root_dir = vim.fn.getcwd(),
+          cmd = { dart_bin, 'language-server', '--protocol=lsp' },
+        }
+      )
+      vim.lsp.start(dartls_config)
+    end)
+  end,
+})
+
 vim.cmd [[ autocmd BufNewFile,BufRead *.metadata set filetype=yaml ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.fvmrc set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.arb set filetype=json ]]
@@ -311,8 +342,8 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     local root = vim.fs.root(args.buf, { 'pubspec.yaml', '.fvmrc', '.git' }) or vim.fn.getcwd()
     local is_fvm = vim.fn.filereadable(root .. '/.fvmrc') == 1
     local cmd = is_fvm
-      and { 'fvm', 'dart', 'fix', '--apply', file }
-      or  { 'dart', 'fix', '--apply', file }
+        and { 'fvm', 'dart', 'fix', '--apply', file }
+        or { 'dart', 'fix', '--apply', file }
     vim.fn.jobstart(cmd, {
       cwd = root,
       stdout_buffered = true,

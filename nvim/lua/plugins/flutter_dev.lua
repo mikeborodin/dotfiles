@@ -1,12 +1,5 @@
 return {
   {
-    'nvim-flutter/pubspec-assist.nvim',
-    dependencies = { 'plenary.nvim' },
-    config = function()
-      require('pubspec-assist').setup {}
-    end,
-  },
-  {
     'm00qek/baleia.nvim',
     config = function()
       vim.g.baleia = require('baleia').setup { log = 'INFO', line_starts_at = 6 }
@@ -22,6 +15,7 @@ return {
   },
   {
     'nvim-flutter/flutter-tools.nvim',
+    lazy = not vim.g.x_is_flutter_project,
     event = { 'VeryLazy' },
     -- enabled      = vim.g.x_is_flutter_project,
     dependencies = {
@@ -42,7 +36,7 @@ return {
         dev_log = {
           enabled = false,
           notify_errors = false, -- if there is an error whilst running then notify the user
-          open_cmd = 'tabedit', -- command to use to open the log buffer
+          open_cmd = 'tabedit',  -- command to use to open the log buffer
         },
         debugger = {
           enabled = true,
@@ -71,6 +65,13 @@ return {
           color = { enabled = false },
         },
       }
+      -- flutter-tools defers command registration (FlutterRun, etc.) until a
+      -- *.dart / pubspec.yaml BufEnter. For Flutter projects we want those
+      -- commands available immediately, so call setup_project() which triggers
+      -- the same internal start() without needing a buffer.
+      if vim.g.x_is_flutter_project then
+        require('flutter-tools').setup_project({})
+      end
     end,
   },
 }

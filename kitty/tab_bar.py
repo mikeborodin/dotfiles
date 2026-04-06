@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Dict, Any
 
 from kitty.boss import get_boss
 from kitty.fast_data_types import Screen, add_timer

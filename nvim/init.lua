@@ -30,7 +30,7 @@ local function SetIsFlutterProject()
   vim.g.x_is_flutter_project = flutter_dependency ~= nil
 end
 
--- SetIsFlutterProject()
+SetIsFlutterProject()
 
 require 'config.setup_lazy'
 require 'config.keymaps_clear'
