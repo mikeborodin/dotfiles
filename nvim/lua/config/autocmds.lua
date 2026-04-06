@@ -289,6 +289,26 @@ vim.api.nvim_create_autocmd('VimEnter', {
   end,
 })
 
+-- Inject project-local devbox bin into PATH when opening a devbox project.
+-- This makes tools like firebase, fvm, phrase, etc. available to nvim
+-- (terminal, jobstart, LSP) without polluting PATH for non-devbox projects.
+-- Runs on VimEnter and DirChanged so it works both at startup and with :cd.
+local function inject_devbox_path()
+  local devbox_bin = vim.fn.getcwd() .. '/.devbox/nix/profile/default/bin'
+  if vim.fn.isdirectory(devbox_bin) == 1 then
+    local current_path = vim.env.PATH or ''
+    -- Only prepend if not already present
+    if not current_path:find(devbox_bin, 1, true) then
+      vim.env.PATH = devbox_bin .. ':' .. current_path
+    end
+  end
+end
+
+vim.api.nvim_create_autocmd({ 'VimEnter', 'DirChanged' }, {
+  group = augroup 'devbox_path',
+  callback = inject_devbox_path,
+})
+
 vim.cmd [[ autocmd BufNewFile,BufRead *.metadata set filetype=yaml ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.fvmrc set filetype=json ]]
 vim.cmd [[ autocmd BufNewFile,BufRead *.arb set filetype=json ]]

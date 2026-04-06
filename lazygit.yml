@@ -115,11 +115,11 @@ gui:
   # If true, show jump-to-window keybindings in window titles.
   showPanelJumps: true
   # Deprecated: use nerdFontsVersion instead
-  showIcons: false
+  showIcons: true
   # Nerd fonts version to use.
   # One of: '2' | '3' | empty string (default)
   # If empty, do not show icons.
-  nerdFontsVersion: ""
+  nerdFontsVersion: "3"
   # If true (default), file icons are shown in the file views. Only relevant if NerdFontsVersion is not empty.
   showFileIcons: true
   # Length of author name in (non-expanded) commits view. 2 means show initials only.
@@ -144,7 +144,7 @@ gui:
   screenMode: normal
   # Window border style.
   # One of 'rounded' (default) | 'single' | 'double' | 'hidden'
-  border: rounded
+  border: single
   # If true, show a seriously epic explosion animation when nuking the working tree.
   animateExplosion: true
   # Whether to stack UI components on top of each other.
@@ -310,7 +310,7 @@ disableStartupPopups: false
 # - 'create': initialize a new repo
 # - 'skip': open most recent repo
 # - 'quit': exit Lazygit
-notARepository: prompt
+notARepository: quit
 # If true, display a confirmation when subprocess terminates. This allows you to view the output of the subprocess before returning to Lazygit.
 promptToReturnFromSubprocess: true
 # Keybindings
