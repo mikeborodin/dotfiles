@@ -74,7 +74,7 @@ return {
     },
     cmd = { 'TSUpdateSync', 'TSUpdate', 'TSInstall' },
     keys = {
-      { '=', desc = 'Increment selection' },
+      { '=',    desc = 'Increment selection' },
       { '<bs>', desc = 'Decrement selection', mode = 'x' },
     },
     opts = {
@@ -149,10 +149,10 @@ return {
       parser_config.bruno = {
         install_info = {
           url = 'https://github.com/Scalamando/tree-sitter-bruno', -- local path or git repo
-          files = { 'src/parser.c', 'src/scanner.c' }, -- note that some parsers also require src/scanner.c or src/scanner.cc
-          branch = 'main', -- default branch in case of git repo if different from master
-          generate_requires_npm = false, -- if stand-alone parser without npm dependencies
-          requires_generate_from_grammar = true, -- if folder contains pre-generated src/parser.c
+          files = { 'src/parser.c', 'src/scanner.c' },             -- note that some parsers also require src/scanner.c or src/scanner.cc
+          branch = 'main',                                         -- default branch in case of git repo if different from master
+          generate_requires_npm = false,                           -- if stand-alone parser without npm dependencies
+          requires_generate_from_grammar = true,                   -- if folder contains pre-generated src/parser.c
         },
         -- filetype = "bruno",                                        -- if filetype does not match the parser name
       }
@@ -177,8 +177,8 @@ return {
       }
       local function lang_from_info_string(alias)
         return vim.filetype.match { filename = 'a.' .. alias }
-          or non_filetype_aliases[alias]
-          or alias
+            or non_filetype_aliases[alias]
+            or alias
       end
 
       ts_query.add_directive('set-lang-from-mimetype!', function(match, _, bufnr, pred, metadata)
@@ -187,8 +187,8 @@ return {
         if not node then return end
         local val = vim.treesitter.get_node_text(node, bufnr)
         metadata['injection.language'] = html_script_type_languages[val]
-          or vim.split(val, '/')[2]
-          or val
+            or vim.split(val, '/')[2]
+            or val
       end, force_opts)
 
       ts_query.add_directive('set-lang-from-info-string!', function(match, _, bufnr, pred, metadata)
@@ -256,6 +256,26 @@ return {
         let g:test#custom_transformations = {'fvm': function('FvmTransform')}
         let g:test#transformation = 'fvm'
         ]]
+    end,
+  },
+  {
+    -- Seamless navigation between neovim splits and kitty panes
+    -- build hook installs the kitty kittens (navigate_kitty.py, relative_resize.py)
+    'mrjones2014/smart-splits.nvim',
+    lazy = false,
+    build = './kitty/install-kittens.bash',
+    opts = {
+      multiplexer_integration = 'kitty',
+      at_edge = 'stop',
+    },
+    config = function(_, opts)
+      require('smart-splits').setup(opts)
+      -- cmd+shift+n/i/e/u passed through by kitty when IS_NVIM is set
+      -- neovim receives them as <D-n>/<D-i>/<D-e>/<D-u> (Colemak: n=left, i=right, e=down, u=up)
+      vim.keymap.set('n', '<D-N>', require('smart-splits').move_cursor_left, { desc = 'Move to left split/pane' })
+      vim.keymap.set('n', '<D-E>', require('smart-splits').move_cursor_down, { desc = 'Move to lower split/pane' })
+      vim.keymap.set('n', '<D-U>', require('smart-splits').move_cursor_up, { desc = 'Move to upper split/pane' })
+      vim.keymap.set('n', '<D-I>', require('smart-splits').move_cursor_right, { desc = 'Move to right split/pane' })
     end,
   },
   {
