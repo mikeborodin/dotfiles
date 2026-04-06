@@ -31,7 +31,7 @@ return {
         local t = terms[1]
         if not t then
           -- First open: create and open normally
-          t = Terminal:new({ hidden = false })
+          t = Terminal:new { hidden = false }
           t:open()
           term_win = t.window
           return
@@ -173,28 +173,32 @@ return {
         ['text/ecmascript'] = 'javascript',
       }
       local non_filetype_aliases = {
-        ex = 'elixir', pl = 'perl', sh = 'bash', uxn = 'uxntal', ts = 'typescript',
+        ex = 'elixir',
+        pl = 'perl',
+        sh = 'bash',
+        uxn = 'uxntal',
+        ts = 'typescript',
       }
       local function lang_from_info_string(alias)
-        return vim.filetype.match { filename = 'a.' .. alias }
-            or non_filetype_aliases[alias]
-            or alias
+        return vim.filetype.match { filename = 'a.' .. alias } or non_filetype_aliases[alias] or alias
       end
 
       ts_query.add_directive('set-lang-from-mimetype!', function(match, _, bufnr, pred, metadata)
         local nodes = match[pred[2]]
         local node = nodes and nodes[1]
-        if not node then return end
+        if not node then
+          return
+        end
         local val = vim.treesitter.get_node_text(node, bufnr)
-        metadata['injection.language'] = html_script_type_languages[val]
-            or vim.split(val, '/')[2]
-            or val
+        metadata['injection.language'] = html_script_type_languages[val] or vim.split(val, '/')[2] or val
       end, force_opts)
 
       ts_query.add_directive('set-lang-from-info-string!', function(match, _, bufnr, pred, metadata)
         local nodes = match[pred[2]]
         local node = nodes and nodes[1]
-        if not node then return end
+        if not node then
+          return
+        end
         local alias = vim.treesitter.get_node_text(node, bufnr):lower()
         metadata['injection.language'] = lang_from_info_string(alias)
       end, force_opts)
@@ -203,8 +207,12 @@ return {
         local id = pred[2]
         local nodes = match[id]
         local node = nodes and nodes[1]
-        if not node then return end
-        if not metadata[id] then metadata[id] = {} end
+        if not node then
+          return
+        end
+        if not metadata[id] then
+          metadata[id] = {}
+        end
         local text = vim.treesitter.get_node_text(node, bufnr, { metadata = metadata[id] }) or ''
         metadata[id].text = text:lower()
       end, force_opts)
@@ -223,7 +231,9 @@ return {
       ts_query.add_predicate('kind-eq?', function(match, _, _, pred)
         local nodes = match[pred[2]]
         local node = nodes and nodes[1]
-        if not node then return true end
+        if not node then
+          return true
+        end
         local types = { unpack(pred, 3) }
         return vim.tbl_contains(types, node:type())
       end, { force = true })
@@ -272,10 +282,52 @@ return {
       require('smart-splits').setup(opts)
       -- cmd+shift+n/i/e/u passed through by kitty when IS_NVIM is set
       -- neovim receives them as <D-n>/<D-i>/<D-e>/<D-u> (Colemak: n=left, i=right, e=down, u=up)
-      vim.keymap.set('n', '<D-N>', require('smart-splits').move_cursor_left, { desc = 'Move to left split/pane' })
-      vim.keymap.set('n', '<D-E>', require('smart-splits').move_cursor_down, { desc = 'Move to lower split/pane' })
-      vim.keymap.set('n', '<D-U>', require('smart-splits').move_cursor_up, { desc = 'Move to upper split/pane' })
-      vim.keymap.set('n', '<D-I>', require('smart-splits').move_cursor_right, { desc = 'Move to right split/pane' })
+      vim.keymap.set(
+        { 'n', 'i', 't' },
+        '<D-N>',
+        require('smart-splits').move_cursor_left,
+        { desc = 'Move to left split/pane' }
+      )
+      vim.keymap.set(
+        { 'n', 'i', 't' },
+        '<D-E>',
+        require('smart-splits').move_cursor_down,
+        { desc = 'Move to lower split/pane' }
+      )
+      vim.keymap.set(
+        { 'n', 'i', 't' },
+        '<D-U>',
+        require('smart-splits').move_cursor_up,
+        { desc = 'Move to upper split/pane' }
+      )
+      vim.keymap.set(
+        { 'n', 'i', 't' },
+        '<D-I>',
+        require('smart-splits').move_cursor_right,
+        { desc = 'Move to right split/pane' }
+      )
+      -- Resize mode: cmd+shift+t enters resize mode (passed through by kitty when IS_NVIM)
+      -- Arrow keys resize, <Esc> exits
+      local resize_mode = false
+      local function enter_resize_mode()
+        resize_mode = true
+        vim.notify('-- RESIZE MODE -- (arrows to resize, <Esc> to exit)', vim.log.levels.INFO)
+        local opts = { noremap = true, silent = true, nowait = true }
+        vim.keymap.set('n', '<Left>',  function() require('smart-splits').resize_left() end,  opts)
+        vim.keymap.set('n', '<Right>', function() require('smart-splits').resize_right() end, opts)
+        vim.keymap.set('n', '<Up>',    function() require('smart-splits').resize_up() end,    opts)
+        vim.keymap.set('n', '<Down>',  function() require('smart-splits').resize_down() end,  opts)
+        vim.keymap.set('n', '<Esc>', function()
+          resize_mode = false
+          vim.notify('', vim.log.levels.INFO)
+          vim.keymap.del('n', '<Left>')
+          vim.keymap.del('n', '<Right>')
+          vim.keymap.del('n', '<Up>')
+          vim.keymap.del('n', '<Down>')
+          vim.keymap.del('n', '<Esc>')
+        end, opts)
+      end
+      vim.keymap.set({ 'n', 'i' }, '<D-T>', enter_resize_mode, { desc = 'Enter resize mode' })
     end,
   },
   {
