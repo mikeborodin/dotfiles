@@ -1,0 +1,46 @@
+{
+  "providers": {
+    "ollama": {
+      "api": "openai-completions",
+      "apiKey": "ollama",
+      "baseUrl": "http://127.0.0.1:11434/v1",
+      "models": [
+        {
+          "_launch": true,
+          "contextWindow": 131072,
+          "id": "gemma4:latest",
+          "input": [
+            "text"
+          ]
+        },
+        {
+          "_launch": true,
+          "contextWindow": 131072,
+          "id": "cyborgxx101/gemma-4-12b-opus-finetuned-mlx",
+          "input": [
+            "text"
+          ],
+          "reasoning": true
+        },
+        {
+          "_launch": true,
+          "contextWindow": 131072,
+          "id": "gemma4:12b-mlx",
+          "input": [
+            "text"
+          ],
+          "reasoning": true
+        },
+        {
+          "_launch": true,
+          "contextWindow": 131072,
+          "id": "gemma4:e4b",
+          "input": [
+            "text"
+          ],
+          "reasoning": true
+        }
+      ]
+    }
+  }
+}

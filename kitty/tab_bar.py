@@ -1,5 +1,4 @@
 from datetime import datetime
-from typing import Dict, Any
 
 from kitty.boss import get_boss
 from kitty.fast_data_types import Screen, add_timer
@@ -22,6 +21,10 @@ NORMAL_TAB_BG = "#191f26"
 NORMAL_TAB_FG = "#808080"
 SESSION_BG = "#c6a0f6"
 SESSION_FG = "#181926"
+RIGHT_CWD_BG = "#1b1e2e"
+RIGHT_CWD_FG = "#b8c0e0"
+RIGHT_TIME_BG = "#141724"
+RIGHT_TIME_FG = "#b8c0e0"
 
 REFRESH_TIME = 1
 
@@ -72,25 +75,117 @@ def _draw_session_indicator(screen: Screen, draw_data: DrawData) -> int:
     return screen.cursor.x
 
 
+def _get_active_cwd() -> str:
+    boss = get_boss()
+    if boss is None or boss.active_window is None:
+        return ""
+
+    w = boss.active_window
+    for attr in ("cwd_of_child", "current_cwd", "cwd"):
+        val = getattr(w, attr, None)
+        if callable(val):
+            try:
+                val = val()
+            except Exception:
+                val = None
+        if isinstance(val, str) and val:
+            home = "~"
+            try:
+                from os.path import expanduser
+
+                user_home = expanduser("~")
+                if user_home and val.startswith(user_home):
+                    val = val.replace(user_home, home, 1)
+            except Exception:
+                pass
+            return val
+
+    return ""
+
+
+def _is_custom_tab_title(tab: TabBarData) -> bool:
+    title = (getattr(tab, "title", "") or "").strip()
+    if not title:
+        return False
+
+    active_exe = (getattr(tab, "active_exe", "") or "").strip()
+    active_wd = (getattr(tab, "active_wd", "") or "").strip()
+    wd_name = active_wd.rstrip("/").rsplit("/", 1)[-1] if active_wd else ""
+
+    t = title.lower()
+    exe = active_exe.lower()
+    wd = active_wd.lower()
+    wd_base = wd_name.lower()
+
+    # Common auto-generated titles (cwd/exe based)
+    if title in {
+        active_exe,
+        active_wd,
+        wd_name,
+        f"{active_exe} · {active_wd}" if active_exe and active_wd else "",
+        f"{active_exe} · {wd_name}" if active_exe and wd_name else "",
+    }:
+        return False
+
+    # Heuristic: if title clearly references cwd/exe, treat as auto-title
+    if exe and exe in t:
+        return False
+    if wd and (wd in t or t in wd):
+        return False
+    if wd_base and wd_base in t:
+        return False
+    if "/" in title or title.startswith("~"):
+        return False
+
+    return True
+
+
+def _tab_label(tab: TabBarData, index: int) -> str:
+    if _is_custom_tab_title(tab):
+        title = (getattr(tab, "title", "") or "").strip()
+        if title.lower().startswith("tab name:"):
+            title = title[len("tab name:") :].strip()
+        return title
+    # kitty passes zero-based index to draw_tab()
+    return str(index + 1)
+
+
 def _draw_right_status(screen: Screen, is_last: bool, draw_data: DrawData) -> int:
     if not is_last:
         return 0
     draw_attributed_string(Formatter.reset, screen)
 
-    now = datetime.now().strftime("%d-%m-%Y %H:%M")
-    right_text = f" {now} "
-    right_status_length = len(right_text)
+    cwd = _get_active_cwd()
+    now = datetime.now().strftime("%H:%M")
 
-    screen.cursor.x = screen.columns - right_status_length
+    parts = []
+    if cwd:
+        parts.append((f" {cwd} ", RIGHT_CWD_BG, RIGHT_CWD_FG))
+    parts.append((f" {now} ", RIGHT_TIME_BG, RIGHT_TIME_FG))
 
-    default_bg = as_rgb(int(to_color(TAB_BAR_BG)))
-    tab_fg = as_rgb(int(to_color(NORMAL_TAB_FG)))
+    # One reverse powerline separator before each segment
+    total_len = sum(len(text) + 1 for text, _, _ in parts)
+    start_x = max(0, screen.columns - total_len)
+    screen.cursor.x = start_x
 
-    screen.cursor.bg = default_bg
-    screen.cursor.fg = tab_fg
-    screen.draw(right_text)
+    prev_bg = as_rgb(int(to_color(TAB_BAR_BG)))
+    for text, bg_hex, fg_hex in parts:
+        seg_bg = as_rgb(int(to_color(bg_hex)))
+        seg_fg = as_rgb(int(to_color(fg_hex)))
 
-    return screen.cursor.x
+        # Reverse powerline separator (points left)
+        screen.cursor.fg = seg_bg
+        screen.cursor.bg = prev_bg
+        screen.draw("\ue0b2")
+
+        # Segment text
+        screen.cursor.bg = seg_bg
+        screen.cursor.fg = seg_fg
+        screen.draw(text)
+
+        prev_bg = seg_bg
+
+    return start_x
 
 
 def _redraw_tab_bar(_) -> None:
@@ -137,8 +232,26 @@ def draw_tab(
 
     before = screen.cursor.x
 
+    label = _tab_label(tab, index)
+    tab_for_draw = tab
+    if label != (getattr(tab, "title", "") or ""):
+        try:
+            setattr(tab, "title", label)
+        except Exception:
+            try:
+                tab_for_draw = tab._replace(title=label)
+            except Exception:
+                pass
+
     draw_tab_with_powerline(
-        draw_data, screen, tab, before, max_title_length, index, is_last, extra_data
+        draw_data,
+        screen,
+        tab_for_draw,
+        before,
+        max_title_length,
+        index,
+        is_last,
+        extra_data,
     )
 
     _draw_right_status(screen, is_last, draw_data)

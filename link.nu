@@ -1,5 +1,7 @@
 ln -s -f (pwd)/nvim ~/.config/nvim
 ln -s -f (pwd)/wezterm ~/.config/wezterm
+mkdir ~/.config/herdr
+ln -s -f (pwd)/herdr/config.toml ~/.config/herdr/config.toml
 ln -s -f (pwd)/karabiner ~/.config/karabiner
 ln -s -f (pwd)/aerospace.toml ~/.config/aerospace/aerospace.toml
 ln -s -f (pwd)/scripts ~/scripts
@@ -17,3 +19,7 @@ mkdir  ~/.config/opencode
 ln -s -f (pwd)/opencode/themes ~/.config/opencode/themes
 ln -s -f (pwd)/opencode/tui.json ~/.config/opencode/tui.json
 ln -s -f (pwd)/opencode/agents ~/.config/opencode/agents
+
+ln -s -f (pwd)/pi/agent/keybindings.json ~/.pi/agent/keybindings.json
+ln -s -f (pwd)/pi/agent/settings.json ~/.pi/agent/settings.json
+ln -s -f (pwd)/pi/agent/models.json ~/.pi/agent/models.json

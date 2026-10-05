@@ -1,0 +1,10 @@
+{
+  "theme": "rootbeet-pi",
+  "lastChangelogVersion": "0.80.2",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6-luna",
+  "defaultThinkingLevel": "high",
+  "packages": [
+    "npm:@foxfirecodes/pi-usage"
+  ]
+}

@@ -363,33 +363,33 @@ end, { desc = 'cd to current file directory' })
 
 -- dart fix --apply on save for .dart files (catches issues LSP format misses)
 -- Uses `fvm dart fix` if the project root contains a .fvmrc file.
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = augroup 'dart_fix',
-  pattern = '*.dart',
-  callback = function(args)
-    local file = vim.api.nvim_buf_get_name(args.buf)
-    local root = vim.fs.root(args.buf, { 'pubspec.yaml', '.fvmrc', '.git' }) or vim.fn.getcwd()
-    local is_fvm = vim.fn.filereadable(root .. '/.fvmrc') == 1
-    local cmd = is_fvm
-        and { 'fvm', 'dart', 'fix', '--apply', file }
-        or { 'dart', 'fix', '--apply', file }
-    vim.fn.jobstart(cmd, {
-      cwd = root,
-      stdout_buffered = true,
-      stderr_buffered = true,
-      on_exit = function(_, code)
-        if code == 0 then
-          -- Reload buffer silently to pick up any changes dart fix made
-          vim.schedule(function()
-            if vim.api.nvim_buf_is_valid(args.buf) then
-              vim.api.nvim_buf_call(args.buf, function() vim.cmd 'silent! checktime' end)
-            end
-          end)
-        end
-      end,
-    })
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufWritePost', {
+--   group = augroup 'dart_fix',
+--   pattern = '*.dart',
+--   callback = function(args)
+--     local file = vim.api.nvim_buf_get_name(args.buf)
+--     local root = vim.fs.root(args.buf, { 'pubspec.yaml', '.fvmrc', '.git' }) or vim.fn.getcwd()
+--     local is_fvm = vim.fn.filereadable(root .. '/.fvmrc') == 1
+--     local cmd = is_fvm
+--         and { 'fvm', 'dart', 'fix', '--apply', file }
+--         or { 'dart', 'fix', '--apply', file }
+--     vim.fn.jobstart(cmd, {
+--       cwd = root,
+--       stdout_buffered = true,
+--       stderr_buffered = true,
+--       on_exit = function(_, code)
+--         if code == 0 then
+--           -- Reload buffer silently to pick up any changes dart fix made
+--           vim.schedule(function()
+--             if vim.api.nvim_buf_is_valid(args.buf) then
+--               vim.api.nvim_buf_call(args.buf, function() vim.cmd 'silent! checktime' end)
+--             end
+--           end)
+--         end
+--       end,
+--     })
+--   end,
+-- })
 
 -- pubspec.yaml watcher: run flutter pub get automatically on save
 vim.api.nvim_create_autocmd('BufWritePost', {

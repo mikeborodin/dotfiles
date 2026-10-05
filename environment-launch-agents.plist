@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0">
+<dict>
+		<key>Label</key>
+		<string>my.startup.shell_agnostic.environment</string>
+		<key>ProgramArguments</key>
+		<array>
+			<string>~/.local/share/devbox/global/default/.devbox/nix/profile/default/bin/nu</string>
+			<string>-c</string>
+			<string>cd $env.HOME ; source ~/ci_agents.nu ; start_all_agents</string>
+		</array>
+<key>RunAtLoad</key><true/>
+</dict>
+</plist>

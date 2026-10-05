@@ -7,6 +7,7 @@ alias o = opencode
 alias e = exit
 alias y = yazi
 alias gg = lazygit
+alias docker = podman
 
 def dot [] {
    cd ~/personal_projects/dotfiles/
@@ -15,7 +16,7 @@ def dot [] {
 
 alias python = python3
 alias ai = aichat -S
-alias drd = devbox run shell
+alias drd = devbox run -q shell
 alias aio = aichat -S -m ollama:llama3.1
 alias tailscale = /Applications/Tailscale.app/Contents/MacOS/Tailscale
 

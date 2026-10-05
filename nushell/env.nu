@@ -102,6 +102,8 @@ $env.PATH = (
 
 $env.AGENT_BASE_URL = 'https://openrouter.ai/api/v1'
 
+$env.OLLAYA_INSTALL_DIR = $'($env.HOME)/.local'
+
 # Specifies how environment variables are:
 # - converted from a string to a value on Nushell startup (from_string)
 # - converted from a value back to a string when running external commands (to_string)
@@ -132,6 +134,7 @@ $env.NU_PLUGIN_DIRS = [
 source ($nu.default-config-dir | path join 'path.nu')
 # source ($nu.default-config-dir | path join 'oh-my-posh.nu')
 source ($nu.default-config-dir | path join 'aliases.nu')
+source ($nu.default-config-dir | path join 'mx/mod.nu')
 source ($nu.default-config-dir | path join 'kitty.nu')
 source ($nu.default-config-dir | path join 'secrets.nu')
 

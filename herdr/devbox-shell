@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -f "$PWD/devbox.json" ] && command -v devbox >/dev/null 2>&1; then
+  exec devbox run -q shell
+fi
+
+exec nu "$@"

@@ -63,9 +63,6 @@ return {
         -- LSP settings kept minimal: dartls is started by vim.lsp.enable('dartls')
         -- via lsp/dartls.lua. When flutter-tools calls vim.lsp.start() on FlutterRun,
         -- it will reuse the already-running dartls client (same name + root_dir).
-        lsp = {
-          color = { enabled = false },
-        },
       }
       -- flutter-tools defers command registration (FlutterRun, etc.) until a
       -- *.dart / pubspec.yaml BufEnter. For Flutter projects we want those
