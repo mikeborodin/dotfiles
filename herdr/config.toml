@@ -83,7 +83,7 @@ next_workspace = "cmd+w"     # optional, unset by default
 # focus_agent = ""        # optional indexed binding, e.g. "prefix+alt+1..9"
 # remote_image_paste = "ctrl+v" # only active in herdr --remote; empty disables raw-key image paste
 new_tab = "prefix+o"
-# rename_tab = "prefix+shift+t"
+rename_tab = "prefix+r"
 previous_tab = "cmd+n"
 next_tab = "cmd+u"
 # switch_tab = "prefix+1..9"
@@ -101,8 +101,8 @@ focus_pane_right = "cmd+shift+i"
 split_vertical = "prefix+h"
 # split_horizontal = "prefix+minus"
 close_pane = "prefix+y"
-# zoom = "prefix+z"       # legacy alias: fullscreen
-# resize_mode = "prefix+r"
+zoom = "prefix+f"       # legacy alias: fullscreen
+resize_mode = "prefix+shift+d"
 toggle_sidebar = "prefix+b"
 
 # Navigate-mode movement. These local shortcuts win while navigate mode is open.
